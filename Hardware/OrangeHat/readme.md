@@ -5,3 +5,12 @@ No dominant protocol exist for the RS485 bus.
 RS485 has been choosen for the slaves. Communication protocol is to be choosen at a later stage of the design.  
 
 ![RS485 Schematics and initial placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-24%20OrangeHat%20RS485.PNG)  
+  
+**Display**  
+The display is side mounted. This solution is elegant as it frees the top of the board and let the display be seen from the side.  
+The display is meant top show power and status information of the OrangeHat.  
+![OrangeHat Display Mockup](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20OrangeHat%20LCD%20Mockup.jpg)  
+Schematics. Pin assigment may change to make routing easier.  
+![OrangeHat Display Schematics](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20LCD%20Schematics.PNG)  
+Initial Placement. Gives an idea of possible routing and area use.  
+![OrangeHat Display Initial Placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20LCD%20Placement.PNG)  
