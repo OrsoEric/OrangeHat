@@ -14,3 +14,18 @@ Schematics. Pin assigment may change to make routing easier.
 ![OrangeHat Display Schematics](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20LCD%20Schematics.PNG)  
 Initial Placement. Gives an idea of possible routing and area use.  
 ![OrangeHat Display Initial Placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20LCD%20Placement.PNG)  
+
+**Servo**
+Schematics for the Servo section of the board  
+- 5.8V 3.0A dedicated power line  
+- Power cut from microcontroller  
+- 8 servo channels  
+- Voltage monitoring  
+- Current Monitoring  
+
+Schematics:  
+![OrangeHat Servo Schematics](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25b%20OrangeHat%20Servo%20Schematics.PNG)
+
+Initial placement:  
+![OrangeHat Servo Initial Placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25b%20OrangeHat%20Servo%20Placement.PNG)
+
