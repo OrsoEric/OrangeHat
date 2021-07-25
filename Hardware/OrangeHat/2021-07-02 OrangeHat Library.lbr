@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="yes" active="yes"/>
@@ -9618,6 +9618,61 @@ Source: AVX .. aphvc.pdf</description>
 <rectangle x1="-4.57" y1="-5.1" x2="-3.05" y2="5.1" layer="51"/>
 <rectangle x1="3.05" y1="-5.1" x2="4.5688" y2="5.1" layer="51"/>
 </package>
+<package name="SOT23">
+<description>&lt;B&gt;SOT-23 PACKAGE&lt;/B&gt;</description>
+<wire x1="-1.27" y1="-0.3175" x2="-1.27" y2="0.9525" width="0.254" layer="21"/>
+<wire x1="-1.27" y1="0.9525" x2="1.27" y2="0.9525" width="0.254" layer="21"/>
+<wire x1="1.27" y1="0.9525" x2="1.27" y2="-0.9525" width="0.254" layer="21"/>
+<wire x1="1.27" y1="-0.9525" x2="-0.635" y2="-0.9525" width="0.254" layer="21"/>
+<wire x1="-0.635" y1="-0.9525" x2="-1.27" y2="-0.3175" width="0.254" layer="21"/>
+<wire x1="-1.5875" y1="-1.905" x2="-1.5875" y2="1.27" width="0.01" layer="39"/>
+<wire x1="-1.5875" y1="1.27" x2="-0.635" y2="1.27" width="0.01" layer="39"/>
+<wire x1="-0.635" y1="1.27" x2="-0.635" y2="1.905" width="0.01" layer="39"/>
+<wire x1="-0.635" y1="1.905" x2="0.635" y2="1.905" width="0.01" layer="39"/>
+<wire x1="0.635" y1="1.905" x2="0.635" y2="1.27" width="0.01" layer="39"/>
+<wire x1="0.635" y1="1.27" x2="1.5875" y2="1.27" width="0.01" layer="39"/>
+<wire x1="1.5875" y1="1.27" x2="1.5875" y2="-1.905" width="0.01" layer="39"/>
+<wire x1="1.5875" y1="-1.905" x2="-1.5875" y2="-1.905" width="0.01" layer="39"/>
+<smd name="1" x="-0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="2" x="0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="3" x="0" y="1.1" dx="1" dy="1.4" layer="1"/>
+<text x="-1.905" y="-1.905" size="0.635" layer="25" font="vector" ratio="15" rot="R90">&gt;NAME</text>
+<text x="2.54" y="-1.905" size="0.635" layer="27" font="vector" ratio="15" rot="R90">&gt;VALUE</text>
+</package>
+<package name="TO252">
+<description>&lt;b&gt;SMALL OUTLINE TRANSISTOR&lt;/b&gt;&lt;p&gt;
+TS-003</description>
+<wire x1="3.2766" y1="3.8354" x2="3.277" y2="-2.159" width="0.2032" layer="21"/>
+<wire x1="3.277" y1="-2.159" x2="-3.277" y2="-2.159" width="0.2032" layer="21"/>
+<wire x1="-3.277" y1="-2.159" x2="-3.2766" y2="3.8354" width="0.2032" layer="21"/>
+<wire x1="-3.277" y1="3.835" x2="3.2774" y2="3.8346" width="0.2032" layer="51"/>
+<wire x1="-3.973" y1="5.983" x2="3.973" y2="5.983" width="0.0508" layer="39"/>
+<wire x1="3.973" y1="-5.983" x2="-3.973" y2="-5.983" width="0.0508" layer="39"/>
+<wire x1="-3.973" y1="-5.983" x2="-3.973" y2="5.983" width="0.0508" layer="39"/>
+<wire x1="3.973" y1="5.983" x2="3.973" y2="-5.983" width="0.0508" layer="39"/>
+<wire x1="-2.5654" y1="3.937" x2="-2.5654" y2="4.6482" width="0.2032" layer="51"/>
+<wire x1="-2.5654" y1="4.6482" x2="-2.1082" y2="5.1054" width="0.2032" layer="51"/>
+<wire x1="-2.1082" y1="5.1054" x2="2.1082" y2="5.1054" width="0.2032" layer="51"/>
+<wire x1="2.1082" y1="5.1054" x2="2.5654" y2="4.6482" width="0.2032" layer="51"/>
+<wire x1="2.5654" y1="4.6482" x2="2.5654" y2="3.937" width="0.2032" layer="51"/>
+<wire x1="2.5654" y1="3.937" x2="-2.5654" y2="3.937" width="0.2032" layer="51"/>
+<smd name="3" x="0" y="2.5" dx="5.4" dy="6.2" layer="1"/>
+<smd name="1" x="-2.28" y="-4.8" dx="1" dy="1.6" layer="1"/>
+<smd name="2" x="2.28" y="-4.8" dx="1" dy="1.6" layer="1"/>
+<text x="-3.81" y="-2.54" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="5.08" y="-2.54" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<rectangle x1="-2.7178" y1="-5.1562" x2="-1.8542" y2="-2.2606" layer="51"/>
+<rectangle x1="1.8542" y1="-5.1562" x2="2.7178" y2="-2.2606" layer="51"/>
+<rectangle x1="-0.4318" y1="-3.0226" x2="0.4318" y2="-2.2606" layer="21"/>
+<polygon width="0.1998" layer="51">
+<vertex x="-2.5654" y="3.937"/>
+<vertex x="-2.5654" y="4.6482"/>
+<vertex x="-2.1082" y="5.1054"/>
+<vertex x="2.1082" y="5.1054"/>
+<vertex x="2.5654" y="4.6482"/>
+<vertex x="2.5654" y="3.937"/>
+</polygon>
+</package>
 </packages>
 <symbols>
 <symbol name="2020-03-18-BUCK">
@@ -10004,6 +10059,72 @@ RS485 Hald Duplex Transceiver&lt;br&gt;
 <rectangle x1="-2.54" y1="-0.254" x2="1.524" y2="0.254" layer="94" rot="R90"/>
 <pin name="1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
 <pin name="2" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1" rot="R180"/>
+</symbol>
+<symbol name="MOS-N">
+<description>&lt;b&gt;MOS N-Channel with DS Diode&lt;/b&lt;p&gt;</description>
+<rectangle x1="-2.032" y1="1.397" x2="-1.524" y2="2.921" layer="94"/>
+<rectangle x1="-2.032" y1="-0.762" x2="-1.524" y2="0.762" layer="94"/>
+<rectangle x1="-2.032" y1="-2.921" x2="-1.524" y2="-1.397" layer="94"/>
+<wire x1="-1.778" y1="0" x2="0" y2="0" width="0.1524" layer="94"/>
+<wire x1="-1.524" y1="-2.159" x2="0" y2="-2.159" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="-2.54" x2="-2.54" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="-2.159" width="0.1524" layer="94"/>
+<wire x1="-1.524" y1="2.159" x2="0" y2="2.159" width="0.1524" layer="94"/>
+<wire x1="0" y1="2.159" x2="0" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.159" x2="0" y2="-2.54" width="0.1524" layer="94"/>
+<pin name="D" x="0" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
+<pin name="G" x="-5.08" y="-2.54" visible="off" length="short" direction="pas"/>
+<pin name="S" x="0" y="-5.08" visible="off" length="short" direction="pas" rot="R90"/>
+<text x="2.54" y="0" size="1.27" layer="96">&gt;VALUE</text>
+<text x="2.54" y="2.54" size="1.27" layer="95">&gt;NAME</text>
+<polygon width="0.15" layer="94">
+<vertex x="-0.635" y="0.635"/>
+<vertex x="-1.27" y="0"/>
+<vertex x="-0.635" y="-0.635"/>
+</polygon>
+<polygon width="0.15" layer="94">
+<vertex x="0.635" y="0"/>
+<vertex x="1.905" y="0"/>
+<vertex x="1.27" y="0.635"/>
+</polygon>
+<wire x1="0" y1="-3.175" x2="1.27" y2="-3.175" width="0.15" layer="94"/>
+<wire x1="1.27" y1="-3.175" x2="1.27" y2="3.175" width="0.15" layer="94"/>
+<wire x1="1.27" y1="3.175" x2="0" y2="3.175" width="0.15" layer="94"/>
+<wire x1="0.635" y1="0.635" x2="1.905" y2="0.635" width="0.15" layer="94"/>
+</symbol>
+<symbol name="MOS-P">
+<description>&lt;b&gt;MOS P-Channel with DS Diode&lt;/b&lt;p&gt;</description>
+<rectangle x1="-2.032" y1="-2.921" x2="-1.524" y2="-1.397" layer="94"/>
+<rectangle x1="-2.032" y1="-0.762" x2="-1.524" y2="0.762" layer="94"/>
+<rectangle x1="-2.032" y1="1.397" x2="-1.524" y2="2.921" layer="94"/>
+<wire x1="-1.778" y1="0" x2="0" y2="0" width="0.15" layer="94"/>
+<wire x1="-1.524" y1="2.159" x2="0" y2="2.159" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="2.159" width="0.15" layer="94"/>
+<wire x1="-1.524" y1="-2.159" x2="0" y2="-2.159" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.159" x2="0" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="2.159" x2="0" y2="2.54" width="0.1524" layer="94"/>
+<pin name="D" x="0" y="-5.08" visible="off" length="short" direction="pas" rot="R90"/>
+<pin name="G" x="-5.08" y="-2.54" visible="off" length="short" direction="pas"/>
+<pin name="S" x="0" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
+<text x="2.54" y="0" size="1.27" layer="96">&gt;VALUE</text>
+<text x="2.54" y="2.54" size="1.27" layer="95">&gt;NAME</text>
+<wire x1="1.905" y1="0" x2="1.27" y2="0" width="0.15" layer="94"/>
+<wire x1="1.27" y1="0" x2="0.635" y2="0" width="0.15" layer="94"/>
+<wire x1="0" y1="3.175" x2="1.27" y2="3.175" width="0.15" layer="94"/>
+<wire x1="1.27" y1="3.175" x2="1.27" y2="0" width="0.15" layer="94"/>
+<wire x1="1.27" y1="-0.635" x2="1.27" y2="-3.175" width="0.15" layer="94"/>
+<wire x1="1.27" y1="-3.175" x2="0" y2="-3.175" width="0.15" layer="94"/>
+<polygon width="0.15" layer="94">
+<vertex x="0.635" y="-0.635"/>
+<vertex x="1.905" y="-0.635"/>
+<vertex x="1.27" y="0"/>
+</polygon>
+<polygon width="0.15" layer="94">
+<vertex x="-1.27" y="0.635"/>
+<vertex x="-1.27" y="-0.635"/>
+<vertex x="-0.635" y="0"/>
+</polygon>
 </symbol>
 </symbols>
 <devicesets>
@@ -13991,6 +14112,58 @@ Link: https://www.waveshare.com/10-dof-imu-sensor-b.html&lt;br&gt;</description>
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MOS-N">
+<description>&lt;b&gt;Standard NMOS&lt;\b&gt;</description>
+<gates>
+<gate name="G$1" symbol="MOS-N" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-SOT23" package="SOT23">
+<connects>
+<connect gate="G$1" pin="D" pad="3"/>
+<connect gate="G$1" pin="G" pad="1"/>
+<connect gate="G$1" pin="S" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-TO252" package="TO252">
+<connects>
+<connect gate="G$1" pin="D" pad="3"/>
+<connect gate="G$1" pin="G" pad="1"/>
+<connect gate="G$1" pin="S" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MOS-P">
+<description>&lt;b&gt;MOS-P&lt;/b&gt;&lt;p&gt;
+SOT23&lt;p&gt;</description>
+<gates>
+<gate name="G$1" symbol="MOS-P" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-TO252" package="TO252">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-SOT23" package="SOT23">
+<connects>
+<connect gate="G$1" pin="D" pad="3"/>
+<connect gate="G$1" pin="G" pad="1"/>
+<connect gate="G$1" pin="S" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
