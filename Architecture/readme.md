@@ -17,6 +17,19 @@ The scope of the OrangeHat project is to consolidate what worked in the previous
  -  Power Monitors (+)
  -  Display (+)
 
+Two versions of the OrangeHat are going to be printed.  
+
+***OrangeHat - Minimal***  
+
+Features Servos and 485 Modbus communication on board. Fixed function to reduce dimensions.  Expandability is through the 485 Modbus 3.5mm Jack connectors.  
+![OrangeHat Minimal](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Architecture/2021-07-31%20Architecture%20Minimal.PNG)  
+
+***OrangeHat - MikroBUS***  
+
+Features four MikroBUS expansion slots. It allows the communication expansion of choice, 485 Modbus/CAN. It allows for sensors, like IMU, GPS and actuators 5VDC motors, Servos and others. It's the Hat used to prototype adding/removing functionality through clickboards rather than communication bus.  
+![OrangeHat MikroBUS](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Architecture/2021-07-31%20Architecture%20Quad%20MikroBUS.PNG)  
+
+
 **Power**  
 
 The TPS54386 is good. One 3.0A channel is dedicated to the Raspberry Pi 3B+, the other channel serves the servomotors and expansion boards.  
