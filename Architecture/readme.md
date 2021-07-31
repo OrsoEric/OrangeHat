@@ -4,7 +4,7 @@ The previous architecture of Raspberry Pi based electronics and software stack w
 Below an architectural overview:  
 ![OrangeBot Architecture](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Architecture/2021-06-26%20OrangeBot%20Architecture.PNG)  
 Below the Pi Wars 2021 Robot:  
-![OrangeBot Robot]()  
+![OrangeBot Robot](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Architecture/2020-09-06%20OrangeBot.JPG)  
 
 **OrangeHat Architecture**  
 
@@ -38,6 +38,7 @@ Choice was between 485 Bus+Modbus or CAN bus. Target speed is 1Mb/s with about a
 **Expansion Slots**  
 
 A difficult choice is to include expansion slots on the OrangeHat or rely on communication bus and slave boards. Expansion boards can be custom, use the Arduino standard or the MikroBUS standard. After much consideration, including a number of MikroBUS expansion slots on the OrangeHat allows for much greater flexibility of the hat. One possible OrangeHat design includes four MikroBUS sockets, allowing the communication bus to be a Click Board too, for unmatched flexibility.  
+![Four MikroBUS Sokets](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Architecture/2021-07-31%20IDEA%20Quad%20MikroBUS.PNG)
 
 **ServoMotors**  
 
