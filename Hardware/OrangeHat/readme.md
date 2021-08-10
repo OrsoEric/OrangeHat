@@ -29,3 +29,5 @@ Schematics:
 Initial placement:  
 ![OrangeHat Servo Initial Placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25b%20OrangeHat%20Servo%20Placement.PNG)
 
+Complete Autorute:  
+![](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-08-10c%20autoroute%20success.PNG)
