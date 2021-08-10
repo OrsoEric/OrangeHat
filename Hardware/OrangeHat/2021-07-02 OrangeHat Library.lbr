@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.3175" unitdist="mm" unit="mm" style="dots" multiple="1" display="yes" altdistance="0.3175" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="yes" active="yes"/>
@@ -1387,18 +1387,39 @@ type 0207, grid 15mm</description>
 <rectangle x1="5.715" y1="-0.3048" x2="6.5786" y2="0.3048" layer="21"/>
 <rectangle x1="-6.5786" y1="-0.3048" x2="-5.715" y2="0.3048" layer="21"/>
 </package>
-<package name="0207/2V">
+<package name="TH-2MM54-V">
 <description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;
 type 0207, grid 2.5 mm</description>
-<wire x1="-1.27" y1="0" x2="-0.381" y2="0" width="0.6096" layer="51"/>
-<wire x1="-0.254" y1="0" x2="0.254" y2="0" width="0.6096" layer="21"/>
-<wire x1="0.381" y1="0" x2="1.27" y2="0" width="0.6096" layer="51"/>
-<circle x="-1.27" y="0" radius="1.27" width="0.1524" layer="21"/>
-<circle x="-1.27" y="0" radius="1.016" width="0.1524" layer="51"/>
-<pad name="1" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
-<pad name="2" x="1.27" y="0" drill="0.8128" shape="octagon"/>
-<text x="-0.0508" y="1.016" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-0.0508" y="-2.2352" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<pad name="1" x="-1.27" y="0" drill="1" shape="octagon"/>
+<pad name="2" x="1.27" y="0" drill="1" shape="octagon"/>
+<text x="-1.905" y="1.905" size="0.635" layer="25" font="vector" ratio="15">&gt;name</text>
+<text x="-1.905" y="-2.54" size="0.635" layer="27" font="vector" ratio="15">&gt;value</text>
+<circle x="-1.27" y="0" radius="1.419903125" width="0.15" layer="21"/>
+<wire x1="1.905" y1="0.9525" x2="2.2225" y2="0.635" width="0.01" layer="40"/>
+<wire x1="2.2225" y1="0.635" x2="2.2225" y2="-0.635" width="0.01" layer="40"/>
+<wire x1="2.2225" y1="-0.635" x2="1.905" y2="-0.9525" width="0.01" layer="40"/>
+<wire x1="1.905" y1="-0.9525" x2="0.635" y2="-0.9525" width="0.01" layer="40"/>
+<wire x1="0.635" y1="-0.9525" x2="0.3175" y2="-0.635" width="0.01" layer="40"/>
+<wire x1="0.3175" y1="-0.635" x2="0.3175" y2="0.635" width="0.01" layer="40"/>
+<wire x1="0.3175" y1="0.635" x2="0.635" y2="0.9525" width="0.01" layer="40"/>
+<wire x1="0.635" y1="0.9525" x2="1.905" y2="0.9525" width="0.01" layer="40"/>
+<wire x1="-1.905" y1="0.9525" x2="-0.635" y2="0.9525" width="0.01" layer="40"/>
+<wire x1="-0.635" y1="0.9525" x2="-0.3175" y2="0.635" width="0.01" layer="40"/>
+<wire x1="-0.3175" y1="0.635" x2="-0.3175" y2="-0.635" width="0.01" layer="40"/>
+<wire x1="-0.3175" y1="-0.635" x2="-0.635" y2="-0.9525" width="0.01" layer="40"/>
+<wire x1="-0.635" y1="-0.9525" x2="-1.905" y2="-0.9525" width="0.01" layer="40"/>
+<wire x1="-1.905" y1="-0.9525" x2="-2.2225" y2="-0.635" width="0.01" layer="40"/>
+<wire x1="-2.2225" y1="-0.635" x2="-2.2225" y2="0.635" width="0.01" layer="40"/>
+<wire x1="-2.2225" y1="0.635" x2="-1.905" y2="0.9525" width="0.01" layer="40"/>
+<wire x1="0.3175" y1="-0.635" x2="0.3175" y2="0.635" width="0.01" layer="39"/>
+<wire x1="0.3175" y1="0.635" x2="0.635" y2="0.9525" width="0.01" layer="39"/>
+<wire x1="1.905" y1="0.9525" x2="0.635" y2="0.9525" width="0.01" layer="39"/>
+<wire x1="1.905" y1="0.9525" x2="2.2225" y2="0.635" width="0.01" layer="39"/>
+<wire x1="2.2225" y1="0.635" x2="2.2225" y2="-0.635" width="0.01" layer="39"/>
+<wire x1="2.2225" y1="-0.635" x2="1.905" y2="-0.9525" width="0.01" layer="39"/>
+<wire x1="1.905" y1="-0.9525" x2="0.635" y2="-0.9525" width="0.01" layer="39"/>
+<wire x1="0.635" y1="-0.9525" x2="0.3175" y2="-0.635" width="0.01" layer="39"/>
+<circle x="-1.27" y="0" radius="1.309084375" width="0.01" layer="39"/>
 </package>
 <package name="0207/5V">
 <description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;
@@ -11125,6 +11146,35 @@ Remove 5.0V1.0A Line</description>
 <wire x1="3.81" y1="6.985" x2="3.81" y2="8.255" width="0.01" layer="40"/>
 <wire x1="3.81" y1="8.255" x2="4.445" y2="8.89" width="0.01" layer="40"/>
 </package>
+<package name="SMD_BTN_M8070">
+<description>&lt;b&gt;Button&lt;/b&gt;&lt;p&gt;
+Button recycled from an old VCR with the terminals folded to become SMD&lt;p&gt;
+Outer dimensions:&lt;br&gt;
+-8mm x 7mm&lt;br&gt;
+-4 pins&lt;br&gt;
+-Short side interaxis: 4.5mm&lt;br&gt;
+-Pins are shorted from long side to long side&lt;br&gt;
+-Button is NO and shorts pins on the short side&lt;br&gt;
+-I use 4.0x1.0 PADS&lt;br&gt;</description>
+<smd name="2B" x="-3" y="-2.25" dx="4" dy="1" layer="1"/>
+<smd name="1A" x="-3" y="2.25" dx="4" dy="1" layer="1"/>
+<smd name="4A" x="3" y="2.25" dx="4" dy="1" layer="1"/>
+<smd name="3B" x="3" y="-2.25" dx="4" dy="1" layer="1"/>
+<wire x1="-4" y1="-3.5" x2="-4" y2="3.5" width="0.127" layer="21"/>
+<wire x1="-4" y1="3.5" x2="4" y2="3.5" width="0.127" layer="21"/>
+<wire x1="4" y1="3.5" x2="4" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="4" y1="-3.5" x2="-4" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="-4" y1="4.5" x2="4" y2="4.5" width="0.01" layer="39"/>
+<wire x1="4" y1="4.5" x2="5.5" y2="3" width="0.01" layer="39"/>
+<wire x1="5.5" y1="3" x2="5.5" y2="-3" width="0.01" layer="39"/>
+<wire x1="5.5" y1="-3" x2="4" y2="-4.5" width="0.01" layer="39"/>
+<wire x1="4" y1="-4.5" x2="-4" y2="-4.5" width="0.01" layer="39"/>
+<wire x1="-4" y1="-4.5" x2="-5.5" y2="-3" width="0.01" layer="39"/>
+<wire x1="-5.5" y1="-3" x2="-5.5" y2="3" width="0.01" layer="39"/>
+<wire x1="-5.5" y1="3" x2="-4" y2="4.5" width="0.01" layer="39"/>
+<text x="-4" y="5" size="0.635" layer="25" ratio="15">&gt;name</text>
+<text x="-4" y="-5.5" size="0.635" layer="27" ratio="15">&gt;value</text>
+</package>
 </packages>
 <symbols>
 <symbol name="2020-03-18-BUCK">
@@ -11836,6 +11886,20 @@ Remove 5V1.0A Line</description>
 <text x="0" y="13.97" size="1.778" layer="95">&gt;name</text>
 <text x="0" y="-2.54" size="1.778" layer="96">&gt;value</text>
 </symbol>
+<symbol name="BTN_NO">
+<description>&lt;b&gt;NO (Normally open) Push Button&lt;/b&gt;&lt;p&gt;</description>
+<pin name="P$1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
+<pin name="P$2" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
+<wire x1="-2.54" y1="0" x2="-1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="0" x2="1.27" y2="1.27" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="-0.3175" y1="1.27" x2="0.635" y2="0" width="0.254" layer="97" curve="-90"/>
+<wire x1="0.635" y1="0" x2="0.9525" y2="0.3175" width="0.254" layer="97"/>
+<wire x1="0.9525" y1="0.3175" x2="0.3175" y2="0.3175" width="0.254" layer="97"/>
+<wire x1="0.3175" y1="0.3175" x2="0.635" y2="0" width="0.254" layer="97"/>
+<text x="-2.54" y="2.54" size="1.27" layer="95" ratio="15">&gt;name</text>
+<text x="-2.54" y="-2.54" size="1.27" layer="96" ratio="15">&gt;value</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="2020-03-18-BUCK">
@@ -12455,7 +12519,7 @@ Link: https://www.waveshare.com/10-dof-imu-sensor-b.html&lt;br&gt;</description>
 <technology name=""/>
 </technologies>
 </device>
-<device name="0207/2V" package="0207/2V">
+<device name="0207/2V" package="TH-2MM54-V">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -14681,7 +14745,7 @@ Link: https://www.waveshare.com/10-dof-imu-sensor-b.html&lt;br&gt;</description>
 <technology name=""/>
 </technologies>
 </device>
-<device name="0207/2V" package="0207/2V">
+<device name="0207/2V" package="TH-2MM54-V">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -16324,6 +16388,24 @@ Output 3: 5.0V 1.0A LDO&lt;br&gt;</description>
 <connect gate="G$1" pin="V5.8A3.0-" pad="V5.8-"/>
 <connect gate="G$1" pin="VIN+" pad="VIN+"/>
 <connect gate="G$1" pin="VIN-" pad="VIN-"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BTN_NO">
+<description>&lt;b&gt;Push Button&lt;/b&gt;&lt;p&gt;
+NO (Normally open)&lt;br&gt;</description>
+<gates>
+<gate name="G$1" symbol="BTN_NO" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-M8070" package="SMD_BTN_M8070">
+<connects>
+<connect gate="G$1" pin="P$1" pad="1A 4A"/>
+<connect gate="G$1" pin="P$2" pad="2B 3B"/>
 </connects>
 <technologies>
 <technology name=""/>
