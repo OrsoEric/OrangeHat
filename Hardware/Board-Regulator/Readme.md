@@ -10,3 +10,6 @@ Output 3: 5.0V 1.0A
 Render:
 Regulator PCB render:  
 ![Board PCB Render](https://github.com/OrsoEric/OrangeHat/blob/main/Hardware/Board-Regulator/2021-06-27%20Regulator%20PCB.JPG?raw=true)
+
+**Assembled Board**  
+![](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/Board-Regulator/2021-08-05%20TPS55386%20Board.jpg)  
