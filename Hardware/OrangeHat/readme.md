@@ -1,33 +1,23 @@
-**RS485 BUS**  
+**FEATURES**  
+- XT60 power connector
+- TPS55386 Dual Buck two 5.2V3.0A channels. Reverse voltage protection. Passive and active overcurrent protection.
+- Full power monitor. Three voltages, Three currents.
+- Raspberry Pi GPIO (10pins) UART and RESET (for bootloader)
+- AT4809 microcontroller with UPDI programming
+- One user button. Two user LEDs-
+- 16x2 LCD screen
+- RS485 commuinication over 3.5mm Jack audio cables.
+- 8x Servo channels
+- Onboard Waveshare 10DOF IMU
 
-Can bus has a lot of overhead and requires dedicated IC, but has wide adoption in automotive.  
-No dominant protocol exist for the RS485 bus.  
-RS485 has been choosen for the slaves. Communication protocol is to be choosen at a later stage of the design.  
+**Schematics**  
+![](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-08-11%20OrangeHat%20Schematics.png)  
 
-![RS485 Schematics and initial placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-24%20OrangeHat%20RS485.PNG)  
-  
-**Display**  
-The display is side mounted. This solution is elegant as it frees the top of the board and let the display be seen from the side.  
-The display is meant top show power and status information of the OrangeHat.  
-![OrangeHat Display Mockup](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20OrangeHat%20LCD%20Mockup.jpg)  
-Schematics. Pin assigment may change to make routing easier.  
-![OrangeHat Display Schematics](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20LCD%20Schematics.PNG)  
-Initial Placement. Gives an idea of possible routing and area use.  
-![OrangeHat Display Initial Placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25%20LCD%20Placement.PNG)  
+**PCB Render**  
+Render of PCB, Top and Bot side.  
+![PCB](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-08-11%20OrangeHat%20PCB.PNG)  
+Render of the gerbers files.  
+![Gerber](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-08-11%20OrangeHat%20Gerber.png)  
 
-**Servo**
-Schematics for the Servo section of the board  
-- 5.8V 3.0A dedicated power line  
-- Power cut from microcontroller  
-- 8 servo channels  
-- Voltage monitoring  
-- Current Monitoring  
-
-Schematics:  
-![OrangeHat Servo Schematics](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25b%20OrangeHat%20Servo%20Schematics.PNG)
-
-Initial placement:  
-![OrangeHat Servo Initial Placement](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-07-25b%20OrangeHat%20Servo%20Placement.PNG)
-
-Complete Autorute:  
-![](https://raw.githubusercontent.com/OrsoEric/OrangeHat/main/Hardware/OrangeHat/Media/2021-08-10c%20autoroute%20success.PNG)
+**Microcontroller Pin Assignment Table**  
+![image](https://user-images.githubusercontent.com/30684972/129023948-7e85f617-7ed9-4bab-883f-ed7bffdb8147.png)
