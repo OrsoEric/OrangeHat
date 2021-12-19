@@ -1,35 +1,35 @@
 
-2021-12-19 AT4809 OrangeHat LCD.elf:     file format elf32-avr
+2021-12-18b AT4809 OrangeHat Servo.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00802800  00802800  00000a92  2**0
+  0 .data         00000000  00802800  00802800  00000aa4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000009ba  00000000  00000000  00000094  2**1
+  1 .text         000009cc  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000044  000049ba  000009ba  00000a4e  2**0
+  2 .rodata       00000044  000049cc  000009cc  00000a60  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .bss          0000002d  00802800  00802800  00000a92  2**0
+  3 .bss          0000002d  00802800  00802800  00000aa4  2**0
                   ALLOC
-  4 .comment      00000030  00000000  00000000  00000a92  2**0
+  4 .comment      00000030  00000000  00000000  00000aa4  2**0
                   CONTENTS, READONLY
-  5 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000ac4  2**2
+  5 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000ad4  2**2
                   CONTENTS, READONLY
-  6 .debug_aranges 00000160  00000000  00000000  00000b04  2**0
+  6 .debug_aranges 00000160  00000000  00000000  00000b14  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   000052ef  00000000  00000000  00000c64  2**0
+  7 .debug_info   000052ef  00000000  00000000  00000c74  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00002b9b  00000000  00000000  00005f53  2**0
+  8 .debug_abbrev 00002b9b  00000000  00000000  00005f63  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   0000230e  00000000  00000000  00008aee  2**0
+  9 .debug_line   0000231a  00000000  00000000  00008afe  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  00000598  00000000  00000000  0000adfc  2**2
+ 10 .debug_frame  00000598  00000000  00000000  0000ae18  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00001ed0  00000000  00000000  0000b394  2**0
+ 11 .debug_str    00001ed3  00000000  00000000  0000b3b0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    0000439f  00000000  00000000  0000d264  2**0
+ 12 .debug_loc    0000439f  00000000  00000000  0000d283  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000180  00000000  00000000  00011603  2**0
+ 13 .debug_ranges 00000180  00000000  00000000  00011622  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -39,7 +39,7 @@ Disassembly of section .text:
    4:	0c 94 62 00 	jmp	0xc4	; 0xc4 <__bad_interrupt>
    8:	0c 94 62 00 	jmp	0xc4	; 0xc4 <__bad_interrupt>
    c:	0c 94 62 00 	jmp	0xc4	; 0xc4 <__bad_interrupt>
-  10:	0c 94 16 04 	jmp	0x82c	; 0x82c <__vector_4>
+  10:	0c 94 17 04 	jmp	0x82e	; 0x82e <__vector_4>
   14:	0c 94 62 00 	jmp	0xc4	; 0xc4 <__bad_interrupt>
   18:	0c 94 62 00 	jmp	0xc4	; 0xc4 <__bad_interrupt>
   1c:	0c 94 62 00 	jmp	0xc4	; 0xc4 <__bad_interrupt>
@@ -97,8 +97,8 @@ Disassembly of section .text:
   b6:	ad 32       	cpi	r26, 0x2D	; 45
   b8:	b2 07       	cpc	r27, r18
   ba:	e1 f7       	brne	.-8      	; 0xb4 <.do_clear_bss_loop>
-  bc:	0e 94 5d 04 	call	0x8ba	; 0x8ba <main>
-  c0:	0c 94 db 04 	jmp	0x9b6	; 0x9b6 <_exit>
+  bc:	0e 94 5e 04 	call	0x8bc	; 0x8bc <main>
+  c0:	0c 94 e4 04 	jmp	0x9c8	; 0x9c8 <_exit>
 
 000000c4 <__bad_interrupt>:
   c4:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -725,7 +725,7 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
                     tmp = num / base[t];
  56e:	80 2f       	mov	r24, r16
  570:	64 2f       	mov	r22, r20
- 572:	0e 94 bb 04 	call	0x976	; 0x976 <__udivmodqi4>
+ 572:	0e 94 c4 04 	call	0x988	; 0x988 <__udivmodqi4>
                     //If: index would overflow. Need an extra slot for the final teminator
                     if ( (SAFETY_CHECKS == true) && (index >= (str_len -Config::STRING_TERMINATOR_SIZE)) )
  576:	62 2f       	mov	r22, r18
@@ -847,7 +847,7 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
                 1
             };
  5e4:	8a e0       	ldi	r24, 0x0A	; 10
- 5e6:	ea eb       	ldi	r30, 0xBA	; 186
+ 5e6:	ec ec       	ldi	r30, 0xCC	; 204
  5e8:	f9 e4       	ldi	r31, 0x49	; 73
  5ea:	de 01       	movw	r26, r28
  5ec:	17 96       	adiw	r26, 0x07	; 7
@@ -903,7 +903,7 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
                     tmp = num / base[t];
  622:	c8 01       	movw	r24, r16
  624:	bf 01       	movw	r22, r30
- 626:	0e 94 c7 04 	call	0x98e	; 0x98e <__udivmodhi4>
+ 626:	0e 94 d0 04 	call	0x9a0	; 0x9a0 <__udivmodhi4>
                     //If: index would overflow. Need an extra slot for the final teminator
                     if ( (SAFETY_CHECKS == true) && (index >= (str_len -Config::STRING_TERMINATOR_SIZE)) )
  62a:	82 2f       	mov	r24, r18
@@ -1200,8 +1200,8 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
  752:	13 8a       	std	Z+19, r1	; 0x13
  754:	14 8a       	std	Z+20, r1	; 0x14
  756:	15 8a       	std	Z+21, r1	; 0x15
- 758:	88 e0       	ldi	r24, 0x08	; 8
- 75a:	86 8b       	std	Z+22, r24	; 0x16
+ 758:	98 e0       	ldi	r25, 0x08	; 8
+ 75a:	96 8b       	std	Z+22, r25	; 0x16
  75c:	17 8a       	std	Z+23, r1	; 0x17
 	//!	PB5,			: LCD RS
 	//!	PB6				:
@@ -1211,8 +1211,8 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
 	PORT_B_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z );
  75e:	e0 e2       	ldi	r30, 0x20	; 32
  760:	f4 e0       	ldi	r31, 0x04	; 4
- 762:	8f e3       	ldi	r24, 0x3F	; 63
- 764:	80 83       	st	Z, r24
+ 762:	9f e3       	ldi	r25, 0x3F	; 63
+ 764:	90 83       	st	Z, r25
  766:	14 82       	std	Z+4, r1	; 0x04
  768:	12 86       	std	Z+10, r1	; 0x0a
  76a:	10 8a       	std	Z+16, r1	; 0x10
@@ -1223,7 +1223,7 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
  774:	15 8a       	std	Z+21, r1	; 0x15
  776:	16 8a       	std	Z+22, r1	; 0x16
  778:	17 8a       	std	Z+23, r1	; 0x17
-	//!	PC5				: UC_LED1
+	//!	PC5				: UC_LED1 (BLUE)
 	//!	PC6				:
 	//!	PC7				:
 	//----------------------------------------------------------------
@@ -1231,8 +1231,8 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
 	PORT_C_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z );
  77a:	e0 e4       	ldi	r30, 0x40	; 64
  77c:	f4 e0       	ldi	r31, 0x04	; 4
- 77e:	80 e3       	ldi	r24, 0x30	; 48
- 780:	80 83       	st	Z, r24
+ 77e:	90 e3       	ldi	r25, 0x30	; 48
+ 780:	90 83       	st	Z, r25
  782:	14 82       	std	Z+4, r1	; 0x04
  784:	12 86       	std	Z+10, r1	; 0x0a
  786:	10 8a       	std	Z+16, r1	; 0x10
@@ -1245,14 +1245,14 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
  794:	17 8a       	std	Z+23, r1	; 0x17
 	//!	PD5				:
 	//!	PD6				: 
-	//!	PD7				:	UC_SERVO_POWER#	| true= allow power to flow from the regulator channel 2 to the servo connectors
+	//!	PD7				:	UC_SERVO_POWER#	| false = allow power to flow from the regulator channel 2 to the servo connectors
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_H );
  796:	e0 e6       	ldi	r30, 0x60	; 96
  798:	f4 e0       	ldi	r31, 0x04	; 4
- 79a:	10 82       	st	Z, r1
- 79c:	14 82       	std	Z+4, r1	; 0x04
+ 79a:	80 83       	st	Z, r24
+ 79c:	84 83       	std	Z+4, r24	; 0x04
  79e:	12 86       	std	Z+10, r1	; 0x0a
  7a0:	10 8a       	std	Z+16, r1	; 0x10
  7a2:	11 8a       	std	Z+17, r1	; 0x11
@@ -1262,467 +1262,485 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
  7aa:	15 8a       	std	Z+21, r1	; 0x15
  7ac:	16 8a       	std	Z+22, r1	; 0x16
  7ae:	17 8a       	std	Z+23, r1	; 0x17
-	//!	PE5				:
-	//!	PE6				:
-	//!	PE7				:
+	//!	PE5				: 
+	//!	PE6				: 
+	//!	PE7				: 
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_E_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_E_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
  7b0:	e0 e8       	ldi	r30, 0x80	; 128
  7b2:	f4 e0       	ldi	r31, 0x04	; 4
- 7b4:	10 82       	st	Z, r1
- 7b6:	14 82       	std	Z+4, r1	; 0x04
- 7b8:	12 86       	std	Z+10, r1	; 0x0a
- 7ba:	10 8a       	std	Z+16, r1	; 0x10
- 7bc:	11 8a       	std	Z+17, r1	; 0x11
- 7be:	12 8a       	std	Z+18, r1	; 0x12
- 7c0:	13 8a       	std	Z+19, r1	; 0x13
- 7c2:	14 8a       	std	Z+20, r1	; 0x14
- 7c4:	15 8a       	std	Z+21, r1	; 0x15
- 7c6:	16 8a       	std	Z+22, r1	; 0x16
- 7c8:	17 8a       	std	Z+23, r1	; 0x17
+ 7b4:	8f e0       	ldi	r24, 0x0F	; 15
+ 7b6:	80 83       	st	Z, r24
+ 7b8:	14 82       	std	Z+4, r1	; 0x04
+ 7ba:	12 86       	std	Z+10, r1	; 0x0a
+ 7bc:	10 8a       	std	Z+16, r1	; 0x10
+ 7be:	11 8a       	std	Z+17, r1	; 0x11
+ 7c0:	12 8a       	std	Z+18, r1	; 0x12
+ 7c2:	13 8a       	std	Z+19, r1	; 0x13
+ 7c4:	14 8a       	std	Z+20, r1	; 0x14
+ 7c6:	15 8a       	std	Z+21, r1	; 0x15
+ 7c8:	16 8a       	std	Z+22, r1	; 0x16
+ 7ca:	17 8a       	std	Z+23, r1	; 0x17
 	//!	PF5				: 
 	//!	PF6				:
 	//!	PF7				:
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_F_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
- 7ca:	e0 ea       	ldi	r30, 0xA0	; 160
- 7cc:	f4 e0       	ldi	r31, 0x04	; 4
- 7ce:	10 82       	st	Z, r1
- 7d0:	14 82       	std	Z+4, r1	; 0x04
- 7d2:	12 86       	std	Z+10, r1	; 0x0a
- 7d4:	10 8a       	std	Z+16, r1	; 0x10
- 7d6:	11 8a       	std	Z+17, r1	; 0x11
- 7d8:	12 8a       	std	Z+18, r1	; 0x12
- 7da:	13 8a       	std	Z+19, r1	; 0x13
- 7dc:	14 8a       	std	Z+20, r1	; 0x14
- 7de:	15 8a       	std	Z+21, r1	; 0x15
- 7e0:	16 8a       	std	Z+22, r1	; 0x16
- 7e2:	17 8a       	std	Z+23, r1	; 0x17
- 7e4:	08 95       	ret
+	PORT_F_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+ 7cc:	e0 ea       	ldi	r30, 0xA0	; 160
+ 7ce:	f4 e0       	ldi	r31, 0x04	; 4
+ 7d0:	80 83       	st	Z, r24
+ 7d2:	14 82       	std	Z+4, r1	; 0x04
+ 7d4:	12 86       	std	Z+10, r1	; 0x0a
+ 7d6:	10 8a       	std	Z+16, r1	; 0x10
+ 7d8:	11 8a       	std	Z+17, r1	; 0x11
+ 7da:	12 8a       	std	Z+18, r1	; 0x12
+ 7dc:	13 8a       	std	Z+19, r1	; 0x13
+ 7de:	14 8a       	std	Z+20, r1	; 0x14
+ 7e0:	15 8a       	std	Z+21, r1	; 0x15
+ 7e2:	16 8a       	std	Z+22, r1	; 0x16
+ 7e4:	17 8a       	std	Z+23, r1	; 0x17
+ 7e6:	08 95       	ret
 
-000007e6 <_Z8init_rtcv>:
+000007e8 <_Z8init_rtcv>:
 	//----------------------------------------------------------------
 	//	VARS
 	//----------------------------------------------------------------
 
 	//! Fetch registers
 	uint8_t ctrla_tmp		= RTC.CTRLA;
- 7e6:	e0 e4       	ldi	r30, 0x40	; 64
- 7e8:	f1 e0       	ldi	r31, 0x01	; 1
- 7ea:	90 81       	ld	r25, Z
+ 7e8:	e0 e4       	ldi	r30, 0x40	; 64
+ 7ea:	f1 e0       	ldi	r31, 0x01	; 1
+ 7ec:	90 81       	ld	r25, Z
 	uint8_t intctrl_tmp		= RTC.INTCTRL;
- 7ec:	42 81       	ldd	r20, Z+2	; 0x02
+ 7ee:	42 81       	ldd	r20, Z+2	; 0x02
 	uint8_t dgbctrl_tmp		= RTC.DBGCTRL;
- 7ee:	55 81       	ldd	r21, Z+5	; 0x05
+ 7f0:	55 81       	ldd	r21, Z+5	; 0x05
 	uint8_t clksel_tmp		= RTC.CLKSEL;
- 7f0:	37 81       	ldd	r19, Z+7	; 0x07
+ 7f2:	37 81       	ldd	r19, Z+7	; 0x07
 	uint8_t pitctrla_tmp	= RTC.PITCTRLA;
- 7f2:	80 89       	ldd	r24, Z+16	; 0x10
+ 7f4:	80 89       	ldd	r24, Z+16	; 0x10
 	uint8_t pitintctrl_tmp	= RTC.PITINTCTRL;
- 7f4:	22 89       	ldd	r18, Z+18	; 0x12
+ 7f6:	22 89       	ldd	r18, Z+18	; 0x12
 	//! RTC Clock Source
 	//----------------------------------------------------------------
 	//	Clock source for the RTC timer. Select only one
 
 	//Internal 32KHz oscillator
 	SET_MASKED_BIT( clksel_tmp, RTC_CLKSEL_gm, RTC_CLKSEL_INT32K_gc );
- 7f6:	3c 7f       	andi	r19, 0xFC	; 252
- 7f8:	97 78       	andi	r25, 0x87	; 135
+ 7f8:	3c 7f       	andi	r19, 0xFC	; 252
+ 7fa:	97 78       	andi	r25, 0x87	; 135
 	//----------------------------------------------------------------
 	//! RTC Clock Prescaler
 	//----------------------------------------------------------------
 	//	Set prescaler. Only activate one
 
 	SET_MASKED_BIT( ctrla_tmp, RTC_PRESCALER_gm, RTC_PRESCALER_DIV1_gc );
- 7fa:	91 68       	ori	r25, 0x81	; 129
+ 7fc:	91 68       	ori	r25, 0x81	; 129
 	//----------------------------------------------------------------
 	//! RTC Periodic Interrupt period
 	//----------------------------------------------------------------
 
 	//! Enable Periodic Interrupt timer
 	SET_BIT( pitctrla_tmp, RTC_PITEN_bp );
- 7fc:	81 60       	ori	r24, 0x01	; 1
+ 7fe:	81 60       	ori	r24, 0x01	; 1
 	//! Period for the periodic interrupt. Activate only one
 	//SET_MASKED_BIT( pitctrla_tmp, RTC_PERIOD_gm, RTC_PERIOD_OFF_gc );
 	//SET_MASKED_BIT( pitctrla_tmp, RTC_PERIOD_gm, RTC_PERIOD_CYC4_gc );
 	//SET_MASKED_BIT( pitctrla_tmp, RTC_PERIOD_gm, RTC_PERIOD_CYC8_gc );
 	//SET_MASKED_BIT( pitctrla_tmp, RTC_PERIOD_gm, RTC_PERIOD_CYC16_gc );
 	SET_MASKED_BIT( pitctrla_tmp, RTC_PERIOD_gm, RTC_PERIOD_CYC32_gc );
- 7fe:	87 78       	andi	r24, 0x87	; 135
- 800:	80 62       	ori	r24, 0x20	; 32
+ 800:	87 78       	andi	r24, 0x87	; 135
+ 802:	80 62       	ori	r24, 0x20	; 32
 	//! Enable overflow interrupt
 	//SET_BIT( intctrl_tmp, RTC_OVF_bp );
 	//! Enable Compare Match interrupt
 	//SET_BIT( intctrl_tmp, RTC_CMP_bp );
 	//! Enable Periodic Interrupt timer
 	SET_BIT( pitintctrl_tmp, RTC_PI_bp );
- 802:	21 60       	ori	r18, 0x01	; 1
+ 804:	21 60       	ori	r18, 0x01	; 1
 	//----------------------------------------------------------------
 	//	RETURN
 	//----------------------------------------------------------------
 
 	//Calibration PPM of the RTC counter. Meant to be done in software against more precise clock sources.
 	RTC.CALIB = (uint8_t)0x00;
- 804:	16 82       	std	Z+6, r1	; 0x06
+ 806:	16 82       	std	Z+6, r1	; 0x06
 
 	//Wait for the ***
 	//while (IS_BIT_ONE(RTC.STATUS, RTC_PERBUSY_bp));
 	RTC.PER = (uint16_t)0;
- 806:	12 86       	std	Z+10, r1	; 0x0a
- 808:	13 86       	std	Z+11, r1	; 0x0b
+ 808:	12 86       	std	Z+10, r1	; 0x0a
+ 80a:	13 86       	std	Z+11, r1	; 0x0b
 	//Compare register for compare interrupt
 	RTC.CMP = (uint16_t)0;
- 80a:	14 86       	std	Z+12, r1	; 0x0c
- 80c:	15 86       	std	Z+13, r1	; 0x0d
+ 80c:	14 86       	std	Z+12, r1	; 0x0c
+ 80e:	15 86       	std	Z+13, r1	; 0x0d
 
 	//! Registers write back
 	//Configuration registers
 	RTC.DBGCTRL = dgbctrl_tmp;
- 80e:	55 83       	std	Z+5, r21	; 0x05
+ 810:	55 83       	std	Z+5, r21	; 0x05
 	RTC.CLKSEL = clksel_tmp;
- 810:	37 83       	std	Z+7, r19	; 0x07
+ 812:	37 83       	std	Z+7, r19	; 0x07
 	RTC.PITCTRLA = pitctrla_tmp;
- 812:	80 8b       	std	Z+16, r24	; 0x10
+ 814:	80 8b       	std	Z+16, r24	; 0x10
 	//Write this register last as it activates the timer
 	RTC.CTRLA = ctrla_tmp;
- 814:	90 83       	st	Z, r25
+ 816:	90 83       	st	Z, r25
 	//Activate interrupts
 	RTC.INTCTRL = intctrl_tmp;
- 816:	42 83       	std	Z+2, r20	; 0x02
+ 818:	42 83       	std	Z+2, r20	; 0x02
 	RTC.PITINTCTRL = pitintctrl_tmp;
- 818:	22 8b       	std	Z+18, r18	; 0x12
- 81a:	08 95       	ret
+ 81a:	22 8b       	std	Z+18, r18	; 0x12
+ 81c:	08 95       	ret
 
-0000081c <_Z4initv>:
+0000081e <_Z4initv>:
 	//----------------------------------------------------------------
 	//	BODY
 	//----------------------------------------------------------------
 
 	//Initialize clock systems
 	init_clock();
- 81c:	0e 94 81 03 	call	0x702	; 0x702 <_Z10init_clockv>
+ 81e:	0e 94 81 03 	call	0x702	; 0x702 <_Z10init_clockv>
 	
 	//initialize pin configuration
 	init_pin();
- 820:	0e 94 a0 03 	call	0x740	; 0x740 <_Z8init_pinv>
+ 822:	0e 94 a0 03 	call	0x740	; 0x740 <_Z8init_pinv>
 	
 	//Initialize RTC timer as Periodic interrupt source: RTC_PIT_vect
 	init_rtc();
- 824:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <_Z8init_rtcv>
+ 826:	0e 94 f4 03 	call	0x7e8	; 0x7e8 <_Z8init_rtcv>
 	
 	//Activate interrupts
 	sei();
- 828:	78 94       	sei
- 82a:	08 95       	ret
+ 82a:	78 94       	sei
+ 82c:	08 95       	ret
 
-0000082c <__vector_4>:
+0000082e <__vector_4>:
 **		slow tick
 **	Issue a slow tick meant for non time critical communication and housekeeping tasks
 ****************************************************************************/
 
 ISR( RTC_PIT_vect )
 {	
- 82c:	1f 92       	push	r1
- 82e:	0f 92       	push	r0
- 830:	0f b6       	in	r0, 0x3f	; 63
- 832:	0f 92       	push	r0
- 834:	11 24       	eor	r1, r1
- 836:	2f 93       	push	r18
- 838:	8f 93       	push	r24
- 83a:	9f 93       	push	r25
+ 82e:	1f 92       	push	r1
+ 830:	0f 92       	push	r0
+ 832:	0f b6       	in	r0, 0x3f	; 63
+ 834:	0f 92       	push	r0
+ 836:	11 24       	eor	r1, r1
+ 838:	2f 93       	push	r18
+ 83a:	8f 93       	push	r24
+ 83c:	9f 93       	push	r25
 	//	VARS
 	//----------------------------------------------------------------
 	//Local prescaler
 	
 	//if: tick is not issued
 	if (g_isr_flags.fast_tick == false)
- 83c:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
- 840:	80 fd       	sbrc	r24, 0
- 842:	06 c0       	rjmp	.+12     	; 0x850 <__vector_4+0x24>
+ 83e:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
+ 842:	80 fd       	sbrc	r24, 0
+ 844:	06 c0       	rjmp	.+12     	; 0x852 <__vector_4+0x24>
 	{
 		//Issue a tick
 		g_isr_flags.fast_tick = true;
- 844:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
- 848:	81 60       	ori	r24, 0x01	; 1
- 84a:	80 93 2c 28 	sts	0x282C, r24	; 0x80282c <g_isr_flags>
- 84e:	07 c0       	rjmp	.+14     	; 0x85e <__vector_4+0x32>
+ 846:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
+ 84a:	81 60       	ori	r24, 0x01	; 1
+ 84c:	80 93 2c 28 	sts	0x282C, r24	; 0x80282c <g_isr_flags>
+ 850:	07 c0       	rjmp	.+14     	; 0x860 <__vector_4+0x32>
 	//if: slow tick is already issued
 	else
 	{
 		//ERR OVERRUN
 		//The main application could not keep up with the previous slow tick. Raise the alarm
 		ISSUE_ERROR(ge_error_code, Error_code::ERR_OVERRUN_FAST_TICK);
- 850:	80 91 2b 28 	lds	r24, 0x282B	; 0x80282b <ge_error_code>
- 854:	88 23       	and	r24, r24
- 856:	19 f0       	breq	.+6      	; 0x85e <__vector_4+0x32>
- 858:	81 e0       	ldi	r24, 0x01	; 1
- 85a:	80 93 2b 28 	sts	0x282B, r24	; 0x80282b <ge_error_code>
+ 852:	80 91 2b 28 	lds	r24, 0x282B	; 0x80282b <ge_error_code>
+ 856:	88 23       	and	r24, r24
+ 858:	19 f0       	breq	.+6      	; 0x860 <__vector_4+0x32>
+ 85a:	81 e0       	ldi	r24, 0x01	; 1
+ 85c:	80 93 2b 28 	sts	0x282B, r24	; 0x80282b <ge_error_code>
 	//	Slow tick meant to handle slow services like LEDs
 	
 	//Prescaler
 	static uint16_t pre_slow = 0;	
 	//If: Tick
 	if (pre_slow == 0)
- 85e:	80 91 29 28 	lds	r24, 0x2829	; 0x802829 <_ZZ10__vector_4E8pre_slow>
- 862:	90 91 2a 28 	lds	r25, 0x282A	; 0x80282a <_ZZ10__vector_4E8pre_slow+0x1>
- 866:	00 97       	sbiw	r24, 0x00	; 0
- 868:	89 f4       	brne	.+34     	; 0x88c <__vector_4+0x60>
+ 860:	80 91 29 28 	lds	r24, 0x2829	; 0x802829 <_ZZ10__vector_4E8pre_slow>
+ 864:	90 91 2a 28 	lds	r25, 0x282A	; 0x80282a <_ZZ10__vector_4E8pre_slow+0x1>
+ 868:	00 97       	sbiw	r24, 0x00	; 0
+ 86a:	89 f4       	brne	.+34     	; 0x88e <__vector_4+0x60>
 	{
 		//if: tick is not issued
 		if (g_isr_flags.slow_tick == false)
- 86a:	20 91 2c 28 	lds	r18, 0x282C	; 0x80282c <g_isr_flags>
- 86e:	21 fd       	sbrc	r18, 1
- 870:	06 c0       	rjmp	.+12     	; 0x87e <__vector_4+0x52>
+ 86c:	20 91 2c 28 	lds	r18, 0x282C	; 0x80282c <g_isr_flags>
+ 870:	21 fd       	sbrc	r18, 1
+ 872:	06 c0       	rjmp	.+12     	; 0x880 <__vector_4+0x52>
 		{
 			//Issue a tick
 			g_isr_flags.slow_tick = true;	
- 872:	20 91 2c 28 	lds	r18, 0x282C	; 0x80282c <g_isr_flags>
- 876:	22 60       	ori	r18, 0x02	; 2
- 878:	20 93 2c 28 	sts	0x282C, r18	; 0x80282c <g_isr_flags>
- 87c:	07 c0       	rjmp	.+14     	; 0x88c <__vector_4+0x60>
+ 874:	20 91 2c 28 	lds	r18, 0x282C	; 0x80282c <g_isr_flags>
+ 878:	22 60       	ori	r18, 0x02	; 2
+ 87a:	20 93 2c 28 	sts	0x282C, r18	; 0x80282c <g_isr_flags>
+ 87e:	07 c0       	rjmp	.+14     	; 0x88e <__vector_4+0x60>
 		//if: tick is already issued
 		else
 		{
 			//ERR OVERRUN
 			//The main application could not keep up with the previous slow tick. Raise the alarm
 			ISSUE_ERROR(ge_error_code, Error_code::ERR_OVERRUN_SLOW_TICK);
- 87e:	20 91 2b 28 	lds	r18, 0x282B	; 0x80282b <ge_error_code>
- 882:	22 23       	and	r18, r18
- 884:	19 f0       	breq	.+6      	; 0x88c <__vector_4+0x60>
- 886:	22 e0       	ldi	r18, 0x02	; 2
- 888:	20 93 2b 28 	sts	0x282B, r18	; 0x80282b <ge_error_code>
+ 880:	20 91 2b 28 	lds	r18, 0x282B	; 0x80282b <ge_error_code>
+ 884:	22 23       	and	r18, r18
+ 886:	19 f0       	breq	.+6      	; 0x88e <__vector_4+0x60>
+ 888:	22 e0       	ldi	r18, 0x02	; 2
+ 88a:	20 93 2b 28 	sts	0x282B, r18	; 0x80282b <ge_error_code>
 		}
 		
 	}
 	//Increment, reset if counter is top before increment
 	pre_slow = AT_TOP_INC( pre_slow, Prescaler::TOP_SLOW_TICK-1 );
- 88c:	87 3e       	cpi	r24, 0xE7	; 231
- 88e:	23 e0       	ldi	r18, 0x03	; 3
- 890:	92 07       	cpc	r25, r18
- 892:	11 f0       	breq	.+4      	; 0x898 <__vector_4+0x6c>
- 894:	01 96       	adiw	r24, 0x01	; 1
- 896:	02 c0       	rjmp	.+4      	; 0x89c <__vector_4+0x70>
- 898:	80 e0       	ldi	r24, 0x00	; 0
- 89a:	90 e0       	ldi	r25, 0x00	; 0
- 89c:	80 93 29 28 	sts	0x2829, r24	; 0x802829 <_ZZ10__vector_4E8pre_slow>
- 8a0:	90 93 2a 28 	sts	0x282A, r25	; 0x80282a <_ZZ10__vector_4E8pre_slow+0x1>
+ 88e:	87 3e       	cpi	r24, 0xE7	; 231
+ 890:	23 e0       	ldi	r18, 0x03	; 3
+ 892:	92 07       	cpc	r25, r18
+ 894:	11 f0       	breq	.+4      	; 0x89a <__vector_4+0x6c>
+ 896:	01 96       	adiw	r24, 0x01	; 1
+ 898:	02 c0       	rjmp	.+4      	; 0x89e <__vector_4+0x70>
+ 89a:	80 e0       	ldi	r24, 0x00	; 0
+ 89c:	90 e0       	ldi	r25, 0x00	; 0
+ 89e:	80 93 29 28 	sts	0x2829, r24	; 0x802829 <_ZZ10__vector_4E8pre_slow>
+ 8a2:	90 93 2a 28 	sts	0x282A, r25	; 0x80282a <_ZZ10__vector_4E8pre_slow+0x1>
 	//----------------------------------------------------------------
 	//	RETURN
 	//----------------------------------------------------------------
 	
 	//Manually clear the interrupt flag
 	RTC.PITINTFLAGS = RTC_PI_bm;
- 8a4:	81 e0       	ldi	r24, 0x01	; 1
- 8a6:	80 93 53 01 	sts	0x0153, r24	; 0x800153 <__TEXT_REGION_LENGTH__+0x7f4153>
+ 8a6:	81 e0       	ldi	r24, 0x01	; 1
+ 8a8:	80 93 53 01 	sts	0x0153, r24	; 0x800153 <__TEXT_REGION_LENGTH__+0x7f4153>
 }
- 8aa:	9f 91       	pop	r25
- 8ac:	8f 91       	pop	r24
- 8ae:	2f 91       	pop	r18
- 8b0:	0f 90       	pop	r0
- 8b2:	0f be       	out	0x3f, r0	; 63
- 8b4:	0f 90       	pop	r0
- 8b6:	1f 90       	pop	r1
- 8b8:	18 95       	reti
+ 8ac:	9f 91       	pop	r25
+ 8ae:	8f 91       	pop	r24
+ 8b0:	2f 91       	pop	r18
+ 8b2:	0f 90       	pop	r0
+ 8b4:	0f be       	out	0x3f, r0	; 63
+ 8b6:	0f 90       	pop	r0
+ 8b8:	1f 90       	pop	r1
+ 8ba:	18 95       	reti
 
-000008ba <main>:
+000008bc <main>:
 	//----------------------------------------------------------------
 	//	INIT
 	//----------------------------------------------------------------
 
 	//! Initialize AT4809 internal peripherals
 	init();
- 8ba:	0e 94 0e 04 	call	0x81c	; 0x81c <_Z4initv>
+ 8bc:	0e 94 0f 04 	call	0x81e	; 0x81e <_Z4initv>
 	
 	//Power the LCD display
 	SET_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
- 8be:	e0 e0       	ldi	r30, 0x00	; 0
- 8c0:	f4 e0       	ldi	r31, 0x04	; 4
- 8c2:	84 81       	ldd	r24, Z+4	; 0x04
- 8c4:	80 68       	ori	r24, 0x80	; 128
- 8c6:	84 83       	std	Z+4, r24	; 0x04
+ 8c0:	e0 e0       	ldi	r30, 0x00	; 0
+ 8c2:	f4 e0       	ldi	r31, 0x04	; 4
+ 8c4:	84 81       	ldd	r24, Z+4	; 0x04
+ 8c6:	80 68       	ori	r24, 0x80	; 128
+ 8c8:	84 83       	std	Z+4, r24	; 0x04
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 8c8:	2f e7       	ldi	r18, 0x7F	; 127
- 8ca:	84 e8       	ldi	r24, 0x84	; 132
- 8cc:	9e e1       	ldi	r25, 0x1E	; 30
- 8ce:	21 50       	subi	r18, 0x01	; 1
- 8d0:	80 40       	sbci	r24, 0x00	; 0
- 8d2:	90 40       	sbci	r25, 0x00	; 0
- 8d4:	e1 f7       	brne	.-8      	; 0x8ce <main+0x14>
- 8d6:	00 c0       	rjmp	.+0      	; 0x8d8 <main+0x1e>
- 8d8:	00 00       	nop
+ 8ca:	2f e7       	ldi	r18, 0x7F	; 127
+ 8cc:	84 e8       	ldi	r24, 0x84	; 132
+ 8ce:	9e e1       	ldi	r25, 0x1E	; 30
+ 8d0:	21 50       	subi	r18, 0x01	; 1
+ 8d2:	80 40       	sbci	r24, 0x00	; 0
+ 8d4:	90 40       	sbci	r25, 0x00	; 0
+ 8d6:	e1 f7       	brne	.-8      	; 0x8d0 <main+0x14>
+ 8d8:	00 c0       	rjmp	.+0      	; 0x8da <main+0x1e>
+ 8da:	00 00       	nop
 	
 	_delay_ms( 500.0 );
 	
 	//Power the LCD display
 	CLEAR_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
- 8da:	84 81       	ldd	r24, Z+4	; 0x04
- 8dc:	8f 77       	andi	r24, 0x7F	; 127
- 8de:	84 83       	std	Z+4, r24	; 0x04
- 8e0:	2f e7       	ldi	r18, 0x7F	; 127
- 8e2:	84 e8       	ldi	r24, 0x84	; 132
- 8e4:	9e e1       	ldi	r25, 0x1E	; 30
- 8e6:	21 50       	subi	r18, 0x01	; 1
- 8e8:	80 40       	sbci	r24, 0x00	; 0
- 8ea:	90 40       	sbci	r25, 0x00	; 0
- 8ec:	e1 f7       	brne	.-8      	; 0x8e6 <main+0x2c>
- 8ee:	00 c0       	rjmp	.+0      	; 0x8f0 <main+0x36>
- 8f0:	00 00       	nop
+ 8dc:	84 81       	ldd	r24, Z+4	; 0x04
+ 8de:	8f 77       	andi	r24, 0x7F	; 127
+ 8e0:	84 83       	std	Z+4, r24	; 0x04
+ 8e2:	2f e7       	ldi	r18, 0x7F	; 127
+ 8e4:	84 e8       	ldi	r24, 0x84	; 132
+ 8e6:	9e e1       	ldi	r25, 0x1E	; 30
+ 8e8:	21 50       	subi	r18, 0x01	; 1
+ 8ea:	80 40       	sbci	r24, 0x00	; 0
+ 8ec:	90 40       	sbci	r25, 0x00	; 0
+ 8ee:	e1 f7       	brne	.-8      	; 0x8e8 <main+0x2c>
+ 8f0:	00 c0       	rjmp	.+0      	; 0x8f2 <main+0x36>
+ 8f2:	00 00       	nop
 	
 	_delay_ms( 500.0 );
 	
 	//Initialize
 	lcd_init();
- 8f2:	0e 94 a0 00 	call	0x140	; 0x140 <_Z8lcd_initv>
+ 8f4:	0e 94 a0 00 	call	0x140	; 0x140 <_Z8lcd_initv>
 	
 	//Welcome message
 	lcd_print_str( LCD_POS( 0, 0 ), "OrangeHat" );
- 8f6:	64 ef       	ldi	r22, 0xF4	; 244
- 8f8:	79 e4       	ldi	r23, 0x49	; 73
- 8fa:	80 e0       	ldi	r24, 0x00	; 0
- 8fc:	0e 94 71 02 	call	0x4e2	; 0x4e2 <_Z13lcd_print_strhPKc>
+ 8f8:	66 e0       	ldi	r22, 0x06	; 6
+ 8fa:	7a e4       	ldi	r23, 0x4A	; 74
+ 8fc:	80 e0       	ldi	r24, 0x00	; 0
+ 8fe:	0e 94 71 02 	call	0x4e2	; 0x4e2 <_Z13lcd_print_strhPKc>
 {
 	//----------------------------------------------------------------
 	//	VARS
 	//----------------------------------------------------------------
 	
 	uint16_t cnt = 0;
- 900:	c0 e0       	ldi	r28, 0x00	; 0
- 902:	d0 e0       	ldi	r29, 0x00	; 0
+ 902:	c0 e0       	ldi	r28, 0x00	; 0
+ 904:	d0 e0       	ldi	r29, 0x00	; 0
 		//	BUTTON
 		//----------------------------------------------------------------
 		//	Use LED0 to mirror the state of the BTN
 
 		//If: Fast Tick
 		if (g_isr_flags.fast_tick == true)
- 904:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
- 908:	80 ff       	sbrs	r24, 0
- 90a:	24 c0       	rjmp	.+72     	; 0x954 <main+0x9a>
+ 906:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
+ 90a:	80 ff       	sbrs	r24, 0
+ 90c:	24 c0       	rjmp	.+72     	; 0x956 <main+0x9a>
 		{
 			//Reset slow tick
 			g_isr_flags.fast_tick = false;
- 90c:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
- 910:	8e 7f       	andi	r24, 0xFE	; 254
- 912:	80 93 2c 28 	sts	0x282C, r24	; 0x80282c <g_isr_flags>
+ 90e:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
+ 912:	8e 7f       	andi	r24, 0xFE	; 254
+ 914:	80 93 2c 28 	sts	0x282C, r24	; 0x80282c <g_isr_flags>
 			//Take the value of the button and mirror it on LED1
 			SET_BIT_VALUE( LED1_PORT.OUT, LED1_PIN, GET_BIT(BTN_PORT.IN, BTN_PIN) );
- 916:	e0 e4       	ldi	r30, 0x40	; 64
- 918:	f4 e0       	ldi	r31, 0x04	; 4
- 91a:	24 81       	ldd	r18, Z+4	; 0x04
- 91c:	80 91 08 04 	lds	r24, 0x0408	; 0x800408 <__TEXT_REGION_LENGTH__+0x7f4408>
- 920:	98 2f       	mov	r25, r24
- 922:	90 74       	andi	r25, 0x40	; 64
- 924:	89 2f       	mov	r24, r25
- 926:	90 e0       	ldi	r25, 0x00	; 0
- 928:	08 2e       	mov	r0, r24
- 92a:	89 2f       	mov	r24, r25
- 92c:	00 0c       	add	r0, r0
- 92e:	88 1f       	adc	r24, r24
- 930:	99 0b       	sbc	r25, r25
- 932:	00 0c       	add	r0, r0
- 934:	88 1f       	adc	r24, r24
- 936:	99 1f       	adc	r25, r25
- 938:	88 0f       	add	r24, r24
- 93a:	99 1f       	adc	r25, r25
- 93c:	82 95       	swap	r24
- 93e:	92 95       	swap	r25
- 940:	90 7f       	andi	r25, 0xF0	; 240
- 942:	98 27       	eor	r25, r24
- 944:	80 7f       	andi	r24, 0xF0	; 240
- 946:	98 27       	eor	r25, r24
- 948:	92 2f       	mov	r25, r18
- 94a:	9f 7d       	andi	r25, 0xDF	; 223
- 94c:	89 2b       	or	r24, r25
- 94e:	84 83       	std	Z+4, r24	; 0x04
+ 918:	e0 e4       	ldi	r30, 0x40	; 64
+ 91a:	f4 e0       	ldi	r31, 0x04	; 4
+ 91c:	24 81       	ldd	r18, Z+4	; 0x04
+ 91e:	80 91 08 04 	lds	r24, 0x0408	; 0x800408 <__TEXT_REGION_LENGTH__+0x7f4408>
+ 922:	98 2f       	mov	r25, r24
+ 924:	90 74       	andi	r25, 0x40	; 64
+ 926:	89 2f       	mov	r24, r25
+ 928:	90 e0       	ldi	r25, 0x00	; 0
+ 92a:	08 2e       	mov	r0, r24
+ 92c:	89 2f       	mov	r24, r25
+ 92e:	00 0c       	add	r0, r0
+ 930:	88 1f       	adc	r24, r24
+ 932:	99 0b       	sbc	r25, r25
+ 934:	00 0c       	add	r0, r0
+ 936:	88 1f       	adc	r24, r24
+ 938:	99 1f       	adc	r25, r25
+ 93a:	88 0f       	add	r24, r24
+ 93c:	99 1f       	adc	r25, r25
+ 93e:	82 95       	swap	r24
+ 940:	92 95       	swap	r25
+ 942:	90 7f       	andi	r25, 0xF0	; 240
+ 944:	98 27       	eor	r25, r24
+ 946:	80 7f       	andi	r24, 0xF0	; 240
+ 948:	98 27       	eor	r25, r24
+ 94a:	92 2f       	mov	r25, r18
+ 94c:	9f 7d       	andi	r25, 0xDF	; 223
+ 94e:	89 2b       	or	r24, r25
+ 950:	84 83       	std	Z+4, r24	; 0x04
+			//SET_BIT_VALUE( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN, GET_BIT(BTN_PORT.IN, BTN_PIN) );
 					
 			//Driver that sync the user structure with the LCD.
 			//This paradigm solve lots of timing problems of the direct call version.
 			//You can print a million time a second, and the driver still won't bug out
 			lcd_update();
- 950:	0e 94 c6 00 	call	0x18c	; 0x18c <_Z10lcd_updatev>
+ 952:	0e 94 c6 00 	call	0x18c	; 0x18c <_Z10lcd_updatev>
 		//	Slow tick generated by the RTC timer, prescaled by 
 		//	32KHz/32/(Prescaler::TOP_SLOW_TICK+1) = 1000ms
 		//	Toggle LED1
 
 		//If: Slow Tick
 		if (g_isr_flags.slow_tick == true)
- 954:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
- 958:	81 ff       	sbrs	r24, 1
- 95a:	d4 cf       	rjmp	.-88     	; 0x904 <main+0x4a>
+ 956:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
+ 95a:	81 ff       	sbrs	r24, 1
+ 95c:	d4 cf       	rjmp	.-88     	; 0x906 <main+0x4a>
 		{
 			//Reset slow tick
 			g_isr_flags.slow_tick = false;
- 95c:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
- 960:	8d 7f       	andi	r24, 0xFD	; 253
- 962:	80 93 2c 28 	sts	0x282C, r24	; 0x80282c <g_isr_flags>
+ 95e:	80 91 2c 28 	lds	r24, 0x282C	; 0x80282c <g_isr_flags>
+ 962:	8d 7f       	andi	r24, 0xFD	; 253
+ 964:	80 93 2c 28 	sts	0x282C, r24	; 0x80282c <g_isr_flags>
 			//Toggle LED0	
 			LED0_PORT.OUTTGL = MASK(LED0_PIN);
- 966:	80 e1       	ldi	r24, 0x10	; 16
- 968:	80 93 47 04 	sts	0x0447, r24	; 0x800447 <__TEXT_REGION_LENGTH__+0x7f4447>
+ 968:	80 e1       	ldi	r24, 0x10	; 16
+ 96a:	80 93 47 04 	sts	0x0447, r24	; 0x800447 <__TEXT_REGION_LENGTH__+0x7f4447>
 			
-			//Power the LCD display ON and OFF
-			//LCD_PWR_PORT.OUTTGL = MASK( LCD_PWR_PIN );
+			//Power all SERVOs ON and OFF
+			//SERVO_PWR_PORT.OUTTGL = MASK( SERVO_PWR_PIN );
 			
 			//Counter
 			lcd_print_u16( LCD_POS(1,0), cnt );
- 96c:	be 01       	movw	r22, r28
- 96e:	0e 94 93 02 	call	0x526	; 0x526 <_Z13lcd_print_u16hj>
+ 96e:	be 01       	movw	r22, r28
+ 970:	0e 94 93 02 	call	0x526	; 0x526 <_Z13lcd_print_u16hj>
 			cnt++;
- 972:	21 96       	adiw	r28, 0x01	; 1
- 974:	c7 cf       	rjmp	.-114    	; 0x904 <main+0x4a>
+ 974:	21 96       	adiw	r28, 0x01	; 1
+			
+			if (cnt > 10)
+ 976:	cb 30       	cpi	r28, 0x0B	; 11
+ 978:	d1 05       	cpc	r29, r1
+ 97a:	28 f6       	brcc	.-118    	; 0x906 <main+0x4a>
+			{
+				//CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+			}
+			else
+			{
+				SET_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+ 97c:	e0 e6       	ldi	r30, 0x60	; 96
+ 97e:	f4 e0       	ldi	r31, 0x04	; 4
+ 980:	84 81       	ldd	r24, Z+4	; 0x04
+ 982:	80 68       	ori	r24, 0x80	; 128
+ 984:	84 83       	std	Z+4, r24	; 0x04
+ 986:	bf cf       	rjmp	.-130    	; 0x906 <main+0x4a>
 
-00000976 <__udivmodqi4>:
- 976:	99 1b       	sub	r25, r25
- 978:	79 e0       	ldi	r23, 0x09	; 9
- 97a:	04 c0       	rjmp	.+8      	; 0x984 <__udivmodqi4_ep>
+00000988 <__udivmodqi4>:
+ 988:	99 1b       	sub	r25, r25
+ 98a:	79 e0       	ldi	r23, 0x09	; 9
+ 98c:	04 c0       	rjmp	.+8      	; 0x996 <__udivmodqi4_ep>
 
-0000097c <__udivmodqi4_loop>:
- 97c:	99 1f       	adc	r25, r25
- 97e:	96 17       	cp	r25, r22
- 980:	08 f0       	brcs	.+2      	; 0x984 <__udivmodqi4_ep>
- 982:	96 1b       	sub	r25, r22
+0000098e <__udivmodqi4_loop>:
+ 98e:	99 1f       	adc	r25, r25
+ 990:	96 17       	cp	r25, r22
+ 992:	08 f0       	brcs	.+2      	; 0x996 <__udivmodqi4_ep>
+ 994:	96 1b       	sub	r25, r22
 
-00000984 <__udivmodqi4_ep>:
- 984:	88 1f       	adc	r24, r24
- 986:	7a 95       	dec	r23
- 988:	c9 f7       	brne	.-14     	; 0x97c <__udivmodqi4_loop>
- 98a:	80 95       	com	r24
- 98c:	08 95       	ret
+00000996 <__udivmodqi4_ep>:
+ 996:	88 1f       	adc	r24, r24
+ 998:	7a 95       	dec	r23
+ 99a:	c9 f7       	brne	.-14     	; 0x98e <__udivmodqi4_loop>
+ 99c:	80 95       	com	r24
+ 99e:	08 95       	ret
 
-0000098e <__udivmodhi4>:
- 98e:	aa 1b       	sub	r26, r26
- 990:	bb 1b       	sub	r27, r27
- 992:	51 e1       	ldi	r21, 0x11	; 17
- 994:	07 c0       	rjmp	.+14     	; 0x9a4 <__udivmodhi4_ep>
+000009a0 <__udivmodhi4>:
+ 9a0:	aa 1b       	sub	r26, r26
+ 9a2:	bb 1b       	sub	r27, r27
+ 9a4:	51 e1       	ldi	r21, 0x11	; 17
+ 9a6:	07 c0       	rjmp	.+14     	; 0x9b6 <__udivmodhi4_ep>
 
-00000996 <__udivmodhi4_loop>:
- 996:	aa 1f       	adc	r26, r26
- 998:	bb 1f       	adc	r27, r27
- 99a:	a6 17       	cp	r26, r22
- 99c:	b7 07       	cpc	r27, r23
- 99e:	10 f0       	brcs	.+4      	; 0x9a4 <__udivmodhi4_ep>
- 9a0:	a6 1b       	sub	r26, r22
- 9a2:	b7 0b       	sbc	r27, r23
+000009a8 <__udivmodhi4_loop>:
+ 9a8:	aa 1f       	adc	r26, r26
+ 9aa:	bb 1f       	adc	r27, r27
+ 9ac:	a6 17       	cp	r26, r22
+ 9ae:	b7 07       	cpc	r27, r23
+ 9b0:	10 f0       	brcs	.+4      	; 0x9b6 <__udivmodhi4_ep>
+ 9b2:	a6 1b       	sub	r26, r22
+ 9b4:	b7 0b       	sbc	r27, r23
 
-000009a4 <__udivmodhi4_ep>:
- 9a4:	88 1f       	adc	r24, r24
- 9a6:	99 1f       	adc	r25, r25
- 9a8:	5a 95       	dec	r21
- 9aa:	a9 f7       	brne	.-22     	; 0x996 <__udivmodhi4_loop>
- 9ac:	80 95       	com	r24
- 9ae:	90 95       	com	r25
- 9b0:	bc 01       	movw	r22, r24
- 9b2:	cd 01       	movw	r24, r26
- 9b4:	08 95       	ret
+000009b6 <__udivmodhi4_ep>:
+ 9b6:	88 1f       	adc	r24, r24
+ 9b8:	99 1f       	adc	r25, r25
+ 9ba:	5a 95       	dec	r21
+ 9bc:	a9 f7       	brne	.-22     	; 0x9a8 <__udivmodhi4_loop>
+ 9be:	80 95       	com	r24
+ 9c0:	90 95       	com	r25
+ 9c2:	bc 01       	movw	r22, r24
+ 9c4:	cd 01       	movw	r24, r26
+ 9c6:	08 95       	ret
 
-000009b6 <_exit>:
- 9b6:	f8 94       	cli
+000009c8 <_exit>:
+ 9c8:	f8 94       	cli
 
-000009b8 <__stop_program>:
- 9b8:	ff cf       	rjmp	.-2      	; 0x9b8 <__stop_program>
+000009ca <__stop_program>:
+ 9ca:	ff cf       	rjmp	.-2      	; 0x9ca <__stop_program>

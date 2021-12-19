@@ -39,29 +39,41 @@
 **	Show a welcome message on the LCD on power ON: SUCCESS
 **	Show a number that changes twice a second: SUCCESS
 **	TODO: I learned a lot about C++ since I wrote the lcd library. Rewrite the LCD library as class.
+**	SERVO PINs. Toggle power ON and OFF to test power delivery
+**
 ****************************************************************/
 
 /****************************************************************
 **	USED PINS
 ****************************************************************
-**	VNH7040
-**				|	DRV0	|	DRV1	|	DRV2	|	DRV3	|	VNH7040
-**	-------------------------------------------------------------------------
-**	uC_SEN		|	PF0		|	PF0		|	PF0		|	PF0		|	SENSE ENABLE
-**	uC_DIAG		|	PF1		|	PF1		|	PF1		|	PF1		|	SEL1
-**	uC_PWM		|	PA2,B20	|	PA3,B21	|	PB4,B22	|	PB5,B23	|	PWM
-**	uC_CTRLA	|	PA4		|	PA6		|	PB2		|	PD6		|	INA, SEL0
-**	uC_CTRLB	|	PA5		|	PA7		|	PB3		|	PD7		|	INB
 **
 **	LEDs			|	Microcontroller
-**	uc.led.green	|	uc.C4
-**	uc.led.blue		|	uc.C5
+**	uc.led.green	|	uc.C4 (true = ON)
+**	uc.led.blue		|	uc.C5 (true = ON)
 **
-**	ADC			|	Microcontroller
-**	uc.led.green	|	uc.C4
-**	uc.led.blue		|	uc.C5
-
-
+**	BUTTON			|	Microcontroller
+**	uc.btn.no0		|	uc.A6 (push = FALSE)
+**
+**	DISPLAY			|	Microcontroller
+**	uc.lcd.pwr#		|	uc.A7
+**	uc.lcd.D4		|	uc.B0
+**	uc.lcd.D5		|	uc.B1
+**	uc.lcd.D6		|	uc.B2
+**	uc.lcd.D7		|	uc.B3
+**	uc.lcd.EN		|	uc.B4
+**	uc.lcd.RS		|	uc.B4
+**
+**	SERVO			|	Microcontroller
+**	uc.servo.pwr#	|	uc.D7
+**	uc.servo.ch1	|	uc.E0
+**	uc.servo.ch2	|	uc.E1
+**	uc.servo.ch3	|	uc.E2
+**	uc.servo.ch4	|	uc.E3
+**	uc.servo.ch5	|	uc.F0
+**	uc.servo.ch6	|	uc.F1
+**	uc.servo.ch7	|	uc.F2
+**	uc.servo.ch8	|	uc.F3
+**
 ****************************************************************/
 
 /****************************************************************
@@ -169,6 +181,8 @@ int main(void)
 			g_isr_flags.fast_tick = false;
 			//Take the value of the button and mirror it on LED1
 			SET_BIT_VALUE( LED1_PORT.OUT, LED1_PIN, GET_BIT(BTN_PORT.IN, BTN_PIN) );
+			//Use the button to power the LCD
+			//SET_BIT_VALUE( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN, GET_BIT(BTN_PORT.IN, BTN_PIN) );
 					
 			//Driver that sync the user structure with the LCD.
 			//This paradigm solve lots of timing problems of the direct call version.
@@ -195,9 +209,21 @@ int main(void)
 			//Power the LCD display ON and OFF
 			//LCD_PWR_PORT.OUTTGL = MASK( LCD_PWR_PIN );
 			
+			//Power all SERVOs ON and OFF
+			//SERVO_PWR_PORT.OUTTGL = MASK( SERVO_PWR_PIN );
+			
 			//Counter
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
+			
+			if (cnt > 10)
+			{
+				//CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+			}
+			else
+			{
+				SET_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+			}
 		}
 		
 	}	//End: Main loop

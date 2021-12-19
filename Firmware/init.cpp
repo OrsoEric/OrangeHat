@@ -196,8 +196,8 @@ void init_pin( void )
 	//!	PC1				:
 	//!	PC2				:
 	//!	PC3				:
-	//!	PC4				: UC_LED0
-	//!	PC5				: UC_LED1
+	//!	PC4				: UC_LED0 (GREEN)
+	//!	PC5				: UC_LED1 (BLUE)
 	//!	PC6				:
 	//!	PC7				:
 	//----------------------------------------------------------------
@@ -213,38 +213,38 @@ void init_pin( void )
 	//!	PD4				:
 	//!	PD5				:
 	//!	PD6				: 
-	//!	PD7				:	UC_SERVO_POWER#	| true= allow power to flow from the regulator channel 2 to the servo connectors
+	//!	PD7				:	UC_SERVO_POWER#	| false = allow power to flow from the regulator channel 2 to the servo connectors
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_H );
 
 	//----------------------------------------------------------------
 	//!	PORTE
-	//!	PE0				: 
-	//!	PE1				: 
-	//!	PE2				: 
-	//!	PE3				:
-	//!	PE4				:
-	//!	PE5				:
-	//!	PE6				:
-	//!	PE7				:
+	//!	PE0				: SERVO1
+	//!	PE1				: SERVO2
+	//!	PE2				: SERVO3
+	//!	PE3				: SERVO4
+	//!	PE4				: 
+	//!	PE5				: 
+	//!	PE6				: 
+	//!	PE7				: 
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_E_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_E_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
 
 	//----------------------------------------------------------------
 	//!	PORTF
-	//!	PF0				: 
-	//!	PF1				: 
-	//!	PF2				:
-	//!	PF3				:
+	//!	PF0				: SERVO5
+	//!	PF1				: SERVO6
+	//!	PF2				: SERVO7
+	//!	PF3				: SERVO8
 	//!	PF4				: 
 	//!	PF5				: 
 	//!	PF6				:
 	//!	PF7				:
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_F_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_F_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
 
 	//----------------------------------------------------------------
 	//	RETURN
