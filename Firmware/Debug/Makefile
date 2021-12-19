@@ -37,6 +37,8 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../at_lcd.cpp \
+../debug.cpp \
 ../init.cpp \
 ../int.cpp \
 ../main.cpp
@@ -49,28 +51,36 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+at_lcd.o \
+debug.o \
 init.o \
 int.o \
 main.o
 
 OBJS_AS_ARGS +=  \
+at_lcd.o \
+debug.o \
 init.o \
 int.o \
 main.o
 
 C_DEPS +=  \
+at_lcd.d \
+debug.d \
 init.d \
 int.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
+at_lcd.d \
+debug.d \
 init.d \
 int.d \
 main.d
 
-OUTPUT_FILE_PATH +=OrangeHat\ Test\ Blink.elf
+OUTPUT_FILE_PATH +=2021-12-19\ AT4809\ OrangeHat\ LCD.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +="OrangeHat Test Blink.elf"
+OUTPUT_FILE_PATH_AS_ARGS +="2021-12-19 AT4809 OrangeHat LCD.elf"
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -82,24 +92,38 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+./at_lcd.o: .././at_lcd.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./debug.o: .././debug.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./init.o: .././init.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./int.o: .././int.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./main.o: .././main.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
@@ -129,13 +153,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR8/GNU Linker : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="OrangeHat Test Blink.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega4809"  
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="2021-12-19 AT4809 OrangeHat LCD.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809"  
 	@echo Finished building target: $@
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "OrangeHat Test Blink.elf" "OrangeHat Test Blink.hex"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "OrangeHat Test Blink.elf" "OrangeHat Test Blink.eep" || exit 0
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "OrangeHat Test Blink.elf" > "OrangeHat Test Blink.lss"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "OrangeHat Test Blink.elf" "OrangeHat Test Blink.srec"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "OrangeHat Test Blink.elf"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.hex"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.eep" || exit 0
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "2021-12-19 AT4809 OrangeHat LCD.elf" > "2021-12-19 AT4809 OrangeHat LCD.lss"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.srec"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "2021-12-19 AT4809 OrangeHat LCD.elf"
 	
 	
 
@@ -147,5 +171,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "OrangeHat Test Blink.elf" "OrangeHat Test Blink.a" "OrangeHat Test Blink.hex" "OrangeHat Test Blink.lss" "OrangeHat Test Blink.eep" "OrangeHat Test Blink.map" "OrangeHat Test Blink.srec" "OrangeHat Test Blink.usersignatures"
+	rm -rf "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.a" "2021-12-19 AT4809 OrangeHat LCD.hex" "2021-12-19 AT4809 OrangeHat LCD.lss" "2021-12-19 AT4809 OrangeHat LCD.eep" "2021-12-19 AT4809 OrangeHat LCD.map" "2021-12-19 AT4809 OrangeHat LCD.srec" "2021-12-19 AT4809 OrangeHat LCD.usersignatures"
 	

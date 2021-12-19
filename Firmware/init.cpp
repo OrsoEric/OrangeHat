@@ -171,24 +171,24 @@ void init_pin( void )
 	//!	PA4				: 
 	//!	PA5				: 
 	//!	PA6				: UC_BTN
-	//!	PA7				: 
+	//!	PA7				: LCD PWR#
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_A_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_R,	PIN_Z );
+	PORT_A_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_R,	PIN_H );
 
 	//----------------------------------------------------------------
 	//!	PORTB
-	//!	PB0,			:
-	//!	PB1,			:
-	//!	PB2				:
-	//!	PB3				:
-	//!	PB4,			:
-	//!	PB5,			: 
+	//!	PB0,			: LCD D4
+	//!	PB1,			: LCD D5
+	//!	PB2				: LCD D6
+	//!	PB3				: LCD D7
+	//!	PB4,			: LCD EN
+	//!	PB5,			: LCD RS
 	//!	PB6				:
 	//!	PB7				:
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_B_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_B_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z );
 
 	//----------------------------------------------------------------
 	//!	PORTC

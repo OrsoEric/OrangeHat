@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>OrangeHat Test Blink</AssemblyName>
-    <Name>OrangeHat Test Blink</Name>
-    <RootNamespace>OrangeHat Test Blink</RootNamespace>
+    <AssemblyName>2021-12-19 AT4809 OrangeHat LCD</AssemblyName>
+    <Name>2021-12-19 AT4809 OrangeHat LCD</Name>
+    <RootNamespace>2021-12-19 AT4809 OrangeHat LCD</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -30,15 +30,15 @@
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.49.1" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.51.0" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
     <avrtoolserialnumber>J41800119017</avrtoolserialnumber>
@@ -60,7 +60,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGccCpp>
-  <avrgcc.common.Device>-mmcu=atmega4809 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega4809"</avrgcc.common.Device>
+  <avrgcc.common.Device>-mmcu=atmega4809 -B "%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809"</avrgcc.common.Device>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
   <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -75,7 +75,7 @@
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\include\</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -91,7 +91,7 @@
   </avrgcccpp.compiler.symbols.DefSymbols>
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\include\</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -107,7 +107,7 @@
   </avrgcccpp.linker.libraries.Libraries>
   <avrgcccpp.assembler.general.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\include\</Value>
     </ListValues>
   </avrgcccpp.assembler.general.IncludePaths>
 </AvrGccCpp>
@@ -116,7 +116,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGccCpp>
-  <avrgcc.common.Device>-mmcu=atmega4809 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega4809"</avrgcc.common.Device>
+  <avrgcc.common.Device>-mmcu=atmega4809 -B "%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809"</avrgcc.common.Device>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
   <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -131,7 +131,7 @@
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\include\</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
@@ -148,7 +148,7 @@
   </avrgcccpp.compiler.symbols.DefSymbols>
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\include\</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcccpp.compiler.optimization.level>
@@ -165,7 +165,7 @@
   </avrgcccpp.linker.libraries.Libraries>
   <avrgcccpp.assembler.general.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.6.364\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.7.374\include\</Value>
     </ListValues>
   </avrgcccpp.assembler.general.IncludePaths>
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
@@ -176,7 +176,22 @@
     <Compile Include="at4809_port.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="at_lcd.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="at_lcd.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="at_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="debug.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="debug.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="embedded_string.hpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="global.h">
