@@ -78,9 +78,9 @@ init.d \
 int.d \
 main.d
 
-OUTPUT_FILE_PATH +=2021-12-19\ AT4809\ OrangeHat\ LCD.elf
+OUTPUT_FILE_PATH +=2021-12-18b\ AT4809\ OrangeHat\ Servo.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +="2021-12-19 AT4809 OrangeHat LCD.elf"
+OUTPUT_FILE_PATH_AS_ARGS +="2021-12-18b AT4809 OrangeHat Servo.elf"
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -153,13 +153,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR8/GNU Linker : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="2021-12-19 AT4809 OrangeHat LCD.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809"  
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="2021-12-18b AT4809 OrangeHat Servo.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809"  
 	@echo Finished building target: $@
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.hex"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.eep" || exit 0
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "2021-12-19 AT4809 OrangeHat LCD.elf" > "2021-12-19 AT4809 OrangeHat LCD.lss"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.srec"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "2021-12-19 AT4809 OrangeHat LCD.elf"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.hex"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.eep" || exit 0
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "2021-12-18b AT4809 OrangeHat Servo.elf" > "2021-12-18b AT4809 OrangeHat Servo.lss"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.srec"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "2021-12-18b AT4809 OrangeHat Servo.elf"
 	
 	
 
@@ -171,5 +171,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "2021-12-19 AT4809 OrangeHat LCD.elf" "2021-12-19 AT4809 OrangeHat LCD.a" "2021-12-19 AT4809 OrangeHat LCD.hex" "2021-12-19 AT4809 OrangeHat LCD.lss" "2021-12-19 AT4809 OrangeHat LCD.eep" "2021-12-19 AT4809 OrangeHat LCD.map" "2021-12-19 AT4809 OrangeHat LCD.srec" "2021-12-19 AT4809 OrangeHat LCD.usersignatures"
+	rm -rf "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.a" "2021-12-18b AT4809 OrangeHat Servo.hex" "2021-12-18b AT4809 OrangeHat Servo.lss" "2021-12-18b AT4809 OrangeHat Servo.eep" "2021-12-18b AT4809 OrangeHat Servo.map" "2021-12-18b AT4809 OrangeHat Servo.srec" "2021-12-18b AT4809 OrangeHat Servo.usersignatures"
 	
