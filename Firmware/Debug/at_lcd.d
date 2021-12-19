@@ -1,7 +1,6 @@
-int.d int.o: .././int.cpp \
+at_lcd.d at_lcd.o: .././at_lcd.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -12,13 +11,14 @@ int.d int.o: .././int.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\xmega.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././at_utils.h .././at4809_port.h .././global.h
+ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
+ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
+ .././at_utils.h .././debug.h .././at_lcd.h .././embedded_string.hpp
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
-
-d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -40,8 +40,16 @@ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
+d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
+
+d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
+
 .././at_utils.h:
 
-.././at4809_port.h:
+.././debug.h:
 
-.././global.h:
+.././at_lcd.h:
+
+.././embedded_string.hpp:

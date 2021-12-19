@@ -127,18 +127,18 @@
 	#define GET_BIT( var, shift_value )	\
 		((var & MASK( shift_value )) >> shift_value)
 
-	//Extract H part of U16
+	//Extract H part of uint16_t
 	#define U16H( data )	\
-		(U8)((U16)data >> 8)
-	//Extract L part of U16
+		(uint8_t)((uint16_t)data >> 8)
+	//Extract L part of uint16_t
 	#define U16L( data )	\
-		(U8)((U16)data & (U16)0x00ff)
+		(uint8_t)((uint16_t)data & (uint16_t)0x00ff)
 	//Extract the h part of a s16 data
 	#define S16H( x )	\
-		(S8)((U16)((x)>>8))
-	//Extract L part of S16. The result is an unsigned number
+		(int8_t)((uint16_t)((x)>>8))
+	//Extract L part of int16_t. The result is an unsigned number
 	#define S16L( x )	\
-		(U8)((U16)(x) & (U16)0x00ff)
+		(uint8_t)((uint16_t)(x) & (uint16_t)0x00ff)
 
 	#define IS_SIGN( x )	\
 		(((x) == '+') || ((x) == '-'))

@@ -30,6 +30,15 @@
 ****************************************************************
 **		2021-08-19
 **	Initial Release
+**		2021-12-19
+**	Import AT324 LCD16x2 Library for controller KS0066U with CDM1602K lcd display with backlight
+**	Refactor the library to make use of the embedded string class
+**	Refactor the library to use AT4809 IO
+**	Compiles with no error
+**	Power ON and OFF the display
+**	Show a welcome message on the LCD on power ON: SUCCESS
+**	Show a number that changes twice a second: SUCCESS
+**	TODO: I learned a lot about C++ since I wrote the lcd library. Rewrite the LCD library as class.
 ****************************************************************/
 
 /****************************************************************
@@ -85,6 +94,8 @@
 #include "global.h"
 //hard delay
 #include <util/delay.h>
+//Driver for 16X2LCD controller KS0066U with CDM1602K display
+#include "at_lcd.h"
 
 /****************************************************************
 ** FUNCTION PROTOTYPES
@@ -114,12 +125,30 @@ int main(void)
 	//	VARS
 	//----------------------------------------------------------------
 	
+	uint16_t cnt = 0;
+	
 	//----------------------------------------------------------------
 	//	INIT
 	//----------------------------------------------------------------
 
 	//! Initialize AT4809 internal peripherals
 	init();
+	
+	//Power the LCD display
+	SET_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
+	
+	_delay_ms( 500.0 );
+	
+	//Power the LCD display
+	CLEAR_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
+	
+	_delay_ms( 500.0 );
+	
+	//Initialize
+	lcd_init();
+	
+	//Welcome message
+	lcd_print_str( LCD_POS( 0, 0 ), "OrangeHat" );
 	
 	//----------------------------------------------------------------
 	//	BODY
@@ -140,6 +169,12 @@ int main(void)
 			g_isr_flags.fast_tick = false;
 			//Take the value of the button and mirror it on LED1
 			SET_BIT_VALUE( LED1_PORT.OUT, LED1_PIN, GET_BIT(BTN_PORT.IN, BTN_PIN) );
+					
+			//Driver that sync the user structure with the LCD.
+			//This paradigm solve lots of timing problems of the direct call version.
+			//You can print a million time a second, and the driver still won't bug out
+			lcd_update();
+			
 		}
 		
 		//----------------------------------------------------------------
@@ -156,6 +191,13 @@ int main(void)
 			g_isr_flags.slow_tick = false;
 			//Toggle LED0	
 			LED0_PORT.OUTTGL = MASK(LED0_PIN);
+			
+			//Power the LCD display ON and OFF
+			//LCD_PWR_PORT.OUTTGL = MASK( LCD_PWR_PIN );
+			
+			//Counter
+			lcd_print_u16( LCD_POS(1,0), cnt );
+			cnt++;
 		}
 		
 	}	//End: Main loop
