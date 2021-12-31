@@ -40,6 +40,8 @@
 **	Show a number that changes twice a second: SUCCESS
 **	TODO: I learned a lot about C++ since I wrote the lcd library. Rewrite the LCD library as class.
 **	SERVO PINs. Toggle power ON and OFF to test power delivery
+**		2021-12-31
+**	soft start encapsulated inside servo.hpp class
 **
 ****************************************************************/
 
@@ -109,6 +111,8 @@
 //Driver for 16X2LCD controller KS0066U with CDM1602K display
 #include "at_lcd.h"
 
+#include "servo.hpp"
+
 /****************************************************************
 ** FUNCTION PROTOTYPES
 ****************************************************************/
@@ -121,6 +125,9 @@
 volatile Isr_flags g_isr_flags = { 0 };
 //Error code of the application
 volatile Error_code ge_error_code = Error_code::OK;
+
+//Instance of the servo controller class
+OrangeBot::Servo gc_servo; 
 
 /****************************************************************************
 **  Function
@@ -162,6 +169,9 @@ int main(void)
 	//Welcome message
 	lcd_print_str( LCD_POS( 0, 0 ), "OrangeHat" );
 	
+	//Construct servo class
+	gc_servo = OrangeBot::Servo();
+	
 	//----------------------------------------------------------------
 	//	BODY
 	//----------------------------------------------------------------
@@ -188,7 +198,6 @@ int main(void)
 			//This paradigm solve lots of timing problems of the direct call version.
 			//You can print a million time a second, and the driver still won't bug out
 			lcd_update();
-			
 		}
 		
 		//----------------------------------------------------------------
@@ -216,13 +225,13 @@ int main(void)
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
 			
-			if (cnt > 10)
+			if (cnt % 2 == 0)
 			{
-				//CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+				gc_servo.power( true );
 			}
 			else
 			{
-				SET_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+				gc_servo.power( false );
 			}
 		}
 		
