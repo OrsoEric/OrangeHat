@@ -17,6 +17,8 @@
 **		-std=c++11					|
 **		-fno-threadsafe-statics		| disable mutex around static local variables
 **		-fkeep-inline-functions		| allow use of inline methods outside of .h for PidS16
+**	Compiler Symbols: F_CPU=20000000
+**		-D"F_CPU=20000000"			| <util/delay.h> hardwired delay
 ****************************************************************/
 
 /****************************************************************
@@ -94,6 +96,9 @@
 **	INCLUDES
 ****************************************************************/
 
+//Boilerplate. Inhibit implementation when calling
+#define USER_INIBITH_IMPLEMENTATION
+
 //type definition using the bit width and sign
 #include <stdint.h>
 //define the ISR routune, ISR vector, and the sei() cli() function
@@ -106,12 +111,14 @@
 #include "at4809_port.h"
 //
 #include "global.h"
-//hard delay
+//hard coded delay
 #include <util/delay.h>
+
+
 //Driver for 16X2LCD controller KS0066U with CDM1602K display
 #include "at_lcd.h"
 
-#include "servo.hpp"
+#include "servo.cpp"
 
 /****************************************************************
 ** FUNCTION PROTOTYPES
@@ -125,6 +132,10 @@
 volatile Isr_flags g_isr_flags = { 0 };
 //Error code of the application
 volatile Error_code ge_error_code = Error_code::OK;
+
+	///----------------------------------------------------------------------
+	///	SERVO DRIVER
+	///----------------------------------------------------------------------
 
 //Instance of the servo controller class
 OrangeBot::Servo gc_servo; 
@@ -155,12 +166,9 @@ int main(void)
 	
 	//Power the LCD display
 	SET_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
-	
 	_delay_ms( 500.0 );
-	
 	//Power the LCD display
 	CLEAR_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
-	
 	_delay_ms( 500.0 );
 	
 	//Initialize
@@ -169,8 +177,11 @@ int main(void)
 	//Welcome message
 	lcd_print_str( LCD_POS( 0, 0 ), "OrangeHat" );
 	
-	//Construct servo class
+	//Construct and initialize the servo class
 	gc_servo = OrangeBot::Servo();
+	//Give power to servos and starts the driver
+	gc_servo.power( true );
+	
 	
 	//----------------------------------------------------------------
 	//	BODY
@@ -224,7 +235,7 @@ int main(void)
 			//Counter
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
-			
+			/*
 			if (cnt % 2 == 0)
 			{
 				gc_servo.power( true );
@@ -233,6 +244,7 @@ int main(void)
 			{
 				gc_servo.power( false );
 			}
+			*/
 		}
 		
 	}	//End: Main loop

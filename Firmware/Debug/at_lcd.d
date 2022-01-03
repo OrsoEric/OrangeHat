@@ -14,7 +14,7 @@ at_lcd.d at_lcd.o: .././at_lcd.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././at_utils.h .././debug.h .././at_lcd.h .././embedded_string.hpp
+ .././at_utils.h .././debug.h .././at_lcd.h .././embedded_string.cpp
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
@@ -52,4 +52,4 @@ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 .././at_lcd.h:
 
-.././embedded_string.hpp:
+.././embedded_string.cpp:

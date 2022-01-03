@@ -39,9 +39,11 @@ SUBDIRS :=
 C_SRCS +=  \
 ../at_lcd.cpp \
 ../debug.cpp \
+../embedded_string.cpp \
 ../init.cpp \
 ../int.cpp \
-../main.cpp
+../main.cpp \
+../servo.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -53,30 +55,38 @@ ASM_SRCS +=
 OBJS +=  \
 at_lcd.o \
 debug.o \
+embedded_string.o \
 init.o \
 int.o \
-main.o
+main.o \
+servo.o
 
 OBJS_AS_ARGS +=  \
 at_lcd.o \
 debug.o \
+embedded_string.o \
 init.o \
 int.o \
-main.o
+main.o \
+servo.o
 
 C_DEPS +=  \
 at_lcd.d \
 debug.d \
+embedded_string.d \
 init.d \
 int.d \
-main.d
+main.d \
+servo.d
 
 C_DEPS_AS_ARGS +=  \
 at_lcd.d \
 debug.d \
+embedded_string.d \
 init.d \
 int.d \
-main.d
+main.d \
+servo.d
 
 OUTPUT_FILE_PATH +=2021-12-18b\ AT4809\ OrangeHat\ Servo.elf
 
@@ -95,35 +105,49 @@ LINKER_SCRIPT_DEP+=
 ./at_lcd.o: .././at_lcd.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./debug.o: .././debug.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./embedded_string.o: .././embedded_string.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./init.o: .././init.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./int.o: .././int.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./main.o: .././main.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./servo.o: .././servo.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 

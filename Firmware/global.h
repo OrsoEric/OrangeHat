@@ -8,8 +8,6 @@
 	**	ENVROIMENT VARIABILE
 	****************************************************************************/
 
-	#define F_CPU 20000000
-
 	/****************************************************************************
 	**	GLOBAL INCLUDE
 	**	TIPS: you can put here the library common to all source file
@@ -32,7 +30,6 @@
 	
 	#define SERVO_PWR_PORT	PORTD
 	#define SERVO_PWR_PIN	7
-	
 	
 		///----------------------------------------------------------------------
 		///	TIMINGS

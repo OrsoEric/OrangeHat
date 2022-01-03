@@ -2,7 +2,7 @@
 **	INCLUDES
 ****************************************************************************/
 
-//type definition using the bit width and signedness
+//type definition using the bit width and sign
 #include <stdint.h>
 //define the ISR routune, ISR vector, and the sei() cli() function
 #include <avr/interrupt.h>
@@ -216,7 +216,7 @@ void init_pin( void )
 	//!	PD7				:	UC_SERVO_POWER#	| false = allow power to flow from the regulator channel 2 to the servo connectors
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_H );
+	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
 
 	//----------------------------------------------------------------
 	//!	PORTE

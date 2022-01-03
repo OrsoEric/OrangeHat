@@ -57,8 +57,8 @@
 **		BUG: AT_FP_SAT_MUL16 is bugged
 ****************************************************************************/
 
-#ifndef AT_UTILS		//handle multiple inclusion
-	#define AT_UTILS	//library define
+#ifndef AT_UTILS_H_		//handle multiple inclusion
+	#define AT_UTILS_H_	//library define
 
 	/****************************************************************************
 	** ENVROIMENT VARIABILE
@@ -804,5 +804,5 @@
 		((x>=0)?(AT_LOG216(x)):(-AT_LOG216((-x))))
 
 #else
-	#warning "multiple inclusion of at_utils.h"
+	#warning "multiple inclusion of AT_UTILS_H_"
 #endif

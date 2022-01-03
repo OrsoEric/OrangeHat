@@ -6,9 +6,13 @@ at_lcd.cpp
 
 debug.cpp
 
+embedded_string.cpp
+
 init.cpp
 
 int.cpp
 
 main.cpp
+
+servo.cpp
 
