@@ -160,11 +160,8 @@ class Servo
 			//PIN Configurations
 			//IO_PWR_PORT = PORTD,
 			IO_PWR_PIN = 7,
-			
-			NUM_SERVOS = 1,
-			//The OCR that needs programming is the number of servos plus the final delay register
-			NUM_OCR = NUM_SERVOS+1,
-			
+			//Number of Servo the driver is meant to drive
+			NUM_SERVOS = 2,
 				//HAL Timer Parameters
 			//Prescaler to the main timer clock
 			HAL_TIMER_PRESCALER = 16,
@@ -186,8 +183,6 @@ class Servo
 			SOFT_START_REPEAT = 2,
 			SOFT_START_DELAY_US = 1,
 			
-			
-			
         } Config;
         
         //! @brief Error codes of the class
@@ -208,6 +203,14 @@ class Servo
         **********************************************************************************************************************************************************
         *********************************************************************************************************************************************************/
         
+		//! @brief Vars needed by
+		typedef struct _Timer
+		{
+			uint16_t u16_target;
+			uint8_t u8_speed;
+			uint16_t u16_actual;
+		} Timer;
+		
         /*********************************************************************************************************************************************************
         **********************************************************************************************************************************************************
         **  CONSTRUCTORS
@@ -274,6 +277,9 @@ class Servo
 		
 		//Driver code executed by the timer ISR
 		bool hal_timer_isr( void );
+		
+		//Stop driver. Clear IO lines. Reinitialize class vars.
+		bool emergency_stop( void );
 
         /*********************************************************************************************************************************************************
         **********************************************************************************************************************************************************
@@ -369,8 +375,10 @@ class Servo
         bool error_recovery( void );
 		//Blocking hardwired version of the soft start method using delay and direct control of IOs
 		bool soft_start( uint8_t iu8_ton, uint8_t iu8_toff, uint8_t iu8_treduce, uint8_t iu8_repeat );
+		//Clear all servo IO lines
+		bool clear_servo_io( void );
 		//Compute and returns the delay 
-		uint16_t compute_next_delay( void );
+		//uint16_t compute_next_delay( void );
 
 
         //Servo method to copy the code
@@ -387,8 +395,10 @@ class Servo
 		//Index of the scan. e.g. 1 means that the driver is waiting for Servo 0 delay to elapse
 		uint8_t gu8_index;
 
-		//OCR array
-		uint16_t gau16_ocr[ Config::NUM_OCR ];
+		//Servo configuration
+		Timer gas_timer[ Config::NUM_SERVOS ];
+		//Sum of all the delays over a servo scan. Used to compute the final delay to get to the period
+		uint16_t gu16_timer_sum;
 
 
         //! @brief Error code of the class
@@ -397,7 +407,7 @@ class Servo
 };	//End Class: Servo
 
 //BOILERPLATE: when including the class as definition, the bits not needed are excluded by saying that the file only needs the definition
-//	This will have problems for template based declarations andd is a boilerplate. TODO: do it properly
+//	This will have problems for template based declarations and is a boilerplate. TODO: do it properly
 #ifndef USER_INIBITH_IMPLEMENTATION
 
 /*********************************************************************************************************************************************************
@@ -622,8 +632,8 @@ bool Servo::power( bool iu1_powered )
 }   //end public method: power | void
 
 /***************************************************************************/
-//! @brief Private method
-//! \n dummy | void
+//! @brief public method
+//! \n hal_servo_io | uint8_t | bool
 /***************************************************************************/
 //! @param iu8_servo_index | index of the physical servo being addressed
 //! @param iu1_io_value | desired IO line value
@@ -642,11 +652,31 @@ bool Servo::hal_servo_io( uint8_t iu8_servo_index, bool iu1_io_value )
 
 	switch( iu8_servo_index )
 	{
+		//Drive IO line of SERVO
 		case 0:
-			//Drive IO line of SERVO0
 			SET_BIT_VALUE( PORTE.OUT, 0, iu1_io_value );
 			break;
-
+		case 1:
+			SET_BIT_VALUE( PORTE.OUT, 1, iu1_io_value );
+			break;
+		case 2:
+			SET_BIT_VALUE( PORTE.OUT, 2, iu1_io_value );
+			break;
+		case 3:
+			SET_BIT_VALUE( PORTE.OUT, 3, iu1_io_value );
+			break;
+		case 4:
+			SET_BIT_VALUE( PORTF.OUT, 0, iu1_io_value );
+			break;
+		case 5:
+			SET_BIT_VALUE( PORTF.OUT, 1, iu1_io_value );
+			break;
+		case 6:
+			SET_BIT_VALUE( PORTF.OUT, 2, iu1_io_value );
+			break;
+		case 7:
+			SET_BIT_VALUE( PORTF.OUT, 3, iu1_io_value );
+			break;
 		default:
 			this -> report_error( Error_code::ERR_BAD_SERVO_INDEX );
 			return true;
@@ -657,7 +687,7 @@ bool Servo::hal_servo_io( uint8_t iu8_servo_index, bool iu1_io_value )
 	///--------------------------------------------------------------------------
 	DRETURN(); //Trace Return
 	return false;	//OK
-}   //end private method:
+}   //end public method: hal_servo_io | uint8_t | bool
 
 /***************************************************************************/
 //! @brief public method
@@ -674,55 +704,118 @@ bool Servo::hal_servo_io( uint8_t iu8_servo_index, bool iu1_io_value )
 bool Servo::hal_timer_isr( void )
 {
 	///--------------------------------------------------------------------------
-	///	INIT
+	///	VARS
 	///--------------------------------------------------------------------------
  
-	uint8_t u8_index;
-	uint16_t u16_delay;
-
-	bool u1_ret;
+	//Return fail initialized to OK
+	bool u1_ret = false;
 
 	///--------------------------------------------------------------------------
-	///	BODY
+	///	SERVO IOs
 	///--------------------------------------------------------------------------
+	//	Emit the correct IO lines
 
 	//Fetch scan index
-	u8_index = this -> gu8_index;
-
-	//Ask the driver to compute the next delay
-	//uint16_t u16_delay = this -> compute_next_delay();
-
-	//Compute Delay for SERVO0 and reset the final accumulator
+	uint8_t u8_index = this -> gu8_index;
+	//First Servo: SET servo line
 	if (u8_index == 0)
+	{
+		u1_ret = this -> hal_servo_io( u8_index, true );
+	}
+	//Inner servos
+	else if ((u8_index > 0) && (u8_index < Config::NUM_SERVOS))
+	{
+		//Clear previous servo line
+		u1_ret = this -> hal_servo_io( u8_index-1, false );
+		//SET current servo line
+		u1_ret |= this -> hal_servo_io( u8_index, true );
+	}
+	//Last Servo: CLEAR servo line
+	else if (u8_index == Config::NUM_SERVOS)
+	{
+		//Clear previous servo line
+		u1_ret = this -> hal_servo_io( u8_index -1, false );
+	}
+	//Algorithmic Error
+	else
+	{
+		//FAIL
+		u1_ret = true;
+	}
+	
+	//If Fail
+	if (u1_ret == true)
+	{
+		//SCRAM!!!
+		u1_ret = this -> emergency_stop();
+		return u1_ret;
+	}
+
+	///--------------------------------------------------------------------------
+	///	COMPUTE DELAY
+	///--------------------------------------------------------------------------
+	//	Compute and program the delay for the next cycle
+	
+	//Temp delay in microseconds. HAL takes care of programming a delay in timer units
+	uint16_t u16_delay;
+	//Latch accumulator
+	uint16_t u16_accumulator = gu16_timer_sum;
+	//Compute Delay for servos
+	if (u8_index < Config::NUM_SERVOS)
 	{
 		//Delay to achieve zero command
 		u16_delay = Config::SERVO_PPM_ZERO;
-		//Program the timer with the desired delay. ISR will be called again when said delay has elapsed
-		u1_ret = this -> hal_timer_set_delay( u16_delay );
-		//Set the SERVO0
-		this -> hal_servo_io( 0, true );
-
-
-		//Reset the
-		//this -> gau16_ocr[ Config::NUM_SERVOS ] = 0;
-
-		//Next scan
-		u8_index++;
+		u16_accumulator += u16_delay;
 	}
+	//Compute final delay and clear accumulator
+	else if (u8_index == Config::NUM_SERVOS)
+	{
+		//If: the servo scan time exceed the PPM period
+		if (u16_accumulator >= Config::SERVO_PPM_PERIOD)
+		{
+			//Fail
+			u1_ret = true;
+		}
+		//If: scan time is good
+		else
+		{
+			//Final delay is meant to achieve the PPM period
+			u16_delay = Config::SERVO_PPM_PERIOD -u16_accumulator;
+			//Reset the accumulator for the next cycle
+			u16_accumulator = 0;	
+		}
+	}
+	//Algorithmic error
 	else
 	{
-		//Delay to complete the PPM
-		u16_delay = Config::SERVO_PPM_PERIOD -Config::SERVO_PPM_ZERO;
-		//Program the timer with the desired delay. ISR will be called again when said delay has elapsed
-		u1_ret = this -> hal_timer_set_delay( u16_delay );
-
-		//Clear the SERVO0
-		this -> hal_servo_io( 0, false );
-		//Reset scan
-		u8_index = 0;
+		//Fail
+		u1_ret = true;	
 	}
-
+	//If fail
+	if (u1_ret == true)
+	{
+		//SCRAM!!!
+		u1_ret = this -> emergency_stop();
+		return u1_ret;
+	}
 	
+	//Program the timer with the desired delay. ISR will be called again when said delay has elapsed
+	u1_ret = this -> hal_timer_set_delay( u16_delay );
+	//Fail
+	if (u1_ret == true)
+	{
+		//SCRAM!!!
+		u1_ret = this -> emergency_stop();
+		return u1_ret;
+	}
+	//Success
+	else
+	{
+		//Write back accumulator
+		gu16_timer_sum = u16_accumulator;
+	}
+	//Next scan. TOP is the last number counted before reset
+	u8_index = AT_TOP_INC( u8_index, Config::NUM_SERVOS );
 	//Update the scan index
 	this -> gu8_index = u8_index;
 
@@ -732,6 +825,38 @@ bool Servo::hal_timer_isr( void )
 	
 	return false;	//OK
 }   //end public method: hal_timer_isr
+
+/***************************************************************************/
+//! @brief Private method
+//! \n emergency_stop | void
+/***************************************************************************/
+//! @return bool | false = OK | true = FAIL |
+//! @details
+//! \n Stop driver. Clear IO lines. Reinitialize class vars.
+/***************************************************************************/
+
+bool Servo::emergency_stop( void )
+{
+	DENTER(); //Trace Enter
+	///--------------------------------------------------------------------------
+	///	BODY
+	///--------------------------------------------------------------------------
+
+	//Initialize error to OK
+	bool u1_ret = false;
+	//Stop timer
+	u1_ret |= this -> hal_run_isr( false );
+	//Clear servo IOs
+	u1_ret |= this -> clear_servo_io();
+	//Reinitialize class vars (except error)
+	u1_ret |= this -> init_class_vars();
+	
+	///--------------------------------------------------------------------------
+	///	RETURN
+	///--------------------------------------------------------------------------
+	DRETURN_ARG("Fail? %d\n", u1_ret); //Trace Return
+	return u1_ret;	//Propagate error
+}   //end private method: emergency_stop | void
 
 /*********************************************************************************************************************************************************
 **********************************************************************************************************************************************************
@@ -1023,7 +1148,7 @@ bool Servo::hal_timer_set_delay( uint16_t iu16_microseconds )
 	u16_delay = u32_tmp;
 
 	//If leftover from previous delay is already more than the programmed delay
-	if (u16_previous_overcount >= u16_delay)
+	if (false) //(u16_previous_overcount >= u16_delay)
 	{
 		this->report_error(Error_code::ERR_DELAY_OVERRUN);
 		//FAIL and keep the timer stopped
@@ -1139,17 +1264,24 @@ bool Servo::init_class_vars( void )
 {
     DENTER();		//Trace Enter
     ///--------------------------------------------------------------------------
-    ///	INIT
-    ///--------------------------------------------------------------------------
-
-    ///--------------------------------------------------------------------------
     ///	BODY
     ///--------------------------------------------------------------------------
 
 	//Initialize scan
-	gu8_index = 0;
-	//20ms
-	gau16_ocr[0] = 24999;
+	this -> gu8_index = 0;
+	//Initialize accumulator
+	this -> gu16_timer_sum = 0;
+	//Initialize class vars
+	Timer s_default_timer;
+	s_default_timer.u16_target = 1875;
+	s_default_timer.u8_speed = 0;
+	s_default_timer.u16_actual = 1875;
+	//Scan all servos
+	for (uint8_t u8_cnt = 0; u8_cnt < Config::NUM_SERVOS; u8_cnt++)	
+	{
+		//Initialize to default
+		this -> gas_timer[u8_cnt] = s_default_timer;
+	}
 
     ///--------------------------------------------------------------------------
     ///	RETURN
@@ -1157,8 +1289,6 @@ bool Servo::init_class_vars( void )
     DRETURN();      //Trace Return
     return false;   //OK
 }   //end method: init_class_vars | void
-
-
 
 /*********************************************************************************************************************************************************
 **********************************************************************************************************************************************************
@@ -1298,13 +1428,45 @@ bool Servo::soft_start( uint8_t iu8_ton, uint8_t iu8_toff, uint8_t iu8_treduce, 
 
 /***************************************************************************/
 //! @brief Private method
+//! \n clear_servo_io | void
+/***************************************************************************/
+//! @return bool | false = OK | true = FAIL |
+//! @details
+//! \n Clear all servo IO lines
+/***************************************************************************/
+
+bool Servo::clear_servo_io( void )
+{
+	DENTER(); //Trace Enter
+	///--------------------------------------------------------------------------
+	///	BODY
+	///--------------------------------------------------------------------------
+
+	//Clear error
+	bool u1_ret = false;
+	//For all servos
+	for (uint8_t u8_cnt = 0; u8_cnt < Config::NUM_SERVOS; u8_cnt++)
+	{
+		//Try and clear that servo IO and accumulate error
+		u1_ret |= this -> hal_servo_io( u8_cnt, false );
+	}
+
+	///--------------------------------------------------------------------------
+	///	RETURN
+	///--------------------------------------------------------------------------
+	DRETURN_ARG("fail? %d\n", u1_ret); //Trace Return
+	return u1_ret;	//Propagate error
+}   //end private method: clear_servo_io | void
+
+/***************************************************************************/
+//! @brief Private method
 //! \n compute_next_delay | void
 /***************************************************************************/
 //! @return uint16_t | delay to be programmed inside the timer
 //! @details
 //! \n The FSM of the driver computes the next delay
 /***************************************************************************/
-
+/*
 uint16_t Servo::compute_next_delay( void )
 {
 	DENTER(); //Trace Enter
@@ -1323,7 +1485,7 @@ uint16_t Servo::compute_next_delay( void )
 	DRETURN_ARG("dervo%d -> delay %d\n", -1, u16_delay); //Trace Return
 	return 0;	//OK
 }   //end private method: compute_next_delay | void
-
+*/
 /***************************************************************************/
 //! @brief Private method
 //! \n dummy | void
