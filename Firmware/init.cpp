@@ -83,9 +83,6 @@ void init(void)
 	//Initialize RTC timer as Periodic interrupt source: RTC_PIT_vect
 	init_rtc();
 	
-	//Activate interrupts
-	sei();
-	
 	//----------------------------------------------------------------
 	//	RETURN
 	//----------------------------------------------------------------
@@ -216,7 +213,7 @@ void init_pin( void )
 	//!	PD7				:	UC_SERVO_POWER#	| false = allow power to flow from the regulator channel 2 to the servo connectors
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_D_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_H );
 
 	//----------------------------------------------------------------
 	//!	PORTE
@@ -230,7 +227,7 @@ void init_pin( void )
 	//!	PE7				: 
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_E_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_E_CONFIG(	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
 
 	//----------------------------------------------------------------
 	//!	PORTF

@@ -182,6 +182,8 @@ int main(void)
 	//Give power to servos and starts the driver
 	gc_servo.power( true );
 	
+	//Activate interrupts
+	sei();
 	
 	//----------------------------------------------------------------
 	//	BODY
@@ -235,16 +237,15 @@ int main(void)
 			//Counter
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
-			/*
+			
 			if (cnt % 2 == 0)
 			{
-				gc_servo.power( true );
+				gc_servo.set_servo( 0, -50 );
 			}
 			else
 			{
-				gc_servo.power( false );
+				gc_servo.set_servo( 0, 50 );
 			}
-			*/
 		}
 		
 	}	//End: Main loop

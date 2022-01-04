@@ -140,6 +140,10 @@ namespace OrangeBot
 //! \n		2022-01-03
 //! \n	Driver expanded to control SERVO0 with 1.5ms and 20ms-1.5ms delay
 //! \n	Physical servo connected and verified that it holds the position correctly
+//! \n		2022-01-04
+//! \n	Driver now handles scans of multiple servos
+//! \n	IO of all servos programmed in
+//! \n	Added some layers of error handling and safety check. emergency_stop function
 /************************************************************************************/
 
 class Servo
@@ -155,19 +159,26 @@ class Servo
         //! @brief Configurations of the class
         typedef enum _Config
         {
+				//Safeties. Disabling safeties will improve performance but make debug harder.
+			//Check external inputs
             SAFETY_CHECK = true,
+			//Check internal inputs and status variables
             PEDANTIC_CHECKS = true,
-			//PIN Configurations
+			
+				//PIN Configurations
 			//IO_PWR_PORT = PORTD,
 			IO_PWR_PIN = 7,
 			//Number of Servo the driver is meant to drive
 			NUM_SERVOS = 2,
+			
 				//HAL Timer Parameters
 			//Prescaler to the main timer clock
 			HAL_TIMER_PRESCALER = 16,
+			HAL_TIMER_MAX_CNT = (UINT16_MAX -1),
 			//Resolution of a single count in nanoseconds per count [ns/cnt]. Needed to convert between time and delay to be programmed inside the hardware timer
-			//HAL_TIMER_RESOLUTION = (1000000000 *HAL_TIMER_PRESCALER *F_CPU),
+			//HAL_TIMER_RESOLUTION = ((1000000000UL /F_CPU) /HAL_TIMER_PRESCALER ),
 			HAL_TIMER_RESOLUTION = 800,
+			
 				//Servomotor PPM Parameters
 			//Pulse width to have a zero output in microseconds [us]
 			SERVO_PPM_ZERO = 1500,
@@ -194,6 +205,9 @@ class Servo
 			ERR_TA0_INIT,	//Failed to initialize TA0
 			ERR_BAD_SERVO_INDEX,	//Tried to index a SERVO that does not exist
 			ERR_DELAY_OVERRUN,	//The programmed delay to generate the PPM signal has been exceeded
+			ERR_OVERFLOW,		//Overflow occurred during calculations
+			ERR_INPUT_OOB,		//Function received parameters out of range
+			ERR_ALGORITHM,		//Algorithmic error. Internal vars are inconsistent or a piace of code that shouldn't fail has failed
             RECOVERY_FAIL,  //error_recovery() failed to recover from an error
         } Error_code;
 
@@ -203,13 +217,32 @@ class Servo
         **********************************************************************************************************************************************************
         *********************************************************************************************************************************************************/
         
-		//! @brief Vars needed by
+		//! @brief Internal timer count vars in microseconds, the drivers keep them updated
 		typedef struct _Timer
 		{
+			//Target delay in microseconds [us]
 			uint16_t u16_target;
+			//Max delay change in microseconds [us] per period 20[ms]
 			uint8_t u8_speed;
+			//Actual delay being rendered to the servo in microseconds [us]
 			uint16_t u16_actual;
 		} Timer;
+		
+		//! @brief User side command to a servo in microseconds
+		typedef struct _Command
+		{
+			//Target position in microseconds of deviation from the zero position [us]. e.g. 1900[us]
+			int16_t s16_position;
+			//Max change in microseconds [us] allowed each second. e.g. 800[us/s] means it can change its full range in one second. can be faster/slower depending on the physical servo
+			uint16_t u16_speed;
+			//Writing to the command sets those flags to true. The driver clears the flags when writing back to the internal delay registers
+			bool u1_position_changed;
+			bool u1_speed_changed;
+			//Driver sets this flag to true when the actual is changing slower than the maximum set speed
+			bool u1_lock;
+			//Driver sets this flag to true when the actual has not been changed
+			bool u1_idle;
+		} Command;
 		
         /*********************************************************************************************************************************************************
         **********************************************************************************************************************************************************
@@ -241,12 +274,10 @@ class Servo
         **********************************************************************************************************************************************************
         *********************************************************************************************************************************************************/
 
-		//Set servo of given index, both position and speed
-		//bool set_servo( uint8_t iu8_index, int8_t is8_pos, int8_t is8_vel );
-
-		//bool set_servo_pos( int8_t is8_pos );
-		
-		//set_servo_ocr( uint8_t iu8_index,  );
+		//Set position of servo with given index (same as overload of operator at [])
+		bool set_servo( uint8_t iu8_index, int16_t is16_pos );
+		//Set position and speed of servo with given index
+		bool set_servo( uint8_t iu8_index, int16_t is16_pos, uint16_t iu16_spd );
 
         /*********************************************************************************************************************************************************
         **********************************************************************************************************************************************************
@@ -341,7 +372,7 @@ class Servo
 		//Fixed Delay
 		bool hal_delay_us( void );
 		//Convert from a delay in microseconds to a delay in timer counts that can be programmed inside the timer
-		//uint16_t hal_microseconds_to_counts( uint16_t iu16_microseconds );
+		uint16_t hal_microseconds_to_counts( uint16_t iu16_microseconds );
 		//Program a delay inside the timer
 		bool hal_timer_set_delay( uint16_t iu16_microseconds );
 		//Set power pin of the SERVO banks. false = disconnected | true = powered
@@ -360,8 +391,6 @@ class Servo
         
         //Initialize class vars
         bool init_class_vars( void );
-		
-		
         
         /*********************************************************************************************************************************************************
         **********************************************************************************************************************************************************
@@ -377,9 +406,8 @@ class Servo
 		bool soft_start( uint8_t iu8_ton, uint8_t iu8_toff, uint8_t iu8_treduce, uint8_t iu8_repeat );
 		//Clear all servo IO lines
 		bool clear_servo_io( void );
-		//Compute and returns the delay 
-		//uint16_t compute_next_delay( void );
-
+		//The driver uses command position and speed, and actual delay, to compute next delay
+		bool compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay );
 
         //Servo method to copy the code
         bool dummy( void );
@@ -390,17 +418,17 @@ class Servo
         **********************************************************************************************************************************************************
         *********************************************************************************************************************************************************/
 
-		PORT_t IO_PWR_PORT;
+		//Boilerplate: find a way to configure port in enum
+		//PORT_t IO_PWR_PORT;
 
 		//Index of the scan. e.g. 1 means that the driver is waiting for Servo 0 delay to elapse
 		uint8_t gu8_index;
-
-		//Servo configuration
-		Timer gas_timer[ Config::NUM_SERVOS ];
+		//User given command to servos (microseconds)
+		Command gast_command[ Config::NUM_SERVOS ];
+		//Driver internal servo status (microseconds)
+		Timer gast_timer[ Config::NUM_SERVOS ];
 		//Sum of all the delays over a servo scan. Used to compute the final delay to get to the period
 		uint16_t gu16_timer_sum;
-
-
         //! @brief Error code of the class
         Error_code g_error;
 
@@ -516,6 +544,116 @@ inline Servo::Error_code Servo::get_error( void )
     DRETURN(); //Trace Return
     return err_code; //OK
 }   //end getter: get_error | void |
+
+/*********************************************************************************************************************************************************
+**********************************************************************************************************************************************************
+**  PUBLIC SETTERS
+**********************************************************************************************************************************************************
+*********************************************************************************************************************************************************/
+
+/***************************************************************************/
+//! @brief Public setter
+//! \n set_servo | uint8_t | int16_t |
+/***************************************************************************/
+//! @param iu8_index | index of the servo being controlled
+//! @param is16_pos | target position. User must have programmed in the configuration for this servo channel
+//! @return bool | false = OK | true = FAIL |
+//! @details
+//! \n Set position of servo with given index (same as overload of operator at [])
+/***************************************************************************/
+
+bool Servo::set_servo( uint8_t iu8_index, int16_t is16_pos )
+{
+	DENTER_ARG("index: %d | position: %d\n", iu8_index, is16_pos); //Trace Enter
+	///--------------------------------------------------------------------------
+	///	CHECK
+	///--------------------------------------------------------------------------
+
+	//If Servo index is OOB
+	if ((Config::SAFETY_CHECK == true) && ((iu8_index < 0) || (iu8_index >= Config::NUM_SERVOS)))
+	{
+		this -> report_error( Error_code::ERR_INPUT_OOB );
+		return true;
+	}
+	//If position is OOB
+	if ((Config::SAFETY_CHECK == true) && ((is16_pos < -(int16_t)Config::SERVO_PPM_MAX_COMMAND) || (is16_pos > (int16_t)Config::SERVO_PPM_MAX_COMMAND)))
+	{
+		this -> report_error( Error_code::ERR_INPUT_OOB );
+		return true;
+	}
+	
+	///--------------------------------------------------------------------------
+	///	BODY
+	///--------------------------------------------------------------------------
+
+	//Update command and inform driver that command has changed
+	if (this -> gast_command[iu8_index].s16_position != is16_pos)
+	{
+		this -> gast_command[iu8_index].s16_position = is16_pos;	
+		this -> gast_command[iu8_index].u1_position_changed = true;
+	}
+
+	///--------------------------------------------------------------------------
+	///	RETURN
+	///--------------------------------------------------------------------------
+	DRETURN(); //Trace Return
+	return false; //OK
+}   //end setter: set_servo | uint8_t | int16_t |
+
+/***************************************************************************/
+//! @brief Public setter
+//! \n set_servo | uint8_t | int16_t | uint16_t |
+/***************************************************************************/
+//! @param iu8_index | index of the servo being controlled
+//! @param is16_pos | target position. User must have programmed in the configuration for this servo channel
+//! @return bool | false = OK | true = FAIL |
+//! @details
+//! \n Set position and speed of servo with given index
+/***************************************************************************/
+
+bool Servo::set_servo( uint8_t iu8_index, int16_t is16_pos, uint16_t iu16_spd )
+{
+	DENTER_ARG("index: %d | position: %d\n", iu8_index, is16_pos); //Trace Enter
+	///--------------------------------------------------------------------------
+	///	CHECK
+	///--------------------------------------------------------------------------
+
+	//If Servo index is OOB
+	if ((Config::SAFETY_CHECK == true) && ((iu8_index < 0) || (iu8_index >= Config::NUM_SERVOS)))
+	{
+		this -> report_error( Error_code::ERR_INPUT_OOB );
+		return true;
+	}
+	//If position is OOB
+	if ((Config::SAFETY_CHECK == true) && ((is16_pos < -(int16_t)Config::SERVO_PPM_MAX_COMMAND) || (is16_pos > (int16_t)Config::SERVO_PPM_MAX_COMMAND)))
+	{
+		this -> report_error( Error_code::ERR_INPUT_OOB );
+		return true;
+	}
+	
+	///--------------------------------------------------------------------------
+	///	BODY
+	///--------------------------------------------------------------------------
+
+	//Update command and inform driver that command has changed
+	if (this -> gast_command[iu8_index].s16_position != is16_pos)
+	{
+		this -> gast_command[iu8_index].s16_position = is16_pos;
+		this -> gast_command[iu8_index].u1_position_changed = true;
+	}
+	//Update command and inform driver that command has changed
+	if (this -> gast_command[iu8_index].u16_speed != iu16_spd)
+	{
+		this -> gast_command[iu8_index].u16_speed = iu16_spd;
+		this -> gast_command[iu8_index].u1_speed_changed = true;
+	}
+
+	///--------------------------------------------------------------------------
+	///	RETURN
+	///--------------------------------------------------------------------------
+	DRETURN(); //Trace Return
+	return false; //OK
+}   //end setter: set_servo | uint8_t | int16_t | uint16_t |
 
 /*********************************************************************************************************************************************************
 **********************************************************************************************************************************************************
@@ -763,8 +901,9 @@ bool Servo::hal_timer_isr( void )
 	//Compute Delay for servos
 	if (u8_index < Config::NUM_SERVOS)
 	{
-		//Delay to achieve zero command
-		u16_delay = Config::SERVO_PPM_ZERO;
+		//Driver takes care of updating from user command, maintaining servo status and computing what the next delay is to be
+		u1_ret = this -> compute_servo_delay( u8_index, u16_delay );
+		//Accumulate delay inside accumulator
 		u16_accumulator += u16_delay;
 	}
 	//Compute final delay and clear accumulator
@@ -881,13 +1020,17 @@ bool Servo::hal_init_io( void )
     ///	BODY
     ///--------------------------------------------------------------------------
 
-	IO_PWR_PORT = PORTD;
-
 	//PWR pin as OUTPUT
 	SET_BIT( PORTD.DIR, Config::IO_PWR_PIN );
 	//Set Servo PINS as OUTPUT
 	SET_BIT( PORTE.DIR, 0 );
-	
+	SET_BIT( PORTE.DIR, 1 );
+	SET_BIT( PORTE.DIR, 2 );
+	SET_BIT( PORTE.DIR, 3 );
+	SET_BIT( PORTF.DIR, 0 );
+	SET_BIT( PORTF.DIR, 1 );
+	SET_BIT( PORTF.DIR, 2 );
+	SET_BIT( PORTF.DIR, 3 );
 
     ///--------------------------------------------------------------------------
     ///	RETURN
@@ -1111,25 +1254,75 @@ bool Servo::hal_delay_us( void )
 
 /***************************************************************************/
 //! @brief Private HAL
+//! \n hal_delay_us | void
+/***************************************************************************/
+//! @param iu16_microseconds | delay in microseconds to be programmed inside the timer
+//! @return uint16_t | timer units that can be programmed inside the HAL hardware timer | MAX means overflow occurred
+//! @details
+//! \n HAL Driver
+//! \n Convert from a delay in microseconds to a delay in timer counts that can be programmed inside the timer
+/***************************************************************************/
+
+uint16_t Servo::hal_microseconds_to_counts( uint16_t iu16_microseconds )
+{
+	///--------------------------------------------------------------------------
+	///	VARS
+	///--------------------------------------------------------------------------
+	
+	//Return timer count
+	uint16_t u16_timer_cnt;
+	
+	///--------------------------------------------------------------------------
+	///	BODY
+	///--------------------------------------------------------------------------
+
+	//From us to ns
+	uint32_t u32_tmp = (uint32_t)1*iu16_microseconds *1000;
+	//from ns to counts
+	u32_tmp /= Config::HAL_TIMER_RESOLUTION;
+	//Detect overflow. Timer is 16b
+	if (u32_tmp >= (Config::HAL_TIMER_MAX_CNT -1))
+	{
+		this -> report_error( Error_code::ERR_OVERFLOW );
+		u16_timer_cnt = UINT16_MAX;
+	}
+	else
+	{
+		//truncate to 16b
+		u16_timer_cnt = u32_tmp;
+	}
+	
+	///--------------------------------------------------------------------------
+	///	RETURN
+	///--------------------------------------------------------------------------
+	
+	return u16_timer_cnt;
+}   //end private HAL: hal_delay_us
+
+/***************************************************************************/
+//! @brief Private HAL
 //! \n hal_timer_set_delay | uint16_t
 /***************************************************************************/
-// @param
+//! @param iu16_microseconds | delay in microseconds to be programmed inside the timer
 //! @return bool | false = OK | true = FAIL |
 //! @details
-//! \n Method
+//! \n Stop the timer. Program in the new delay in microseconds. Restart the timer.
 /***************************************************************************/
 
 bool Servo::hal_timer_set_delay( uint16_t iu16_microseconds )
 {
 	DENTER_ARG("delay us: %d\n", iu16_microseconds); //Trace Enter
 	///--------------------------------------------------------------------------
-	///	VARS
+	///	CHECK
 	///--------------------------------------------------------------------------
-
-	uint32_t u32_tmp;
-	uint16_t u16_delay;
-	uint16_t u16_previous_overcount;
-
+	
+	//If: delay is out of range
+	if ((Config::SAFETY_CHECK == true) && ( (iu16_microseconds < (Config::SERVO_PPM_ZERO -Config::SERVO_PPM_MAX_COMMAND)) || (iu16_microseconds > Config::SERVO_PPM_PERIOD) ))
+	{
+		this -> report_error( Error_code::ERR_INPUT_OOB );
+		return true;
+	}
+	
 	///--------------------------------------------------------------------------
 	///	BODY
 	///--------------------------------------------------------------------------
@@ -1138,27 +1331,30 @@ bool Servo::hal_timer_set_delay( uint16_t iu16_microseconds )
 	CLEAR_BIT( TCA0.SINGLE.CTRLA, TCA_SINGLE_ENABLE_bp );
 
 	//Fetch previous count
-	u16_previous_overcount = TCA0.SINGLE.CNT;
-
-	//From us to ns
-	u32_tmp = (uint32_t)1*iu16_microseconds *1000;
-	//from ns to counts
-	u32_tmp /= Config::HAL_TIMER_RESOLUTION;
-	//truncate to 16b
-	u16_delay = u32_tmp;
-
+	uint16_t u16_previous_overcount = TCA0.SINGLE.CNT;
+	//Convert from microseconds to timer counts
+	uint16_t u16_timer_count = this->hal_microseconds_to_counts( iu16_microseconds );
+	if ((u16_timer_count == 0) || (u16_timer_count >= Config::HAL_TIMER_MAX_CNT))
+	{
+		this -> report_error( Error_code::ERR_OVERFLOW );
+		//FAIL and keep the timer stopped
+		return true;
+	}
 	//If leftover from previous delay is already more than the programmed delay
-	if (false) //(u16_previous_overcount >= u16_delay)
+	else if (u16_previous_overcount >= u16_timer_count)
 	{
 		this->report_error(Error_code::ERR_DELAY_OVERRUN);
 		//FAIL and keep the timer stopped
 		return true;
 	}
-
-	//Program the new top
-	TCA0.SINGLE.PER = u16_delay;
-	//Start the clock
-	SET_BIT( TCA0.SINGLE.CTRLA, TCA_SINGLE_ENABLE_bp );
+	//All good
+	else
+	{
+		//Program the new top
+		TCA0.SINGLE.PER = u16_timer_count -1;
+		//Start the clock
+		SET_BIT( TCA0.SINGLE.CTRLA, TCA_SINGLE_ENABLE_bp );	
+	}
 
 	///--------------------------------------------------------------------------
 	///	RETURN
@@ -1271,16 +1467,44 @@ bool Servo::init_class_vars( void )
 	this -> gu8_index = 0;
 	//Initialize accumulator
 	this -> gu16_timer_sum = 0;
-	//Initialize class vars
-	Timer s_default_timer;
-	s_default_timer.u16_target = 1875;
-	s_default_timer.u8_speed = 0;
-	s_default_timer.u16_actual = 1875;
+	
+	///--------------------------------------------------------------------------
+	///	USER SERVO COMMAND
+	///--------------------------------------------------------------------------
+	
+	//Defaults
+	Command st_default_command;
+	//Deviation from zero position in microseconds
+	st_default_command.s16_position = 0;
+	//Max speed in microseconds per second. 0 means speed limit disabled
+	st_default_command.u16_speed = 0;
+	//Inform the driver that command has changed, and that targets need to be recalculated
+	st_default_command.u1_position_changed = true;
+	st_default_command.u1_speed_changed = true;
+	//Driver will take care of informing user of lock and idle
+	st_default_command.u1_idle = false;
+	st_default_command.u1_lock = false;
+	//Scan all servos
+	for (uint8_t u8_cnt = 0; u8_cnt < Config::NUM_SERVOS; u8_cnt++)
+	{
+		//Initialize to default
+		this -> gast_command[u8_cnt] = st_default_command;
+	}
+	
+	///--------------------------------------------------------------------------
+	///	DRIVER SERVO STATUS
+	///--------------------------------------------------------------------------
+	
+	//Defaults
+	Timer st_default_timer;
+	st_default_timer.u16_target = 0;
+	st_default_timer.u8_speed = 0;
+	st_default_timer.u16_actual = Config::SERVO_PPM_ZERO;
 	//Scan all servos
 	for (uint8_t u8_cnt = 0; u8_cnt < Config::NUM_SERVOS; u8_cnt++)	
 	{
 		//Initialize to default
-		this -> gas_timer[u8_cnt] = s_default_timer;
+		this -> gast_timer[u8_cnt] = st_default_timer;
 	}
 
     ///--------------------------------------------------------------------------
@@ -1458,34 +1682,137 @@ bool Servo::clear_servo_io( void )
 	return u1_ret;	//Propagate error
 }   //end private method: clear_servo_io | void
 
+
+
 /***************************************************************************/
 //! @brief Private method
-//! \n compute_next_delay | void
+//! \n compute_servo_delay | uint8_t | uint16_t |
 /***************************************************************************/
-//! @return uint16_t | delay to be programmed inside the timer
+//! @param iu8_index | index of the servo being updated
+//! @param ou16_delay | returns computed delay, saves driver effort of fetching result from class var
+//! @return bool | bool | false = OK | true = FAIL |
 //! @details
-//! \n The FSM of the driver computes the next delay
+//! \n The driver uses command position and speed, and actual delay, to compute next delay
 /***************************************************************************/
-/*
-uint16_t Servo::compute_next_delay( void )
+
+bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 {
-	DENTER(); //Trace Enter
+	DENTER_ARG("Servo:%d\n"); //Trace Enter
 	///--------------------------------------------------------------------------
-	///	INIT
-	///--------------------------------------------------------------------------
-
-	///--------------------------------------------------------------------------
-	///	BODY
+	///	CHECK
 	///--------------------------------------------------------------------------
 
+	//If Servo index is OOB
+	if ((Config::PEDANTIC_CHECKS == true) && ((iu8_index < 0) || (iu8_index >= Config::NUM_SERVOS)))
+	{
+		this -> report_error( Error_code::ERR_INPUT_OOB );
+		ou16_delay = Config::HAL_TIMER_MAX_CNT;
+		return true;
+	}
+	
+	///--------------------------------------------------------------------------
+	///	COMMAND -> STATUS
+	///--------------------------------------------------------------------------
+	//	The driver check if command has changed and saves the vars inside the timer status vars
+
+	//If command position changed
+	if (gast_command[iu8_index].u1_position_changed == true)
+	{
+		//Fetch position
+		int16_t s16_tmp = gast_command[iu8_index].s16_position;
+		if ((Config::PEDANTIC_CHECKS == true) && ( (s16_tmp < -(int16_t)Config::SERVO_PPM_MAX_COMMAND) || (s16_tmp > (int16_t)Config::SERVO_PPM_MAX_COMMAND) ))
+		{
+			//Algorithmic error. The class should make sure that user can't write bollocks inside the position
+			this -> report_error( Error_code::ERR_ALGORITHM );
+			return true;
+		}
+		//The target delay is the delay to achieve zero position plus the deviation
+		gast_timer[iu8_index].u16_target = Config::SERVO_PPM_ZERO +s16_tmp;
+		//status and command are synced
+		gast_command[iu8_index].u1_position_changed = false;
+	}
+
+	//Latch speed limit in microseconds per 20ms
+	uint8_t u8_speed = 0;
+	//If command speed changed
+	if (gast_command[iu8_index].u1_speed_changed == true)
+	{
+		//Fetch position
+		uint16_t u16_tmp = gast_command[iu8_index].u16_speed;
+		//If speed limiter is disabled
+		if (u16_tmp == 0)
+		{
+			//Update internal timer status
+			gast_timer[iu8_index].u8_speed = 0;	
+		}
+		//if speed limiter is active
+		else
+		{
+			//The target speed is the speed multiplied by the number of PPM cycles in a second
+			u16_tmp = u16_tmp *(1000000 / Config::SERVO_PPM_PERIOD);
+			if (u16_tmp > 255)
+			{
+				report_error(Error_code::ERR_OVERFLOW);
+				return true;
+			}
+			u8_speed = u16_tmp;
+			//Update internal timer status
+			gast_timer[iu8_index].u8_speed = u8_speed;
+		}
+		//status and command are synced
+		gast_command[iu8_index].u1_speed_changed = false;
+	}
+	//If speed has not changed
+	else
+	{
+		//Fetch speed
+		u8_speed = gast_timer[iu8_index].u8_speed;
+	}
+
+	///--------------------------------------------------------------------------
+	///	STATUS -> COUNT
+	///--------------------------------------------------------------------------
+
+	//If: speed limit is inactive
+	if (u8_speed == 0)
+	{
+		//Fetch target
+		uint16_t u16_target = gast_timer[iu8_index].u16_target;
+		//Fetch actual
+		uint16_t u16_actual = gast_timer[iu8_index].u16_actual;
+		//if already locked
+		if (u16_actual == u16_actual)
+		{
+			//Already locked
+			gast_command[iu8_index].u1_idle = true;
+			gast_command[iu8_index].u1_lock = true;	
+		}
+		//Needs to move
+		else
+		{
+			//Not locked
+			gast_command[iu8_index].u1_idle = false;
+			gast_command[iu8_index].u1_lock = false;
+			//Update actual
+			gast_timer[iu8_index].u16_actual = u16_target;
+		}
+		//Return to caller the updated delay
+		ou16_delay = u16_target;
+	}
+	//if: speed limit active
+	else
+	{
+		report_error( Error_code::ERR_ALGORITHM );
+		return true;
+	}
 
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
-	DRETURN_ARG("dervo%d -> delay %d\n", -1, u16_delay); //Trace Return
-	return 0;	//OK
-}   //end private method: compute_next_delay | void
-*/
+	DRETURN_ARG("Delay %d\n", ou16_delay); //Trace Return
+	return false;	//OK
+}   //end private method: compute_servo_delay | uint8_t | uint16_t |
+
 /***************************************************************************/
 //! @brief Private method
 //! \n dummy | void
