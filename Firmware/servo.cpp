@@ -174,7 +174,7 @@ class Servo
 				//HAL Timer Parameters
 			//Prescaler to the main timer clock
 			HAL_TIMER_PRESCALER = 16,
-			HAL_TIMER_MAX_CNT = (UINT16_MAX -1),
+			HAL_TIMER_MAX_CNT = UINT16_MAX,
 			//Resolution of a single count in nanoseconds per count [ns/cnt]. Needed to convert between time and delay to be programmed inside the hardware timer
 			//HAL_TIMER_RESOLUTION = ((1000000000UL /F_CPU) /HAL_TIMER_PRESCALER ),
 			HAL_TIMER_RESOLUTION = 800,
@@ -184,8 +184,13 @@ class Servo
 			SERVO_PPM_ZERO = 1500,
 			//Period of a single servo waveform in microseconds [us]
 			SERVO_PPM_PERIOD = 20000,
+			//SERVO_PPM_FREQUENCY = 1000000/Config::SERVO_PPM_PERIOD,
+			SERVO_PPM_FREQUENCY = 50,
 			//Deviation from the deadtime that gives either a full forward or a full backward command in microseconds [us]
 			SERVO_PPM_MAX_COMMAND = 400,
+			//Minimum and maximum pulse width in microseconds [us]
+			SERVO_PPM_MIN_PULSE = SERVO_PPM_ZERO -SERVO_PPM_MAX_COMMAND,
+			SERVO_PPM_MAX_PULSE = SERVO_PPM_ZERO +SERVO_PPM_MAX_COMMAND,
 				
 				//Servomotor Power Soft start configurations
 			SOFT_START_TON = 10,
@@ -903,6 +908,11 @@ bool Servo::hal_timer_isr( void )
 	{
 		//Driver takes care of updating from user command, maintaining servo status and computing what the next delay is to be
 		u1_ret = this -> compute_servo_delay( u8_index, u16_delay );
+		if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < (Config::SERVO_PPM_ZERO-Config::SERVO_PPM_MAX_COMMAND)) || (u16_delay > (Config::SERVO_PPM_ZERO+Config::SERVO_PPM_MAX_COMMAND))) )
+		{
+			this ->report_error( Error_code::ERR_ALGORITHM );
+			return true;
+		}
 		//Accumulate delay inside accumulator
 		u16_accumulator += u16_delay;
 	}
@@ -912,7 +922,7 @@ bool Servo::hal_timer_isr( void )
 		//If: the servo scan time exceed the PPM period
 		if (u16_accumulator >= Config::SERVO_PPM_PERIOD)
 		{
-			//Fail
+			this ->report_error( Error_code::ERR_ALGORITHM );
 			u1_ret = true;
 		}
 		//If: scan time is good
@@ -1540,6 +1550,12 @@ bool Servo::report_error( Error_code error_code_tmp )
 	///	BODY
 	///--------------------------------------------------------------------------
 
+	//Only report oldest error
+	if (this -> g_error == Error_code::OK)
+	{
+		this -> g_error = error_code_tmp;	
+	}
+
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
@@ -1724,6 +1740,7 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 		{
 			//Algorithmic error. The class should make sure that user can't write bollocks inside the position
 			this -> report_error( Error_code::ERR_ALGORITHM );
+			ou16_delay = Config::HAL_TIMER_MAX_CNT;
 			return true;
 		}
 		//The target delay is the delay to achieve zero position plus the deviation
@@ -1749,10 +1766,11 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 		else
 		{
 			//The target speed is the speed multiplied by the number of PPM cycles in a second
-			u16_tmp = u16_tmp *(1000000 / Config::SERVO_PPM_PERIOD);
+			u16_tmp /= Config::SERVO_PPM_FREQUENCY;
 			if (u16_tmp > 255)
 			{
 				report_error(Error_code::ERR_OVERFLOW);
+				ou16_delay = Config::HAL_TIMER_MAX_CNT;
 				return true;
 			}
 			u8_speed = u16_tmp;
@@ -1773,15 +1791,17 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 	///	STATUS -> COUNT
 	///--------------------------------------------------------------------------
 
+	//Initialize return delay to invalid
+	uint16_t u16_delay = Config::HAL_TIMER_MAX_CNT;
+	//Fetch target
+	uint16_t u16_target = gast_timer[iu8_index].u16_target;
+	//Fetch actual
+	uint16_t u16_actual = gast_timer[iu8_index].u16_actual;
 	//If: speed limit is inactive
 	if (u8_speed == 0)
 	{
-		//Fetch target
-		uint16_t u16_target = gast_timer[iu8_index].u16_target;
-		//Fetch actual
-		uint16_t u16_actual = gast_timer[iu8_index].u16_actual;
 		//if already locked
-		if (u16_actual == u16_actual)
+		if (u16_target == u16_actual)
 		{
 			//Already locked
 			gast_command[iu8_index].u1_idle = true;
@@ -1796,20 +1816,97 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 			//Update actual
 			gast_timer[iu8_index].u16_actual = u16_target;
 		}
-		//Return to caller the updated delay
-		ou16_delay = u16_target;
+		//Delay of the servo to be returned to caller
+		u16_delay = u16_target;
+		if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+		{
+			this ->report_error( Error_code::ERR_ALGORITHM );
+			ou16_delay = Config::HAL_TIMER_MAX_CNT;
+			return true;
+		}
 	}
 	//if: speed limit active
 	else
 	{
-		report_error( Error_code::ERR_ALGORITHM );
+		//if already locked
+		if (u16_target == u16_actual)
+		{
+			//Already locked
+			gast_command[iu8_index].u1_idle = true;
+			gast_command[iu8_index].u1_lock = true;
+		}
+		//if: Needs to move
+		else
+		{
+			//Compute absolute difference
+			uint16_t u16_delta = ((u16_target > u16_actual)?(u16_target-u16_actual):(u16_actual-u16_target));
+			//If: I need to move less than my allowed speed limit
+			if (u16_delta < u8_speed)
+			{
+				//I'm locked but not IDLE
+				gast_command[iu8_index].u1_lock = true;
+				gast_command[iu8_index].u1_idle = false;
+				//Update actual
+				gast_timer[iu8_index].u16_actual = u16_target;
+				//Delay of the servo to be returned to caller
+				u16_delay = u16_target;
+				if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+				{
+					this ->report_error( Error_code::ERR_ALGORITHM );
+					ou16_delay = Config::HAL_TIMER_MAX_CNT;
+					return true;
+				}
+			}
+			//if: I need to move more than the speed limit
+			else
+			{
+				//I'm moving in a speed limited way
+				gast_command[iu8_index].u1_lock = false;
+				gast_command[iu8_index].u1_idle = false;
+				//If: moving positive
+				if (u16_target > u16_actual)
+				{
+					//Move the maximum allowed speed in the positive direction	
+					u16_actual += u8_speed;
+					
+				}
+				//If: moving negative
+				else if (u16_target < u16_actual)
+				{
+					//Move the maximum allowed speed in the positive direction
+					u16_actual -= u8_speed;
+				}
+				else
+				{
+					report_error(Error_code::ERR_ALGORITHM);
+					ou16_delay = Config::HAL_TIMER_MAX_CNT;
+					return true;
+				}
+				//Update actual
+				gast_timer[iu8_index].u16_actual = u16_actual;
+				//Delay of the servo to be returned to caller
+				u16_delay = u16_actual;
+				if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+				{
+					this ->report_error( Error_code::ERR_ALGORITHM );
+					ou16_delay = Config::HAL_TIMER_MAX_CNT;
+					return true;
+				}
+			} //end if: I need to move more than the speed limit
+		}  //end if: Needs to move
+	} //end if: speed limit active
+	if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+	{
+		this ->report_error( Error_code::ERR_ALGORITHM );
+		ou16_delay = Config::HAL_TIMER_MAX_CNT;
 		return true;
 	}
 
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
-	DRETURN_ARG("Delay %d\n", ou16_delay); //Trace Return
+	DRETURN_ARG("Delay %d\n", u16_delay); //Trace Return
+	ou16_delay = u16_delay;
 	return false;	//OK
 }   //end private method: compute_servo_delay | uint8_t | uint16_t |
 

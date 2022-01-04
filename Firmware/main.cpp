@@ -240,11 +240,13 @@ int main(void)
 			
 			if (cnt % 2 == 0)
 			{
-				gc_servo.set_servo( 0, -50 );
+				//Move to -100us at 200us/s
+				gc_servo.set_servo( 0, -100, 200 );
 			}
 			else
 			{
-				gc_servo.set_servo( 0, 50 );
+				//move to +100us at 400us/s
+				gc_servo.set_servo( 0, 100, 400 );
 			}
 		}
 		

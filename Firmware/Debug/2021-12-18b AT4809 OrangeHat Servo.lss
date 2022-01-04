@@ -3,33 +3,33 @@
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00802800  00802800  0000137a  2**0
+  0 .data         00000000  00802800  00802800  00001660  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000012a2  00000000  00000000  00000094  2**1
+  1 .text         00001588  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000044  000052a2  000012a2  00001336  2**0
+  2 .rodata       00000044  00005588  00001588  0000161c  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .bss          0000004b  00802800  00802800  0000137a  2**0
+  3 .bss          0000004b  00802800  00802800  00001660  2**0
                   ALLOC
-  4 .comment      00000030  00000000  00000000  0000137a  2**0
+  4 .comment      00000030  00000000  00000000  00001660  2**0
                   CONTENTS, READONLY
-  5 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000013ac  2**2
+  5 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00001690  2**2
                   CONTENTS, READONLY
-  6 .debug_aranges 00000278  00000000  00000000  000013ec  2**0
+  6 .debug_aranges 00000278  00000000  00000000  000016d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   00008199  00000000  00000000  00001664  2**0
+  7 .debug_info   00008440  00000000  00000000  00001948  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 000031d1  00000000  00000000  000097fd  2**0
+  8 .debug_abbrev 0000318f  00000000  00000000  00009d88  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   00002d68  00000000  00000000  0000c9ce  2**0
+  9 .debug_line   00002f08  00000000  00000000  0000cf17  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  00000920  00000000  00000000  0000f738  2**2
+ 10 .debug_frame  00000950  00000000  00000000  0000fe20  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00002bad  00000000  00000000  00010058  2**0
+ 11 .debug_str    00002bf3  00000000  00000000  00010770  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    0000570f  00000000  00000000  00012c05  2**0
+ 12 .debug_loc    00005d8a  00000000  00000000  00013363  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 000002b8  00000000  00000000  00018314  2**0
+ 13 .debug_ranges 000002b8  00000000  00000000  000190ed  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -75,20 +75,20 @@ Disassembly of section .text:
       94:	0c 94 77 00 	jmp	0xee	; 0xee <__bad_interrupt>
       98:	0c 94 77 00 	jmp	0xee	; 0xee <__bad_interrupt>
       9c:	0c 94 77 00 	jmp	0xee	; 0xee <__bad_interrupt>
-      a0:	8d 05       	cpc	r24, r13
-      a2:	95 05       	cpc	r25, r5
-      a4:	a0 05       	cpc	r26, r0
-      a6:	ad 05       	cpc	r26, r13
-      a8:	bc 05       	cpc	r27, r12
-      aa:	c4 05       	cpc	r28, r4
-      ac:	cf 05       	cpc	r28, r15
-      ae:	dc 05       	cpc	r29, r12
+      a0:	af 06       	cpc	r10, r31
+      a2:	b7 06       	cpc	r11, r23
+      a4:	c2 06       	cpc	r12, r18
+      a6:	cf 06       	cpc	r12, r31
+      a8:	de 06       	cpc	r13, r30
+      aa:	e6 06       	cpc	r14, r22
+      ac:	f1 06       	cpc	r15, r17
+      ae:	fe 06       	cpc	r15, r30
 
 000000b0 <__ctors_start>:
-      b0:	47 05       	cpc	r20, r7
+      b0:	4b 05       	cpc	r20, r11
 
 000000b2 <__ctors_end>:
-      b2:	4e 05       	cpc	r20, r14
+      b2:	52 05       	cpc	r21, r2
 
 000000b4 <__dtors_end>:
       b4:	11 24       	eor	r1, r1
@@ -119,12 +119,12 @@ Disassembly of section .text:
       d6:	04 c0       	rjmp	.+8      	; 0xe0 <__do_global_ctors+0x10>
       d8:	21 97       	sbiw	r28, 0x01	; 1
       da:	fe 01       	movw	r30, r28
-      dc:	0e 94 2f 09 	call	0x125e	; 0x125e <__tablejump2__>
+      dc:	0e 94 a2 0a 	call	0x1544	; 0x1544 <__tablejump2__>
       e0:	c8 35       	cpi	r28, 0x58	; 88
       e2:	d1 07       	cpc	r29, r17
       e4:	c9 f7       	brne	.-14     	; 0xd8 <__do_global_ctors+0x8>
       e6:	0e 94 b9 04 	call	0x972	; 0x972 <main>
-      ea:	0c 94 44 09 	jmp	0x1288	; 0x1288 <__do_global_dtors>
+      ea:	0c 94 b7 0a 	jmp	0x156e	; 0x156e <__do_global_dtors>
 
 000000ee <__bad_interrupt>:
       ee:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -751,7 +751,7 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
                     tmp = num / base[t];
      598:	80 2f       	mov	r24, r16
      59a:	64 2f       	mov	r22, r20
-     59c:	0e 94 ed 08 	call	0x11da	; 0x11da <__udivmodqi4>
+     59c:	0e 94 60 0a 	call	0x14c0	; 0x14c0 <__udivmodqi4>
                     //If: index would overflow. Need an extra slot for the final teminator
                     if ( (SAFETY_CHECKS == true) && (index >= (str_len -Config::STRING_TERMINATOR_SIZE)) )
      5a0:	62 2f       	mov	r22, r18
@@ -873,8 +873,8 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
                 1
             };
      60e:	8a e0       	ldi	r24, 0x0A	; 10
-     610:	e2 ea       	ldi	r30, 0xA2	; 162
-     612:	f2 e5       	ldi	r31, 0x52	; 82
+     610:	e8 e8       	ldi	r30, 0x88	; 136
+     612:	f5 e5       	ldi	r31, 0x55	; 85
      614:	de 01       	movw	r26, r28
      616:	17 96       	adiw	r26, 0x07	; 7
      618:	01 90       	ld	r0, Z+
@@ -929,7 +929,7 @@ void lcd_print_u16( uint8_t pos, uint16_t num )
                     tmp = num / base[t];
      64c:	c8 01       	movw	r24, r16
      64e:	bf 01       	movw	r22, r30
-     650:	0e 94 f9 08 	call	0x11f2	; 0x11f2 <__udivmodhi4>
+     650:	0e 94 6c 0a 	call	0x14d8	; 0x14d8 <__udivmodhi4>
                     //If: index would overflow. Need an extra slot for the final teminator
                     if ( (SAFETY_CHECKS == true) && (index >= (str_len -Config::STRING_TERMINATOR_SIZE)) )
      654:	82 2f       	mov	r24, r18
@@ -1582,7 +1582,7 @@ ISR( TCA0_OVF_vect )
 	gc_servo.hal_timer_isr();
      908:	8b e2       	ldi	r24, 0x2B	; 43
      90a:	98 e2       	ldi	r25, 0x28	; 40
-     90c:	0e 94 6f 08 	call	0x10de	; 0x10de <_ZN9OrangeBot5Servo13hal_timer_isrEv>
+     90c:	0e 94 d2 09 	call	0x13a4	; 0x13a4 <_ZN9OrangeBot5Servo13hal_timer_isrEv>
 	//----------------------------------------------------------------
 	//	RETURN
 	//----------------------------------------------------------------
@@ -1630,7 +1630,7 @@ void function_template( void )
      94c:	21 f4       	brne	.+8      	; 0x956 <_Z41__static_initialization_and_destruction_0ii+0x1e>
      94e:	8b e2       	ldi	r24, 0x2B	; 43
      950:	98 e2       	ldi	r25, 0x28	; 40
-     952:	0e 94 0e 07 	call	0xe1c	; 0xe1c <_ZN9OrangeBot5ServoC1Ev>
+     952:	0e 94 9f 06 	call	0xd3e	; 0xd3e <_ZN9OrangeBot5ServoC1Ev>
      956:	cd 2b       	or	r28, r29
      958:	39 f4       	brne	.+14     	; 0x968 <_Z41__static_initialization_and_destruction_0ii+0x30>
      95a:	0f 3f       	cpi	r16, 0xFF	; 255
@@ -1638,7 +1638,7 @@ void function_template( void )
      95e:	21 f4       	brne	.+8      	; 0x968 <_Z41__static_initialization_and_destruction_0ii+0x30>
      960:	8b e2       	ldi	r24, 0x2B	; 43
      962:	98 e2       	ldi	r25, 0x28	; 40
-     964:	0e 94 55 05 	call	0xaaa	; 0xaaa <_ZN9OrangeBot5ServoD1Ev>
+     964:	0e 94 59 05 	call	0xab2	; 0xab2 <_ZN9OrangeBot5ServoD1Ev>
      968:	df 91       	pop	r29
      96a:	cf 91       	pop	r28
      96c:	1f 91       	pop	r17
@@ -1681,13 +1681,13 @@ void function_template( void )
      9b4:	00 c0       	rjmp	.+0      	; 0x9b6 <main+0x44>
      9b6:	00 00       	nop
      9b8:	0e 94 b5 00 	call	0x16a	; 0x16a <_Z8lcd_initv>
-     9bc:	6c ed       	ldi	r22, 0xDC	; 220
-     9be:	72 e5       	ldi	r23, 0x52	; 82
+     9bc:	62 ec       	ldi	r22, 0xC2	; 194
+     9be:	75 e5       	ldi	r23, 0x55	; 85
      9c0:	80 e0       	ldi	r24, 0x00	; 0
      9c2:	0e 94 86 02 	call	0x50c	; 0x50c <_Z13lcd_print_strhPKc>
      9c6:	ce 01       	movw	r24, r28
      9c8:	01 96       	adiw	r24, 0x01	; 1
-     9ca:	0e 94 0e 07 	call	0xe1c	; 0xe1c <_ZN9OrangeBot5ServoC1Ev>
+     9ca:	0e 94 9f 06 	call	0xd3e	; 0xd3e <_ZN9OrangeBot5ServoC1Ev>
      9ce:	8e e1       	ldi	r24, 0x1E	; 30
      9d0:	fe 01       	movw	r30, r28
      9d2:	31 96       	adiw	r30, 0x01	; 1
@@ -1699,11 +1699,11 @@ void function_template( void )
      9de:	e1 f7       	brne	.-8      	; 0x9d8 <main+0x66>
      9e0:	ce 01       	movw	r24, r28
      9e2:	01 96       	adiw	r24, 0x01	; 1
-     9e4:	0e 94 55 05 	call	0xaaa	; 0xaaa <_ZN9OrangeBot5ServoD1Ev>
+     9e4:	0e 94 59 05 	call	0xab2	; 0xab2 <_ZN9OrangeBot5ServoD1Ev>
      9e8:	61 e0       	ldi	r22, 0x01	; 1
      9ea:	8b e2       	ldi	r24, 0x2B	; 43
      9ec:	98 e2       	ldi	r25, 0x28	; 40
-     9ee:	0e 94 56 07 	call	0xeac	; 0xeac <_ZN9OrangeBot5Servo5powerEb>
+     9ee:	0e 94 b6 07 	call	0xf6c	; 0xf6c <_ZN9OrangeBot5Servo5powerEb>
      9f2:	78 94       	sei
      9f4:	00 e0       	ldi	r16, 0x00	; 0
      9f6:	10 e0       	ldi	r17, 0x00	; 0
@@ -1755,1507 +1755,1944 @@ void function_template( void )
      a66:	0f 5f       	subi	r16, 0xFF	; 255
      a68:	1f 4f       	sbci	r17, 0xFF	; 255
      a6a:	00 fd       	sbrc	r16, 0
-     a6c:	08 c0       	rjmp	.+16     	; 0xa7e <main+0x10c>
-     a6e:	4e ec       	ldi	r20, 0xCE	; 206
-     a70:	5f ef       	ldi	r21, 0xFF	; 255
-     a72:	60 e0       	ldi	r22, 0x00	; 0
-     a74:	8b e2       	ldi	r24, 0x2B	; 43
-     a76:	98 e2       	ldi	r25, 0x28	; 40
-     a78:	0e 94 56 05 	call	0xaac	; 0xaac <_ZN9OrangeBot5Servo9set_servoEhi>
-     a7c:	bd cf       	rjmp	.-134    	; 0x9f8 <main+0x86>
-     a7e:	42 e3       	ldi	r20, 0x32	; 50
-     a80:	50 e0       	ldi	r21, 0x00	; 0
-     a82:	60 e0       	ldi	r22, 0x00	; 0
-     a84:	8b e2       	ldi	r24, 0x2B	; 43
-     a86:	98 e2       	ldi	r25, 0x28	; 40
-     a88:	0e 94 56 05 	call	0xaac	; 0xaac <_ZN9OrangeBot5Servo9set_servoEhi>
-     a8c:	b5 cf       	rjmp	.-150    	; 0x9f8 <main+0x86>
+     a6c:	0a c0       	rjmp	.+20     	; 0xa82 <main+0x110>
+     a6e:	28 ec       	ldi	r18, 0xC8	; 200
+     a70:	30 e0       	ldi	r19, 0x00	; 0
+     a72:	4c e9       	ldi	r20, 0x9C	; 156
+     a74:	5f ef       	ldi	r21, 0xFF	; 255
+     a76:	60 e0       	ldi	r22, 0x00	; 0
+     a78:	8b e2       	ldi	r24, 0x2B	; 43
+     a7a:	98 e2       	ldi	r25, 0x28	; 40
+     a7c:	0e 94 2b 06 	call	0xc56	; 0xc56 <_ZN9OrangeBot5Servo9set_servoEhij>
+     a80:	bb cf       	rjmp	.-138    	; 0x9f8 <main+0x86>
+     a82:	20 e9       	ldi	r18, 0x90	; 144
+     a84:	31 e0       	ldi	r19, 0x01	; 1
+     a86:	44 e6       	ldi	r20, 0x64	; 100
+     a88:	50 e0       	ldi	r21, 0x00	; 0
+     a8a:	60 e0       	ldi	r22, 0x00	; 0
+     a8c:	8b e2       	ldi	r24, 0x2B	; 43
+     a8e:	98 e2       	ldi	r25, 0x28	; 40
+     a90:	0e 94 2b 06 	call	0xc56	; 0xc56 <_ZN9OrangeBot5Servo9set_servoEhij>
+     a94:	b1 cf       	rjmp	.-158    	; 0x9f8 <main+0x86>
 
-00000a8e <_GLOBAL__sub_I_g_isr_flags>:
+00000a96 <_GLOBAL__sub_I_g_isr_flags>:
 	//----------------------------------------------------------------
 	//	RETURN
 	//----------------------------------------------------------------
 	
 	return;
 }	//End function:
-     a8e:	6f ef       	ldi	r22, 0xFF	; 255
-     a90:	7f ef       	ldi	r23, 0xFF	; 255
-     a92:	81 e0       	ldi	r24, 0x01	; 1
-     a94:	90 e0       	ldi	r25, 0x00	; 0
-     a96:	0e 94 9c 04 	call	0x938	; 0x938 <_Z41__static_initialization_and_destruction_0ii>
-     a9a:	08 95       	ret
+     a96:	6f ef       	ldi	r22, 0xFF	; 255
+     a98:	7f ef       	ldi	r23, 0xFF	; 255
+     a9a:	81 e0       	ldi	r24, 0x01	; 1
+     a9c:	90 e0       	ldi	r25, 0x00	; 0
+     a9e:	0e 94 9c 04 	call	0x938	; 0x938 <_Z41__static_initialization_and_destruction_0ii>
+     aa2:	08 95       	ret
 
-00000a9c <_GLOBAL__sub_D_g_isr_flags>:
-     a9c:	6f ef       	ldi	r22, 0xFF	; 255
-     a9e:	7f ef       	ldi	r23, 0xFF	; 255
-     aa0:	80 e0       	ldi	r24, 0x00	; 0
-     aa2:	90 e0       	ldi	r25, 0x00	; 0
-     aa4:	0e 94 9c 04 	call	0x938	; 0x938 <_Z41__static_initialization_and_destruction_0ii>
-     aa8:	08 95       	ret
+00000aa4 <_GLOBAL__sub_D_g_isr_flags>:
+     aa4:	6f ef       	ldi	r22, 0xFF	; 255
+     aa6:	7f ef       	ldi	r23, 0xFF	; 255
+     aa8:	80 e0       	ldi	r24, 0x00	; 0
+     aaa:	90 e0       	ldi	r25, 0x00	; 0
+     aac:	0e 94 9c 04 	call	0x938	; 0x938 <_Z41__static_initialization_and_destruction_0ii>
+     ab0:	08 95       	ret
 
-00000aaa <_ZN9OrangeBot5ServoD1Ev>:
+00000ab2 <_ZN9OrangeBot5ServoD1Ev>:
     ///--------------------------------------------------------------------------
     ///	RETURN
     ///--------------------------------------------------------------------------
     DRETURN();      //Trace Return
     return true;    //FAIL
 }   //end private method: error_recovery | void |
-     aaa:	08 95       	ret
+     ab2:	08 95       	ret
 
-00000aac <_ZN9OrangeBot5Servo9set_servoEhi>:
-     aac:	62 30       	cpi	r22, 0x02	; 2
-     aae:	20 f5       	brcc	.+72     	; 0xaf8 <_ZN9OrangeBot5Servo9set_servoEhi+0x4c>
-     ab0:	9a 01       	movw	r18, r20
-     ab2:	20 57       	subi	r18, 0x70	; 112
-     ab4:	3e 4f       	sbci	r19, 0xFE	; 254
-     ab6:	21 32       	cpi	r18, 0x21	; 33
-     ab8:	33 40       	sbci	r19, 0x03	; 3
-     aba:	00 f5       	brcc	.+64     	; 0xafc <_ZN9OrangeBot5Servo9set_servoEhi+0x50>
-     abc:	70 e0       	ldi	r23, 0x00	; 0
-     abe:	fb 01       	movw	r30, r22
-     ac0:	ee 0f       	add	r30, r30
-     ac2:	ff 1f       	adc	r31, r31
-     ac4:	ee 0f       	add	r30, r30
-     ac6:	ff 1f       	adc	r31, r31
-     ac8:	ee 0f       	add	r30, r30
-     aca:	ff 1f       	adc	r31, r31
-     acc:	e8 0f       	add	r30, r24
-     ace:	f9 1f       	adc	r31, r25
-     ad0:	21 81       	ldd	r18, Z+1	; 0x01
-     ad2:	32 81       	ldd	r19, Z+2	; 0x02
-     ad4:	42 17       	cp	r20, r18
-     ad6:	53 07       	cpc	r21, r19
-     ad8:	99 f0       	breq	.+38     	; 0xb00 <_ZN9OrangeBot5Servo9set_servoEhi+0x54>
-     ada:	66 0f       	add	r22, r22
-     adc:	77 1f       	adc	r23, r23
-     ade:	66 0f       	add	r22, r22
-     ae0:	77 1f       	adc	r23, r23
-     ae2:	66 0f       	add	r22, r22
-     ae4:	77 1f       	adc	r23, r23
-     ae6:	fc 01       	movw	r30, r24
-     ae8:	e6 0f       	add	r30, r22
-     aea:	f7 1f       	adc	r31, r23
-     aec:	41 83       	std	Z+1, r20	; 0x01
-     aee:	52 83       	std	Z+2, r21	; 0x02
-     af0:	81 e0       	ldi	r24, 0x01	; 1
-     af2:	85 83       	std	Z+5, r24	; 0x05
-     af4:	80 e0       	ldi	r24, 0x00	; 0
-     af6:	08 95       	ret
-     af8:	81 e0       	ldi	r24, 0x01	; 1
-     afa:	08 95       	ret
-     afc:	81 e0       	ldi	r24, 0x01	; 1
-     afe:	08 95       	ret
-     b00:	80 e0       	ldi	r24, 0x00	; 0
-     b02:	08 95       	ret
+00000ab4 <_ZN9OrangeBot5Servo11hal_init_ioEv>:
+     ab4:	e0 e6       	ldi	r30, 0x60	; 96
+     ab6:	f4 e0       	ldi	r31, 0x04	; 4
+     ab8:	80 81       	ld	r24, Z
+     aba:	80 68       	ori	r24, 0x80	; 128
+     abc:	80 83       	st	Z, r24
+     abe:	e0 e8       	ldi	r30, 0x80	; 128
+     ac0:	f4 e0       	ldi	r31, 0x04	; 4
+     ac2:	80 81       	ld	r24, Z
+     ac4:	81 60       	ori	r24, 0x01	; 1
+     ac6:	80 83       	st	Z, r24
+     ac8:	80 81       	ld	r24, Z
+     aca:	82 60       	ori	r24, 0x02	; 2
+     acc:	80 83       	st	Z, r24
+     ace:	80 81       	ld	r24, Z
+     ad0:	84 60       	ori	r24, 0x04	; 4
+     ad2:	80 83       	st	Z, r24
+     ad4:	80 81       	ld	r24, Z
+     ad6:	88 60       	ori	r24, 0x08	; 8
+     ad8:	80 83       	st	Z, r24
+     ada:	e0 ea       	ldi	r30, 0xA0	; 160
+     adc:	f4 e0       	ldi	r31, 0x04	; 4
+     ade:	80 81       	ld	r24, Z
+     ae0:	81 60       	ori	r24, 0x01	; 1
+     ae2:	80 83       	st	Z, r24
+     ae4:	80 81       	ld	r24, Z
+     ae6:	82 60       	ori	r24, 0x02	; 2
+     ae8:	80 83       	st	Z, r24
+     aea:	80 81       	ld	r24, Z
+     aec:	84 60       	ori	r24, 0x04	; 4
+     aee:	80 83       	st	Z, r24
+     af0:	80 81       	ld	r24, Z
+     af2:	88 60       	ori	r24, 0x08	; 8
+     af4:	80 83       	st	Z, r24
+     af6:	80 e0       	ldi	r24, 0x00	; 0
+     af8:	08 95       	ret
 
-00000b04 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>:
-     b04:	86 2f       	mov	r24, r22
-     b06:	90 e0       	ldi	r25, 0x00	; 0
-     b08:	88 30       	cpi	r24, 0x08	; 8
-     b0a:	91 05       	cpc	r25, r1
-     b0c:	08 f0       	brcs	.+2      	; 0xb10 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xc>
-     b0e:	63 c0       	rjmp	.+198    	; 0xbd6 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xd2>
-     b10:	fc 01       	movw	r30, r24
-     b12:	e0 5b       	subi	r30, 0xB0	; 176
-     b14:	ff 4f       	sbci	r31, 0xFF	; 255
-     b16:	0c 94 2f 09 	jmp	0x125e	; 0x125e <__tablejump2__>
-     b1a:	e0 e8       	ldi	r30, 0x80	; 128
-     b1c:	f4 e0       	ldi	r31, 0x04	; 4
-     b1e:	84 81       	ldd	r24, Z+4	; 0x04
-     b20:	8e 7f       	andi	r24, 0xFE	; 254
-     b22:	48 2b       	or	r20, r24
-     b24:	44 83       	std	Z+4, r20	; 0x04
-     b26:	80 e0       	ldi	r24, 0x00	; 0
-     b28:	08 95       	ret
-     b2a:	e0 e8       	ldi	r30, 0x80	; 128
-     b2c:	f4 e0       	ldi	r31, 0x04	; 4
-     b2e:	84 81       	ldd	r24, Z+4	; 0x04
-     b30:	50 e0       	ldi	r21, 0x00	; 0
-     b32:	44 0f       	add	r20, r20
-     b34:	55 1f       	adc	r21, r21
-     b36:	8d 7f       	andi	r24, 0xFD	; 253
-     b38:	48 2b       	or	r20, r24
-     b3a:	44 83       	std	Z+4, r20	; 0x04
-     b3c:	80 e0       	ldi	r24, 0x00	; 0
-     b3e:	08 95       	ret
-     b40:	e0 e8       	ldi	r30, 0x80	; 128
-     b42:	f4 e0       	ldi	r31, 0x04	; 4
-     b44:	84 81       	ldd	r24, Z+4	; 0x04
-     b46:	50 e0       	ldi	r21, 0x00	; 0
-     b48:	44 0f       	add	r20, r20
-     b4a:	55 1f       	adc	r21, r21
-     b4c:	44 0f       	add	r20, r20
-     b4e:	55 1f       	adc	r21, r21
-     b50:	8b 7f       	andi	r24, 0xFB	; 251
-     b52:	48 2b       	or	r20, r24
-     b54:	44 83       	std	Z+4, r20	; 0x04
-     b56:	80 e0       	ldi	r24, 0x00	; 0
-     b58:	08 95       	ret
-     b5a:	e0 e8       	ldi	r30, 0x80	; 128
-     b5c:	f4 e0       	ldi	r31, 0x04	; 4
-     b5e:	84 81       	ldd	r24, Z+4	; 0x04
-     b60:	50 e0       	ldi	r21, 0x00	; 0
-     b62:	44 0f       	add	r20, r20
-     b64:	55 1f       	adc	r21, r21
-     b66:	44 0f       	add	r20, r20
-     b68:	55 1f       	adc	r21, r21
-     b6a:	44 0f       	add	r20, r20
-     b6c:	55 1f       	adc	r21, r21
-     b6e:	87 7f       	andi	r24, 0xF7	; 247
-     b70:	48 2b       	or	r20, r24
-     b72:	44 83       	std	Z+4, r20	; 0x04
-     b74:	80 e0       	ldi	r24, 0x00	; 0
-     b76:	08 95       	ret
-     b78:	e0 ea       	ldi	r30, 0xA0	; 160
-     b7a:	f4 e0       	ldi	r31, 0x04	; 4
-     b7c:	84 81       	ldd	r24, Z+4	; 0x04
-     b7e:	8e 7f       	andi	r24, 0xFE	; 254
-     b80:	48 2b       	or	r20, r24
-     b82:	44 83       	std	Z+4, r20	; 0x04
-     b84:	80 e0       	ldi	r24, 0x00	; 0
-     b86:	08 95       	ret
-     b88:	e0 ea       	ldi	r30, 0xA0	; 160
-     b8a:	f4 e0       	ldi	r31, 0x04	; 4
-     b8c:	84 81       	ldd	r24, Z+4	; 0x04
-     b8e:	50 e0       	ldi	r21, 0x00	; 0
-     b90:	44 0f       	add	r20, r20
-     b92:	55 1f       	adc	r21, r21
-     b94:	8d 7f       	andi	r24, 0xFD	; 253
-     b96:	48 2b       	or	r20, r24
-     b98:	44 83       	std	Z+4, r20	; 0x04
-     b9a:	80 e0       	ldi	r24, 0x00	; 0
-     b9c:	08 95       	ret
-     b9e:	e0 ea       	ldi	r30, 0xA0	; 160
-     ba0:	f4 e0       	ldi	r31, 0x04	; 4
-     ba2:	84 81       	ldd	r24, Z+4	; 0x04
-     ba4:	50 e0       	ldi	r21, 0x00	; 0
-     ba6:	44 0f       	add	r20, r20
-     ba8:	55 1f       	adc	r21, r21
-     baa:	44 0f       	add	r20, r20
-     bac:	55 1f       	adc	r21, r21
-     bae:	8b 7f       	andi	r24, 0xFB	; 251
-     bb0:	48 2b       	or	r20, r24
-     bb2:	44 83       	std	Z+4, r20	; 0x04
-     bb4:	80 e0       	ldi	r24, 0x00	; 0
-     bb6:	08 95       	ret
-     bb8:	e0 ea       	ldi	r30, 0xA0	; 160
-     bba:	f4 e0       	ldi	r31, 0x04	; 4
-     bbc:	84 81       	ldd	r24, Z+4	; 0x04
-     bbe:	50 e0       	ldi	r21, 0x00	; 0
-     bc0:	44 0f       	add	r20, r20
-     bc2:	55 1f       	adc	r21, r21
-     bc4:	44 0f       	add	r20, r20
-     bc6:	55 1f       	adc	r21, r21
-     bc8:	44 0f       	add	r20, r20
-     bca:	55 1f       	adc	r21, r21
-     bcc:	87 7f       	andi	r24, 0xF7	; 247
-     bce:	48 2b       	or	r20, r24
-     bd0:	44 83       	std	Z+4, r20	; 0x04
-     bd2:	80 e0       	ldi	r24, 0x00	; 0
-     bd4:	08 95       	ret
-     bd6:	81 e0       	ldi	r24, 0x01	; 1
-     bd8:	08 95       	ret
+00000afa <_ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj>:
+     afa:	1f 93       	push	r17
+     afc:	cf 93       	push	r28
+     afe:	df 93       	push	r29
+     b00:	e0 e0       	ldi	r30, 0x00	; 0
+     b02:	fa e0       	ldi	r31, 0x0A	; 10
+     b04:	80 81       	ld	r24, Z
+     b06:	31 81       	ldd	r19, Z+1	; 0x01
+     b08:	12 81       	ldd	r17, Z+2	; 0x02
+     b0a:	d3 81       	ldd	r29, Z+3	; 0x03
+     b0c:	c5 81       	ldd	r28, Z+5	; 0x05
+     b0e:	26 85       	ldd	r18, Z+14	; 0x0e
+     b10:	a0 ee       	ldi	r26, 0xE0	; 224
+     b12:	b5 e0       	ldi	r27, 0x05	; 5
+     b14:	14 96       	adiw	r26, 0x04	; 4
+     b16:	5c 91       	ld	r21, X
+     b18:	14 97       	sbiw	r26, 0x04	; 4
+     b1a:	41 85       	ldd	r20, Z+9	; 0x09
+     b1c:	92 85       	ldd	r25, Z+10	; 0x0a
+     b1e:	81 7f       	andi	r24, 0xF1	; 241
+     b20:	88 60       	ori	r24, 0x08	; 8
+     b22:	38 7f       	andi	r19, 0xF8	; 248
+     b24:	91 60       	ori	r25, 0x01	; 1
+     b26:	21 60       	ori	r18, 0x01	; 1
+     b28:	31 83       	std	Z+1, r19	; 0x01
+     b2a:	12 83       	std	Z+2, r17	; 0x02
+     b2c:	d3 83       	std	Z+3, r29	; 0x03
+     b2e:	c5 83       	std	Z+5, r28	; 0x05
+     b30:	26 87       	std	Z+14, r18	; 0x0e
+     b32:	14 96       	adiw	r26, 0x04	; 4
+     b34:	5c 93       	st	X, r21
+     b36:	66 a3       	std	Z+38, r22	; 0x26
+     b38:	77 a3       	std	Z+39, r23	; 0x27
+     b3a:	10 a6       	std	Z+40, r1	; 0x28
+     b3c:	11 a6       	std	Z+41, r1	; 0x29
+     b3e:	12 a6       	std	Z+42, r1	; 0x2a
+     b40:	13 a6       	std	Z+43, r1	; 0x2b
+     b42:	14 a6       	std	Z+44, r1	; 0x2c
+     b44:	15 a6       	std	Z+45, r1	; 0x2d
+     b46:	80 83       	st	Z, r24
+     b48:	41 87       	std	Z+9, r20	; 0x09
+     b4a:	92 87       	std	Z+10, r25	; 0x0a
+     b4c:	80 e0       	ldi	r24, 0x00	; 0
+     b4e:	df 91       	pop	r29
+     b50:	cf 91       	pop	r28
+     b52:	1f 91       	pop	r17
+     b54:	08 95       	ret
 
-00000bda <_ZN9OrangeBot5Servo11hal_init_ioEv>:
-     bda:	e0 e6       	ldi	r30, 0x60	; 96
-     bdc:	f4 e0       	ldi	r31, 0x04	; 4
-     bde:	80 81       	ld	r24, Z
-     be0:	80 68       	ori	r24, 0x80	; 128
-     be2:	80 83       	st	Z, r24
-     be4:	e0 e8       	ldi	r30, 0x80	; 128
-     be6:	f4 e0       	ldi	r31, 0x04	; 4
-     be8:	80 81       	ld	r24, Z
-     bea:	81 60       	ori	r24, 0x01	; 1
-     bec:	80 83       	st	Z, r24
-     bee:	80 81       	ld	r24, Z
-     bf0:	82 60       	ori	r24, 0x02	; 2
-     bf2:	80 83       	st	Z, r24
-     bf4:	80 81       	ld	r24, Z
-     bf6:	84 60       	ori	r24, 0x04	; 4
-     bf8:	80 83       	st	Z, r24
-     bfa:	80 81       	ld	r24, Z
-     bfc:	88 60       	ori	r24, 0x08	; 8
-     bfe:	80 83       	st	Z, r24
-     c00:	e0 ea       	ldi	r30, 0xA0	; 160
-     c02:	f4 e0       	ldi	r31, 0x04	; 4
-     c04:	80 81       	ld	r24, Z
-     c06:	81 60       	ori	r24, 0x01	; 1
-     c08:	80 83       	st	Z, r24
-     c0a:	80 81       	ld	r24, Z
-     c0c:	82 60       	ori	r24, 0x02	; 2
-     c0e:	80 83       	st	Z, r24
-     c10:	80 81       	ld	r24, Z
-     c12:	84 60       	ori	r24, 0x04	; 4
-     c14:	80 83       	st	Z, r24
-     c16:	80 81       	ld	r24, Z
-     c18:	88 60       	ori	r24, 0x08	; 8
-     c1a:	80 83       	st	Z, r24
-     c1c:	80 e0       	ldi	r24, 0x00	; 0
-     c1e:	08 95       	ret
+00000b56 <_ZN9OrangeBot5Servo12hal_delay_usEv>:
+     b56:	86 e0       	ldi	r24, 0x06	; 6
+     b58:	8a 95       	dec	r24
+     b5a:	f1 f7       	brne	.-4      	; 0xb58 <_ZN9OrangeBot5Servo12hal_delay_usEv+0x2>
+     b5c:	00 c0       	rjmp	.+0      	; 0xb5e <_ZN9OrangeBot5Servo12hal_delay_usEv+0x8>
+     b5e:	80 e0       	ldi	r24, 0x00	; 0
+     b60:	08 95       	ret
 
-00000c20 <_ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj>:
-     c20:	1f 93       	push	r17
-     c22:	cf 93       	push	r28
-     c24:	df 93       	push	r29
-     c26:	e0 e0       	ldi	r30, 0x00	; 0
-     c28:	fa e0       	ldi	r31, 0x0A	; 10
-     c2a:	80 81       	ld	r24, Z
-     c2c:	31 81       	ldd	r19, Z+1	; 0x01
-     c2e:	12 81       	ldd	r17, Z+2	; 0x02
-     c30:	d3 81       	ldd	r29, Z+3	; 0x03
-     c32:	c5 81       	ldd	r28, Z+5	; 0x05
-     c34:	26 85       	ldd	r18, Z+14	; 0x0e
-     c36:	a0 ee       	ldi	r26, 0xE0	; 224
-     c38:	b5 e0       	ldi	r27, 0x05	; 5
-     c3a:	14 96       	adiw	r26, 0x04	; 4
-     c3c:	5c 91       	ld	r21, X
-     c3e:	14 97       	sbiw	r26, 0x04	; 4
-     c40:	41 85       	ldd	r20, Z+9	; 0x09
-     c42:	92 85       	ldd	r25, Z+10	; 0x0a
-     c44:	81 7f       	andi	r24, 0xF1	; 241
-     c46:	88 60       	ori	r24, 0x08	; 8
-     c48:	38 7f       	andi	r19, 0xF8	; 248
-     c4a:	91 60       	ori	r25, 0x01	; 1
-     c4c:	21 60       	ori	r18, 0x01	; 1
-     c4e:	31 83       	std	Z+1, r19	; 0x01
-     c50:	12 83       	std	Z+2, r17	; 0x02
-     c52:	d3 83       	std	Z+3, r29	; 0x03
-     c54:	c5 83       	std	Z+5, r28	; 0x05
-     c56:	26 87       	std	Z+14, r18	; 0x0e
-     c58:	14 96       	adiw	r26, 0x04	; 4
-     c5a:	5c 93       	st	X, r21
-     c5c:	66 a3       	std	Z+38, r22	; 0x26
-     c5e:	77 a3       	std	Z+39, r23	; 0x27
-     c60:	10 a6       	std	Z+40, r1	; 0x28
-     c62:	11 a6       	std	Z+41, r1	; 0x29
-     c64:	12 a6       	std	Z+42, r1	; 0x2a
-     c66:	13 a6       	std	Z+43, r1	; 0x2b
-     c68:	14 a6       	std	Z+44, r1	; 0x2c
-     c6a:	15 a6       	std	Z+45, r1	; 0x2d
-     c6c:	80 83       	st	Z, r24
-     c6e:	41 87       	std	Z+9, r20	; 0x09
-     c70:	92 87       	std	Z+10, r25	; 0x0a
-     c72:	80 e0       	ldi	r24, 0x00	; 0
-     c74:	df 91       	pop	r29
-     c76:	cf 91       	pop	r28
-     c78:	1f 91       	pop	r17
-     c7a:	08 95       	ret
+00000b62 <_ZN9OrangeBot5Servo9hal_powerEb>:
+     b62:	61 11       	cpse	r22, r1
+     b64:	06 c0       	rjmp	.+12     	; 0xb72 <_ZN9OrangeBot5Servo9hal_powerEb+0x10>
+     b66:	e0 e6       	ldi	r30, 0x60	; 96
+     b68:	f4 e0       	ldi	r31, 0x04	; 4
+     b6a:	84 81       	ldd	r24, Z+4	; 0x04
+     b6c:	80 68       	ori	r24, 0x80	; 128
+     b6e:	84 83       	std	Z+4, r24	; 0x04
+     b70:	05 c0       	rjmp	.+10     	; 0xb7c <_ZN9OrangeBot5Servo9hal_powerEb+0x1a>
+     b72:	e0 e6       	ldi	r30, 0x60	; 96
+     b74:	f4 e0       	ldi	r31, 0x04	; 4
+     b76:	84 81       	ldd	r24, Z+4	; 0x04
+     b78:	8f 77       	andi	r24, 0x7F	; 127
+     b7a:	84 83       	std	Z+4, r24	; 0x04
+     b7c:	80 e0       	ldi	r24, 0x00	; 0
+     b7e:	08 95       	ret
 
-00000c7c <_ZN9OrangeBot5Servo12hal_delay_usEv>:
-     c7c:	86 e0       	ldi	r24, 0x06	; 6
-     c7e:	8a 95       	dec	r24
-     c80:	f1 f7       	brne	.-4      	; 0xc7e <_ZN9OrangeBot5Servo12hal_delay_usEv+0x2>
-     c82:	00 c0       	rjmp	.+0      	; 0xc84 <_ZN9OrangeBot5Servo12hal_delay_usEv+0x8>
-     c84:	80 e0       	ldi	r24, 0x00	; 0
-     c86:	08 95       	ret
+00000b80 <_ZN9OrangeBot5Servo11hal_run_isrEb>:
+     b80:	61 11       	cpse	r22, r1
+     b82:	06 c0       	rjmp	.+12     	; 0xb90 <_ZN9OrangeBot5Servo11hal_run_isrEb+0x10>
+     b84:	e0 e0       	ldi	r30, 0x00	; 0
+     b86:	fa e0       	ldi	r31, 0x0A	; 10
+     b88:	80 81       	ld	r24, Z
+     b8a:	8e 7f       	andi	r24, 0xFE	; 254
+     b8c:	80 83       	st	Z, r24
+     b8e:	09 c0       	rjmp	.+18     	; 0xba2 <_ZN9OrangeBot5Servo11hal_run_isrEb+0x22>
+     b90:	e0 e0       	ldi	r30, 0x00	; 0
+     b92:	fa e0       	ldi	r31, 0x0A	; 10
+     b94:	87 ea       	ldi	r24, 0xA7	; 167
+     b96:	91 e6       	ldi	r25, 0x61	; 97
+     b98:	86 a3       	std	Z+38, r24	; 0x26
+     b9a:	97 a3       	std	Z+39, r25	; 0x27
+     b9c:	80 81       	ld	r24, Z
+     b9e:	81 60       	ori	r24, 0x01	; 1
+     ba0:	80 83       	st	Z, r24
+     ba2:	80 e0       	ldi	r24, 0x00	; 0
+     ba4:	08 95       	ret
 
-00000c88 <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj>:
-     c88:	9b 01       	movw	r18, r22
-     c8a:	a8 ee       	ldi	r26, 0xE8	; 232
-     c8c:	b3 e0       	ldi	r27, 0x03	; 3
-     c8e:	0e 94 35 09 	call	0x126a	; 0x126a <__umulhisi3>
-     c92:	20 e2       	ldi	r18, 0x20	; 32
-     c94:	33 e0       	ldi	r19, 0x03	; 3
-     c96:	40 e0       	ldi	r20, 0x00	; 0
-     c98:	50 e0       	ldi	r21, 0x00	; 0
-     c9a:	0e 94 0d 09 	call	0x121a	; 0x121a <__udivmodsi4>
-     c9e:	2d 3f       	cpi	r18, 0xFD	; 253
-     ca0:	8f ef       	ldi	r24, 0xFF	; 255
-     ca2:	38 07       	cpc	r19, r24
-     ca4:	41 05       	cpc	r20, r1
-     ca6:	51 05       	cpc	r21, r1
-     ca8:	10 f4       	brcc	.+4      	; 0xcae <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj+0x26>
-     caa:	c9 01       	movw	r24, r18
-     cac:	08 95       	ret
-     cae:	8f ef       	ldi	r24, 0xFF	; 255
-     cb0:	9f ef       	ldi	r25, 0xFF	; 255
-     cb2:	08 95       	ret
+00000ba6 <_ZN9OrangeBot5Servo15init_class_varsEv>:
+     ba6:	cf 93       	push	r28
+     ba8:	df 93       	push	r29
+     baa:	cd b7       	in	r28, 0x3d	; 61
+     bac:	de b7       	in	r29, 0x3e	; 62
+     bae:	2d 97       	sbiw	r28, 0x0d	; 13
+     bb0:	cd bf       	out	0x3d, r28	; 61
+     bb2:	de bf       	out	0x3e, r29	; 62
+     bb4:	fc 01       	movw	r30, r24
+     bb6:	10 82       	st	Z, r1
+     bb8:	13 8e       	std	Z+27, r1	; 0x1b
+     bba:	14 8e       	std	Z+28, r1	; 0x1c
+     bbc:	19 82       	std	Y+1, r1	; 0x01
+     bbe:	1a 82       	std	Y+2, r1	; 0x02
+     bc0:	1b 82       	std	Y+3, r1	; 0x03
+     bc2:	1c 82       	std	Y+4, r1	; 0x04
+     bc4:	21 e0       	ldi	r18, 0x01	; 1
+     bc6:	2d 83       	std	Y+5, r18	; 0x05
+     bc8:	2e 83       	std	Y+6, r18	; 0x06
+     bca:	18 86       	std	Y+8, r1	; 0x08
+     bcc:	1f 82       	std	Y+7, r1	; 0x07
+     bce:	20 e0       	ldi	r18, 0x00	; 0
+     bd0:	22 30       	cpi	r18, 0x02	; 2
+     bd2:	a0 f4       	brcc	.+40     	; 0xbfc <_ZN9OrangeBot5Servo15init_class_varsEv+0x56>
+     bd4:	a2 2f       	mov	r26, r18
+     bd6:	b0 e0       	ldi	r27, 0x00	; 0
+     bd8:	aa 0f       	add	r26, r26
+     bda:	bb 1f       	adc	r27, r27
+     bdc:	aa 0f       	add	r26, r26
+     bde:	bb 1f       	adc	r27, r27
+     be0:	aa 0f       	add	r26, r26
+     be2:	bb 1f       	adc	r27, r27
+     be4:	a8 0f       	add	r26, r24
+     be6:	b9 1f       	adc	r27, r25
+     be8:	11 96       	adiw	r26, 0x01	; 1
+     bea:	38 e0       	ldi	r19, 0x08	; 8
+     bec:	fe 01       	movw	r30, r28
+     bee:	31 96       	adiw	r30, 0x01	; 1
+     bf0:	01 90       	ld	r0, Z+
+     bf2:	0d 92       	st	X+, r0
+     bf4:	3a 95       	dec	r19
+     bf6:	e1 f7       	brne	.-8      	; 0xbf0 <_ZN9OrangeBot5Servo15init_class_varsEv+0x4a>
+     bf8:	2f 5f       	subi	r18, 0xFF	; 255
+     bfa:	ea cf       	rjmp	.-44     	; 0xbd0 <_ZN9OrangeBot5Servo15init_class_varsEv+0x2a>
+     bfc:	19 86       	std	Y+9, r1	; 0x09
+     bfe:	1a 86       	std	Y+10, r1	; 0x0a
+     c00:	1b 86       	std	Y+11, r1	; 0x0b
+     c02:	2c ed       	ldi	r18, 0xDC	; 220
+     c04:	35 e0       	ldi	r19, 0x05	; 5
+     c06:	2c 87       	std	Y+12, r18	; 0x0c
+     c08:	3d 87       	std	Y+13, r19	; 0x0d
+     c0a:	40 e0       	ldi	r20, 0x00	; 0
+     c0c:	42 30       	cpi	r20, 0x02	; 2
+     c0e:	a8 f4       	brcc	.+42     	; 0xc3a <_ZN9OrangeBot5Servo15init_class_varsEv+0x94>
+     c10:	24 2f       	mov	r18, r20
+     c12:	30 e0       	ldi	r19, 0x00	; 0
+     c14:	d9 01       	movw	r26, r18
+     c16:	aa 0f       	add	r26, r26
+     c18:	bb 1f       	adc	r27, r27
+     c1a:	aa 0f       	add	r26, r26
+     c1c:	bb 1f       	adc	r27, r27
+     c1e:	a2 0f       	add	r26, r18
+     c20:	b3 1f       	adc	r27, r19
+     c22:	a8 0f       	add	r26, r24
+     c24:	b9 1f       	adc	r27, r25
+     c26:	51 96       	adiw	r26, 0x11	; 17
+     c28:	25 e0       	ldi	r18, 0x05	; 5
+     c2a:	fe 01       	movw	r30, r28
+     c2c:	39 96       	adiw	r30, 0x09	; 9
+     c2e:	01 90       	ld	r0, Z+
+     c30:	0d 92       	st	X+, r0
+     c32:	2a 95       	dec	r18
+     c34:	e1 f7       	brne	.-8      	; 0xc2e <_ZN9OrangeBot5Servo15init_class_varsEv+0x88>
+     c36:	4f 5f       	subi	r20, 0xFF	; 255
+     c38:	e9 cf       	rjmp	.-46     	; 0xc0c <_ZN9OrangeBot5Servo15init_class_varsEv+0x66>
+     c3a:	80 e0       	ldi	r24, 0x00	; 0
+     c3c:	2d 96       	adiw	r28, 0x0d	; 13
+     c3e:	cd bf       	out	0x3d, r28	; 61
+     c40:	de bf       	out	0x3e, r29	; 62
+     c42:	df 91       	pop	r29
+     c44:	cf 91       	pop	r28
+     c46:	08 95       	ret
 
-00000cb4 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj>:
-     cb4:	cf 93       	push	r28
-     cb6:	df 93       	push	r29
-     cb8:	9b 01       	movw	r18, r22
-     cba:	2c 54       	subi	r18, 0x4C	; 76
-     cbc:	34 40       	sbci	r19, 0x04	; 4
-     cbe:	25 3d       	cpi	r18, 0xD5	; 213
-     cc0:	39 44       	sbci	r19, 0x49	; 73
-     cc2:	e0 f4       	brcc	.+56     	; 0xcfc <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x48>
-     cc4:	e0 e0       	ldi	r30, 0x00	; 0
-     cc6:	fa e0       	ldi	r31, 0x0A	; 10
-     cc8:	20 81       	ld	r18, Z
-     cca:	2e 7f       	andi	r18, 0xFE	; 254
-     ccc:	20 83       	st	Z, r18
-     cce:	c0 a1       	ldd	r28, Z+32	; 0x20
-     cd0:	d1 a1       	ldd	r29, Z+33	; 0x21
-     cd2:	0e 94 44 06 	call	0xc88	; 0xc88 <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj>
-     cd6:	9c 01       	movw	r18, r24
-     cd8:	21 50       	subi	r18, 0x01	; 1
-     cda:	31 09       	sbc	r19, r1
-     cdc:	2d 3f       	cpi	r18, 0xFD	; 253
-     cde:	4f ef       	ldi	r20, 0xFF	; 255
-     ce0:	34 07       	cpc	r19, r20
-     ce2:	70 f4       	brcc	.+28     	; 0xd00 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x4c>
-     ce4:	c8 17       	cp	r28, r24
-     ce6:	d9 07       	cpc	r29, r25
-     ce8:	68 f4       	brcc	.+26     	; 0xd04 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x50>
-     cea:	e0 e0       	ldi	r30, 0x00	; 0
-     cec:	fa e0       	ldi	r31, 0x0A	; 10
-     cee:	26 a3       	std	Z+38, r18	; 0x26
-     cf0:	37 a3       	std	Z+39, r19	; 0x27
-     cf2:	80 81       	ld	r24, Z
-     cf4:	81 60       	ori	r24, 0x01	; 1
-     cf6:	80 83       	st	Z, r24
-     cf8:	80 e0       	ldi	r24, 0x00	; 0
-     cfa:	05 c0       	rjmp	.+10     	; 0xd06 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x52>
-     cfc:	81 e0       	ldi	r24, 0x01	; 1
-     cfe:	03 c0       	rjmp	.+6      	; 0xd06 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x52>
-     d00:	81 e0       	ldi	r24, 0x01	; 1
-     d02:	01 c0       	rjmp	.+2      	; 0xd06 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x52>
-     d04:	81 e0       	ldi	r24, 0x01	; 1
-     d06:	df 91       	pop	r29
-     d08:	cf 91       	pop	r28
-     d0a:	08 95       	ret
+00000c48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>:
+     c48:	fc 01       	movw	r30, r24
+     c4a:	25 8d       	ldd	r18, Z+29	; 0x1d
+     c4c:	21 11       	cpse	r18, r1
+     c4e:	01 c0       	rjmp	.+2      	; 0xc52 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE+0xa>
+     c50:	65 8f       	std	Z+29, r22	; 0x1d
+     c52:	81 e0       	ldi	r24, 0x01	; 1
+     c54:	08 95       	ret
 
-00000d0c <_ZN9OrangeBot5Servo9hal_powerEb>:
-     d0c:	61 11       	cpse	r22, r1
-     d0e:	06 c0       	rjmp	.+12     	; 0xd1c <_ZN9OrangeBot5Servo9hal_powerEb+0x10>
-     d10:	e0 e6       	ldi	r30, 0x60	; 96
-     d12:	f4 e0       	ldi	r31, 0x04	; 4
-     d14:	84 81       	ldd	r24, Z+4	; 0x04
-     d16:	80 68       	ori	r24, 0x80	; 128
-     d18:	84 83       	std	Z+4, r24	; 0x04
-     d1a:	05 c0       	rjmp	.+10     	; 0xd26 <_ZN9OrangeBot5Servo9hal_powerEb+0x1a>
-     d1c:	e0 e6       	ldi	r30, 0x60	; 96
-     d1e:	f4 e0       	ldi	r31, 0x04	; 4
-     d20:	84 81       	ldd	r24, Z+4	; 0x04
-     d22:	8f 77       	andi	r24, 0x7F	; 127
-     d24:	84 83       	std	Z+4, r24	; 0x04
-     d26:	80 e0       	ldi	r24, 0x00	; 0
-     d28:	08 95       	ret
+00000c56 <_ZN9OrangeBot5Servo9set_servoEhij>:
+     c56:	62 30       	cpi	r22, 0x02	; 2
+     c58:	28 f0       	brcs	.+10     	; 0xc64 <_ZN9OrangeBot5Servo9set_servoEhij+0xe>
+     c5a:	67 e0       	ldi	r22, 0x07	; 7
+     c5c:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     c60:	81 e0       	ldi	r24, 0x01	; 1
+     c62:	08 95       	ret
+     c64:	fa 01       	movw	r30, r20
+     c66:	e0 57       	subi	r30, 0x70	; 112
+     c68:	fe 4f       	sbci	r31, 0xFE	; 254
+     c6a:	e1 32       	cpi	r30, 0x21	; 33
+     c6c:	f3 40       	sbci	r31, 0x03	; 3
+     c6e:	28 f0       	brcs	.+10     	; 0xc7a <_ZN9OrangeBot5Servo9set_servoEhij+0x24>
+     c70:	67 e0       	ldi	r22, 0x07	; 7
+     c72:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     c76:	81 e0       	ldi	r24, 0x01	; 1
+     c78:	08 95       	ret
+     c7a:	70 e0       	ldi	r23, 0x00	; 0
+     c7c:	fb 01       	movw	r30, r22
+     c7e:	ee 0f       	add	r30, r30
+     c80:	ff 1f       	adc	r31, r31
+     c82:	ee 0f       	add	r30, r30
+     c84:	ff 1f       	adc	r31, r31
+     c86:	ee 0f       	add	r30, r30
+     c88:	ff 1f       	adc	r31, r31
+     c8a:	e8 0f       	add	r30, r24
+     c8c:	f9 1f       	adc	r31, r25
+     c8e:	01 80       	ldd	r0, Z+1	; 0x01
+     c90:	f2 81       	ldd	r31, Z+2	; 0x02
+     c92:	e0 2d       	mov	r30, r0
+     c94:	4e 17       	cp	r20, r30
+     c96:	5f 07       	cpc	r21, r31
+     c98:	69 f0       	breq	.+26     	; 0xcb4 <_ZN9OrangeBot5Servo9set_servoEhij+0x5e>
+     c9a:	fb 01       	movw	r30, r22
+     c9c:	ee 0f       	add	r30, r30
+     c9e:	ff 1f       	adc	r31, r31
+     ca0:	ee 0f       	add	r30, r30
+     ca2:	ff 1f       	adc	r31, r31
+     ca4:	ee 0f       	add	r30, r30
+     ca6:	ff 1f       	adc	r31, r31
+     ca8:	e8 0f       	add	r30, r24
+     caa:	f9 1f       	adc	r31, r25
+     cac:	41 83       	std	Z+1, r20	; 0x01
+     cae:	52 83       	std	Z+2, r21	; 0x02
+     cb0:	41 e0       	ldi	r20, 0x01	; 1
+     cb2:	45 83       	std	Z+5, r20	; 0x05
+     cb4:	fb 01       	movw	r30, r22
+     cb6:	ee 0f       	add	r30, r30
+     cb8:	ff 1f       	adc	r31, r31
+     cba:	ee 0f       	add	r30, r30
+     cbc:	ff 1f       	adc	r31, r31
+     cbe:	ee 0f       	add	r30, r30
+     cc0:	ff 1f       	adc	r31, r31
+     cc2:	e8 0f       	add	r30, r24
+     cc4:	f9 1f       	adc	r31, r25
+     cc6:	43 81       	ldd	r20, Z+3	; 0x03
+     cc8:	54 81       	ldd	r21, Z+4	; 0x04
+     cca:	42 17       	cp	r20, r18
+     ccc:	53 07       	cpc	r21, r19
+     cce:	79 f0       	breq	.+30     	; 0xcee <_ZN9OrangeBot5Servo9set_servoEhij+0x98>
+     cd0:	66 0f       	add	r22, r22
+     cd2:	77 1f       	adc	r23, r23
+     cd4:	66 0f       	add	r22, r22
+     cd6:	77 1f       	adc	r23, r23
+     cd8:	66 0f       	add	r22, r22
+     cda:	77 1f       	adc	r23, r23
+     cdc:	fc 01       	movw	r30, r24
+     cde:	e6 0f       	add	r30, r22
+     ce0:	f7 1f       	adc	r31, r23
+     ce2:	23 83       	std	Z+3, r18	; 0x03
+     ce4:	34 83       	std	Z+4, r19	; 0x04
+     ce6:	81 e0       	ldi	r24, 0x01	; 1
+     ce8:	86 83       	std	Z+6, r24	; 0x06
+     cea:	80 e0       	ldi	r24, 0x00	; 0
+     cec:	08 95       	ret
+     cee:	80 e0       	ldi	r24, 0x00	; 0
+     cf0:	08 95       	ret
 
-00000d2a <_ZN9OrangeBot5Servo11hal_run_isrEb>:
-     d2a:	61 11       	cpse	r22, r1
-     d2c:	06 c0       	rjmp	.+12     	; 0xd3a <_ZN9OrangeBot5Servo11hal_run_isrEb+0x10>
-     d2e:	e0 e0       	ldi	r30, 0x00	; 0
-     d30:	fa e0       	ldi	r31, 0x0A	; 10
-     d32:	80 81       	ld	r24, Z
-     d34:	8e 7f       	andi	r24, 0xFE	; 254
-     d36:	80 83       	st	Z, r24
-     d38:	09 c0       	rjmp	.+18     	; 0xd4c <_ZN9OrangeBot5Servo11hal_run_isrEb+0x22>
-     d3a:	e0 e0       	ldi	r30, 0x00	; 0
-     d3c:	fa e0       	ldi	r31, 0x0A	; 10
-     d3e:	87 ea       	ldi	r24, 0xA7	; 167
-     d40:	91 e6       	ldi	r25, 0x61	; 97
-     d42:	86 a3       	std	Z+38, r24	; 0x26
-     d44:	97 a3       	std	Z+39, r25	; 0x27
-     d46:	80 81       	ld	r24, Z
-     d48:	81 60       	ori	r24, 0x01	; 1
-     d4a:	80 83       	st	Z, r24
-     d4c:	80 e0       	ldi	r24, 0x00	; 0
-     d4e:	08 95       	ret
+00000cf2 <_ZN9OrangeBot5Servo4initEv>:
+     cf2:	0f 93       	push	r16
+     cf4:	1f 93       	push	r17
+     cf6:	cf 93       	push	r28
+     cf8:	8c 01       	movw	r16, r24
+     cfa:	0e 94 d3 05 	call	0xba6	; 0xba6 <_ZN9OrangeBot5Servo15init_class_varsEv>
+     cfe:	c8 2f       	mov	r28, r24
+     d00:	88 23       	and	r24, r24
+     d02:	21 f0       	breq	.+8      	; 0xd0c <_ZN9OrangeBot5Servo4initEv+0x1a>
+     d04:	61 e0       	ldi	r22, 0x01	; 1
+     d06:	c8 01       	movw	r24, r16
+     d08:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     d0c:	c8 01       	movw	r24, r16
+     d0e:	0e 94 5a 05 	call	0xab4	; 0xab4 <_ZN9OrangeBot5Servo11hal_init_ioEv>
+     d12:	c8 2b       	or	r28, r24
+     d14:	21 f0       	breq	.+8      	; 0xd1e <_ZN9OrangeBot5Servo4initEv+0x2c>
+     d16:	62 e0       	ldi	r22, 0x02	; 2
+     d18:	c8 01       	movw	r24, r16
+     d1a:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     d1e:	67 ea       	ldi	r22, 0xA7	; 167
+     d20:	71 e6       	ldi	r23, 0x61	; 97
+     d22:	c8 01       	movw	r24, r16
+     d24:	0e 94 7d 05 	call	0xafa	; 0xafa <_ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj>
+     d28:	c8 2b       	or	r28, r24
+     d2a:	21 f0       	breq	.+8      	; 0xd34 <_ZN9OrangeBot5Servo4initEv+0x42>
+     d2c:	63 e0       	ldi	r22, 0x03	; 3
+     d2e:	c8 01       	movw	r24, r16
+     d30:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     d34:	8c 2f       	mov	r24, r28
+     d36:	cf 91       	pop	r28
+     d38:	1f 91       	pop	r17
+     d3a:	0f 91       	pop	r16
+     d3c:	08 95       	ret
 
-00000d50 <_ZN9OrangeBot5Servo15init_class_varsEv>:
-     d50:	cf 93       	push	r28
-     d52:	df 93       	push	r29
-     d54:	cd b7       	in	r28, 0x3d	; 61
-     d56:	de b7       	in	r29, 0x3e	; 62
-     d58:	2d 97       	sbiw	r28, 0x0d	; 13
-     d5a:	cd bf       	out	0x3d, r28	; 61
-     d5c:	de bf       	out	0x3e, r29	; 62
-     d5e:	fc 01       	movw	r30, r24
-     d60:	10 82       	st	Z, r1
-     d62:	13 8e       	std	Z+27, r1	; 0x1b
-     d64:	14 8e       	std	Z+28, r1	; 0x1c
-     d66:	19 82       	std	Y+1, r1	; 0x01
-     d68:	1a 82       	std	Y+2, r1	; 0x02
-     d6a:	1b 82       	std	Y+3, r1	; 0x03
-     d6c:	1c 82       	std	Y+4, r1	; 0x04
-     d6e:	21 e0       	ldi	r18, 0x01	; 1
-     d70:	2d 83       	std	Y+5, r18	; 0x05
-     d72:	2e 83       	std	Y+6, r18	; 0x06
-     d74:	18 86       	std	Y+8, r1	; 0x08
-     d76:	1f 82       	std	Y+7, r1	; 0x07
-     d78:	20 e0       	ldi	r18, 0x00	; 0
-     d7a:	22 30       	cpi	r18, 0x02	; 2
-     d7c:	a0 f4       	brcc	.+40     	; 0xda6 <_ZN9OrangeBot5Servo15init_class_varsEv+0x56>
-     d7e:	a2 2f       	mov	r26, r18
-     d80:	b0 e0       	ldi	r27, 0x00	; 0
-     d82:	aa 0f       	add	r26, r26
-     d84:	bb 1f       	adc	r27, r27
-     d86:	aa 0f       	add	r26, r26
-     d88:	bb 1f       	adc	r27, r27
-     d8a:	aa 0f       	add	r26, r26
-     d8c:	bb 1f       	adc	r27, r27
-     d8e:	a8 0f       	add	r26, r24
-     d90:	b9 1f       	adc	r27, r25
-     d92:	11 96       	adiw	r26, 0x01	; 1
-     d94:	38 e0       	ldi	r19, 0x08	; 8
-     d96:	fe 01       	movw	r30, r28
-     d98:	31 96       	adiw	r30, 0x01	; 1
-     d9a:	01 90       	ld	r0, Z+
-     d9c:	0d 92       	st	X+, r0
-     d9e:	3a 95       	dec	r19
-     da0:	e1 f7       	brne	.-8      	; 0xd9a <_ZN9OrangeBot5Servo15init_class_varsEv+0x4a>
-     da2:	2f 5f       	subi	r18, 0xFF	; 255
-     da4:	ea cf       	rjmp	.-44     	; 0xd7a <_ZN9OrangeBot5Servo15init_class_varsEv+0x2a>
-     da6:	19 86       	std	Y+9, r1	; 0x09
-     da8:	1a 86       	std	Y+10, r1	; 0x0a
-     daa:	1b 86       	std	Y+11, r1	; 0x0b
-     dac:	2c ed       	ldi	r18, 0xDC	; 220
-     dae:	35 e0       	ldi	r19, 0x05	; 5
-     db0:	2c 87       	std	Y+12, r18	; 0x0c
-     db2:	3d 87       	std	Y+13, r19	; 0x0d
-     db4:	40 e0       	ldi	r20, 0x00	; 0
-     db6:	42 30       	cpi	r20, 0x02	; 2
-     db8:	a8 f4       	brcc	.+42     	; 0xde4 <_ZN9OrangeBot5Servo15init_class_varsEv+0x94>
-     dba:	24 2f       	mov	r18, r20
-     dbc:	30 e0       	ldi	r19, 0x00	; 0
-     dbe:	d9 01       	movw	r26, r18
-     dc0:	aa 0f       	add	r26, r26
-     dc2:	bb 1f       	adc	r27, r27
-     dc4:	aa 0f       	add	r26, r26
-     dc6:	bb 1f       	adc	r27, r27
-     dc8:	a2 0f       	add	r26, r18
-     dca:	b3 1f       	adc	r27, r19
-     dcc:	a8 0f       	add	r26, r24
-     dce:	b9 1f       	adc	r27, r25
-     dd0:	51 96       	adiw	r26, 0x11	; 17
-     dd2:	25 e0       	ldi	r18, 0x05	; 5
-     dd4:	fe 01       	movw	r30, r28
-     dd6:	39 96       	adiw	r30, 0x09	; 9
-     dd8:	01 90       	ld	r0, Z+
-     dda:	0d 92       	st	X+, r0
-     ddc:	2a 95       	dec	r18
-     dde:	e1 f7       	brne	.-8      	; 0xdd8 <_ZN9OrangeBot5Servo15init_class_varsEv+0x88>
-     de0:	4f 5f       	subi	r20, 0xFF	; 255
-     de2:	e9 cf       	rjmp	.-46     	; 0xdb6 <_ZN9OrangeBot5Servo15init_class_varsEv+0x66>
-     de4:	80 e0       	ldi	r24, 0x00	; 0
-     de6:	2d 96       	adiw	r28, 0x0d	; 13
-     de8:	cd bf       	out	0x3d, r28	; 61
-     dea:	de bf       	out	0x3e, r29	; 62
-     dec:	df 91       	pop	r29
-     dee:	cf 91       	pop	r28
-     df0:	08 95       	ret
+00000d3e <_ZN9OrangeBot5ServoC1Ev>:
+     d3e:	0e 94 79 06 	call	0xcf2	; 0xcf2 <_ZN9OrangeBot5Servo4initEv>
+     d42:	08 95       	ret
 
-00000df2 <_ZN9OrangeBot5Servo4initEv>:
-     df2:	0f 93       	push	r16
-     df4:	1f 93       	push	r17
-     df6:	cf 93       	push	r28
-     df8:	8c 01       	movw	r16, r24
-     dfa:	0e 94 a8 06 	call	0xd50	; 0xd50 <_ZN9OrangeBot5Servo15init_class_varsEv>
-     dfe:	c8 2f       	mov	r28, r24
-     e00:	c8 01       	movw	r24, r16
-     e02:	0e 94 ed 05 	call	0xbda	; 0xbda <_ZN9OrangeBot5Servo11hal_init_ioEv>
-     e06:	c8 2b       	or	r28, r24
-     e08:	67 ea       	ldi	r22, 0xA7	; 167
-     e0a:	71 e6       	ldi	r23, 0x61	; 97
-     e0c:	c8 01       	movw	r24, r16
-     e0e:	0e 94 10 06 	call	0xc20	; 0xc20 <_ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj>
-     e12:	8c 2b       	or	r24, r28
-     e14:	cf 91       	pop	r28
-     e16:	1f 91       	pop	r17
-     e18:	0f 91       	pop	r16
-     e1a:	08 95       	ret
+00000d44 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>:
+     d44:	0f 93       	push	r16
+     d46:	1f 93       	push	r17
+     d48:	06 2f       	mov	r16, r22
+     d4a:	10 e0       	ldi	r17, 0x00	; 0
+     d4c:	08 30       	cpi	r16, 0x08	; 8
+     d4e:	11 05       	cpc	r17, r1
+     d50:	08 f0       	brcs	.+2      	; 0xd54 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0x10>
+     d52:	63 c0       	rjmp	.+198    	; 0xe1a <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xd6>
+     d54:	f8 01       	movw	r30, r16
+     d56:	e0 5b       	subi	r30, 0xB0	; 176
+     d58:	ff 4f       	sbci	r31, 0xFF	; 255
+     d5a:	0c 94 a2 0a 	jmp	0x1544	; 0x1544 <__tablejump2__>
+     d5e:	e0 e8       	ldi	r30, 0x80	; 128
+     d60:	f4 e0       	ldi	r31, 0x04	; 4
+     d62:	84 81       	ldd	r24, Z+4	; 0x04
+     d64:	8e 7f       	andi	r24, 0xFE	; 254
+     d66:	48 2b       	or	r20, r24
+     d68:	44 83       	std	Z+4, r20	; 0x04
+     d6a:	80 e0       	ldi	r24, 0x00	; 0
+     d6c:	5a c0       	rjmp	.+180    	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     d6e:	e0 e8       	ldi	r30, 0x80	; 128
+     d70:	f4 e0       	ldi	r31, 0x04	; 4
+     d72:	84 81       	ldd	r24, Z+4	; 0x04
+     d74:	50 e0       	ldi	r21, 0x00	; 0
+     d76:	44 0f       	add	r20, r20
+     d78:	55 1f       	adc	r21, r21
+     d7a:	8d 7f       	andi	r24, 0xFD	; 253
+     d7c:	48 2b       	or	r20, r24
+     d7e:	44 83       	std	Z+4, r20	; 0x04
+     d80:	80 e0       	ldi	r24, 0x00	; 0
+     d82:	4f c0       	rjmp	.+158    	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     d84:	e0 e8       	ldi	r30, 0x80	; 128
+     d86:	f4 e0       	ldi	r31, 0x04	; 4
+     d88:	84 81       	ldd	r24, Z+4	; 0x04
+     d8a:	50 e0       	ldi	r21, 0x00	; 0
+     d8c:	44 0f       	add	r20, r20
+     d8e:	55 1f       	adc	r21, r21
+     d90:	44 0f       	add	r20, r20
+     d92:	55 1f       	adc	r21, r21
+     d94:	8b 7f       	andi	r24, 0xFB	; 251
+     d96:	48 2b       	or	r20, r24
+     d98:	44 83       	std	Z+4, r20	; 0x04
+     d9a:	80 e0       	ldi	r24, 0x00	; 0
+     d9c:	42 c0       	rjmp	.+132    	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     d9e:	e0 e8       	ldi	r30, 0x80	; 128
+     da0:	f4 e0       	ldi	r31, 0x04	; 4
+     da2:	84 81       	ldd	r24, Z+4	; 0x04
+     da4:	50 e0       	ldi	r21, 0x00	; 0
+     da6:	44 0f       	add	r20, r20
+     da8:	55 1f       	adc	r21, r21
+     daa:	44 0f       	add	r20, r20
+     dac:	55 1f       	adc	r21, r21
+     dae:	44 0f       	add	r20, r20
+     db0:	55 1f       	adc	r21, r21
+     db2:	87 7f       	andi	r24, 0xF7	; 247
+     db4:	48 2b       	or	r20, r24
+     db6:	44 83       	std	Z+4, r20	; 0x04
+     db8:	80 e0       	ldi	r24, 0x00	; 0
+     dba:	33 c0       	rjmp	.+102    	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     dbc:	e0 ea       	ldi	r30, 0xA0	; 160
+     dbe:	f4 e0       	ldi	r31, 0x04	; 4
+     dc0:	84 81       	ldd	r24, Z+4	; 0x04
+     dc2:	8e 7f       	andi	r24, 0xFE	; 254
+     dc4:	48 2b       	or	r20, r24
+     dc6:	44 83       	std	Z+4, r20	; 0x04
+     dc8:	80 e0       	ldi	r24, 0x00	; 0
+     dca:	2b c0       	rjmp	.+86     	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     dcc:	e0 ea       	ldi	r30, 0xA0	; 160
+     dce:	f4 e0       	ldi	r31, 0x04	; 4
+     dd0:	84 81       	ldd	r24, Z+4	; 0x04
+     dd2:	50 e0       	ldi	r21, 0x00	; 0
+     dd4:	44 0f       	add	r20, r20
+     dd6:	55 1f       	adc	r21, r21
+     dd8:	8d 7f       	andi	r24, 0xFD	; 253
+     dda:	48 2b       	or	r20, r24
+     ddc:	44 83       	std	Z+4, r20	; 0x04
+     dde:	80 e0       	ldi	r24, 0x00	; 0
+     de0:	20 c0       	rjmp	.+64     	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     de2:	e0 ea       	ldi	r30, 0xA0	; 160
+     de4:	f4 e0       	ldi	r31, 0x04	; 4
+     de6:	84 81       	ldd	r24, Z+4	; 0x04
+     de8:	50 e0       	ldi	r21, 0x00	; 0
+     dea:	44 0f       	add	r20, r20
+     dec:	55 1f       	adc	r21, r21
+     dee:	44 0f       	add	r20, r20
+     df0:	55 1f       	adc	r21, r21
+     df2:	8b 7f       	andi	r24, 0xFB	; 251
+     df4:	48 2b       	or	r20, r24
+     df6:	44 83       	std	Z+4, r20	; 0x04
+     df8:	80 e0       	ldi	r24, 0x00	; 0
+     dfa:	13 c0       	rjmp	.+38     	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     dfc:	e0 ea       	ldi	r30, 0xA0	; 160
+     dfe:	f4 e0       	ldi	r31, 0x04	; 4
+     e00:	84 81       	ldd	r24, Z+4	; 0x04
+     e02:	50 e0       	ldi	r21, 0x00	; 0
+     e04:	44 0f       	add	r20, r20
+     e06:	55 1f       	adc	r21, r21
+     e08:	44 0f       	add	r20, r20
+     e0a:	55 1f       	adc	r21, r21
+     e0c:	44 0f       	add	r20, r20
+     e0e:	55 1f       	adc	r21, r21
+     e10:	87 7f       	andi	r24, 0xF7	; 247
+     e12:	48 2b       	or	r20, r24
+     e14:	44 83       	std	Z+4, r20	; 0x04
+     e16:	80 e0       	ldi	r24, 0x00	; 0
+     e18:	04 c0       	rjmp	.+8      	; 0xe22 <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xde>
+     e1a:	64 e0       	ldi	r22, 0x04	; 4
+     e1c:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     e20:	81 e0       	ldi	r24, 0x01	; 1
+     e22:	1f 91       	pop	r17
+     e24:	0f 91       	pop	r16
+     e26:	08 95       	ret
 
-00000e1c <_ZN9OrangeBot5ServoC1Ev>:
-     e1c:	0e 94 f9 06 	call	0xdf2	; 0xdf2 <_ZN9OrangeBot5Servo4initEv>
-     e20:	08 95       	ret
+00000e28 <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj>:
+     e28:	cf 93       	push	r28
+     e2a:	df 93       	push	r29
+     e2c:	ec 01       	movw	r28, r24
+     e2e:	9b 01       	movw	r18, r22
+     e30:	a8 ee       	ldi	r26, 0xE8	; 232
+     e32:	b3 e0       	ldi	r27, 0x03	; 3
+     e34:	0e 94 a8 0a 	call	0x1550	; 0x1550 <__umulhisi3>
+     e38:	20 e2       	ldi	r18, 0x20	; 32
+     e3a:	33 e0       	ldi	r19, 0x03	; 3
+     e3c:	40 e0       	ldi	r20, 0x00	; 0
+     e3e:	50 e0       	ldi	r21, 0x00	; 0
+     e40:	0e 94 80 0a 	call	0x1500	; 0x1500 <__udivmodsi4>
+     e44:	2e 3f       	cpi	r18, 0xFE	; 254
+     e46:	8f ef       	ldi	r24, 0xFF	; 255
+     e48:	38 07       	cpc	r19, r24
+     e4a:	41 05       	cpc	r20, r1
+     e4c:	51 05       	cpc	r21, r1
+     e4e:	38 f0       	brcs	.+14     	; 0xe5e <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj+0x36>
+     e50:	ce 01       	movw	r24, r28
+     e52:	66 e0       	ldi	r22, 0x06	; 6
+     e54:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     e58:	8f ef       	ldi	r24, 0xFF	; 255
+     e5a:	9f ef       	ldi	r25, 0xFF	; 255
+     e5c:	01 c0       	rjmp	.+2      	; 0xe60 <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj+0x38>
+     e5e:	c9 01       	movw	r24, r18
+     e60:	df 91       	pop	r29
+     e62:	cf 91       	pop	r28
+     e64:	08 95       	ret
 
-00000e22 <_ZN9OrangeBot5Servo10soft_startEhhhh>:
+00000e66 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj>:
+     e66:	0f 93       	push	r16
+     e68:	1f 93       	push	r17
+     e6a:	cf 93       	push	r28
+     e6c:	df 93       	push	r29
+     e6e:	ec 01       	movw	r28, r24
+     e70:	cb 01       	movw	r24, r22
+     e72:	8c 54       	subi	r24, 0x4C	; 76
+     e74:	94 40       	sbci	r25, 0x04	; 4
+     e76:	85 3d       	cpi	r24, 0xD5	; 213
+     e78:	99 44       	sbci	r25, 0x49	; 73
+     e7a:	30 f0       	brcs	.+12     	; 0xe88 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x22>
+     e7c:	67 e0       	ldi	r22, 0x07	; 7
+     e7e:	ce 01       	movw	r24, r28
+     e80:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     e84:	81 e0       	ldi	r24, 0x01	; 1
+     e86:	28 c0       	rjmp	.+80     	; 0xed8 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x72>
+     e88:	e0 e0       	ldi	r30, 0x00	; 0
+     e8a:	fa e0       	ldi	r31, 0x0A	; 10
+     e8c:	80 81       	ld	r24, Z
+     e8e:	8e 7f       	andi	r24, 0xFE	; 254
+     e90:	80 83       	st	Z, r24
+     e92:	00 a1       	ldd	r16, Z+32	; 0x20
+     e94:	11 a1       	ldd	r17, Z+33	; 0x21
+     e96:	ce 01       	movw	r24, r28
+     e98:	0e 94 14 07 	call	0xe28	; 0xe28 <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj>
+     e9c:	9c 01       	movw	r18, r24
+     e9e:	21 50       	subi	r18, 0x01	; 1
+     ea0:	31 09       	sbc	r19, r1
+     ea2:	2e 3f       	cpi	r18, 0xFE	; 254
+     ea4:	4f ef       	ldi	r20, 0xFF	; 255
+     ea6:	34 07       	cpc	r19, r20
+     ea8:	30 f0       	brcs	.+12     	; 0xeb6 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x50>
+     eaa:	66 e0       	ldi	r22, 0x06	; 6
+     eac:	ce 01       	movw	r24, r28
+     eae:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     eb2:	81 e0       	ldi	r24, 0x01	; 1
+     eb4:	11 c0       	rjmp	.+34     	; 0xed8 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x72>
+     eb6:	08 17       	cp	r16, r24
+     eb8:	19 07       	cpc	r17, r25
+     eba:	30 f0       	brcs	.+12     	; 0xec8 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x62>
+     ebc:	65 e0       	ldi	r22, 0x05	; 5
+     ebe:	ce 01       	movw	r24, r28
+     ec0:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+     ec4:	81 e0       	ldi	r24, 0x01	; 1
+     ec6:	08 c0       	rjmp	.+16     	; 0xed8 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x72>
+     ec8:	e0 e0       	ldi	r30, 0x00	; 0
+     eca:	fa e0       	ldi	r31, 0x0A	; 10
+     ecc:	26 a3       	std	Z+38, r18	; 0x26
+     ece:	37 a3       	std	Z+39, r19	; 0x27
+     ed0:	80 81       	ld	r24, Z
+     ed2:	81 60       	ori	r24, 0x01	; 1
+     ed4:	80 83       	st	Z, r24
+     ed6:	80 e0       	ldi	r24, 0x00	; 0
+     ed8:	df 91       	pop	r29
+     eda:	cf 91       	pop	r28
+     edc:	1f 91       	pop	r17
+     ede:	0f 91       	pop	r16
+     ee0:	08 95       	ret
+
+00000ee2 <_ZN9OrangeBot5Servo10soft_startEhhhh>:
 //!	\n	Blocking hardwired version of the soft start method using delay and direct control of IOs
 //!	\n	@TODO: I can use TCA0 to emit pulses to EVOUTD in PWM mode for the soft start
 /***************************************************************************/
 
 bool Servo::soft_start( uint8_t iu8_ton, uint8_t iu8_toff, uint8_t iu8_treduce, uint8_t iu8_repeat )
 {
-     e22:	bf 92       	push	r11
-     e24:	cf 92       	push	r12
-     e26:	df 92       	push	r13
-     e28:	ef 92       	push	r14
-     e2a:	ff 92       	push	r15
-     e2c:	0f 93       	push	r16
-     e2e:	1f 93       	push	r17
-     e30:	cf 93       	push	r28
-     e32:	df 93       	push	r29
-     e34:	7c 01       	movw	r14, r24
-     e36:	16 2f       	mov	r17, r22
-     e38:	d4 2f       	mov	r29, r20
-     e3a:	c2 2e       	mov	r12, r18
+     ee2:	bf 92       	push	r11
+     ee4:	cf 92       	push	r12
+     ee6:	df 92       	push	r13
+     ee8:	ef 92       	push	r14
+     eea:	ff 92       	push	r15
+     eec:	0f 93       	push	r16
+     eee:	1f 93       	push	r17
+     ef0:	cf 93       	push	r28
+     ef2:	df 93       	push	r29
+     ef4:	7c 01       	movw	r14, r24
+     ef6:	16 2f       	mov	r17, r22
+     ef8:	d4 2f       	mov	r29, r20
+     efa:	c2 2e       	mov	r12, r18
 	//----------------------------------------------------------------
 	//	VARS
 	//----------------------------------------------------------------
 
 	bool u1_continue = true;
-     e3c:	bb 24       	eor	r11, r11
-     e3e:	b3 94       	inc	r11
+     efc:	bb 24       	eor	r11, r11
+     efe:	b3 94       	inc	r11
 	//----------------------------------------------------------------
 	//	BODY
 	//----------------------------------------------------------------
 
 	//While not done
 	while (u1_continue == true)
-     e40:	bb 20       	and	r11, r11
-     e42:	49 f1       	breq	.+82     	; 0xe96 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x74>
+     f00:	bb 20       	and	r11, r11
+     f02:	49 f1       	breq	.+82     	; 0xf56 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x74>
 	{
 		//if: there is room to reduce Toff
 		if (iu8_toff > iu8_treduce)
-     e44:	cd 16       	cp	r12, r29
-     e46:	08 f5       	brcc	.+66     	; 0xe8a <_ZN9OrangeBot5Servo10soft_startEhhhh+0x68>
-     e48:	d1 2c       	mov	r13, r1
+     f04:	cd 16       	cp	r12, r29
+     f06:	08 f5       	brcc	.+66     	; 0xf4a <_ZN9OrangeBot5Servo10soft_startEhhhh+0x68>
+     f08:	d1 2c       	mov	r13, r1
 		{
 			//For each repeat
 			for (uint8_t u8_tmp = 0; u8_tmp < iu8_repeat; u8_tmp++)
-     e4a:	d0 16       	cp	r13, r16
-     e4c:	d8 f4       	brcc	.+54     	; 0xe84 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x62>
+     f0a:	d0 16       	cp	r13, r16
+     f0c:	d8 f4       	brcc	.+54     	; 0xf44 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x62>
 			{
 				//Power on
 				CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
-     e4e:	e0 e6       	ldi	r30, 0x60	; 96
-     e50:	f4 e0       	ldi	r31, 0x04	; 4
-     e52:	84 81       	ldd	r24, Z+4	; 0x04
-     e54:	8f 77       	andi	r24, 0x7F	; 127
-     e56:	84 83       	std	Z+4, r24	; 0x04
+     f0e:	e0 e6       	ldi	r30, 0x60	; 96
+     f10:	f4 e0       	ldi	r31, 0x04	; 4
+     f12:	84 81       	ldd	r24, Z+4	; 0x04
+     f14:	8f 77       	andi	r24, 0x7F	; 127
+     f16:	84 83       	std	Z+4, r24	; 0x04
 				
 				for (uint8_t u8_tmp_b = 0; u8_tmp_b < iu8_ton; u8_tmp_b++)
-     e58:	c0 e0       	ldi	r28, 0x00	; 0
-     e5a:	c1 17       	cp	r28, r17
-     e5c:	28 f4       	brcc	.+10     	; 0xe68 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x46>
+     f18:	c0 e0       	ldi	r28, 0x00	; 0
+     f1a:	c1 17       	cp	r28, r17
+     f1c:	28 f4       	brcc	.+10     	; 0xf28 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x46>
 				{
 					this->hal_delay_us();
-     e5e:	c7 01       	movw	r24, r14
-     e60:	0e 94 3e 06 	call	0xc7c	; 0xc7c <_ZN9OrangeBot5Servo12hal_delay_usEv>
+     f1e:	c7 01       	movw	r24, r14
+     f20:	0e 94 ab 05 	call	0xb56	; 0xb56 <_ZN9OrangeBot5Servo12hal_delay_usEv>
 			for (uint8_t u8_tmp = 0; u8_tmp < iu8_repeat; u8_tmp++)
 			{
 				//Power on
 				CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
 				
 				for (uint8_t u8_tmp_b = 0; u8_tmp_b < iu8_ton; u8_tmp_b++)
-     e64:	cf 5f       	subi	r28, 0xFF	; 255
-     e66:	f9 cf       	rjmp	.-14     	; 0xe5a <_ZN9OrangeBot5Servo10soft_startEhhhh+0x38>
+     f24:	cf 5f       	subi	r28, 0xFF	; 255
+     f26:	f9 cf       	rjmp	.-14     	; 0xf1a <_ZN9OrangeBot5Servo10soft_startEhhhh+0x38>
 				{
 					this->hal_delay_us();
 				}
 				
 				//Power Off
 				this -> hal_power( false );
-     e68:	60 e0       	ldi	r22, 0x00	; 0
-     e6a:	c7 01       	movw	r24, r14
-     e6c:	0e 94 86 06 	call	0xd0c	; 0xd0c <_ZN9OrangeBot5Servo9hal_powerEb>
+     f28:	60 e0       	ldi	r22, 0x00	; 0
+     f2a:	c7 01       	movw	r24, r14
+     f2c:	0e 94 b1 05 	call	0xb62	; 0xb62 <_ZN9OrangeBot5Servo9hal_powerEb>
 				
 				//Wait
 				for (uint8_t u8_tmp_b = 0; u8_tmp_b < iu8_toff; u8_tmp_b++)
-     e70:	c0 e0       	ldi	r28, 0x00	; 0
-     e72:	cd 17       	cp	r28, r29
-     e74:	28 f4       	brcc	.+10     	; 0xe80 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x5e>
+     f30:	c0 e0       	ldi	r28, 0x00	; 0
+     f32:	cd 17       	cp	r28, r29
+     f34:	28 f4       	brcc	.+10     	; 0xf40 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x5e>
 				{
 					this->hal_delay_us();
-     e76:	c7 01       	movw	r24, r14
-     e78:	0e 94 3e 06 	call	0xc7c	; 0xc7c <_ZN9OrangeBot5Servo12hal_delay_usEv>
+     f36:	c7 01       	movw	r24, r14
+     f38:	0e 94 ab 05 	call	0xb56	; 0xb56 <_ZN9OrangeBot5Servo12hal_delay_usEv>
 				
 				//Power Off
 				this -> hal_power( false );
 				
 				//Wait
 				for (uint8_t u8_tmp_b = 0; u8_tmp_b < iu8_toff; u8_tmp_b++)
-     e7c:	cf 5f       	subi	r28, 0xFF	; 255
-     e7e:	f9 cf       	rjmp	.-14     	; 0xe72 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x50>
+     f3c:	cf 5f       	subi	r28, 0xFF	; 255
+     f3e:	f9 cf       	rjmp	.-14     	; 0xf32 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x50>
 	{
 		//if: there is room to reduce Toff
 		if (iu8_toff > iu8_treduce)
 		{
 			//For each repeat
 			for (uint8_t u8_tmp = 0; u8_tmp < iu8_repeat; u8_tmp++)
-     e80:	d3 94       	inc	r13
-     e82:	e3 cf       	rjmp	.-58     	; 0xe4a <_ZN9OrangeBot5Servo10soft_startEhhhh+0x28>
+     f40:	d3 94       	inc	r13
+     f42:	e3 cf       	rjmp	.-58     	; 0xf0a <_ZN9OrangeBot5Servo10soft_startEhhhh+0x28>
 					this->hal_delay_us();
 				}
 			}
 			
 			//Increase Ton
 			iu8_ton = iu8_ton+iu8_treduce;
-     e84:	1c 0d       	add	r17, r12
+     f44:	1c 0d       	add	r17, r12
 			//Reduce Toff
 			iu8_toff = iu8_toff-iu8_treduce;
-     e86:	dc 19       	sub	r29, r12
-     e88:	db cf       	rjmp	.-74     	; 0xe40 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x1e>
+     f46:	dc 19       	sub	r29, r12
+     f48:	db cf       	rjmp	.-74     	; 0xf00 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x1e>
 		}
 		//if: Reached Toff = 0
 		else
 		{
 			//Power on
 			this -> hal_power( true );
-     e8a:	61 e0       	ldi	r22, 0x01	; 1
-     e8c:	c7 01       	movw	r24, r14
-     e8e:	0e 94 86 06 	call	0xd0c	; 0xd0c <_ZN9OrangeBot5Servo9hal_powerEb>
+     f4a:	61 e0       	ldi	r22, 0x01	; 1
+     f4c:	c7 01       	movw	r24, r14
+     f4e:	0e 94 b1 05 	call	0xb62	; 0xb62 <_ZN9OrangeBot5Servo9hal_powerEb>
 			//Break cycle
 			u1_continue = false;
-     e92:	b1 2c       	mov	r11, r1
-     e94:	d5 cf       	rjmp	.-86     	; 0xe40 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x1e>
+     f52:	b1 2c       	mov	r11, r1
+     f54:	d5 cf       	rjmp	.-86     	; 0xf00 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x1e>
 	//----------------------------------------------------------------
 	//	RETURN
 	//----------------------------------------------------------------
 	
 	return false;	//OK
 }	//End private method: soft_start | uint8_t | uint8_t | uint8_t | uint8_t
-     e96:	80 e0       	ldi	r24, 0x00	; 0
-     e98:	df 91       	pop	r29
-     e9a:	cf 91       	pop	r28
-     e9c:	1f 91       	pop	r17
-     e9e:	0f 91       	pop	r16
-     ea0:	ff 90       	pop	r15
-     ea2:	ef 90       	pop	r14
-     ea4:	df 90       	pop	r13
-     ea6:	cf 90       	pop	r12
-     ea8:	bf 90       	pop	r11
-     eaa:	08 95       	ret
+     f56:	80 e0       	ldi	r24, 0x00	; 0
+     f58:	df 91       	pop	r29
+     f5a:	cf 91       	pop	r28
+     f5c:	1f 91       	pop	r17
+     f5e:	0f 91       	pop	r16
+     f60:	ff 90       	pop	r15
+     f62:	ef 90       	pop	r14
+     f64:	df 90       	pop	r13
+     f66:	cf 90       	pop	r12
+     f68:	bf 90       	pop	r11
+     f6a:	08 95       	ret
 
-00000eac <_ZN9OrangeBot5Servo5powerEb>:
+00000f6c <_ZN9OrangeBot5Servo5powerEb>:
 //! \n	power the servomotors
 //! \n	starts the ISR driver to scan the servos
 /***************************************************************************/
 
 bool Servo::power( bool iu1_powered )
 {
-     eac:	0f 93       	push	r16
-     eae:	1f 93       	push	r17
-     eb0:	cf 93       	push	r28
-     eb2:	df 93       	push	r29
-     eb4:	ec 01       	movw	r28, r24
+     f6c:	0f 93       	push	r16
+     f6e:	1f 93       	push	r17
+     f70:	cf 93       	push	r28
+     f72:	df 93       	push	r29
+     f74:	ec 01       	movw	r28, r24
 	///--------------------------------------------------------------------------
 	///	BODY
 	///--------------------------------------------------------------------------
 
 	//SERVO OFF
 	if (iu1_powered == false)
-     eb6:	61 11       	cpse	r22, r1
-     eb8:	08 c0       	rjmp	.+16     	; 0xeca <_ZN9OrangeBot5Servo5powerEb+0x1e>
+     f76:	61 11       	cpse	r22, r1
+     f78:	08 c0       	rjmp	.+16     	; 0xf8a <_ZN9OrangeBot5Servo5powerEb+0x1e>
 	{
 		//Turn off SERVO bank
 		u1_ret = this -> hal_power( false );
-     eba:	0e 94 86 06 	call	0xd0c	; 0xd0c <_ZN9OrangeBot5Servo9hal_powerEb>
-     ebe:	18 2f       	mov	r17, r24
+     f7a:	0e 94 b1 05 	call	0xb62	; 0xb62 <_ZN9OrangeBot5Servo9hal_powerEb>
+     f7e:	18 2f       	mov	r17, r24
 		//Stop the ISR
 		this ->hal_run_isr( false );
-     ec0:	60 e0       	ldi	r22, 0x00	; 0
-     ec2:	ce 01       	movw	r24, r28
-     ec4:	0e 94 95 06 	call	0xd2a	; 0xd2a <_ZN9OrangeBot5Servo11hal_run_isrEb>
-     ec8:	0b c0       	rjmp	.+22     	; 0xee0 <_ZN9OrangeBot5Servo5powerEb+0x34>
+     f80:	60 e0       	ldi	r22, 0x00	; 0
+     f82:	ce 01       	movw	r24, r28
+     f84:	0e 94 c0 05 	call	0xb80	; 0xb80 <_ZN9OrangeBot5Servo11hal_run_isrEb>
+     f88:	0b c0       	rjmp	.+22     	; 0xfa0 <_ZN9OrangeBot5Servo5powerEb+0x34>
 	}
 	//SERVO ON
 	else
 	{
 		//Use a blocking soft start delay based routine
 		u1_ret = this -> soft_start( Config::SOFT_START_TON, Config::SOFT_START_TOFF, Config::SOFT_START_TREDUCE, Config::SOFT_START_REPEAT );
-     eca:	02 e0       	ldi	r16, 0x02	; 2
-     ecc:	21 e0       	ldi	r18, 0x01	; 1
-     ece:	44 e6       	ldi	r20, 0x64	; 100
-     ed0:	6a e0       	ldi	r22, 0x0A	; 10
-     ed2:	0e 94 11 07 	call	0xe22	; 0xe22 <_ZN9OrangeBot5Servo10soft_startEhhhh>
-     ed6:	18 2f       	mov	r17, r24
+     f8a:	02 e0       	ldi	r16, 0x02	; 2
+     f8c:	21 e0       	ldi	r18, 0x01	; 1
+     f8e:	44 e6       	ldi	r20, 0x64	; 100
+     f90:	6a e0       	ldi	r22, 0x0A	; 10
+     f92:	0e 94 71 07 	call	0xee2	; 0xee2 <_ZN9OrangeBot5Servo10soft_startEhhhh>
+     f96:	18 2f       	mov	r17, r24
 		//Start the ISR
 		this -> hal_run_isr( true );
-     ed8:	61 e0       	ldi	r22, 0x01	; 1
-     eda:	ce 01       	movw	r24, r28
-     edc:	0e 94 95 06 	call	0xd2a	; 0xd2a <_ZN9OrangeBot5Servo11hal_run_isrEb>
+     f98:	61 e0       	ldi	r22, 0x01	; 1
+     f9a:	ce 01       	movw	r24, r28
+     f9c:	0e 94 c0 05 	call	0xb80	; 0xb80 <_ZN9OrangeBot5Servo11hal_run_isrEb>
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
 	DRETURN_ARG("Success: %d", u1_ret); //Trace Return
 	return u1_ret;	//Propagate Error
 }   //end public method: power | void
-     ee0:	81 2f       	mov	r24, r17
-     ee2:	df 91       	pop	r29
-     ee4:	cf 91       	pop	r28
-     ee6:	1f 91       	pop	r17
-     ee8:	0f 91       	pop	r16
-     eea:	08 95       	ret
+     fa0:	81 2f       	mov	r24, r17
+     fa2:	df 91       	pop	r29
+     fa4:	cf 91       	pop	r28
+     fa6:	1f 91       	pop	r17
+     fa8:	0f 91       	pop	r16
+     faa:	08 95       	ret
 
-00000eec <_ZN9OrangeBot5Servo14clear_servo_ioEv>:
+00000fac <_ZN9OrangeBot5Servo14clear_servo_ioEv>:
 //! @details
 //! \n Clear all servo IO lines
 /***************************************************************************/
 
 bool Servo::clear_servo_io( void )
 {
-     eec:	0f 93       	push	r16
-     eee:	1f 93       	push	r17
-     ef0:	cf 93       	push	r28
-     ef2:	df 93       	push	r29
-     ef4:	8c 01       	movw	r16, r24
+     fac:	0f 93       	push	r16
+     fae:	1f 93       	push	r17
+     fb0:	cf 93       	push	r28
+     fb2:	df 93       	push	r29
+     fb4:	8c 01       	movw	r16, r24
 	///--------------------------------------------------------------------------
 
 	//Clear error
 	bool u1_ret = false;
 	//For all servos
 	for (uint8_t u8_cnt = 0; u8_cnt < Config::NUM_SERVOS; u8_cnt++)
-     ef6:	c0 e0       	ldi	r28, 0x00	; 0
+     fb6:	c0 e0       	ldi	r28, 0x00	; 0
 	///--------------------------------------------------------------------------
 	///	BODY
 	///--------------------------------------------------------------------------
 
 	//Clear error
 	bool u1_ret = false;
-     ef8:	d0 e0       	ldi	r29, 0x00	; 0
+     fb8:	d0 e0       	ldi	r29, 0x00	; 0
 	//For all servos
 	for (uint8_t u8_cnt = 0; u8_cnt < Config::NUM_SERVOS; u8_cnt++)
-     efa:	c2 30       	cpi	r28, 0x02	; 2
-     efc:	40 f4       	brcc	.+16     	; 0xf0e <_ZN9OrangeBot5Servo14clear_servo_ioEv+0x22>
+     fba:	c2 30       	cpi	r28, 0x02	; 2
+     fbc:	40 f4       	brcc	.+16     	; 0xfce <_ZN9OrangeBot5Servo14clear_servo_ioEv+0x22>
 	{
 		//Try and clear that servo IO and accumulate error
 		u1_ret |= this -> hal_servo_io( u8_cnt, false );
-     efe:	40 e0       	ldi	r20, 0x00	; 0
-     f00:	6c 2f       	mov	r22, r28
-     f02:	c8 01       	movw	r24, r16
-     f04:	0e 94 82 05 	call	0xb04	; 0xb04 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
-     f08:	d8 2b       	or	r29, r24
+     fbe:	40 e0       	ldi	r20, 0x00	; 0
+     fc0:	6c 2f       	mov	r22, r28
+     fc2:	c8 01       	movw	r24, r16
+     fc4:	0e 94 a2 06 	call	0xd44	; 0xd44 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
+     fc8:	d8 2b       	or	r29, r24
 	///--------------------------------------------------------------------------
 
 	//Clear error
 	bool u1_ret = false;
 	//For all servos
 	for (uint8_t u8_cnt = 0; u8_cnt < Config::NUM_SERVOS; u8_cnt++)
-     f0a:	cf 5f       	subi	r28, 0xFF	; 255
-     f0c:	f6 cf       	rjmp	.-20     	; 0xefa <_ZN9OrangeBot5Servo14clear_servo_ioEv+0xe>
+     fca:	cf 5f       	subi	r28, 0xFF	; 255
+     fcc:	f6 cf       	rjmp	.-20     	; 0xfba <_ZN9OrangeBot5Servo14clear_servo_ioEv+0xe>
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
 	DRETURN_ARG("fail? %d\n", u1_ret); //Trace Return
 	return u1_ret;	//Propagate error
 }   //end private method: clear_servo_io | void
-     f0e:	8d 2f       	mov	r24, r29
-     f10:	df 91       	pop	r29
-     f12:	cf 91       	pop	r28
-     f14:	1f 91       	pop	r17
-     f16:	0f 91       	pop	r16
-     f18:	08 95       	ret
+     fce:	8d 2f       	mov	r24, r29
+     fd0:	df 91       	pop	r29
+     fd2:	cf 91       	pop	r28
+     fd4:	1f 91       	pop	r17
+     fd6:	0f 91       	pop	r16
+     fd8:	08 95       	ret
 
-00000f1a <_ZN9OrangeBot5Servo14emergency_stopEv>:
+00000fda <_ZN9OrangeBot5Servo14emergency_stopEv>:
 //! @details
 //! \n Stop driver. Clear IO lines. Reinitialize class vars.
 /***************************************************************************/
 
 bool Servo::emergency_stop( void )
 {
-     f1a:	0f 93       	push	r16
-     f1c:	1f 93       	push	r17
-     f1e:	cf 93       	push	r28
-     f20:	8c 01       	movw	r16, r24
+     fda:	0f 93       	push	r16
+     fdc:	1f 93       	push	r17
+     fde:	cf 93       	push	r28
+     fe0:	8c 01       	movw	r16, r24
 	///--------------------------------------------------------------------------
 
 	//Initialize error to OK
 	bool u1_ret = false;
 	//Stop timer
 	u1_ret |= this -> hal_run_isr( false );
-     f22:	60 e0       	ldi	r22, 0x00	; 0
-     f24:	0e 94 95 06 	call	0xd2a	; 0xd2a <_ZN9OrangeBot5Servo11hal_run_isrEb>
-     f28:	c8 2f       	mov	r28, r24
+     fe2:	60 e0       	ldi	r22, 0x00	; 0
+     fe4:	0e 94 c0 05 	call	0xb80	; 0xb80 <_ZN9OrangeBot5Servo11hal_run_isrEb>
+     fe8:	c8 2f       	mov	r28, r24
 	//Clear servo IOs
 	u1_ret |= this -> clear_servo_io();
-     f2a:	c8 01       	movw	r24, r16
-     f2c:	0e 94 76 07 	call	0xeec	; 0xeec <_ZN9OrangeBot5Servo14clear_servo_ioEv>
-     f30:	c8 2b       	or	r28, r24
+     fea:	c8 01       	movw	r24, r16
+     fec:	0e 94 d6 07 	call	0xfac	; 0xfac <_ZN9OrangeBot5Servo14clear_servo_ioEv>
+     ff0:	c8 2b       	or	r28, r24
 	//Reinitialize class vars (except error)
 	u1_ret |= this -> init_class_vars();
-     f32:	c8 01       	movw	r24, r16
-     f34:	0e 94 a8 06 	call	0xd50	; 0xd50 <_ZN9OrangeBot5Servo15init_class_varsEv>
+     ff2:	c8 01       	movw	r24, r16
+     ff4:	0e 94 d3 05 	call	0xba6	; 0xba6 <_ZN9OrangeBot5Servo15init_class_varsEv>
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
 	DRETURN_ARG("Fail? %d\n", u1_ret); //Trace Return
 	return u1_ret;	//Propagate error
 }   //end private method: emergency_stop | void
-     f38:	8c 2b       	or	r24, r28
-     f3a:	cf 91       	pop	r28
-     f3c:	1f 91       	pop	r17
-     f3e:	0f 91       	pop	r16
-     f40:	08 95       	ret
+     ff8:	8c 2b       	or	r24, r28
+     ffa:	cf 91       	pop	r28
+     ffc:	1f 91       	pop	r17
+     ffe:	0f 91       	pop	r16
+    1000:	08 95       	ret
 
-00000f42 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj>:
+00001002 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj>:
 //! @details
 //! \n The driver uses command position and speed, and actual delay, to compute next delay
 /***************************************************************************/
 
 bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 {
-     f42:	cf 93       	push	r28
-     f44:	df 93       	push	r29
-     f46:	fc 01       	movw	r30, r24
+    1002:	ef 92       	push	r14
+    1004:	ff 92       	push	r15
+    1006:	1f 93       	push	r17
+    1008:	cf 93       	push	r28
+    100a:	df 93       	push	r29
+    100c:	ec 01       	movw	r28, r24
+    100e:	7a 01       	movw	r14, r20
 	///--------------------------------------------------------------------------
 	///	CHECK
 	///--------------------------------------------------------------------------
 
 	//If Servo index is OOB
 	if ((Config::PEDANTIC_CHECKS == true) && ((iu8_index < 0) || (iu8_index >= Config::NUM_SERVOS)))
-     f48:	62 30       	cpi	r22, 0x02	; 2
-     f4a:	38 f0       	brcs	.+14     	; 0xf5a <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x18>
+    1010:	62 30       	cpi	r22, 0x02	; 2
+    1012:	50 f0       	brcs	.+20     	; 0x1028 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x26>
 	{
 		this -> report_error( Error_code::ERR_INPUT_OOB );
+    1014:	67 e0       	ldi	r22, 0x07	; 7
+    1016:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
 		ou16_delay = Config::HAL_TIMER_MAX_CNT;
-     f4c:	8e ef       	ldi	r24, 0xFE	; 254
-     f4e:	9f ef       	ldi	r25, 0xFF	; 255
-     f50:	fa 01       	movw	r30, r20
-     f52:	80 83       	st	Z, r24
-     f54:	91 83       	std	Z+1, r25	; 0x01
+    101a:	8f ef       	ldi	r24, 0xFF	; 255
+    101c:	9f ef       	ldi	r25, 0xFF	; 255
+    101e:	f7 01       	movw	r30, r14
+    1020:	80 83       	st	Z, r24
+    1022:	91 83       	std	Z+1, r25	; 0x01
 		return true;
-     f56:	81 e0       	ldi	r24, 0x01	; 1
-     f58:	bf c0       	rjmp	.+382    	; 0x10d8 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x196>
+    1024:	11 e0       	ldi	r17, 0x01	; 1
+    1026:	b7 c1       	rjmp	.+878    	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
 	///	COMMAND -> STATUS
 	///--------------------------------------------------------------------------
 	//	The driver check if command has changed and saves the vars inside the timer status vars
 
 	//If command position changed
 	if (gast_command[iu8_index].u1_position_changed == true)
-     f5a:	70 e0       	ldi	r23, 0x00	; 0
-     f5c:	db 01       	movw	r26, r22
-     f5e:	aa 0f       	add	r26, r26
-     f60:	bb 1f       	adc	r27, r27
-     f62:	aa 0f       	add	r26, r26
-     f64:	bb 1f       	adc	r27, r27
-     f66:	aa 0f       	add	r26, r26
-     f68:	bb 1f       	adc	r27, r27
-     f6a:	a8 0f       	add	r26, r24
-     f6c:	b9 1f       	adc	r27, r25
-     f6e:	15 96       	adiw	r26, 0x05	; 5
-     f70:	8c 91       	ld	r24, X
-     f72:	88 23       	and	r24, r24
-     f74:	71 f1       	breq	.+92     	; 0xfd2 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x90>
+    1028:	46 2f       	mov	r20, r22
+    102a:	50 e0       	ldi	r21, 0x00	; 0
+    102c:	fa 01       	movw	r30, r20
+    102e:	ee 0f       	add	r30, r30
+    1030:	ff 1f       	adc	r31, r31
+    1032:	ee 0f       	add	r30, r30
+    1034:	ff 1f       	adc	r31, r31
+    1036:	ee 0f       	add	r30, r30
+    1038:	ff 1f       	adc	r31, r31
+    103a:	e8 0f       	add	r30, r24
+    103c:	f9 1f       	adc	r31, r25
+    103e:	15 81       	ldd	r17, Z+5	; 0x05
+    1040:	11 23       	and	r17, r17
+    1042:	91 f1       	breq	.+100    	; 0x10a8 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0xa6>
 	{
 		//Fetch position
 		int16_t s16_tmp = gast_command[iu8_index].s16_position;
-     f76:	db 01       	movw	r26, r22
-     f78:	aa 0f       	add	r26, r26
-     f7a:	bb 1f       	adc	r27, r27
-     f7c:	aa 0f       	add	r26, r26
-     f7e:	bb 1f       	adc	r27, r27
-     f80:	aa 0f       	add	r26, r26
-     f82:	bb 1f       	adc	r27, r27
-     f84:	ae 0f       	add	r26, r30
-     f86:	bf 1f       	adc	r27, r31
-     f88:	11 96       	adiw	r26, 0x01	; 1
-     f8a:	2d 91       	ld	r18, X+
-     f8c:	3c 91       	ld	r19, X
-     f8e:	12 97       	sbiw	r26, 0x02	; 2
+    1044:	fa 01       	movw	r30, r20
+    1046:	ee 0f       	add	r30, r30
+    1048:	ff 1f       	adc	r31, r31
+    104a:	ee 0f       	add	r30, r30
+    104c:	ff 1f       	adc	r31, r31
+    104e:	ee 0f       	add	r30, r30
+    1050:	ff 1f       	adc	r31, r31
+    1052:	e8 0f       	add	r30, r24
+    1054:	f9 1f       	adc	r31, r25
+    1056:	81 81       	ldd	r24, Z+1	; 0x01
+    1058:	92 81       	ldd	r25, Z+2	; 0x02
 		if ((Config::PEDANTIC_CHECKS == true) && ( (s16_tmp < -(int16_t)Config::SERVO_PPM_MAX_COMMAND) || (s16_tmp > (int16_t)Config::SERVO_PPM_MAX_COMMAND) ))
-     f90:	d9 01       	movw	r26, r18
-     f92:	a0 57       	subi	r26, 0x70	; 112
-     f94:	be 4f       	sbci	r27, 0xFE	; 254
-     f96:	a1 32       	cpi	r26, 0x21	; 33
-     f98:	b3 40       	sbci	r27, 0x03	; 3
-     f9a:	08 f0       	brcs	.+2      	; 0xf9e <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x5c>
-     f9c:	9d c0       	rjmp	.+314    	; 0x10d8 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x196>
+    105a:	9c 01       	movw	r18, r24
+    105c:	20 57       	subi	r18, 0x70	; 112
+    105e:	3e 4f       	sbci	r19, 0xFE	; 254
+    1060:	21 32       	cpi	r18, 0x21	; 33
+    1062:	33 40       	sbci	r19, 0x03	; 3
+    1064:	50 f0       	brcs	.+20     	; 0x107a <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x78>
+		{
 			//Algorithmic error. The class should make sure that user can't write bollocks inside the position
 			this -> report_error( Error_code::ERR_ALGORITHM );
+    1066:	68 e0       	ldi	r22, 0x08	; 8
+    1068:	ce 01       	movw	r24, r28
+    106a:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+			ou16_delay = Config::HAL_TIMER_MAX_CNT;
+    106e:	8f ef       	ldi	r24, 0xFF	; 255
+    1070:	9f ef       	ldi	r25, 0xFF	; 255
+    1072:	f7 01       	movw	r30, r14
+    1074:	80 83       	st	Z, r24
+    1076:	91 83       	std	Z+1, r25	; 0x01
 			return true;
+    1078:	8e c1       	rjmp	.+796    	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
 		}
 		//The target delay is the delay to achieve zero position plus the deviation
 		gast_timer[iu8_index].u16_target = Config::SERVO_PPM_ZERO +s16_tmp;
-     f9e:	24 52       	subi	r18, 0x24	; 36
-     fa0:	3a 4f       	sbci	r19, 0xFA	; 250
-     fa2:	db 01       	movw	r26, r22
-     fa4:	aa 0f       	add	r26, r26
-     fa6:	bb 1f       	adc	r27, r27
-     fa8:	aa 0f       	add	r26, r26
-     faa:	bb 1f       	adc	r27, r27
-     fac:	a6 0f       	add	r26, r22
-     fae:	b7 1f       	adc	r27, r23
-     fb0:	ae 0f       	add	r26, r30
-     fb2:	bf 1f       	adc	r27, r31
-     fb4:	51 96       	adiw	r26, 0x11	; 17
-     fb6:	2d 93       	st	X+, r18
-     fb8:	3c 93       	st	X, r19
-     fba:	52 97       	sbiw	r26, 0x12	; 18
+    107a:	84 52       	subi	r24, 0x24	; 36
+    107c:	9a 4f       	sbci	r25, 0xFA	; 250
+    107e:	fa 01       	movw	r30, r20
+    1080:	ee 0f       	add	r30, r30
+    1082:	ff 1f       	adc	r31, r31
+    1084:	ee 0f       	add	r30, r30
+    1086:	ff 1f       	adc	r31, r31
+    1088:	e4 0f       	add	r30, r20
+    108a:	f5 1f       	adc	r31, r21
+    108c:	ec 0f       	add	r30, r28
+    108e:	fd 1f       	adc	r31, r29
+    1090:	81 8b       	std	Z+17, r24	; 0x11
+    1092:	92 8b       	std	Z+18, r25	; 0x12
 		//status and command are synced
 		gast_command[iu8_index].u1_position_changed = false;
-     fbc:	db 01       	movw	r26, r22
-     fbe:	aa 0f       	add	r26, r26
-     fc0:	bb 1f       	adc	r27, r27
-     fc2:	aa 0f       	add	r26, r26
-     fc4:	bb 1f       	adc	r27, r27
-     fc6:	aa 0f       	add	r26, r26
-     fc8:	bb 1f       	adc	r27, r27
-     fca:	ae 0f       	add	r26, r30
-     fcc:	bf 1f       	adc	r27, r31
-     fce:	15 96       	adiw	r26, 0x05	; 5
-     fd0:	1c 92       	st	X, r1
+    1094:	fa 01       	movw	r30, r20
+    1096:	ee 0f       	add	r30, r30
+    1098:	ff 1f       	adc	r31, r31
+    109a:	ee 0f       	add	r30, r30
+    109c:	ff 1f       	adc	r31, r31
+    109e:	ee 0f       	add	r30, r30
+    10a0:	ff 1f       	adc	r31, r31
+    10a2:	ec 0f       	add	r30, r28
+    10a4:	fd 1f       	adc	r31, r29
+    10a6:	15 82       	std	Z+5, r1	; 0x05
 	}
 
 	//Latch speed limit in microseconds per 20ms
 	uint8_t u8_speed = 0;
 	//If command speed changed
 	if (gast_command[iu8_index].u1_speed_changed == true)
-     fd2:	db 01       	movw	r26, r22
-     fd4:	aa 0f       	add	r26, r26
-     fd6:	bb 1f       	adc	r27, r27
-     fd8:	aa 0f       	add	r26, r26
-     fda:	bb 1f       	adc	r27, r27
-     fdc:	aa 0f       	add	r26, r26
-     fde:	bb 1f       	adc	r27, r27
-     fe0:	ae 0f       	add	r26, r30
-     fe2:	bf 1f       	adc	r27, r31
-     fe4:	16 96       	adiw	r26, 0x06	; 6
-     fe6:	8c 91       	ld	r24, X
-     fe8:	88 23       	and	r24, r24
-     fea:	09 f4       	brne	.+2      	; 0xfee <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0xac>
-     fec:	40 c0       	rjmp	.+128    	; 0x106e <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x12c>
+    10a8:	fa 01       	movw	r30, r20
+    10aa:	ee 0f       	add	r30, r30
+    10ac:	ff 1f       	adc	r31, r31
+    10ae:	ee 0f       	add	r30, r30
+    10b0:	ff 1f       	adc	r31, r31
+    10b2:	ee 0f       	add	r30, r30
+    10b4:	ff 1f       	adc	r31, r31
+    10b6:	ec 0f       	add	r30, r28
+    10b8:	fd 1f       	adc	r31, r29
+    10ba:	16 81       	ldd	r17, Z+6	; 0x06
+    10bc:	11 23       	and	r17, r17
+    10be:	09 f4       	brne	.+2      	; 0x10c2 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0xc0>
+    10c0:	46 c0       	rjmp	.+140    	; 0x114e <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x14c>
 	{
 		//Fetch position
 		uint16_t u16_tmp = gast_command[iu8_index].u16_speed;
-     fee:	db 01       	movw	r26, r22
-     ff0:	aa 0f       	add	r26, r26
-     ff2:	bb 1f       	adc	r27, r27
-     ff4:	aa 0f       	add	r26, r26
-     ff6:	bb 1f       	adc	r27, r27
-     ff8:	aa 0f       	add	r26, r26
-     ffa:	bb 1f       	adc	r27, r27
-     ffc:	ae 0f       	add	r26, r30
-     ffe:	bf 1f       	adc	r27, r31
-    1000:	13 96       	adiw	r26, 0x03	; 3
-    1002:	2d 91       	ld	r18, X+
-    1004:	3c 91       	ld	r19, X
-    1006:	14 97       	sbiw	r26, 0x04	; 4
+    10c2:	fa 01       	movw	r30, r20
+    10c4:	ee 0f       	add	r30, r30
+    10c6:	ff 1f       	adc	r31, r31
+    10c8:	ee 0f       	add	r30, r30
+    10ca:	ff 1f       	adc	r31, r31
+    10cc:	ee 0f       	add	r30, r30
+    10ce:	ff 1f       	adc	r31, r31
+    10d0:	ec 0f       	add	r30, r28
+    10d2:	fd 1f       	adc	r31, r29
+    10d4:	23 81       	ldd	r18, Z+3	; 0x03
+    10d6:	34 81       	ldd	r19, Z+4	; 0x04
 		//If speed limiter is disabled
 		if (u16_tmp == 0)
-    1008:	21 15       	cp	r18, r1
-    100a:	31 05       	cpc	r19, r1
-    100c:	69 f4       	brne	.+26     	; 0x1028 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0xe6>
+    10d8:	21 15       	cp	r18, r1
+    10da:	31 05       	cpc	r19, r1
+    10dc:	61 f4       	brne	.+24     	; 0x10f6 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0xf4>
 		{
 			//Update internal timer status
 			gast_timer[iu8_index].u8_speed = 0;	
-    100e:	db 01       	movw	r26, r22
-    1010:	aa 0f       	add	r26, r26
-    1012:	bb 1f       	adc	r27, r27
-    1014:	aa 0f       	add	r26, r26
-    1016:	bb 1f       	adc	r27, r27
-    1018:	a6 0f       	add	r26, r22
-    101a:	b7 1f       	adc	r27, r23
-    101c:	ae 0f       	add	r26, r30
-    101e:	bf 1f       	adc	r27, r31
-    1020:	53 96       	adiw	r26, 0x13	; 19
-    1022:	1c 92       	st	X, r1
+    10de:	fa 01       	movw	r30, r20
+    10e0:	ee 0f       	add	r30, r30
+    10e2:	ff 1f       	adc	r31, r31
+    10e4:	ee 0f       	add	r30, r30
+    10e6:	ff 1f       	adc	r31, r31
+    10e8:	e4 0f       	add	r30, r20
+    10ea:	f5 1f       	adc	r31, r21
+    10ec:	ec 0f       	add	r30, r28
+    10ee:	fd 1f       	adc	r31, r29
+    10f0:	13 8a       	std	Z+19, r1	; 0x13
 		//status and command are synced
 		gast_command[iu8_index].u1_position_changed = false;
 	}
 
 	//Latch speed limit in microseconds per 20ms
 	uint8_t u8_speed = 0;
-    1024:	80 e0       	ldi	r24, 0x00	; 0
-    1026:	17 c0       	rjmp	.+46     	; 0x1056 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x114>
+    10f2:	20 e0       	ldi	r18, 0x00	; 0
+    10f4:	21 c0       	rjmp	.+66     	; 0x1138 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x136>
 		}
 		//if speed limiter is active
 		else
 		{
 			//The target speed is the speed multiplied by the number of PPM cycles in a second
-			u16_tmp = u16_tmp *(1000000 / Config::SERVO_PPM_PERIOD);
-    1028:	92 e3       	ldi	r25, 0x32	; 50
-    102a:	92 9f       	mul	r25, r18
-    102c:	e0 01       	movw	r28, r0
-    102e:	93 9f       	mul	r25, r19
-    1030:	d0 0d       	add	r29, r0
-    1032:	11 24       	eor	r1, r1
+			u16_tmp /= Config::SERVO_PPM_FREQUENCY;
+    10f6:	36 95       	lsr	r19
+    10f8:	27 95       	ror	r18
+    10fa:	ab e7       	ldi	r26, 0x7B	; 123
+    10fc:	b4 e1       	ldi	r27, 0x14	; 20
+    10fe:	0e 94 a8 0a 	call	0x1550	; 0x1550 <__umulhisi3>
+    1102:	96 95       	lsr	r25
+    1104:	87 95       	ror	r24
 			if (u16_tmp > 255)
-    1034:	cf 3f       	cpi	r28, 0xFF	; 255
-    1036:	d1 05       	cpc	r29, r1
-    1038:	11 f0       	breq	.+4      	; 0x103e <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0xfc>
-    103a:	08 f0       	brcs	.+2      	; 0x103e <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0xfc>
-    103c:	4d c0       	rjmp	.+154    	; 0x10d8 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x196>
+    1106:	8f 3f       	cpi	r24, 0xFF	; 255
+    1108:	91 05       	cpc	r25, r1
+    110a:	59 f0       	breq	.+22     	; 0x1122 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x120>
+    110c:	50 f0       	brcs	.+20     	; 0x1122 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x120>
 			{
 				report_error(Error_code::ERR_OVERFLOW);
+    110e:	66 e0       	ldi	r22, 0x06	; 6
+    1110:	ce 01       	movw	r24, r28
+    1112:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+				ou16_delay = Config::HAL_TIMER_MAX_CNT;
+    1116:	8f ef       	ldi	r24, 0xFF	; 255
+    1118:	9f ef       	ldi	r25, 0xFF	; 255
+    111a:	f7 01       	movw	r30, r14
+    111c:	80 83       	st	Z, r24
+    111e:	91 83       	std	Z+1, r25	; 0x01
 				return true;
+    1120:	3a c1       	rjmp	.+628    	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
 			}
 			u8_speed = u16_tmp;
-    103e:	8c 2f       	mov	r24, r28
+    1122:	28 2f       	mov	r18, r24
 			//Update internal timer status
 			gast_timer[iu8_index].u8_speed = u8_speed;
-    1040:	db 01       	movw	r26, r22
-    1042:	aa 0f       	add	r26, r26
-    1044:	bb 1f       	adc	r27, r27
-    1046:	aa 0f       	add	r26, r26
-    1048:	bb 1f       	adc	r27, r27
-    104a:	a6 0f       	add	r26, r22
-    104c:	b7 1f       	adc	r27, r23
-    104e:	ae 0f       	add	r26, r30
-    1050:	bf 1f       	adc	r27, r31
-    1052:	53 96       	adiw	r26, 0x13	; 19
-    1054:	cc 93       	st	X, r28
+    1124:	fa 01       	movw	r30, r20
+    1126:	ee 0f       	add	r30, r30
+    1128:	ff 1f       	adc	r31, r31
+    112a:	ee 0f       	add	r30, r30
+    112c:	ff 1f       	adc	r31, r31
+    112e:	e4 0f       	add	r30, r20
+    1130:	f5 1f       	adc	r31, r21
+    1132:	ec 0f       	add	r30, r28
+    1134:	fd 1f       	adc	r31, r29
+    1136:	83 8b       	std	Z+19, r24	; 0x13
 		}
 		//status and command are synced
 		gast_command[iu8_index].u1_speed_changed = false;
-    1056:	db 01       	movw	r26, r22
-    1058:	aa 0f       	add	r26, r26
-    105a:	bb 1f       	adc	r27, r27
-    105c:	aa 0f       	add	r26, r26
-    105e:	bb 1f       	adc	r27, r27
-    1060:	aa 0f       	add	r26, r26
-    1062:	bb 1f       	adc	r27, r27
-    1064:	ae 0f       	add	r26, r30
-    1066:	bf 1f       	adc	r27, r31
-    1068:	16 96       	adiw	r26, 0x06	; 6
-    106a:	1c 92       	st	X, r1
-    106c:	0b c0       	rjmp	.+22     	; 0x1084 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x142>
+    1138:	fa 01       	movw	r30, r20
+    113a:	ee 0f       	add	r30, r30
+    113c:	ff 1f       	adc	r31, r31
+    113e:	ee 0f       	add	r30, r30
+    1140:	ff 1f       	adc	r31, r31
+    1142:	ee 0f       	add	r30, r30
+    1144:	ff 1f       	adc	r31, r31
+    1146:	ec 0f       	add	r30, r28
+    1148:	fd 1f       	adc	r31, r29
+    114a:	16 82       	std	Z+6, r1	; 0x06
+    114c:	0a c0       	rjmp	.+20     	; 0x1162 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x160>
 	}
 	//If speed has not changed
 	else
 	{
 		//Fetch speed
 		u8_speed = gast_timer[iu8_index].u8_speed;
-    106e:	db 01       	movw	r26, r22
-    1070:	aa 0f       	add	r26, r26
-    1072:	bb 1f       	adc	r27, r27
-    1074:	aa 0f       	add	r26, r26
-    1076:	bb 1f       	adc	r27, r27
-    1078:	a6 0f       	add	r26, r22
-    107a:	b7 1f       	adc	r27, r23
-    107c:	ae 0f       	add	r26, r30
-    107e:	bf 1f       	adc	r27, r31
-    1080:	53 96       	adiw	r26, 0x13	; 19
-    1082:	8c 91       	ld	r24, X
-	///--------------------------------------------------------------------------
-	///	STATUS -> COUNT
+    114e:	fa 01       	movw	r30, r20
+    1150:	ee 0f       	add	r30, r30
+    1152:	ff 1f       	adc	r31, r31
+    1154:	ee 0f       	add	r30, r30
+    1156:	ff 1f       	adc	r31, r31
+    1158:	e4 0f       	add	r30, r20
+    115a:	f5 1f       	adc	r31, r21
+    115c:	ec 0f       	add	r30, r28
+    115e:	fd 1f       	adc	r31, r29
+    1160:	23 89       	ldd	r18, Z+19	; 0x13
 	///--------------------------------------------------------------------------
 
+	//Initialize return delay to invalid
+	uint16_t u16_delay = Config::HAL_TIMER_MAX_CNT;
+	//Fetch target
+	uint16_t u16_target = gast_timer[iu8_index].u16_target;
+    1162:	fa 01       	movw	r30, r20
+    1164:	ee 0f       	add	r30, r30
+    1166:	ff 1f       	adc	r31, r31
+    1168:	ee 0f       	add	r30, r30
+    116a:	ff 1f       	adc	r31, r31
+    116c:	e4 0f       	add	r30, r20
+    116e:	f5 1f       	adc	r31, r21
+    1170:	ec 0f       	add	r30, r28
+    1172:	fd 1f       	adc	r31, r29
+    1174:	81 89       	ldd	r24, Z+17	; 0x11
+    1176:	92 89       	ldd	r25, Z+18	; 0x12
+	//Fetch actual
+	uint16_t u16_actual = gast_timer[iu8_index].u16_actual;
+    1178:	64 89       	ldd	r22, Z+20	; 0x14
+    117a:	75 89       	ldd	r23, Z+21	; 0x15
 	//If: speed limit is inactive
 	if (u8_speed == 0)
-    1084:	81 11       	cpse	r24, r1
-    1086:	27 c0       	rjmp	.+78     	; 0x10d6 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x194>
+    117c:	21 11       	cpse	r18, r1
+    117e:	4d c0       	rjmp	.+154    	; 0x121a <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x218>
 	{
-		//Fetch target
-		uint16_t u16_target = gast_timer[iu8_index].u16_target;
-    1088:	db 01       	movw	r26, r22
-    108a:	aa 0f       	add	r26, r26
-    108c:	bb 1f       	adc	r27, r27
-    108e:	aa 0f       	add	r26, r26
-    1090:	bb 1f       	adc	r27, r27
-    1092:	a6 0f       	add	r26, r22
-    1094:	b7 1f       	adc	r27, r23
-    1096:	ae 0f       	add	r26, r30
-    1098:	bf 1f       	adc	r27, r31
-    109a:	51 96       	adiw	r26, 0x11	; 17
-    109c:	2d 91       	ld	r18, X+
-    109e:	3c 91       	ld	r19, X
-    10a0:	52 97       	sbiw	r26, 0x12	; 18
-		uint16_t u16_actual = gast_timer[iu8_index].u16_actual;
 		//if already locked
-		if (u16_actual == u16_actual)
+		if (u16_target == u16_actual)
+    1180:	86 17       	cp	r24, r22
+    1182:	97 07       	cpc	r25, r23
+    1184:	b9 f4       	brne	.+46     	; 0x11b4 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x1b2>
 		{
 			//Already locked
 			gast_command[iu8_index].u1_idle = true;
-    10a2:	db 01       	movw	r26, r22
-    10a4:	11 96       	adiw	r26, 0x01	; 1
-    10a6:	aa 0f       	add	r26, r26
-    10a8:	bb 1f       	adc	r27, r27
-    10aa:	aa 0f       	add	r26, r26
-    10ac:	bb 1f       	adc	r27, r27
-    10ae:	aa 0f       	add	r26, r26
-    10b0:	bb 1f       	adc	r27, r27
-    10b2:	ae 0f       	add	r26, r30
-    10b4:	bf 1f       	adc	r27, r31
-    10b6:	81 e0       	ldi	r24, 0x01	; 1
-    10b8:	8c 93       	st	X, r24
+    1186:	fa 01       	movw	r30, r20
+    1188:	31 96       	adiw	r30, 0x01	; 1
+    118a:	ee 0f       	add	r30, r30
+    118c:	ff 1f       	adc	r31, r31
+    118e:	ee 0f       	add	r30, r30
+    1190:	ff 1f       	adc	r31, r31
+    1192:	ee 0f       	add	r30, r30
+    1194:	ff 1f       	adc	r31, r31
+    1196:	ec 0f       	add	r30, r28
+    1198:	fd 1f       	adc	r31, r29
+    119a:	21 e0       	ldi	r18, 0x01	; 1
+    119c:	20 83       	st	Z, r18
 			gast_command[iu8_index].u1_lock = true;	
-    10ba:	66 0f       	add	r22, r22
-    10bc:	77 1f       	adc	r23, r23
-    10be:	66 0f       	add	r22, r22
-    10c0:	77 1f       	adc	r23, r23
-    10c2:	66 0f       	add	r22, r22
-    10c4:	77 1f       	adc	r23, r23
-    10c6:	e6 0f       	add	r30, r22
-    10c8:	f7 1f       	adc	r31, r23
-    10ca:	87 83       	std	Z+7, r24	; 0x07
+    119e:	44 0f       	add	r20, r20
+    11a0:	55 1f       	adc	r21, r21
+    11a2:	44 0f       	add	r20, r20
+    11a4:	55 1f       	adc	r21, r21
+    11a6:	44 0f       	add	r20, r20
+    11a8:	55 1f       	adc	r21, r21
+    11aa:	fe 01       	movw	r30, r28
+    11ac:	e4 0f       	add	r30, r20
+    11ae:	f5 1f       	adc	r31, r21
+    11b0:	27 83       	std	Z+7, r18	; 0x07
+    11b2:	21 c0       	rjmp	.+66     	; 0x11f6 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x1f4>
+		}
+		//Needs to move
+		else
+		{
+			//Not locked
+			gast_command[iu8_index].u1_idle = false;
+    11b4:	fa 01       	movw	r30, r20
+    11b6:	31 96       	adiw	r30, 0x01	; 1
+    11b8:	ee 0f       	add	r30, r30
+    11ba:	ff 1f       	adc	r31, r31
+    11bc:	ee 0f       	add	r30, r30
+    11be:	ff 1f       	adc	r31, r31
+    11c0:	ee 0f       	add	r30, r30
+    11c2:	ff 1f       	adc	r31, r31
+    11c4:	ec 0f       	add	r30, r28
+    11c6:	fd 1f       	adc	r31, r29
+    11c8:	10 82       	st	Z, r1
 			gast_command[iu8_index].u1_lock = false;
+    11ca:	fa 01       	movw	r30, r20
+    11cc:	ee 0f       	add	r30, r30
+    11ce:	ff 1f       	adc	r31, r31
+    11d0:	ee 0f       	add	r30, r30
+    11d2:	ff 1f       	adc	r31, r31
+    11d4:	ee 0f       	add	r30, r30
+    11d6:	ff 1f       	adc	r31, r31
+    11d8:	ec 0f       	add	r30, r28
+    11da:	fd 1f       	adc	r31, r29
+    11dc:	17 82       	std	Z+7, r1	; 0x07
 			//Update actual
 			gast_timer[iu8_index].u16_actual = u16_target;
+    11de:	fa 01       	movw	r30, r20
+    11e0:	ee 0f       	add	r30, r30
+    11e2:	ff 1f       	adc	r31, r31
+    11e4:	ee 0f       	add	r30, r30
+    11e6:	ff 1f       	adc	r31, r31
+    11e8:	4e 0f       	add	r20, r30
+    11ea:	5f 1f       	adc	r21, r31
+    11ec:	fe 01       	movw	r30, r28
+    11ee:	e4 0f       	add	r30, r20
+    11f0:	f5 1f       	adc	r31, r21
+    11f2:	84 8b       	std	Z+20, r24	; 0x14
+    11f4:	95 8b       	std	Z+21, r25	; 0x15
 		}
-		//Return to caller the updated delay
-		ou16_delay = u16_target;
-    10cc:	fa 01       	movw	r30, r20
-    10ce:	20 83       	st	Z, r18
-    10d0:	31 83       	std	Z+1, r19	; 0x01
-
-	///--------------------------------------------------------------------------
-	///	RETURN
-	///--------------------------------------------------------------------------
-	DRETURN_ARG("Delay %d\n", ou16_delay); //Trace Return
-	return false;	//OK
-    10d2:	80 e0       	ldi	r24, 0x00	; 0
-    10d4:	01 c0       	rjmp	.+2      	; 0x10d8 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x196>
+		//Delay of the servo to be returned to caller
+		u16_delay = u16_target;
+		if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+    11f6:	9c 01       	movw	r18, r24
+    11f8:	2c 54       	subi	r18, 0x4C	; 76
+    11fa:	34 40       	sbci	r19, 0x04	; 4
+    11fc:	21 32       	cpi	r18, 0x21	; 33
+    11fe:	33 40       	sbci	r19, 0x03	; 3
+    1200:	08 f4       	brcc	.+2      	; 0x1204 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x202>
+    1202:	b4 c0       	rjmp	.+360    	; 0x136c <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x36a>
+		{
+			this ->report_error( Error_code::ERR_ALGORITHM );
+    1204:	68 e0       	ldi	r22, 0x08	; 8
+    1206:	ce 01       	movw	r24, r28
+    1208:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+			ou16_delay = Config::HAL_TIMER_MAX_CNT;
+    120c:	8f ef       	ldi	r24, 0xFF	; 255
+    120e:	9f ef       	ldi	r25, 0xFF	; 255
+    1210:	f7 01       	movw	r30, r14
+    1212:	80 83       	st	Z, r24
+    1214:	91 83       	std	Z+1, r25	; 0x01
+			return true;
+    1216:	11 e0       	ldi	r17, 0x01	; 1
+    1218:	be c0       	rjmp	.+380    	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
 	}
 	//if: speed limit active
 	else
 	{
-		report_error( Error_code::ERR_ALGORITHM );
+		//if already locked
+		if (u16_target == u16_actual)
+    121a:	86 17       	cp	r24, r22
+    121c:	97 07       	cpc	r25, r23
+    121e:	c9 f4       	brne	.+50     	; 0x1252 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x250>
+		{
+			//Already locked
+			gast_command[iu8_index].u1_idle = true;
+    1220:	fa 01       	movw	r30, r20
+    1222:	31 96       	adiw	r30, 0x01	; 1
+    1224:	ee 0f       	add	r30, r30
+    1226:	ff 1f       	adc	r31, r31
+    1228:	ee 0f       	add	r30, r30
+    122a:	ff 1f       	adc	r31, r31
+    122c:	ee 0f       	add	r30, r30
+    122e:	ff 1f       	adc	r31, r31
+    1230:	ec 0f       	add	r30, r28
+    1232:	fd 1f       	adc	r31, r29
+    1234:	81 e0       	ldi	r24, 0x01	; 1
+    1236:	80 83       	st	Z, r24
+			gast_command[iu8_index].u1_lock = true;
+    1238:	44 0f       	add	r20, r20
+    123a:	55 1f       	adc	r21, r21
+    123c:	44 0f       	add	r20, r20
+    123e:	55 1f       	adc	r21, r21
+    1240:	44 0f       	add	r20, r20
+    1242:	55 1f       	adc	r21, r21
+    1244:	fe 01       	movw	r30, r28
+    1246:	e4 0f       	add	r30, r20
+    1248:	f5 1f       	adc	r31, r21
+    124a:	87 83       	std	Z+7, r24	; 0x07
+	///--------------------------------------------------------------------------
+	///	STATUS -> COUNT
+	///--------------------------------------------------------------------------
+
+	//Initialize return delay to invalid
+	uint16_t u16_delay = Config::HAL_TIMER_MAX_CNT;
+    124c:	8f ef       	ldi	r24, 0xFF	; 255
+    124e:	9f ef       	ldi	r25, 0xFF	; 255
+    1250:	8d c0       	rjmp	.+282    	; 0x136c <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x36a>
+		}
+		//if: Needs to move
+		else
+		{
+			//Compute absolute difference
+			uint16_t u16_delta = ((u16_target > u16_actual)?(u16_target-u16_actual):(u16_actual-u16_target));
+    1252:	68 17       	cp	r22, r24
+    1254:	79 07       	cpc	r23, r25
+    1256:	20 f4       	brcc	.+8      	; 0x1260 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x25e>
+    1258:	fc 01       	movw	r30, r24
+    125a:	e6 1b       	sub	r30, r22
+    125c:	f7 0b       	sbc	r31, r23
+    125e:	03 c0       	rjmp	.+6      	; 0x1266 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x264>
+    1260:	fb 01       	movw	r30, r22
+    1262:	e8 1b       	sub	r30, r24
+    1264:	f9 0b       	sbc	r31, r25
+			//If: I need to move less than my allowed speed limit
+			if (u16_delta < u8_speed)
+    1266:	30 e0       	ldi	r19, 0x00	; 0
+    1268:	e2 17       	cp	r30, r18
+    126a:	f3 07       	cpc	r31, r19
+    126c:	a0 f5       	brcc	.+104    	; 0x12d6 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x2d4>
+			{
+				//I'm locked but not IDLE
+				gast_command[iu8_index].u1_lock = true;
+    126e:	fa 01       	movw	r30, r20
+    1270:	ee 0f       	add	r30, r30
+    1272:	ff 1f       	adc	r31, r31
+    1274:	ee 0f       	add	r30, r30
+    1276:	ff 1f       	adc	r31, r31
+    1278:	ee 0f       	add	r30, r30
+    127a:	ff 1f       	adc	r31, r31
+    127c:	ec 0f       	add	r30, r28
+    127e:	fd 1f       	adc	r31, r29
+    1280:	21 e0       	ldi	r18, 0x01	; 1
+    1282:	27 83       	std	Z+7, r18	; 0x07
+				gast_command[iu8_index].u1_idle = false;
+    1284:	fa 01       	movw	r30, r20
+    1286:	31 96       	adiw	r30, 0x01	; 1
+    1288:	ee 0f       	add	r30, r30
+    128a:	ff 1f       	adc	r31, r31
+    128c:	ee 0f       	add	r30, r30
+    128e:	ff 1f       	adc	r31, r31
+    1290:	ee 0f       	add	r30, r30
+    1292:	ff 1f       	adc	r31, r31
+    1294:	ec 0f       	add	r30, r28
+    1296:	fd 1f       	adc	r31, r29
+    1298:	10 82       	st	Z, r1
+				//Update actual
+				gast_timer[iu8_index].u16_actual = u16_target;
+    129a:	fa 01       	movw	r30, r20
+    129c:	ee 0f       	add	r30, r30
+    129e:	ff 1f       	adc	r31, r31
+    12a0:	ee 0f       	add	r30, r30
+    12a2:	ff 1f       	adc	r31, r31
+    12a4:	4e 0f       	add	r20, r30
+    12a6:	5f 1f       	adc	r21, r31
+    12a8:	fe 01       	movw	r30, r28
+    12aa:	e4 0f       	add	r30, r20
+    12ac:	f5 1f       	adc	r31, r21
+    12ae:	84 8b       	std	Z+20, r24	; 0x14
+    12b0:	95 8b       	std	Z+21, r25	; 0x15
+				//Delay of the servo to be returned to caller
+				u16_delay = u16_target;
+				if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+    12b2:	9c 01       	movw	r18, r24
+    12b4:	2c 54       	subi	r18, 0x4C	; 76
+    12b6:	34 40       	sbci	r19, 0x04	; 4
+    12b8:	21 32       	cpi	r18, 0x21	; 33
+    12ba:	33 40       	sbci	r19, 0x03	; 3
+    12bc:	08 f4       	brcc	.+2      	; 0x12c0 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x2be>
+    12be:	56 c0       	rjmp	.+172    	; 0x136c <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x36a>
+				{
+					this ->report_error( Error_code::ERR_ALGORITHM );
+    12c0:	68 e0       	ldi	r22, 0x08	; 8
+    12c2:	ce 01       	movw	r24, r28
+    12c4:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+					ou16_delay = Config::HAL_TIMER_MAX_CNT;
+    12c8:	8f ef       	ldi	r24, 0xFF	; 255
+    12ca:	9f ef       	ldi	r25, 0xFF	; 255
+    12cc:	f7 01       	movw	r30, r14
+    12ce:	80 83       	st	Z, r24
+    12d0:	91 83       	std	Z+1, r25	; 0x01
+					return true;
+    12d2:	11 e0       	ldi	r17, 0x01	; 1
+    12d4:	60 c0       	rjmp	.+192    	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
+			}
+			//if: I need to move more than the speed limit
+			else
+			{
+				//I'm moving in a speed limited way
+				gast_command[iu8_index].u1_lock = false;
+    12d6:	fa 01       	movw	r30, r20
+    12d8:	ee 0f       	add	r30, r30
+    12da:	ff 1f       	adc	r31, r31
+    12dc:	ee 0f       	add	r30, r30
+    12de:	ff 1f       	adc	r31, r31
+    12e0:	ee 0f       	add	r30, r30
+    12e2:	ff 1f       	adc	r31, r31
+    12e4:	ec 0f       	add	r30, r28
+    12e6:	fd 1f       	adc	r31, r29
+    12e8:	17 82       	std	Z+7, r1	; 0x07
+				gast_command[iu8_index].u1_idle = false;
+    12ea:	fa 01       	movw	r30, r20
+    12ec:	31 96       	adiw	r30, 0x01	; 1
+    12ee:	ee 0f       	add	r30, r30
+    12f0:	ff 1f       	adc	r31, r31
+    12f2:	ee 0f       	add	r30, r30
+    12f4:	ff 1f       	adc	r31, r31
+    12f6:	ee 0f       	add	r30, r30
+    12f8:	ff 1f       	adc	r31, r31
+    12fa:	ec 0f       	add	r30, r28
+    12fc:	fd 1f       	adc	r31, r29
+    12fe:	10 82       	st	Z, r1
+				//If: moving positive
+				if (u16_target > u16_actual)
+    1300:	68 17       	cp	r22, r24
+    1302:	79 07       	cpc	r23, r25
+    1304:	20 f4       	brcc	.+8      	; 0x130e <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x30c>
+				{
+					//Move the maximum allowed speed in the positive direction	
+					u16_actual += u8_speed;
+    1306:	cb 01       	movw	r24, r22
+    1308:	82 0f       	add	r24, r18
+    130a:	93 1f       	adc	r25, r19
+    130c:	12 c0       	rjmp	.+36     	; 0x1332 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x330>
+					
+				}
+				//If: moving negative
+				else if (u16_target < u16_actual)
+    130e:	86 17       	cp	r24, r22
+    1310:	97 07       	cpc	r25, r23
+    1312:	20 f4       	brcc	.+8      	; 0x131c <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x31a>
+				{
+					//Move the maximum allowed speed in the positive direction
+					u16_actual -= u8_speed;
+    1314:	cb 01       	movw	r24, r22
+    1316:	82 1b       	sub	r24, r18
+    1318:	93 0b       	sbc	r25, r19
+    131a:	0b c0       	rjmp	.+22     	; 0x1332 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x330>
+				}
+				else
+				{
+					report_error(Error_code::ERR_ALGORITHM);
+    131c:	68 e0       	ldi	r22, 0x08	; 8
+    131e:	ce 01       	movw	r24, r28
+    1320:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+					ou16_delay = Config::HAL_TIMER_MAX_CNT;
+    1324:	8f ef       	ldi	r24, 0xFF	; 255
+    1326:	9f ef       	ldi	r25, 0xFF	; 255
+    1328:	f7 01       	movw	r30, r14
+    132a:	80 83       	st	Z, r24
+    132c:	91 83       	std	Z+1, r25	; 0x01
+					return true;
+    132e:	11 e0       	ldi	r17, 0x01	; 1
+    1330:	32 c0       	rjmp	.+100    	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
+				}
+				//Update actual
+				gast_timer[iu8_index].u16_actual = u16_actual;
+    1332:	fa 01       	movw	r30, r20
+    1334:	ee 0f       	add	r30, r30
+    1336:	ff 1f       	adc	r31, r31
+    1338:	ee 0f       	add	r30, r30
+    133a:	ff 1f       	adc	r31, r31
+    133c:	4e 0f       	add	r20, r30
+    133e:	5f 1f       	adc	r21, r31
+    1340:	fe 01       	movw	r30, r28
+    1342:	e4 0f       	add	r30, r20
+    1344:	f5 1f       	adc	r31, r21
+    1346:	84 8b       	std	Z+20, r24	; 0x14
+    1348:	95 8b       	std	Z+21, r25	; 0x15
+				//Delay of the servo to be returned to caller
+				u16_delay = u16_actual;
+				if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+    134a:	9c 01       	movw	r18, r24
+    134c:	2c 54       	subi	r18, 0x4C	; 76
+    134e:	34 40       	sbci	r19, 0x04	; 4
+    1350:	21 32       	cpi	r18, 0x21	; 33
+    1352:	33 40       	sbci	r19, 0x03	; 3
+    1354:	58 f0       	brcs	.+22     	; 0x136c <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x36a>
+				{
+					this ->report_error( Error_code::ERR_ALGORITHM );
+    1356:	68 e0       	ldi	r22, 0x08	; 8
+    1358:	ce 01       	movw	r24, r28
+    135a:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+					ou16_delay = Config::HAL_TIMER_MAX_CNT;
+    135e:	8f ef       	ldi	r24, 0xFF	; 255
+    1360:	9f ef       	ldi	r25, 0xFF	; 255
+    1362:	f7 01       	movw	r30, r14
+    1364:	80 83       	st	Z, r24
+    1366:	91 83       	std	Z+1, r25	; 0x01
+					return true;
+    1368:	11 e0       	ldi	r17, 0x01	; 1
+    136a:	15 c0       	rjmp	.+42     	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
+				}
+			} //end if: I need to move more than the speed limit
+		}  //end if: Needs to move
+	} //end if: speed limit active
+	if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
+    136c:	9c 01       	movw	r18, r24
+    136e:	2c 54       	subi	r18, 0x4C	; 76
+    1370:	34 40       	sbci	r19, 0x04	; 4
+    1372:	21 32       	cpi	r18, 0x21	; 33
+    1374:	33 40       	sbci	r19, 0x03	; 3
+    1376:	58 f0       	brcs	.+22     	; 0x138e <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x38c>
+	{
+		this ->report_error( Error_code::ERR_ALGORITHM );
+    1378:	68 e0       	ldi	r22, 0x08	; 8
+    137a:	ce 01       	movw	r24, r28
+    137c:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+		ou16_delay = Config::HAL_TIMER_MAX_CNT;
+    1380:	8f ef       	ldi	r24, 0xFF	; 255
+    1382:	9f ef       	ldi	r25, 0xFF	; 255
+    1384:	f7 01       	movw	r30, r14
+    1386:	80 83       	st	Z, r24
+    1388:	91 83       	std	Z+1, r25	; 0x01
 		return true;
-    10d6:	81 e0       	ldi	r24, 0x01	; 1
+    138a:	11 e0       	ldi	r17, 0x01	; 1
+    138c:	04 c0       	rjmp	.+8      	; 0x1396 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x394>
+
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
-	DRETURN_ARG("Delay %d\n", ou16_delay); //Trace Return
+	DRETURN_ARG("Delay %d\n", u16_delay); //Trace Return
+	ou16_delay = u16_delay;
+    138e:	f7 01       	movw	r30, r14
+    1390:	80 83       	st	Z, r24
+    1392:	91 83       	std	Z+1, r25	; 0x01
 	return false;	//OK
+    1394:	10 e0       	ldi	r17, 0x00	; 0
 }   //end private method: compute_servo_delay | uint8_t | uint16_t |
-    10d8:	df 91       	pop	r29
-    10da:	cf 91       	pop	r28
-    10dc:	08 95       	ret
+    1396:	81 2f       	mov	r24, r17
+    1398:	df 91       	pop	r29
+    139a:	cf 91       	pop	r28
+    139c:	1f 91       	pop	r17
+    139e:	ff 90       	pop	r15
+    13a0:	ef 90       	pop	r14
+    13a2:	08 95       	ret
 
-000010de <_ZN9OrangeBot5Servo13hal_timer_isrEv>:
+000013a4 <_ZN9OrangeBot5Servo13hal_timer_isrEv>:
 //! \n Toggles the servo pin and compute the next OCR
 //! \n Re-arms or Stop the timer
 /***************************************************************************/
 
 bool Servo::hal_timer_isr( void )
 {
-    10de:	cf 92       	push	r12
-    10e0:	df 92       	push	r13
-    10e2:	ef 92       	push	r14
-    10e4:	ff 92       	push	r15
-    10e6:	0f 93       	push	r16
-    10e8:	1f 93       	push	r17
-    10ea:	cf 93       	push	r28
-    10ec:	df 93       	push	r29
-    10ee:	00 d0       	rcall	.+0      	; 0x10f0 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x12>
-    10f0:	cd b7       	in	r28, 0x3d	; 61
-    10f2:	de b7       	in	r29, 0x3e	; 62
-    10f4:	7c 01       	movw	r14, r24
+    13a4:	cf 92       	push	r12
+    13a6:	df 92       	push	r13
+    13a8:	ef 92       	push	r14
+    13aa:	ff 92       	push	r15
+    13ac:	0f 93       	push	r16
+    13ae:	1f 93       	push	r17
+    13b0:	cf 93       	push	r28
+    13b2:	df 93       	push	r29
+    13b4:	00 d0       	rcall	.+0      	; 0x13b6 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x12>
+    13b6:	cd b7       	in	r28, 0x3d	; 61
+    13b8:	de b7       	in	r29, 0x3e	; 62
+    13ba:	7c 01       	movw	r14, r24
 	///	SERVO IOs
 	///--------------------------------------------------------------------------
 	//	Emit the correct IO lines
 
 	//Fetch scan index
 	uint8_t u8_index = this -> gu8_index;
-    10f6:	fc 01       	movw	r30, r24
-    10f8:	10 81       	ld	r17, Z
+    13bc:	fc 01       	movw	r30, r24
+    13be:	10 81       	ld	r17, Z
 	//First Servo: SET servo line
 	if (u8_index == 0)
-    10fa:	11 11       	cpse	r17, r1
-    10fc:	05 c0       	rjmp	.+10     	; 0x1108 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x2a>
+    13c0:	11 11       	cpse	r17, r1
+    13c2:	05 c0       	rjmp	.+10     	; 0x13ce <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x2a>
 	{
 		u1_ret = this -> hal_servo_io( u8_index, true );
-    10fe:	41 e0       	ldi	r20, 0x01	; 1
-    1100:	61 2f       	mov	r22, r17
-    1102:	0e 94 82 05 	call	0xb04	; 0xb04 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
-    1106:	18 c0       	rjmp	.+48     	; 0x1138 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x5a>
+    13c4:	41 e0       	ldi	r20, 0x01	; 1
+    13c6:	61 2f       	mov	r22, r17
+    13c8:	0e 94 a2 06 	call	0xd44	; 0xd44 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
+    13cc:	18 c0       	rjmp	.+48     	; 0x13fe <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x5a>
 	}
 	//Inner servos
 	else if ((u8_index > 0) && (u8_index < Config::NUM_SERVOS))
-    1108:	11 30       	cpi	r17, 0x01	; 1
-    110a:	69 f4       	brne	.+26     	; 0x1126 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x48>
+    13ce:	11 30       	cpi	r17, 0x01	; 1
+    13d0:	69 f4       	brne	.+26     	; 0x13ec <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x48>
 	{
 		//Clear previous servo line
 		u1_ret = this -> hal_servo_io( u8_index-1, false );
-    110c:	40 e0       	ldi	r20, 0x00	; 0
-    110e:	6f ef       	ldi	r22, 0xFF	; 255
-    1110:	61 0f       	add	r22, r17
-    1112:	0e 94 82 05 	call	0xb04	; 0xb04 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
-    1116:	08 2f       	mov	r16, r24
+    13d2:	40 e0       	ldi	r20, 0x00	; 0
+    13d4:	6f ef       	ldi	r22, 0xFF	; 255
+    13d6:	61 0f       	add	r22, r17
+    13d8:	0e 94 a2 06 	call	0xd44	; 0xd44 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
+    13dc:	08 2f       	mov	r16, r24
 		//SET current servo line
 		u1_ret |= this -> hal_servo_io( u8_index, true );
-    1118:	41 e0       	ldi	r20, 0x01	; 1
-    111a:	61 2f       	mov	r22, r17
-    111c:	c7 01       	movw	r24, r14
-    111e:	0e 94 82 05 	call	0xb04	; 0xb04 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
-    1122:	80 2b       	or	r24, r16
-    1124:	09 c0       	rjmp	.+18     	; 0x1138 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x5a>
+    13de:	41 e0       	ldi	r20, 0x01	; 1
+    13e0:	61 2f       	mov	r22, r17
+    13e2:	c7 01       	movw	r24, r14
+    13e4:	0e 94 a2 06 	call	0xd44	; 0xd44 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
+    13e8:	80 2b       	or	r24, r16
+    13ea:	09 c0       	rjmp	.+18     	; 0x13fe <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x5a>
 	}
 	//Last Servo: CLEAR servo line
 	else if (u8_index == Config::NUM_SERVOS)
-    1126:	12 30       	cpi	r17, 0x02	; 2
-    1128:	31 f4       	brne	.+12     	; 0x1136 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x58>
+    13ec:	12 30       	cpi	r17, 0x02	; 2
+    13ee:	31 f4       	brne	.+12     	; 0x13fc <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x58>
 	{
 		//Clear previous servo line
 		u1_ret = this -> hal_servo_io( u8_index -1, false );
-    112a:	40 e0       	ldi	r20, 0x00	; 0
-    112c:	6f ef       	ldi	r22, 0xFF	; 255
-    112e:	61 0f       	add	r22, r17
-    1130:	0e 94 82 05 	call	0xb04	; 0xb04 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
-    1134:	01 c0       	rjmp	.+2      	; 0x1138 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x5a>
+    13f0:	40 e0       	ldi	r20, 0x00	; 0
+    13f2:	6f ef       	ldi	r22, 0xFF	; 255
+    13f4:	61 0f       	add	r22, r17
+    13f6:	0e 94 a2 06 	call	0xd44	; 0xd44 <_ZN9OrangeBot5Servo12hal_servo_ioEhb>
+    13fa:	01 c0       	rjmp	.+2      	; 0x13fe <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x5a>
 	}
 	//Algorithmic Error
 	else
 	{
 		//FAIL
 		u1_ret = true;
-    1136:	81 e0       	ldi	r24, 0x01	; 1
+    13fc:	81 e0       	ldi	r24, 0x01	; 1
 	}
 	
 	//If Fail
 	if (u1_ret == true)
-    1138:	88 23       	and	r24, r24
-    113a:	21 f0       	breq	.+8      	; 0x1144 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x66>
+    13fe:	88 23       	and	r24, r24
+    1400:	21 f0       	breq	.+8      	; 0x140a <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x66>
 	{
 		//SCRAM!!!
 		u1_ret = this -> emergency_stop();
-    113c:	c7 01       	movw	r24, r14
-    113e:	0e 94 8d 07 	call	0xf1a	; 0xf1a <_ZN9OrangeBot5Servo14emergency_stopEv>
+    1402:	c7 01       	movw	r24, r14
+    1404:	0e 94 ed 07 	call	0xfda	; 0xfda <_ZN9OrangeBot5Servo14emergency_stopEv>
 		return u1_ret;
-    1142:	40 c0       	rjmp	.+128    	; 0x11c4 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xe6>
+    1408:	50 c0       	rjmp	.+160    	; 0x14aa <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x106>
 	//	Compute and program the delay for the next cycle
 	
 	//Temp delay in microseconds. HAL takes care of programming a delay in timer units
 	uint16_t u16_delay;
 	//Latch accumulator
 	uint16_t u16_accumulator = gu16_timer_sum;
-    1144:	f7 01       	movw	r30, r14
-    1146:	c3 8c       	ldd	r12, Z+27	; 0x1b
-    1148:	d4 8c       	ldd	r13, Z+28	; 0x1c
+    140a:	f7 01       	movw	r30, r14
+    140c:	c3 8c       	ldd	r12, Z+27	; 0x1b
+    140e:	d4 8c       	ldd	r13, Z+28	; 0x1c
 	//Compute Delay for servos
 	if (u8_index < Config::NUM_SERVOS)
-    114a:	12 30       	cpi	r17, 0x02	; 2
-    114c:	60 f4       	brcc	.+24     	; 0x1166 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x88>
+    1410:	12 30       	cpi	r17, 0x02	; 2
+    1412:	c0 f4       	brcc	.+48     	; 0x1444 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xa0>
 	{
 		//Driver takes care of updating from user command, maintaining servo status and computing what the next delay is to be
 		u1_ret = this -> compute_servo_delay( u8_index, u16_delay );
-    114e:	ae 01       	movw	r20, r28
-    1150:	4f 5f       	subi	r20, 0xFF	; 255
-    1152:	5f 4f       	sbci	r21, 0xFF	; 255
-    1154:	61 2f       	mov	r22, r17
-    1156:	c7 01       	movw	r24, r14
-    1158:	0e 94 a1 07 	call	0xf42	; 0xf42 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj>
+    1414:	ae 01       	movw	r20, r28
+    1416:	4f 5f       	subi	r20, 0xFF	; 255
+    1418:	5f 4f       	sbci	r21, 0xFF	; 255
+    141a:	61 2f       	mov	r22, r17
+    141c:	c7 01       	movw	r24, r14
+    141e:	0e 94 01 08 	call	0x1002	; 0x1002 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj>
+		if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < (Config::SERVO_PPM_ZERO-Config::SERVO_PPM_MAX_COMMAND)) || (u16_delay > (Config::SERVO_PPM_ZERO+Config::SERVO_PPM_MAX_COMMAND))) )
+    1422:	29 81       	ldd	r18, Y+1	; 0x01
+    1424:	3a 81       	ldd	r19, Y+2	; 0x02
+    1426:	a9 01       	movw	r20, r18
+    1428:	4c 54       	subi	r20, 0x4C	; 76
+    142a:	54 40       	sbci	r21, 0x04	; 4
+    142c:	41 32       	cpi	r20, 0x21	; 33
+    142e:	53 40       	sbci	r21, 0x03	; 3
+    1430:	30 f0       	brcs	.+12     	; 0x143e <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x9a>
+		{
+			this ->report_error( Error_code::ERR_ALGORITHM );
+    1432:	68 e0       	ldi	r22, 0x08	; 8
+    1434:	c7 01       	movw	r24, r14
+    1436:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+			return true;
+    143a:	81 e0       	ldi	r24, 0x01	; 1
+    143c:	36 c0       	rjmp	.+108    	; 0x14aa <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x106>
+		}
 		//Accumulate delay inside accumulator
 		u16_accumulator += u16_delay;
-    115c:	29 81       	ldd	r18, Y+1	; 0x01
-    115e:	3a 81       	ldd	r19, Y+2	; 0x02
-    1160:	c2 0e       	add	r12, r18
-    1162:	d3 1e       	adc	r13, r19
-    1164:	13 c0       	rjmp	.+38     	; 0x118c <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xae>
+    143e:	c2 0e       	add	r12, r18
+    1440:	d3 1e       	adc	r13, r19
+    1442:	17 c0       	rjmp	.+46     	; 0x1472 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xce>
 	}
 	//Compute final delay and clear accumulator
 	else if (u8_index == Config::NUM_SERVOS)
-    1166:	12 30       	cpi	r17, 0x02	; 2
-    1168:	71 f4       	brne	.+28     	; 0x1186 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xa8>
+    1444:	12 30       	cpi	r17, 0x02	; 2
+    1446:	a1 f4       	brne	.+40     	; 0x1470 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xcc>
 	{
 		//If: the servo scan time exceed the PPM period
 		if (u16_accumulator >= Config::SERVO_PPM_PERIOD)
-    116a:	f0 e2       	ldi	r31, 0x20	; 32
-    116c:	cf 16       	cp	r12, r31
-    116e:	fe e4       	ldi	r31, 0x4E	; 78
-    1170:	df 06       	cpc	r13, r31
-    1172:	58 f4       	brcc	.+22     	; 0x118a <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xac>
+    1448:	90 e2       	ldi	r25, 0x20	; 32
+    144a:	c9 16       	cp	r12, r25
+    144c:	9e e4       	ldi	r25, 0x4E	; 78
+    144e:	d9 06       	cpc	r13, r25
+    1450:	30 f0       	brcs	.+12     	; 0x145e <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xba>
+		{
+			this ->report_error( Error_code::ERR_ALGORITHM );
+    1452:	68 e0       	ldi	r22, 0x08	; 8
+    1454:	c7 01       	movw	r24, r14
+    1456:	0e 94 24 06 	call	0xc48	; 0xc48 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeE>
+			u1_ret = true;
+    145a:	81 e0       	ldi	r24, 0x01	; 1
+    145c:	0a c0       	rjmp	.+20     	; 0x1472 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xce>
 		}
 		//If: scan time is good
 		else
 		{
 			//Final delay is meant to achieve the PPM period
 			u16_delay = Config::SERVO_PPM_PERIOD -u16_accumulator;
-    1174:	20 e2       	ldi	r18, 0x20	; 32
-    1176:	3e e4       	ldi	r19, 0x4E	; 78
-    1178:	2c 19       	sub	r18, r12
-    117a:	3d 09       	sbc	r19, r13
-    117c:	29 83       	std	Y+1, r18	; 0x01
-    117e:	3a 83       	std	Y+2, r19	; 0x02
+    145e:	20 e2       	ldi	r18, 0x20	; 32
+    1460:	3e e4       	ldi	r19, 0x4E	; 78
+    1462:	2c 19       	sub	r18, r12
+    1464:	3d 09       	sbc	r19, r13
+    1466:	29 83       	std	Y+1, r18	; 0x01
+    1468:	3a 83       	std	Y+2, r19	; 0x02
 			//Reset the accumulator for the next cycle
 			u16_accumulator = 0;	
-    1180:	c1 2c       	mov	r12, r1
-    1182:	d1 2c       	mov	r13, r1
-    1184:	03 c0       	rjmp	.+6      	; 0x118c <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xae>
+    146a:	c1 2c       	mov	r12, r1
+    146c:	d1 2c       	mov	r13, r1
+    146e:	01 c0       	rjmp	.+2      	; 0x1472 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xce>
 	}
 	//Algorithmic error
 	else
 	{
 		//Fail
 		u1_ret = true;	
-    1186:	81 e0       	ldi	r24, 0x01	; 1
-    1188:	01 c0       	rjmp	.+2      	; 0x118c <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xae>
-	{
-		//If: the servo scan time exceed the PPM period
-		if (u16_accumulator >= Config::SERVO_PPM_PERIOD)
-		{
-			//Fail
-			u1_ret = true;
-    118a:	81 e0       	ldi	r24, 0x01	; 1
-	{
-		//Fail
-		u1_ret = true;	
+    1470:	81 e0       	ldi	r24, 0x01	; 1
 	}
 	//If fail
 	if (u1_ret == true)
-    118c:	88 23       	and	r24, r24
-    118e:	21 f0       	breq	.+8      	; 0x1198 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xba>
+    1472:	88 23       	and	r24, r24
+    1474:	21 f0       	breq	.+8      	; 0x147e <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xda>
 	{
 		//SCRAM!!!
 		u1_ret = this -> emergency_stop();
-    1190:	c7 01       	movw	r24, r14
-    1192:	0e 94 8d 07 	call	0xf1a	; 0xf1a <_ZN9OrangeBot5Servo14emergency_stopEv>
+    1476:	c7 01       	movw	r24, r14
+    1478:	0e 94 ed 07 	call	0xfda	; 0xfda <_ZN9OrangeBot5Servo14emergency_stopEv>
 		return u1_ret;
-    1196:	16 c0       	rjmp	.+44     	; 0x11c4 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xe6>
+    147c:	16 c0       	rjmp	.+44     	; 0x14aa <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x106>
 	}
 	
 	//Program the timer with the desired delay. ISR will be called again when said delay has elapsed
 	u1_ret = this -> hal_timer_set_delay( u16_delay );
-    1198:	69 81       	ldd	r22, Y+1	; 0x01
-    119a:	7a 81       	ldd	r23, Y+2	; 0x02
-    119c:	c7 01       	movw	r24, r14
-    119e:	0e 94 5a 06 	call	0xcb4	; 0xcb4 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj>
+    147e:	69 81       	ldd	r22, Y+1	; 0x01
+    1480:	7a 81       	ldd	r23, Y+2	; 0x02
+    1482:	c7 01       	movw	r24, r14
+    1484:	0e 94 33 07 	call	0xe66	; 0xe66 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj>
 	//Fail
 	if (u1_ret == true)
-    11a2:	88 23       	and	r24, r24
-    11a4:	21 f0       	breq	.+8      	; 0x11ae <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xd0>
+    1488:	88 23       	and	r24, r24
+    148a:	21 f0       	breq	.+8      	; 0x1494 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xf0>
 	{
 		//SCRAM!!!
 		u1_ret = this -> emergency_stop();
-    11a6:	c7 01       	movw	r24, r14
-    11a8:	0e 94 8d 07 	call	0xf1a	; 0xf1a <_ZN9OrangeBot5Servo14emergency_stopEv>
+    148c:	c7 01       	movw	r24, r14
+    148e:	0e 94 ed 07 	call	0xfda	; 0xfda <_ZN9OrangeBot5Servo14emergency_stopEv>
 		return u1_ret;
-    11ac:	0b c0       	rjmp	.+22     	; 0x11c4 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xe6>
+    1492:	0b c0       	rjmp	.+22     	; 0x14aa <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x106>
 	}
 	//Success
 	else
 	{
 		//Write back accumulator
 		gu16_timer_sum = u16_accumulator;
-    11ae:	f7 01       	movw	r30, r14
-    11b0:	c3 8e       	std	Z+27, r12	; 0x1b
-    11b2:	d4 8e       	std	Z+28, r13	; 0x1c
+    1494:	f7 01       	movw	r30, r14
+    1496:	c3 8e       	std	Z+27, r12	; 0x1b
+    1498:	d4 8e       	std	Z+28, r13	; 0x1c
 	}
 	//Next scan. TOP is the last number counted before reset
 	u8_index = AT_TOP_INC( u8_index, Config::NUM_SERVOS );
-    11b4:	12 30       	cpi	r17, 0x02	; 2
-    11b6:	11 f0       	breq	.+4      	; 0x11bc <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xde>
-    11b8:	1f 5f       	subi	r17, 0xFF	; 255
-    11ba:	01 c0       	rjmp	.+2      	; 0x11be <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xe0>
-    11bc:	10 e0       	ldi	r17, 0x00	; 0
+    149a:	12 30       	cpi	r17, 0x02	; 2
+    149c:	11 f0       	breq	.+4      	; 0x14a2 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xfe>
+    149e:	1f 5f       	subi	r17, 0xFF	; 255
+    14a0:	01 c0       	rjmp	.+2      	; 0x14a4 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x100>
+    14a2:	10 e0       	ldi	r17, 0x00	; 0
 	//Update the scan index
 	this -> gu8_index = u8_index;
-    11be:	f7 01       	movw	r30, r14
-    11c0:	10 83       	st	Z, r17
+    14a4:	f7 01       	movw	r30, r14
+    14a6:	10 83       	st	Z, r17
 
 	///--------------------------------------------------------------------------
 	///	RETURN
 	///--------------------------------------------------------------------------
 	
 	return false;	//OK
-    11c2:	80 e0       	ldi	r24, 0x00	; 0
+    14a8:	80 e0       	ldi	r24, 0x00	; 0
 }   //end public method: hal_timer_isr
-    11c4:	0f 90       	pop	r0
-    11c6:	0f 90       	pop	r0
-    11c8:	df 91       	pop	r29
-    11ca:	cf 91       	pop	r28
-    11cc:	1f 91       	pop	r17
-    11ce:	0f 91       	pop	r16
-    11d0:	ff 90       	pop	r15
-    11d2:	ef 90       	pop	r14
-    11d4:	df 90       	pop	r13
-    11d6:	cf 90       	pop	r12
-    11d8:	08 95       	ret
+    14aa:	0f 90       	pop	r0
+    14ac:	0f 90       	pop	r0
+    14ae:	df 91       	pop	r29
+    14b0:	cf 91       	pop	r28
+    14b2:	1f 91       	pop	r17
+    14b4:	0f 91       	pop	r16
+    14b6:	ff 90       	pop	r15
+    14b8:	ef 90       	pop	r14
+    14ba:	df 90       	pop	r13
+    14bc:	cf 90       	pop	r12
+    14be:	08 95       	ret
 
-000011da <__udivmodqi4>:
-    11da:	99 1b       	sub	r25, r25
-    11dc:	79 e0       	ldi	r23, 0x09	; 9
-    11de:	04 c0       	rjmp	.+8      	; 0x11e8 <__udivmodqi4_ep>
+000014c0 <__udivmodqi4>:
+    14c0:	99 1b       	sub	r25, r25
+    14c2:	79 e0       	ldi	r23, 0x09	; 9
+    14c4:	04 c0       	rjmp	.+8      	; 0x14ce <__udivmodqi4_ep>
 
-000011e0 <__udivmodqi4_loop>:
-    11e0:	99 1f       	adc	r25, r25
-    11e2:	96 17       	cp	r25, r22
-    11e4:	08 f0       	brcs	.+2      	; 0x11e8 <__udivmodqi4_ep>
-    11e6:	96 1b       	sub	r25, r22
+000014c6 <__udivmodqi4_loop>:
+    14c6:	99 1f       	adc	r25, r25
+    14c8:	96 17       	cp	r25, r22
+    14ca:	08 f0       	brcs	.+2      	; 0x14ce <__udivmodqi4_ep>
+    14cc:	96 1b       	sub	r25, r22
 
-000011e8 <__udivmodqi4_ep>:
-    11e8:	88 1f       	adc	r24, r24
-    11ea:	7a 95       	dec	r23
-    11ec:	c9 f7       	brne	.-14     	; 0x11e0 <__udivmodqi4_loop>
-    11ee:	80 95       	com	r24
-    11f0:	08 95       	ret
+000014ce <__udivmodqi4_ep>:
+    14ce:	88 1f       	adc	r24, r24
+    14d0:	7a 95       	dec	r23
+    14d2:	c9 f7       	brne	.-14     	; 0x14c6 <__udivmodqi4_loop>
+    14d4:	80 95       	com	r24
+    14d6:	08 95       	ret
 
-000011f2 <__udivmodhi4>:
-    11f2:	aa 1b       	sub	r26, r26
-    11f4:	bb 1b       	sub	r27, r27
-    11f6:	51 e1       	ldi	r21, 0x11	; 17
-    11f8:	07 c0       	rjmp	.+14     	; 0x1208 <__udivmodhi4_ep>
+000014d8 <__udivmodhi4>:
+    14d8:	aa 1b       	sub	r26, r26
+    14da:	bb 1b       	sub	r27, r27
+    14dc:	51 e1       	ldi	r21, 0x11	; 17
+    14de:	07 c0       	rjmp	.+14     	; 0x14ee <__udivmodhi4_ep>
 
-000011fa <__udivmodhi4_loop>:
-    11fa:	aa 1f       	adc	r26, r26
-    11fc:	bb 1f       	adc	r27, r27
-    11fe:	a6 17       	cp	r26, r22
-    1200:	b7 07       	cpc	r27, r23
-    1202:	10 f0       	brcs	.+4      	; 0x1208 <__udivmodhi4_ep>
-    1204:	a6 1b       	sub	r26, r22
-    1206:	b7 0b       	sbc	r27, r23
+000014e0 <__udivmodhi4_loop>:
+    14e0:	aa 1f       	adc	r26, r26
+    14e2:	bb 1f       	adc	r27, r27
+    14e4:	a6 17       	cp	r26, r22
+    14e6:	b7 07       	cpc	r27, r23
+    14e8:	10 f0       	brcs	.+4      	; 0x14ee <__udivmodhi4_ep>
+    14ea:	a6 1b       	sub	r26, r22
+    14ec:	b7 0b       	sbc	r27, r23
 
-00001208 <__udivmodhi4_ep>:
-    1208:	88 1f       	adc	r24, r24
-    120a:	99 1f       	adc	r25, r25
-    120c:	5a 95       	dec	r21
-    120e:	a9 f7       	brne	.-22     	; 0x11fa <__udivmodhi4_loop>
-    1210:	80 95       	com	r24
-    1212:	90 95       	com	r25
-    1214:	bc 01       	movw	r22, r24
-    1216:	cd 01       	movw	r24, r26
-    1218:	08 95       	ret
+000014ee <__udivmodhi4_ep>:
+    14ee:	88 1f       	adc	r24, r24
+    14f0:	99 1f       	adc	r25, r25
+    14f2:	5a 95       	dec	r21
+    14f4:	a9 f7       	brne	.-22     	; 0x14e0 <__udivmodhi4_loop>
+    14f6:	80 95       	com	r24
+    14f8:	90 95       	com	r25
+    14fa:	bc 01       	movw	r22, r24
+    14fc:	cd 01       	movw	r24, r26
+    14fe:	08 95       	ret
 
-0000121a <__udivmodsi4>:
-    121a:	a1 e2       	ldi	r26, 0x21	; 33
-    121c:	1a 2e       	mov	r1, r26
-    121e:	aa 1b       	sub	r26, r26
-    1220:	bb 1b       	sub	r27, r27
-    1222:	fd 01       	movw	r30, r26
-    1224:	0d c0       	rjmp	.+26     	; 0x1240 <__udivmodsi4_ep>
+00001500 <__udivmodsi4>:
+    1500:	a1 e2       	ldi	r26, 0x21	; 33
+    1502:	1a 2e       	mov	r1, r26
+    1504:	aa 1b       	sub	r26, r26
+    1506:	bb 1b       	sub	r27, r27
+    1508:	fd 01       	movw	r30, r26
+    150a:	0d c0       	rjmp	.+26     	; 0x1526 <__udivmodsi4_ep>
 
-00001226 <__udivmodsi4_loop>:
-    1226:	aa 1f       	adc	r26, r26
-    1228:	bb 1f       	adc	r27, r27
-    122a:	ee 1f       	adc	r30, r30
-    122c:	ff 1f       	adc	r31, r31
-    122e:	a2 17       	cp	r26, r18
-    1230:	b3 07       	cpc	r27, r19
-    1232:	e4 07       	cpc	r30, r20
-    1234:	f5 07       	cpc	r31, r21
-    1236:	20 f0       	brcs	.+8      	; 0x1240 <__udivmodsi4_ep>
-    1238:	a2 1b       	sub	r26, r18
-    123a:	b3 0b       	sbc	r27, r19
-    123c:	e4 0b       	sbc	r30, r20
-    123e:	f5 0b       	sbc	r31, r21
+0000150c <__udivmodsi4_loop>:
+    150c:	aa 1f       	adc	r26, r26
+    150e:	bb 1f       	adc	r27, r27
+    1510:	ee 1f       	adc	r30, r30
+    1512:	ff 1f       	adc	r31, r31
+    1514:	a2 17       	cp	r26, r18
+    1516:	b3 07       	cpc	r27, r19
+    1518:	e4 07       	cpc	r30, r20
+    151a:	f5 07       	cpc	r31, r21
+    151c:	20 f0       	brcs	.+8      	; 0x1526 <__udivmodsi4_ep>
+    151e:	a2 1b       	sub	r26, r18
+    1520:	b3 0b       	sbc	r27, r19
+    1522:	e4 0b       	sbc	r30, r20
+    1524:	f5 0b       	sbc	r31, r21
 
-00001240 <__udivmodsi4_ep>:
-    1240:	66 1f       	adc	r22, r22
-    1242:	77 1f       	adc	r23, r23
-    1244:	88 1f       	adc	r24, r24
-    1246:	99 1f       	adc	r25, r25
-    1248:	1a 94       	dec	r1
-    124a:	69 f7       	brne	.-38     	; 0x1226 <__udivmodsi4_loop>
-    124c:	60 95       	com	r22
-    124e:	70 95       	com	r23
-    1250:	80 95       	com	r24
-    1252:	90 95       	com	r25
-    1254:	9b 01       	movw	r18, r22
-    1256:	ac 01       	movw	r20, r24
-    1258:	bd 01       	movw	r22, r26
-    125a:	cf 01       	movw	r24, r30
-    125c:	08 95       	ret
+00001526 <__udivmodsi4_ep>:
+    1526:	66 1f       	adc	r22, r22
+    1528:	77 1f       	adc	r23, r23
+    152a:	88 1f       	adc	r24, r24
+    152c:	99 1f       	adc	r25, r25
+    152e:	1a 94       	dec	r1
+    1530:	69 f7       	brne	.-38     	; 0x150c <__udivmodsi4_loop>
+    1532:	60 95       	com	r22
+    1534:	70 95       	com	r23
+    1536:	80 95       	com	r24
+    1538:	90 95       	com	r25
+    153a:	9b 01       	movw	r18, r22
+    153c:	ac 01       	movw	r20, r24
+    153e:	bd 01       	movw	r22, r26
+    1540:	cf 01       	movw	r24, r30
+    1542:	08 95       	ret
 
-0000125e <__tablejump2__>:
-    125e:	ee 0f       	add	r30, r30
-    1260:	ff 1f       	adc	r31, r31
-    1262:	05 90       	lpm	r0, Z+
-    1264:	f4 91       	lpm	r31, Z
-    1266:	e0 2d       	mov	r30, r0
-    1268:	09 94       	ijmp
+00001544 <__tablejump2__>:
+    1544:	ee 0f       	add	r30, r30
+    1546:	ff 1f       	adc	r31, r31
+    1548:	05 90       	lpm	r0, Z+
+    154a:	f4 91       	lpm	r31, Z
+    154c:	e0 2d       	mov	r30, r0
+    154e:	09 94       	ijmp
 
-0000126a <__umulhisi3>:
-    126a:	a2 9f       	mul	r26, r18
-    126c:	b0 01       	movw	r22, r0
-    126e:	b3 9f       	mul	r27, r19
-    1270:	c0 01       	movw	r24, r0
-    1272:	a3 9f       	mul	r26, r19
-    1274:	70 0d       	add	r23, r0
-    1276:	81 1d       	adc	r24, r1
-    1278:	11 24       	eor	r1, r1
-    127a:	91 1d       	adc	r25, r1
-    127c:	b2 9f       	mul	r27, r18
-    127e:	70 0d       	add	r23, r0
-    1280:	81 1d       	adc	r24, r1
-    1282:	11 24       	eor	r1, r1
-    1284:	91 1d       	adc	r25, r1
-    1286:	08 95       	ret
+00001550 <__umulhisi3>:
+    1550:	a2 9f       	mul	r26, r18
+    1552:	b0 01       	movw	r22, r0
+    1554:	b3 9f       	mul	r27, r19
+    1556:	c0 01       	movw	r24, r0
+    1558:	a3 9f       	mul	r26, r19
+    155a:	70 0d       	add	r23, r0
+    155c:	81 1d       	adc	r24, r1
+    155e:	11 24       	eor	r1, r1
+    1560:	91 1d       	adc	r25, r1
+    1562:	b2 9f       	mul	r27, r18
+    1564:	70 0d       	add	r23, r0
+    1566:	81 1d       	adc	r24, r1
+    1568:	11 24       	eor	r1, r1
+    156a:	91 1d       	adc	r25, r1
+    156c:	08 95       	ret
 
-00001288 <__do_global_dtors>:
-    1288:	10 e0       	ldi	r17, 0x00	; 0
-    128a:	c9 e5       	ldi	r28, 0x59	; 89
-    128c:	d0 e0       	ldi	r29, 0x00	; 0
-    128e:	04 c0       	rjmp	.+8      	; 0x1298 <__do_global_dtors+0x10>
-    1290:	fe 01       	movw	r30, r28
-    1292:	0e 94 2f 09 	call	0x125e	; 0x125e <__tablejump2__>
-    1296:	21 96       	adiw	r28, 0x01	; 1
-    1298:	ca 35       	cpi	r28, 0x5A	; 90
-    129a:	d1 07       	cpc	r29, r17
-    129c:	c9 f7       	brne	.-14     	; 0x1290 <__do_global_dtors+0x8>
-    129e:	f8 94       	cli
+0000156e <__do_global_dtors>:
+    156e:	10 e0       	ldi	r17, 0x00	; 0
+    1570:	c9 e5       	ldi	r28, 0x59	; 89
+    1572:	d0 e0       	ldi	r29, 0x00	; 0
+    1574:	04 c0       	rjmp	.+8      	; 0x157e <__do_global_dtors+0x10>
+    1576:	fe 01       	movw	r30, r28
+    1578:	0e 94 a2 0a 	call	0x1544	; 0x1544 <__tablejump2__>
+    157c:	21 96       	adiw	r28, 0x01	; 1
+    157e:	ca 35       	cpi	r28, 0x5A	; 90
+    1580:	d1 07       	cpc	r29, r17
+    1582:	c9 f7       	brne	.-14     	; 0x1576 <__do_global_dtors+0x8>
+    1584:	f8 94       	cli
 
-000012a0 <__stop_program>:
-    12a0:	ff cf       	rjmp	.-2      	; 0x12a0 <__stop_program>
+00001586 <__stop_program>:
+    1586:	ff cf       	rjmp	.-2      	; 0x1586 <__stop_program>
