@@ -12,3 +12,6 @@ Assembly
 **OrangeHat Firmware**  
 LCD Display (click on image to see video on youtube)  
 [![LCD Display](https://user-images.githubusercontent.com/30684972/147383496-393940e3-d7eb-4baa-a7c9-940535a397f4.jpg)](https://youtu.be/4nYxutRMj2Q)  
+
+Eight Servomotors Demo (click on image to see video on youtube)  
+[![Eight Servomotor Demo](https://user-images.githubusercontent.com/30684972/148192421-6b130518-2c06-4834-8d54-1e0173dce9de.jpg)](https://youtu.be/TLqbNKa-QK0)  
