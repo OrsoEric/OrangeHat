@@ -2,23 +2,37 @@
 **	INCLUDE
 ****************************************************************************/
 
-//type definition using the bit width and signedness
+//Boilerplate. Inhibit implementation when calling
+#define USER_INIBITH_IMPLEMENTATION
+
+
+//type definition using the bit width and sign
 #include <stdint.h>
 //define the ISR routune, ISR vector, and the sei() cli() function
 #include <avr/interrupt.h>
 //name all the register and bit
 #include <avr/io.h>
-
 //General purpose macros
 #include "at_utils.h"
 //AT4809 PORT macros definitions
 #include "at4809_port.h"
-
+//Common definitions
 #include "global.h"
+//hard coded delay
+#include <util/delay.h>
+
+#include "servo.cpp"
 
 /****************************************************************************
 **GLOBAL VARS
 ****************************************************************************/
+
+	///----------------------------------------------------------------------
+	///	SERVO DRIVER
+	///----------------------------------------------------------------------
+
+//Instance of the servo controller class
+extern OrangeBot::Servo gc_servo;
 
 /****************************************************************************
 ** INTERRUPT SERVICE ROUTINE
@@ -95,4 +109,41 @@ ISR( RTC_PIT_vect )
 	RTC.PITINTFLAGS = RTC_PI_bm;
 }
 
+/***************************************************************************/
+//! @brief HAL ISR
+//! \n TCA0_OVF_vect | void
+/***************************************************************************/
+//! @return void
+//! @details
+//! \n	TA0 Overflow Interrupt
+//! \n	TA0 is set as a timeout timer.
+//! \n	Every time the timer expires, the driver either rearms it or doesn't
+//! \n	The ISR scans in sequence all the Servomotors to generate 16b PPM signals
+//! \n		Algorithm:
+//! \n	Allowed to run?
+//! \n	N: stop timer
+//! \n	Next Servo
+//! \n	>Set appropriate Servo IO
+//! \n	>First Servo: Compute OCR from target, actual and speed
+//! \n	>Last Servo Done: set PER to the time needed to do 20ms
+//! \n	>Other Servo: Set OCR of said servo
+//! \n
+/***************************************************************************/
+
+ISR( TCA0_OVF_vect )
+{
+	//----------------------------------------------------------------
+	//	VARS
+	//----------------------------------------------------------------
+	
+	//Execute the servo driver ISR
+	gc_servo.hal_timer_isr();
+	
+	//----------------------------------------------------------------
+	//	RETURN
+	//----------------------------------------------------------------
+	
+	//Manually clear the interrupt flag
+	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
+}
 

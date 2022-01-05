@@ -17,6 +17,8 @@
 **		-std=c++11					|
 **		-fno-threadsafe-statics		| disable mutex around static local variables
 **		-fkeep-inline-functions		| allow use of inline methods outside of .h for PidS16
+**	Compiler Symbols: F_CPU=20000000
+**		-D"F_CPU=20000000"			| <util/delay.h> hardwired delay
 ****************************************************************/
 
 /****************************************************************
@@ -40,7 +42,11 @@
 **	Show a number that changes twice a second: SUCCESS
 **	TODO: I learned a lot about C++ since I wrote the lcd library. Rewrite the LCD library as class.
 **	SERVO PINs. Toggle power ON and OFF to test power delivery
-**
+**		2021-12-31
+**	soft start encapsulated inside servo.hpp class
+**		2021-01-05
+**	servo driver in a working state
+**	demo with generation of eight random position and speeds
 ****************************************************************/
 
 /****************************************************************
@@ -92,8 +98,13 @@
 **	INCLUDES
 ****************************************************************/
 
+//Boilerplate. Inhibit implementation when calling
+#define USER_INIBITH_IMPLEMENTATION
+
 //type definition using the bit width and sign
 #include <stdint.h>
+//RNG
+#include <stdlib.h>
 //define the ISR routune, ISR vector, and the sei() cli() function
 #include <avr/interrupt.h>
 //name all the register and bit
@@ -104,10 +115,14 @@
 #include "at4809_port.h"
 //
 #include "global.h"
-//hard delay
+//hard coded delay
 #include <util/delay.h>
+
+
 //Driver for 16X2LCD controller KS0066U with CDM1602K display
 #include "at_lcd.h"
+
+#include "servo.cpp"
 
 /****************************************************************
 ** FUNCTION PROTOTYPES
@@ -121,6 +136,13 @@
 volatile Isr_flags g_isr_flags = { 0 };
 //Error code of the application
 volatile Error_code ge_error_code = Error_code::OK;
+
+	///----------------------------------------------------------------------
+	///	SERVO DRIVER
+	///----------------------------------------------------------------------
+
+//Instance of the servo controller class
+OrangeBot::Servo gc_servo; 
 
 /****************************************************************************
 **  Function
@@ -148,12 +170,9 @@ int main(void)
 	
 	//Power the LCD display
 	SET_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
-	
 	_delay_ms( 500.0 );
-	
 	//Power the LCD display
 	CLEAR_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
-	
 	_delay_ms( 500.0 );
 	
 	//Initialize
@@ -161,6 +180,17 @@ int main(void)
 	
 	//Welcome message
 	lcd_print_str( LCD_POS( 0, 0 ), "OrangeHat" );
+	
+	//Construct and initialize the servo class
+	gc_servo = OrangeBot::Servo();
+	//Give power to servos and starts the driver
+	gc_servo.power( true );
+	
+	//Activate interrupts
+	sei();
+	
+	//Initialize random number generator
+	srand( 0 );
 	
 	//----------------------------------------------------------------
 	//	BODY
@@ -188,7 +218,6 @@ int main(void)
 			//This paradigm solve lots of timing problems of the direct call version.
 			//You can print a million time a second, and the driver still won't bug out
 			lcd_update();
-			
 		}
 		
 		//----------------------------------------------------------------
@@ -216,14 +245,33 @@ int main(void)
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
 			
-			if (cnt > 10)
+			//SERVO DEMO: feed servo channels with random position and speeds
+			//CHANNEL0
+			if (cnt % 4 == 0)
 			{
-				//CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+				//Move to -100us at 200us/s
+				gc_servo.set_servo( 0, -200, 1000 );
+			}
+			else if (cnt % 4 == 2)
+			{
+				gc_servo.set_servo( 0, +200 );
 			}
 			else
 			{
-				SET_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+				//move to +100us at 400us/s
+				gc_servo.set_servo( 0, 0 );
 			}
+			
+			for (uint8_t u8_cnt = 1; u8_cnt < OrangeBot::Servo::Config::NUM_SERVOS; u8_cnt++)
+			{
+				//Generate a random position
+				uint16_t u16_position = (rand() %(OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND *2)) -OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND;
+				//Generate a random speed in increments of 50
+				uint16_t u16_speed = (((rand() %8)+1) *50 );
+				//Ask the driver to execute the command
+				gc_servo.set_servo( u8_cnt, u16_position, u16_speed );
+			}
+			
 		}
 		
 	}	//End: Main loop

@@ -132,8 +132,6 @@
 **	INCLUDE
 ****************************************************************************/
 
-#define F_CPU 20000000
-
 #include <stdint.h>
 #include <avr/io.h>
 #include <util/delay.h>
@@ -141,7 +139,7 @@
 #include "at_utils.h"
 #include "debug.h"
 #include "at_lcd.h"
-#include "embedded_string.hpp"
+#include "embedded_string.cpp"
 
 /****************************************************************************
 **	GLOBAL VARIABILE

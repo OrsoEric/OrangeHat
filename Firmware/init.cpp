@@ -2,7 +2,7 @@
 **	INCLUDES
 ****************************************************************************/
 
-//type definition using the bit width and signedness
+//type definition using the bit width and sign
 #include <stdint.h>
 //define the ISR routune, ISR vector, and the sei() cli() function
 #include <avr/interrupt.h>
@@ -82,9 +82,6 @@ void init(void)
 	
 	//Initialize RTC timer as Periodic interrupt source: RTC_PIT_vect
 	init_rtc();
-	
-	//Activate interrupts
-	sei();
 	
 	//----------------------------------------------------------------
 	//	RETURN
@@ -230,7 +227,7 @@ void init_pin( void )
 	//!	PE7				: 
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_E_CONFIG(	PIN_L,	PIN_L,	PIN_L,	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
+	PORT_E_CONFIG(	PIN_L,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z );
 
 	//----------------------------------------------------------------
 	//!	PORTF
