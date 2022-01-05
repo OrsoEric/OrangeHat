@@ -169,14 +169,14 @@ class Servo
 			//IO_PWR_PORT = PORTD,
 			IO_PWR_PIN = 7,
 			//Number of Servo the driver is meant to drive
-			NUM_SERVOS = 2,
+			NUM_SERVOS = 8,
 			
 				//HAL Timer Parameters
 			//Prescaler to the main timer clock
 			HAL_TIMER_PRESCALER = 16,
 			HAL_TIMER_MAX_CNT = UINT16_MAX,
 			//Resolution of a single count in nanoseconds per count [ns/cnt]. Needed to convert between time and delay to be programmed inside the hardware timer
-			//HAL_TIMER_RESOLUTION = ((1000000000UL /F_CPU) /HAL_TIMER_PRESCALER ),
+			//HAL_TIMER_RESOLUTION = ((1000000000UL /F_CPU) /HAL_TIMER_PRESCALER ), //BUGGED
 			HAL_TIMER_RESOLUTION = 800,
 			
 				//Servomotor PPM Parameters
@@ -184,7 +184,7 @@ class Servo
 			SERVO_PPM_ZERO = 1500,
 			//Period of a single servo waveform in microseconds [us]
 			SERVO_PPM_PERIOD = 20000,
-			//SERVO_PPM_FREQUENCY = 1000000/Config::SERVO_PPM_PERIOD,
+			//SERVO_PPM_FREQUENCY = 1000000/Config::SERVO_PPM_PERIOD, //BUGGED
 			SERVO_PPM_FREQUENCY = 50,
 			//Deviation from the deadtime that gives either a full forward or a full backward command in microseconds [us]
 			SERVO_PPM_MAX_COMMAND = 400,
@@ -377,10 +377,6 @@ class Servo
         bool hal_init_io( void );
 		//HAL Driver. Initialize TA0 to launch an ISR when a given time is expired a single time
 		bool hal_init_ta0_timeout_mode( uint16_t iu16_top );
-        //Set the IO level of a given servo pin to a given value
-        //bool hal_servo_io( uint8_t iu8_index, bool iu1_value );
-        //HAL driver. Initialize 
-        //bool hal_init_timer( void );
 		//Fixed Delay
 		bool hal_delay_us( void );
 		//Convert from a delay in microseconds to a delay in timer counts that can be programmed inside the timer
@@ -769,9 +765,6 @@ bool Servo::power( bool iu1_powered )
 		//Start the ISR
 		this -> hal_run_isr( true );
 	}
-
-
-
 
 	///--------------------------------------------------------------------------
 	///	RETURN

@@ -44,7 +44,9 @@
 **	SERVO PINs. Toggle power ON and OFF to test power delivery
 **		2021-12-31
 **	soft start encapsulated inside servo.hpp class
-**
+**		2021-01-05
+**	servo driver in a working state
+**	demo with generation of eight random position and speeds
 ****************************************************************/
 
 /****************************************************************
@@ -101,6 +103,8 @@
 
 //type definition using the bit width and sign
 #include <stdint.h>
+//RNG
+#include <stdlib.h>
 //define the ISR routune, ISR vector, and the sei() cli() function
 #include <avr/interrupt.h>
 //name all the register and bit
@@ -185,6 +189,9 @@ int main(void)
 	//Activate interrupts
 	sei();
 	
+	//Initialize random number generator
+	srand( 0 );
+	
 	//----------------------------------------------------------------
 	//	BODY
 	//----------------------------------------------------------------
@@ -238,16 +245,33 @@ int main(void)
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
 			
+			//SERVO DEMO: feed servo channels with random position and speeds
+			//CHANNEL0
 			if (cnt % 4 == 0)
 			{
 				//Move to -100us at 200us/s
-				gc_servo.set_servo( 0, -100, 200 );
+				gc_servo.set_servo( 0, -200, 1000 );
+			}
+			else if (cnt % 4 == 2)
+			{
+				gc_servo.set_servo( 0, +200 );
 			}
 			else
 			{
 				//move to +100us at 400us/s
-				gc_servo.set_servo( 0, 100, 400 );
+				gc_servo.set_servo( 0, 0 );
 			}
+			
+			for (uint8_t u8_cnt = 1; u8_cnt < OrangeBot::Servo::Config::NUM_SERVOS; u8_cnt++)
+			{
+				//Generate a random position
+				uint16_t u16_position = (rand() %(OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND *2)) -OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND;
+				//Generate a random speed in increments of 50
+				uint16_t u16_speed = (((rand() %8)+1) *50 );
+				//Ask the driver to execute the command
+				gc_servo.set_servo( u8_cnt, u16_position, u16_speed );
+			}
+			
 		}
 		
 	}	//End: Main loop
