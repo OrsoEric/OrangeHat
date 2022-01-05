@@ -238,7 +238,7 @@ int main(void)
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
 			
-			if (cnt % 2 == 0)
+			if (cnt % 4 == 0)
 			{
 				//Move to -100us at 200us/s
 				gc_servo.set_servo( 0, -100, 200 );

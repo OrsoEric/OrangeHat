@@ -212,7 +212,7 @@ class Servo
 			ERR_DELAY_OVERRUN,	//The programmed delay to generate the PPM signal has been exceeded
 			ERR_OVERFLOW,		//Overflow occurred during calculations
 			ERR_INPUT_OOB,		//Function received parameters out of range
-			ERR_ALGORITHM,		//Algorithmic error. Internal vars are inconsistent or a piace of code that shouldn't fail has failed
+			ERR_ALGORITHM,		//Algorithmic error. Internal vars are inconsistent or a piece of code that shouldn't fail has failed
             RECOVERY_FAIL,  //error_recovery() failed to recover from an error
         } Error_code;
 
@@ -222,6 +222,13 @@ class Servo
         **********************************************************************************************************************************************************
         *********************************************************************************************************************************************************/
         
+		//! @brief Error Reporter. Error code and line number where error occurred
+		typedef struct _Error_report
+		{
+			Error_code e_error_code;
+			uint16_t u16_line_number;
+		} Error_report;
+		
 		//! @brief Internal timer count vars in microseconds, the drivers keep them updated
 		typedef struct _Timer
 		{
@@ -404,7 +411,7 @@ class Servo
         *********************************************************************************************************************************************************/
         
         //Report an error. return false: OK | true: Unknown error code 
-        bool report_error( Error_code error_code_tmp );
+        bool report_error( Error_code error_code_tmp, uint16_t u16_line_number );
         //Tries to recover from an error. Automatically called by get_error. return false = OK | true = fail
         bool error_recovery( void );
 		//Blocking hardwired version of the soft start method using delay and direct control of IOs
@@ -435,8 +442,7 @@ class Servo
 		//Sum of all the delays over a servo scan. Used to compute the final delay to get to the period
 		uint16_t gu16_timer_sum;
         //! @brief Error code of the class
-        Error_code g_error;
-
+		Error_report gst_error;
 };	//End Class: Servo
 
 //BOILERPLATE: when including the class as definition, the bits not needed are excluded by saying that the file only needs the definition
@@ -534,7 +540,7 @@ inline Servo::Error_code Servo::get_error( void )
     ///--------------------------------------------------------------------------
 
     //Fetch error
-    Error_code err_code = this -> g_error;
+    Error_code err_code = this -> gst_error.e_error_code;
     //Try to recover from error
     bool f_ret = this -> error_recovery();
     //If: failed to recover
@@ -577,13 +583,13 @@ bool Servo::set_servo( uint8_t iu8_index, int16_t is16_pos )
 	//If Servo index is OOB
 	if ((Config::SAFETY_CHECK == true) && ((iu8_index < 0) || (iu8_index >= Config::NUM_SERVOS)))
 	{
-		this -> report_error( Error_code::ERR_INPUT_OOB );
+		this -> report_error( Error_code::ERR_INPUT_OOB, __LINE__  );
 		return true;
 	}
 	//If position is OOB
 	if ((Config::SAFETY_CHECK == true) && ((is16_pos < -(int16_t)Config::SERVO_PPM_MAX_COMMAND) || (is16_pos > (int16_t)Config::SERVO_PPM_MAX_COMMAND)))
 	{
-		this -> report_error( Error_code::ERR_INPUT_OOB );
+		this -> report_error( Error_code::ERR_INPUT_OOB, __LINE__  );
 		return true;
 	}
 	
@@ -626,13 +632,13 @@ bool Servo::set_servo( uint8_t iu8_index, int16_t is16_pos, uint16_t iu16_spd )
 	//If Servo index is OOB
 	if ((Config::SAFETY_CHECK == true) && ((iu8_index < 0) || (iu8_index >= Config::NUM_SERVOS)))
 	{
-		this -> report_error( Error_code::ERR_INPUT_OOB );
+		this -> report_error( Error_code::ERR_INPUT_OOB, __LINE__  );
 		return true;
 	}
 	//If position is OOB
 	if ((Config::SAFETY_CHECK == true) && ((is16_pos < -(int16_t)Config::SERVO_PPM_MAX_COMMAND) || (is16_pos > (int16_t)Config::SERVO_PPM_MAX_COMMAND)))
 	{
-		this -> report_error( Error_code::ERR_INPUT_OOB );
+		this -> report_error( Error_code::ERR_INPUT_OOB, __LINE__  );
 		return true;
 	}
 	
@@ -695,21 +701,21 @@ bool Servo::init( void )
 	u1_ret |= this -> init_class_vars();
 	if (u1_ret == true)
 	{
-		this -> report_error( Error_code::ERR_VAR_INIT );
+		this -> report_error( Error_code::ERR_VAR_INIT, __LINE__  );
 	}
 
 	//Initialize the IOs
 	u1_ret |= this -> hal_init_io();
 	if (u1_ret == true)
 	{
-		this -> report_error( Error_code::ERR_HAL_INIT );
+		this -> report_error( Error_code::ERR_HAL_INIT, __LINE__  );
 	}
 	
 	//Initialize the TA0
-	u1_ret |= this -> hal_init_ta0_timeout_mode( 24999 );
+	u1_ret |= this -> hal_init_ta0_timeout_mode( 0 );
 	if (u1_ret == true)
 	{
-		this -> report_error( Error_code::ERR_TA0_INIT );
+		this -> report_error( Error_code::ERR_TA0_INIT, __LINE__  );
 	}
 
 	//Set all servos to their dead time
@@ -821,7 +827,7 @@ bool Servo::hal_servo_io( uint8_t iu8_servo_index, bool iu1_io_value )
 			SET_BIT_VALUE( PORTF.OUT, 3, iu1_io_value );
 			break;
 		default:
-			this -> report_error( Error_code::ERR_BAD_SERVO_INDEX );
+			this -> report_error( Error_code::ERR_BAD_SERVO_INDEX, __LINE__  );
 			return true;
 	}
 
@@ -908,9 +914,9 @@ bool Servo::hal_timer_isr( void )
 	{
 		//Driver takes care of updating from user command, maintaining servo status and computing what the next delay is to be
 		u1_ret = this -> compute_servo_delay( u8_index, u16_delay );
-		if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < (Config::SERVO_PPM_ZERO-Config::SERVO_PPM_MAX_COMMAND)) || (u16_delay > (Config::SERVO_PPM_ZERO+Config::SERVO_PPM_MAX_COMMAND))) )
+		if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay > Config::SERVO_PPM_MAX_PULSE)) )
 		{
-			this ->report_error( Error_code::ERR_ALGORITHM );
+			this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
 			return true;
 		}
 		//Accumulate delay inside accumulator
@@ -922,7 +928,7 @@ bool Servo::hal_timer_isr( void )
 		//If: the servo scan time exceed the PPM period
 		if (u16_accumulator >= Config::SERVO_PPM_PERIOD)
 		{
-			this ->report_error( Error_code::ERR_ALGORITHM );
+			this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
 			u1_ret = true;
 		}
 		//If: scan time is good
@@ -1293,7 +1299,7 @@ uint16_t Servo::hal_microseconds_to_counts( uint16_t iu16_microseconds )
 	//Detect overflow. Timer is 16b
 	if (u32_tmp >= (Config::HAL_TIMER_MAX_CNT -1))
 	{
-		this -> report_error( Error_code::ERR_OVERFLOW );
+		this -> report_error( Error_code::ERR_OVERFLOW, __LINE__  );
 		u16_timer_cnt = UINT16_MAX;
 	}
 	else
@@ -1327,9 +1333,9 @@ bool Servo::hal_timer_set_delay( uint16_t iu16_microseconds )
 	///--------------------------------------------------------------------------
 	
 	//If: delay is out of range
-	if ((Config::SAFETY_CHECK == true) && ( (iu16_microseconds < (Config::SERVO_PPM_ZERO -Config::SERVO_PPM_MAX_COMMAND)) || (iu16_microseconds > Config::SERVO_PPM_PERIOD) ))
+	if ((Config::SAFETY_CHECK == true) && ( (iu16_microseconds < Config::SERVO_PPM_MIN_PULSE) || (iu16_microseconds > Config::SERVO_PPM_PERIOD) ))
 	{
-		this -> report_error( Error_code::ERR_INPUT_OOB );
+		this -> report_error( Error_code::ERR_INPUT_OOB, __LINE__  );
 		return true;
 	}
 	
@@ -1343,17 +1349,17 @@ bool Servo::hal_timer_set_delay( uint16_t iu16_microseconds )
 	//Fetch previous count
 	uint16_t u16_previous_overcount = TCA0.SINGLE.CNT;
 	//Convert from microseconds to timer counts
-	uint16_t u16_timer_count = this->hal_microseconds_to_counts( iu16_microseconds );
+	uint16_t u16_timer_count = this -> hal_microseconds_to_counts( iu16_microseconds );
 	if ((u16_timer_count == 0) || (u16_timer_count >= Config::HAL_TIMER_MAX_CNT))
 	{
-		this -> report_error( Error_code::ERR_OVERFLOW );
+		this -> report_error( Error_code::ERR_OVERFLOW, __LINE__  );
 		//FAIL and keep the timer stopped
 		return true;
 	}
 	//If leftover from previous delay is already more than the programmed delay
 	else if (u16_previous_overcount >= u16_timer_count)
 	{
-		this->report_error(Error_code::ERR_DELAY_OVERRUN);
+		this -> report_error( Error_code::ERR_DELAY_OVERRUN, __LINE__  );
 		//FAIL and keep the timer stopped
 		return true;
 	}
@@ -1536,24 +1542,21 @@ bool Servo::init_class_vars( void )
 /***************************************************************************/
 //! @return return false = OK | true = fail
 //! @details
-//! \n Report an error.
+//! \n Report an error and the line number where it occurred
 /***************************************************************************/
 
-bool Servo::report_error( Error_code error_code_tmp )
+bool Servo::report_error( Error_code ie_error_code, uint16_t iu16_line_number )
 {
-	DENTER(); //Trace Enter
-	///--------------------------------------------------------------------------
-	///	INIT
-	///--------------------------------------------------------------------------
-
+	DENTER_ARG("Error %d | line %d\n", ie_error_code, iu16_line_number); //Trace Enter
 	///--------------------------------------------------------------------------
 	///	BODY
 	///--------------------------------------------------------------------------
 
 	//Only report oldest error
-	if (this -> g_error == Error_code::OK)
+	if (this -> gst_error.e_error_code == Error_code::OK)
 	{
-		this -> g_error = error_code_tmp;	
+		this -> gst_error.e_error_code = ie_error_code;
+		this ->gst_error.u16_line_number = iu16_line_number;
 	}
 
 	///--------------------------------------------------------------------------
@@ -1721,7 +1724,7 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 	//If Servo index is OOB
 	if ((Config::PEDANTIC_CHECKS == true) && ((iu8_index < 0) || (iu8_index >= Config::NUM_SERVOS)))
 	{
-		this -> report_error( Error_code::ERR_INPUT_OOB );
+		this -> report_error( Error_code::ERR_INPUT_OOB, __LINE__ );
 		ou16_delay = Config::HAL_TIMER_MAX_CNT;
 		return true;
 	}
@@ -1739,7 +1742,7 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 		if ((Config::PEDANTIC_CHECKS == true) && ( (s16_tmp < -(int16_t)Config::SERVO_PPM_MAX_COMMAND) || (s16_tmp > (int16_t)Config::SERVO_PPM_MAX_COMMAND) ))
 		{
 			//Algorithmic error. The class should make sure that user can't write bollocks inside the position
-			this -> report_error( Error_code::ERR_ALGORITHM );
+			this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
 			ou16_delay = Config::HAL_TIMER_MAX_CNT;
 			return true;
 		}
@@ -1769,7 +1772,7 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 			u16_tmp /= Config::SERVO_PPM_FREQUENCY;
 			if (u16_tmp > 255)
 			{
-				report_error(Error_code::ERR_OVERFLOW);
+				this -> report_error( Error_code::ERR_OVERFLOW, __LINE__ );
 				ou16_delay = Config::HAL_TIMER_MAX_CNT;
 				return true;
 			}
@@ -1818,12 +1821,6 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 		}
 		//Delay of the servo to be returned to caller
 		u16_delay = u16_target;
-		if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
-		{
-			this ->report_error( Error_code::ERR_ALGORITHM );
-			ou16_delay = Config::HAL_TIMER_MAX_CNT;
-			return true;
-		}
 	}
 	//if: speed limit active
 	else
@@ -1834,6 +1831,8 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 			//Already locked
 			gast_command[iu8_index].u1_idle = true;
 			gast_command[iu8_index].u1_lock = true;
+			//Delay of the servo to be returned to caller
+			u16_delay = u16_actual;
 		}
 		//if: Needs to move
 		else
@@ -1850,12 +1849,6 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 				gast_timer[iu8_index].u16_actual = u16_target;
 				//Delay of the servo to be returned to caller
 				u16_delay = u16_target;
-				if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
-				{
-					this ->report_error( Error_code::ERR_ALGORITHM );
-					ou16_delay = Config::HAL_TIMER_MAX_CNT;
-					return true;
-				}
 			}
 			//if: I need to move more than the speed limit
 			else
@@ -1878,7 +1871,7 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 				}
 				else
 				{
-					report_error(Error_code::ERR_ALGORITHM);
+					this -> report_error( Error_code::ERR_ALGORITHM, __LINE__ );
 					ou16_delay = Config::HAL_TIMER_MAX_CNT;
 					return true;
 				}
@@ -1886,18 +1879,12 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 				gast_timer[iu8_index].u16_actual = u16_actual;
 				//Delay of the servo to be returned to caller
 				u16_delay = u16_actual;
-				if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
-				{
-					this ->report_error( Error_code::ERR_ALGORITHM );
-					ou16_delay = Config::HAL_TIMER_MAX_CNT;
-					return true;
-				}
 			} //end if: I need to move more than the speed limit
 		}  //end if: Needs to move
 	} //end if: speed limit active
 	if ((Config::PEDANTIC_CHECKS == true) && ((u16_delay < Config::SERVO_PPM_MIN_PULSE) || (u16_delay> Config::SERVO_PPM_MAX_PULSE)) )
 	{
-		this ->report_error( Error_code::ERR_ALGORITHM );
+		this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
 		ou16_delay = Config::HAL_TIMER_MAX_CNT;
 		return true;
 	}
