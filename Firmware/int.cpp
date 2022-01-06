@@ -23,7 +23,7 @@
 
 #include "uart.h"
 
-#include "servo.cpp"
+#include "servo.h"
 
 /****************************************************************************
 **GLOBAL VARS

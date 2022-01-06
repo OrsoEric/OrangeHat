@@ -17,19 +17,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .debug_aranges 000002e8  00000000  00000000  00001b90  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   000099f6  00000000  00000000  00001e78  2**0
+  7 .debug_info   00009a04  00000000  00000000  00001e78  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 000035e7  00000000  00000000  0000b86e  2**0
+  8 .debug_abbrev 00003632  00000000  00000000  0000b87c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   0000332d  00000000  00000000  0000ee55  2**0
+  9 .debug_line   00003333  00000000  00000000  0000eeae  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  00000a70  00000000  00000000  00012184  2**2
+ 10 .debug_frame  00000a70  00000000  00000000  000121e4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00003115  00000000  00000000  00012bf4  2**0
+ 11 .debug_str    00003121  00000000  00000000  00012c54  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    00006063  00000000  00000000  00015d09  2**0
+ 12 .debug_loc    00006063  00000000  00000000  00015d75  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000318  00000000  00000000  0001bd6c  2**0
+ 13 .debug_ranges 00000318  00000000  00000000  0001bdd8  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2211,8 +2211,8 @@ void function_template( void )
 00000daa <_ZN9OrangeBot5Servo9set_servoEhi>:
      daa:	68 30       	cpi	r22, 0x08	; 8
      dac:	38 f0       	brcs	.+14     	; 0xdbc <_ZN9OrangeBot5Servo9set_servoEhi+0x12>
-     dae:	46 e4       	ldi	r20, 0x46	; 70
-     db0:	52 e0       	ldi	r21, 0x02	; 2
+     dae:	43 ea       	ldi	r20, 0xA3	; 163
+     db0:	50 e0       	ldi	r21, 0x00	; 0
      db2:	67 e0       	ldi	r22, 0x07	; 7
      db4:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
      db8:	81 e0       	ldi	r24, 0x01	; 1
@@ -2223,8 +2223,8 @@ void function_template( void )
      dc2:	21 32       	cpi	r18, 0x21	; 33
      dc4:	33 40       	sbci	r19, 0x03	; 3
      dc6:	38 f0       	brcs	.+14     	; 0xdd6 <_ZN9OrangeBot5Servo9set_servoEhi+0x2c>
-     dc8:	4c e4       	ldi	r20, 0x4C	; 76
-     dca:	52 e0       	ldi	r21, 0x02	; 2
+     dc8:	49 ea       	ldi	r20, 0xA9	; 169
+     dca:	50 e0       	ldi	r21, 0x00	; 0
      dcc:	67 e0       	ldi	r22, 0x07	; 7
      dce:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
      dd2:	81 e0       	ldi	r24, 0x01	; 1
@@ -2259,8 +2259,8 @@ void function_template( void )
 00000e0a <_ZN9OrangeBot5Servo9set_servoEhij>:
      e0a:	68 30       	cpi	r22, 0x08	; 8
      e0c:	38 f0       	brcs	.+14     	; 0xe1c <_ZN9OrangeBot5Servo9set_servoEhij+0x12>
-     e0e:	47 e7       	ldi	r20, 0x77	; 119
-     e10:	52 e0       	ldi	r21, 0x02	; 2
+     e0e:	44 ed       	ldi	r20, 0xD4	; 212
+     e10:	50 e0       	ldi	r21, 0x00	; 0
      e12:	67 e0       	ldi	r22, 0x07	; 7
      e14:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
      e18:	81 e0       	ldi	r24, 0x01	; 1
@@ -2271,8 +2271,8 @@ void function_template( void )
      e22:	e1 32       	cpi	r30, 0x21	; 33
      e24:	f3 40       	sbci	r31, 0x03	; 3
      e26:	38 f0       	brcs	.+14     	; 0xe36 <_ZN9OrangeBot5Servo9set_servoEhij+0x2c>
-     e28:	4d e7       	ldi	r20, 0x7D	; 125
-     e2a:	52 e0       	ldi	r21, 0x02	; 2
+     e28:	4a ed       	ldi	r20, 0xDA	; 218
+     e2a:	50 e0       	ldi	r21, 0x00	; 0
      e2c:	67 e0       	ldi	r22, 0x07	; 7
      e2e:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
      e32:	81 e0       	ldi	r24, 0x01	; 1
@@ -2347,8 +2347,8 @@ void function_template( void )
      eba:	c8 2f       	mov	r28, r24
      ebc:	88 23       	and	r24, r24
      ebe:	31 f0       	breq	.+12     	; 0xecc <_ZN9OrangeBot5Servo4initEv+0x1e>
-     ec0:	4c eb       	ldi	r20, 0xBC	; 188
-     ec2:	52 e0       	ldi	r21, 0x02	; 2
+     ec0:	49 e1       	ldi	r20, 0x19	; 25
+     ec2:	51 e0       	ldi	r21, 0x01	; 1
      ec4:	61 e0       	ldi	r22, 0x01	; 1
      ec6:	c8 01       	movw	r24, r16
      ec8:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -2356,8 +2356,8 @@ void function_template( void )
      ece:	0e 94 fc 05 	call	0xbf8	; 0xbf8 <_ZN9OrangeBot5Servo11hal_init_ioEv>
      ed2:	c8 2b       	or	r28, r24
      ed4:	31 f0       	breq	.+12     	; 0xee2 <_ZN9OrangeBot5Servo4initEv+0x34>
-     ed6:	43 ec       	ldi	r20, 0xC3	; 195
-     ed8:	52 e0       	ldi	r21, 0x02	; 2
+     ed6:	40 e2       	ldi	r20, 0x20	; 32
+     ed8:	51 e0       	ldi	r21, 0x01	; 1
      eda:	62 e0       	ldi	r22, 0x02	; 2
      edc:	c8 01       	movw	r24, r16
      ede:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -2367,8 +2367,8 @@ void function_template( void )
      ee8:	0e 94 1f 06 	call	0xc3e	; 0xc3e <_ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj>
      eec:	c8 2b       	or	r28, r24
      eee:	31 f0       	breq	.+12     	; 0xefc <_ZN9OrangeBot5Servo4initEv+0x4e>
-     ef0:	4a ec       	ldi	r20, 0xCA	; 202
-     ef2:	52 e0       	ldi	r21, 0x02	; 2
+     ef0:	47 e2       	ldi	r20, 0x27	; 39
+     ef2:	51 e0       	ldi	r21, 0x01	; 1
      ef4:	63 e0       	ldi	r22, 0x03	; 3
      ef6:	c8 01       	movw	r24, r16
      ef8:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -2489,8 +2489,8 @@ void function_template( void )
      fdc:	44 83       	std	Z+4, r20	; 0x04
      fde:	80 e0       	ldi	r24, 0x00	; 0
      fe0:	06 c0       	rjmp	.+12     	; 0xfee <_ZN9OrangeBot5Servo12hal_servo_ioEhb+0xe2>
-     fe2:	47 e3       	ldi	r20, 0x37	; 55
-     fe4:	53 e0       	ldi	r21, 0x03	; 3
+     fe2:	44 e9       	ldi	r20, 0x94	; 148
+     fe4:	51 e0       	ldi	r21, 0x01	; 1
      fe6:	64 e0       	ldi	r22, 0x04	; 4
      fe8:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
      fec:	81 e0       	ldi	r24, 0x01	; 1
@@ -2518,8 +2518,8 @@ void function_template( void )
     1018:	51 05       	cpc	r21, r1
     101a:	48 f0       	brcs	.+18     	; 0x102e <_ZN9OrangeBot5Servo26hal_microseconds_to_countsEj+0x3a>
     101c:	ce 01       	movw	r24, r28
-    101e:	4f e0       	ldi	r20, 0x0F	; 15
-    1020:	55 e0       	ldi	r21, 0x05	; 5
+    101e:	4c e6       	ldi	r20, 0x6C	; 108
+    1020:	53 e0       	ldi	r21, 0x03	; 3
     1022:	66 e0       	ldi	r22, 0x06	; 6
     1024:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
     1028:	8f ef       	ldi	r24, 0xFF	; 255
@@ -2542,8 +2542,8 @@ void function_template( void )
     1046:	85 3d       	cpi	r24, 0xD5	; 213
     1048:	99 44       	sbci	r25, 0x49	; 73
     104a:	40 f0       	brcs	.+16     	; 0x105c <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x26>
-    104c:	43 e3       	ldi	r20, 0x33	; 51
-    104e:	55 e0       	ldi	r21, 0x05	; 5
+    104c:	40 e9       	ldi	r20, 0x90	; 144
+    104e:	53 e0       	ldi	r21, 0x03	; 3
     1050:	67 e0       	ldi	r22, 0x07	; 7
     1052:	ce 01       	movw	r24, r28
     1054:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -2565,8 +2565,8 @@ void function_template( void )
     1078:	4f ef       	ldi	r20, 0xFF	; 255
     107a:	34 07       	cpc	r19, r20
     107c:	40 f0       	brcs	.+16     	; 0x108e <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x58>
-    107e:	44 e4       	ldi	r20, 0x44	; 68
-    1080:	55 e0       	ldi	r21, 0x05	; 5
+    107e:	41 ea       	ldi	r20, 0xA1	; 161
+    1080:	53 e0       	ldi	r21, 0x03	; 3
     1082:	66 e0       	ldi	r22, 0x06	; 6
     1084:	ce 01       	movw	r24, r28
     1086:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -2575,8 +2575,8 @@ void function_template( void )
     108e:	08 17       	cp	r16, r24
     1090:	19 07       	cpc	r17, r25
     1092:	40 f0       	brcs	.+16     	; 0x10a4 <_ZN9OrangeBot5Servo19hal_timer_set_delayEj+0x6e>
-    1094:	4b e4       	ldi	r20, 0x4B	; 75
-    1096:	55 e0       	ldi	r21, 0x05	; 5
+    1094:	48 ea       	ldi	r20, 0xA8	; 168
+    1096:	53 e0       	ldi	r21, 0x03	; 3
     1098:	65 e0       	ldi	r22, 0x05	; 5
     109a:	ce 01       	movw	r24, r28
     109c:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -2644,7 +2644,7 @@ bool Servo::soft_start( uint8_t iu8_ton, uint8_t iu8_toff, uint8_t iu8_treduce, 
     10e8:	d8 f4       	brcc	.+54     	; 0x1120 <_ZN9OrangeBot5Servo10soft_startEhhhh+0x62>
 			{
 				//Power on
-				CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+				CLEAR_BIT( PORTD.OUT, SERVO_PWR_PIN );
     10ea:	e0 e6       	ldi	r30, 0x60	; 96
     10ec:	f4 e0       	ldi	r31, 0x04	; 4
     10ee:	84 81       	ldd	r24, Z+4	; 0x04
@@ -2662,7 +2662,7 @@ bool Servo::soft_start( uint8_t iu8_ton, uint8_t iu8_toff, uint8_t iu8_treduce, 
 			for (uint8_t u8_tmp = 0; u8_tmp < iu8_repeat; u8_tmp++)
 			{
 				//Power on
-				CLEAR_BIT( SERVO_PWR_PORT.OUT, SERVO_PWR_PIN );
+				CLEAR_BIT( PORTD.OUT, SERVO_PWR_PIN );
 				
 				for (uint8_t u8_tmp_b = 0; u8_tmp_b < iu8_ton; u8_tmp_b++)
     1100:	cf 5f       	subi	r28, 0xFF	; 255
@@ -2929,8 +2929,8 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
     11ee:	68 f0       	brcs	.+26     	; 0x120a <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x2c>
 	{
 		this -> report_error( Error_code::ERR_INPUT_OOB, __LINE__ );
-    11f0:	48 eb       	ldi	r20, 0xB8	; 184
-    11f2:	56 e0       	ldi	r21, 0x06	; 6
+    11f0:	45 e1       	ldi	r20, 0x15	; 21
+    11f2:	55 e0       	ldi	r21, 0x05	; 5
     11f4:	67 e0       	ldi	r22, 0x07	; 7
     11f6:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
 		ou16_delay = Config::HAL_TIMER_MAX_CNT;
@@ -2987,8 +2987,8 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 		{
 			//Algorithmic error. The class should make sure that user can't write bollocks inside the position
 			this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
-    1248:	4a ec       	ldi	r20, 0xCA	; 202
-    124a:	56 e0       	ldi	r21, 0x06	; 6
+    1248:	47 e2       	ldi	r20, 0x27	; 39
+    124a:	55 e0       	ldi	r21, 0x05	; 5
     124c:	68 e0       	ldi	r22, 0x08	; 8
     124e:	ce 01       	movw	r24, r28
     1250:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -3111,8 +3111,8 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
     12fa:	60 f0       	brcs	.+24     	; 0x1314 <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x136>
 			{
 				this -> report_error( Error_code::ERR_OVERFLOW, __LINE__ );
-    12fc:	48 ee       	ldi	r20, 0xE8	; 232
-    12fe:	56 e0       	ldi	r21, 0x06	; 6
+    12fc:	45 e4       	ldi	r20, 0x45	; 69
+    12fe:	55 e0       	ldi	r21, 0x05	; 5
     1300:	66 e0       	ldi	r22, 0x06	; 6
     1302:	ce 01       	movw	r24, r28
     1304:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -3440,8 +3440,8 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
 				else
 				{
 					this -> report_error( Error_code::ERR_ALGORITHM, __LINE__ );
-    14dc:	4b e4       	ldi	r20, 0x4B	; 75
-    14de:	57 e0       	ldi	r21, 0x07	; 7
+    14dc:	48 ea       	ldi	r20, 0xA8	; 168
+    14de:	55 e0       	ldi	r21, 0x05	; 5
     14e0:	68 e0       	ldi	r22, 0x08	; 8
     14e2:	ce 01       	movw	r24, r28
     14e4:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -3485,8 +3485,8 @@ bool Servo::compute_servo_delay( uint8_t iu8_index, uint16_t &ou16_delay )
     151c:	70 f0       	brcs	.+28     	; 0x153a <_ZN9OrangeBot5Servo19compute_servo_delayEhRj+0x35c>
 	{
 		this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
-    151e:	48 e5       	ldi	r20, 0x58	; 88
-    1520:	57 e0       	ldi	r21, 0x07	; 7
+    151e:	45 eb       	ldi	r20, 0xB5	; 181
+    1520:	55 e0       	ldi	r21, 0x05	; 5
     1522:	68 e0       	ldi	r22, 0x08	; 8
     1524:	ce 01       	movw	r24, r28
     1526:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -3644,8 +3644,8 @@ bool Servo::hal_timer_isr( void )
     15dc:	40 f0       	brcs	.+16     	; 0x15ee <_ZN9OrangeBot5Servo13hal_timer_isrEv+0x9e>
 		{
 			this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
-    15de:	40 e9       	ldi	r20, 0x90	; 144
-    15e0:	53 e0       	ldi	r21, 0x03	; 3
+    15de:	4d ee       	ldi	r20, 0xED	; 237
+    15e0:	51 e0       	ldi	r21, 0x01	; 1
     15e2:	68 e0       	ldi	r22, 0x08	; 8
     15e4:	c7 01       	movw	r24, r14
     15e6:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -3673,8 +3673,8 @@ bool Servo::hal_timer_isr( void )
     1600:	40 f0       	brcs	.+16     	; 0x1612 <_ZN9OrangeBot5Servo13hal_timer_isrEv+0xc2>
 		{
 			this -> report_error( Error_code::ERR_ALGORITHM, __LINE__  );
-    1602:	4c e9       	ldi	r20, 0x9C	; 156
-    1604:	53 e0       	ldi	r21, 0x03	; 3
+    1602:	49 ef       	ldi	r20, 0xF9	; 249
+    1604:	51 e0       	ldi	r21, 0x01	; 1
     1606:	68 e0       	ldi	r22, 0x08	; 8
     1608:	c7 01       	movw	r24, r14
     160a:	0e 94 c9 06 	call	0xd92	; 0xd92 <_ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj>
@@ -4406,10 +4406,10 @@ bool Uart::init( void )
 000019a4 <srand>:
     19a4:	a0 e0       	ldi	r26, 0x00	; 0
     19a6:	b0 e0       	ldi	r27, 0x00	; 0
-    19a8:	80 93 00 28 	sts	0x2800, r24	; 0x802800 <__DATA_REGION_ORIGIN__>
-    19ac:	90 93 01 28 	sts	0x2801, r25	; 0x802801 <__DATA_REGION_ORIGIN__+0x1>
-    19b0:	a0 93 02 28 	sts	0x2802, r26	; 0x802802 <__DATA_REGION_ORIGIN__+0x2>
-    19b4:	b0 93 03 28 	sts	0x2803, r27	; 0x802803 <__DATA_REGION_ORIGIN__+0x3>
+    19a8:	80 93 00 28 	sts	0x2800, r24	; 0x802800 <__data_start>
+    19ac:	90 93 01 28 	sts	0x2801, r25	; 0x802801 <__data_start+0x1>
+    19b0:	a0 93 02 28 	sts	0x2802, r26	; 0x802802 <__data_start+0x2>
+    19b4:	b0 93 03 28 	sts	0x2803, r27	; 0x802803 <__data_start+0x3>
     19b8:	08 95       	ret
 
 000019ba <__divmodsi4>:

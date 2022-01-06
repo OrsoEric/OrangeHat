@@ -129,7 +129,7 @@
 
 #include "uart.h"
 
-#include "servo.cpp"
+#include "servo.h"
 
 /****************************************************************
 ** FUNCTION PROTOTYPES
