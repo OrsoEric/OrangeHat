@@ -34,8 +34,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **  ENVIROMENT VARIABILE
 **********************************************************************************/
 
-#ifndef CLASS_NAME_H_
-    #define CLASS_NAME_H_
+#ifndef UART_H_
+    #define UART_H_
 
 /**********************************************************************************
 **  GLOBAL INCLUDES
@@ -186,6 +186,11 @@ class Uart
         **  PUBLIC GETTERS
         **********************************************************************************************************************************************************
         *********************************************************************************************************************************************************/
+
+		//! @brief get the number of received bytes
+		bool get_counter_rx( uint16_t &oru16_cnt );
+		//! @brief get the number of transmitted bytes
+		bool get_counter_tx( uint16_t &oru16_cnt );
 
         //Get current error state of the library
         Error_code get_error( void );

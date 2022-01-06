@@ -277,6 +277,21 @@ int main(void)
 			lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
 			
+			//----------------------------------------------------------------
+			//	UART TX DEMO
+			//----------------------------------------------------------------
+			
+			//Transmit a data through the driver
+			//USART0.TXDATAL = 'Z';
+			gcl_uart0.send( 'Z' );
+			//Get the transmitted data and print them on screen
+			uint16_t u16_uart0_cnt;
+			bool u1_fail = gcl_uart0.get_counter_tx( u16_uart0_cnt ) ;
+			if (u1_fail == false)
+			{
+				lcd_print_u16( LCD_POS(0,10), u16_uart0_cnt );
+			}
+			
 			//SERVO DEMO: feed servo channels with random position and speeds
 			//CHANNEL0
 			if (cnt % 4 == 0)
@@ -294,8 +309,7 @@ int main(void)
 				gc_servo.set_servo( 0, 0 );
 			}
 			
-			//USART0.TXDATAL = 'Z';
-			gcl_uart0.send( 'Z' );
+			
 			
 			
 			

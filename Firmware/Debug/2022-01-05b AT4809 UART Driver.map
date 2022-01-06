@@ -551,7 +551,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1a22
+.text           0x00000000     0x1a4e
  *(.vectors)
  .vectors       0x00000000       0xa0 D:/Programs/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega4809/avrxmega3/crtatmega4809.o
                 0x00000000                __vector_default
@@ -696,145 +696,148 @@ END GROUP
                 0x0000094a                __vector_7
  .text._Z41__static_initialization_and_destruction_0ii
                 0x0000099c       0x4a main.o
- .text.main     0x000009e6      0x1f4 main.o
+ .text.main     0x000009e6      0x210 main.o
                 0x000009e6                main
  .text._GLOBAL__sub_I_g_isr_flags
-                0x00000bda        0xe main.o
+                0x00000bf6        0xe main.o
  .text._GLOBAL__sub_D_g_isr_flags
-                0x00000be8        0xe main.o
+                0x00000c04        0xe main.o
  .text._ZN9OrangeBot5ServoD2Ev
-                0x00000bf6        0x2 servo.o
-                0x00000bf6                _ZN9OrangeBot5ServoD2Ev
-                0x00000bf6                _ZN9OrangeBot5ServoD1Ev
+                0x00000c12        0x2 servo.o
+                0x00000c12                _ZN9OrangeBot5ServoD2Ev
+                0x00000c12                _ZN9OrangeBot5ServoD1Ev
  .text._ZN9OrangeBot5Servo11hal_init_ioEv
-                0x00000bf8       0x46 servo.o
-                0x00000bf8                _ZN9OrangeBot5Servo11hal_init_ioEv
+                0x00000c14       0x46 servo.o
+                0x00000c14                _ZN9OrangeBot5Servo11hal_init_ioEv
  .text._ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj
-                0x00000c3e       0x5c servo.o
-                0x00000c3e                _ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj
+                0x00000c5a       0x5c servo.o
+                0x00000c5a                _ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj
  .text._ZN9OrangeBot5Servo12hal_delay_usEv
-                0x00000c9a        0xc servo.o
-                0x00000c9a                _ZN9OrangeBot5Servo12hal_delay_usEv
+                0x00000cb6        0xc servo.o
+                0x00000cb6                _ZN9OrangeBot5Servo12hal_delay_usEv
  .text._ZN9OrangeBot5Servo9hal_powerEb
-                0x00000ca6       0x1e servo.o
-                0x00000ca6                _ZN9OrangeBot5Servo9hal_powerEb
+                0x00000cc2       0x1e servo.o
+                0x00000cc2                _ZN9OrangeBot5Servo9hal_powerEb
  .text._ZN9OrangeBot5Servo11hal_run_isrEb
-                0x00000cc4       0x26 servo.o
-                0x00000cc4                _ZN9OrangeBot5Servo11hal_run_isrEb
+                0x00000ce0       0x26 servo.o
+                0x00000ce0                _ZN9OrangeBot5Servo11hal_run_isrEb
  .text._ZN9OrangeBot5Servo15init_class_varsEv
-                0x00000cea       0xa8 servo.o
-                0x00000cea                _ZN9OrangeBot5Servo15init_class_varsEv
+                0x00000d06       0xa8 servo.o
+                0x00000d06                _ZN9OrangeBot5Servo15init_class_varsEv
  .text._ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj
-                0x00000d92       0x18 servo.o
-                0x00000d92                _ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj
+                0x00000dae       0x18 servo.o
+                0x00000dae                _ZN9OrangeBot5Servo12report_errorENS0_11_Error_codeEj
  .text._ZN9OrangeBot5Servo9set_servoEhi
-                0x00000daa       0x60 servo.o
-                0x00000daa                _ZN9OrangeBot5Servo9set_servoEhi
+                0x00000dc6       0x60 servo.o
+                0x00000dc6                _ZN9OrangeBot5Servo9set_servoEhi
  .text._ZN9OrangeBot5Servo9set_servoEhij
-                0x00000e0a       0xa4 servo.o
-                0x00000e0a                _ZN9OrangeBot5Servo9set_servoEhij
+                0x00000e26       0xa4 servo.o
+                0x00000e26                _ZN9OrangeBot5Servo9set_servoEhij
  .text._ZN9OrangeBot5Servo4initEv
-                0x00000eae       0x58 servo.o
-                0x00000eae                _ZN9OrangeBot5Servo4initEv
+                0x00000eca       0x58 servo.o
+                0x00000eca                _ZN9OrangeBot5Servo4initEv
  .text._ZN9OrangeBot5ServoC2Ev
-                0x00000f06        0x6 servo.o
-                0x00000f06                _ZN9OrangeBot5ServoC2Ev
-                0x00000f06                _ZN9OrangeBot5ServoC1Ev
+                0x00000f22        0x6 servo.o
+                0x00000f22                _ZN9OrangeBot5ServoC2Ev
+                0x00000f22                _ZN9OrangeBot5ServoC1Ev
  .text._ZN9OrangeBot5Servo12hal_servo_ioEhb
-                0x00000f0c       0xe8 servo.o
-                0x00000f0c                _ZN9OrangeBot5Servo12hal_servo_ioEhb
+                0x00000f28       0xe8 servo.o
+                0x00000f28                _ZN9OrangeBot5Servo12hal_servo_ioEhb
  .text._ZN9OrangeBot5Servo26hal_microseconds_to_countsEj
-                0x00000ff4       0x42 servo.o
-                0x00000ff4                _ZN9OrangeBot5Servo26hal_microseconds_to_countsEj
+                0x00001010       0x42 servo.o
+                0x00001010                _ZN9OrangeBot5Servo26hal_microseconds_to_countsEj
  .text._ZN9OrangeBot5Servo19hal_timer_set_delayEj
-                0x00001036       0x88 servo.o
-                0x00001036                _ZN9OrangeBot5Servo19hal_timer_set_delayEj
+                0x00001052       0x88 servo.o
+                0x00001052                _ZN9OrangeBot5Servo19hal_timer_set_delayEj
  .text._ZN9OrangeBot5Servo10soft_startEhhhh
-                0x000010be       0x8a servo.o
-                0x000010be                _ZN9OrangeBot5Servo10soft_startEhhhh
+                0x000010da       0x8a servo.o
+                0x000010da                _ZN9OrangeBot5Servo10soft_startEhhhh
  .text._ZN9OrangeBot5Servo5powerEb
-                0x00001148       0x40 servo.o
-                0x00001148                _ZN9OrangeBot5Servo5powerEb
+                0x00001164       0x40 servo.o
+                0x00001164                _ZN9OrangeBot5Servo5powerEb
  .text._ZN9OrangeBot5Servo14clear_servo_ioEv
-                0x00001188       0x2e servo.o
-                0x00001188                _ZN9OrangeBot5Servo14clear_servo_ioEv
+                0x000011a4       0x2e servo.o
+                0x000011a4                _ZN9OrangeBot5Servo14clear_servo_ioEv
  .text._ZN9OrangeBot5Servo14emergency_stopEv
-                0x000011b6       0x28 servo.o
-                0x000011b6                _ZN9OrangeBot5Servo14emergency_stopEv
+                0x000011d2       0x28 servo.o
+                0x000011d2                _ZN9OrangeBot5Servo14emergency_stopEv
  .text._ZN9OrangeBot5Servo19compute_servo_delayEhRj
-                0x000011de      0x372 servo.o
-                0x000011de                _ZN9OrangeBot5Servo19compute_servo_delayEhRj
+                0x000011fa      0x372 servo.o
+                0x000011fa                _ZN9OrangeBot5Servo19compute_servo_delayEhRj
  .text._ZN9OrangeBot5Servo13hal_timer_isrEv
-                0x00001550      0x128 servo.o
-                0x00001550                _ZN9OrangeBot5Servo13hal_timer_isrEv
+                0x0000156c      0x128 servo.o
+                0x0000156c                _ZN9OrangeBot5Servo13hal_timer_isrEv
  .text._ZN4User4UartD2Ev
-                0x00001678        0x2 uart.o
-                0x00001678                _ZN4User4UartD1Ev
-                0x00001678                _ZN4User4UartD2Ev
+                0x00001694        0x2 uart.o
+                0x00001694                _ZN4User4UartD1Ev
+                0x00001694                _ZN4User4UartD2Ev
  .text._ZN4User4Uart4sendEh
-                0x0000167a       0x2e uart.o
-                0x0000167a                _ZN4User4Uart4sendEh
+                0x00001696       0x2e uart.o
+                0x00001696                _ZN4User4Uart4sendEh
+ .text._ZN4User4Uart14get_counter_txERj
+                0x000016c4       0x10 uart.o
+                0x000016c4                _ZN4User4Uart14get_counter_txERj
  .text._ZN4User4Uart10isr_rx_exeEv
-                0x000016a8       0xb2 uart.o
-                0x000016a8                _ZN4User4Uart10isr_rx_exeEv
+                0x000016d4       0xb2 uart.o
+                0x000016d4                _ZN4User4Uart10isr_rx_exeEv
  .text._ZN4User4Uart6updateEv
-                0x0000175a       0x78 uart.o
-                0x0000175a                _ZN4User4Uart6updateEv
+                0x00001786       0x78 uart.o
+                0x00001786                _ZN4User4Uart6updateEv
  .text._ZN4User4Uart9init_uartER12USART_structj
-                0x000017d2       0x34 uart.o
-                0x000017d2                _ZN4User4Uart9init_uartER12USART_structj
+                0x000017fe       0x34 uart.o
+                0x000017fe                _ZN4User4Uart9init_uartER12USART_structj
  .text._ZN4User4Uart4initEv
-                0x00001806       0x32 uart.o
-                0x00001806                _ZN4User4Uart4initEv
+                0x00001832       0x32 uart.o
+                0x00001832                _ZN4User4Uart4initEv
  .text._ZN4User4UartC2Ev
-                0x00001838        0x6 uart.o
-                0x00001838                _ZN4User4UartC2Ev
-                0x00001838                _ZN4User4UartC1Ev
+                0x00001864        0x6 uart.o
+                0x00001864                _ZN4User4UartC2Ev
+                0x00001864                _ZN4User4UartC1Ev
  .text.libgcc.div
-                0x0000183e       0x18 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodqi4.o)
-                0x0000183e                __udivmodqi4
+                0x0000186a       0x18 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodqi4.o)
+                0x0000186a                __udivmodqi4
  .text.libgcc.div
-                0x00001856       0x28 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodhi4.o)
-                0x00001856                __udivmodhi4
+                0x00001882       0x28 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodhi4.o)
+                0x00001882                __udivmodhi4
  .text.libgcc.div
-                0x0000187e       0x44 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodsi4.o)
-                0x0000187e                __udivmodsi4
- .text.libgcc   0x000018c2        0xc d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_tablejump2.o)
-                0x000018c2                __tablejump2__
+                0x000018aa       0x44 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodsi4.o)
+                0x000018aa                __udivmodsi4
+ .text.libgcc   0x000018ee        0xc d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_tablejump2.o)
+                0x000018ee                __tablejump2__
  .text.libgcc.mul
-                0x000018ce       0x1e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_umulhisi3.o)
-                0x000018ce                __umulhisi3
+                0x000018fa       0x1e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_umulhisi3.o)
+                0x000018fa                __umulhisi3
  .text.libgcc.mul
-                0x000018ec       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_muluhisi3.o)
-                0x000018ec                __muluhisi3
+                0x00001918       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_muluhisi3.o)
+                0x00001918                __muluhisi3
  .text.avr-libc
-                0x00001902       0xb8 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega3\libc.a(rand.o)
-                0x00001994                rand_r
-                0x0000199a                rand
-                0x000019a4                srand
+                0x0000192e       0xb8 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega3\libc.a(rand.o)
+                0x000019c0                rand_r
+                0x000019c6                rand
+                0x000019d0                srand
  .text.libgcc.div
-                0x000019ba       0x2e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_divmodsi4.o)
-                0x000019ba                __divmodsi4
+                0x000019e6       0x2e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_divmodsi4.o)
+                0x000019e6                __divmodsi4
  .text.libgcc.div
-                0x000019e8       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_negsi2.o)
-                0x000019e8                __negsi2
+                0x00001a14       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_negsi2.o)
+                0x00001a14                __negsi2
  .text.libgcc.mul
-                0x000019f8       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_mulshisi3.o)
-                0x000019f8                __mulshisi3
-                0x000019fe                __mulohisi3
-                0x00001a08                . = ALIGN (0x2)
+                0x00001a24       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_mulshisi3.o)
+                0x00001a24                __mulshisi3
+                0x00001a2a                __mulohisi3
+                0x00001a34                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001a08        0x0 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
-                0x00001a08                _exit
-                0x00001a08                exit
+ .fini9         0x00001a34        0x0 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
+                0x00001a34                _exit
+                0x00001a34                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
  *(.fini7)
  *(.fini7)
  *(.fini6)
- .fini6         0x00001a08       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_dtors.o)
-                0x00001a08                __do_global_dtors
+ .fini6         0x00001a34       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_dtors.o)
+                0x00001a34                __do_global_dtors
  *(.fini6)
  *(.fini5)
  *(.fini5)
@@ -847,19 +850,19 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001a1e        0x4 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
+ .fini0         0x00001a4a        0x4 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001a22                _etext = .
+                0x00001a4e                _etext = .
 
-.rodata         0x00005a22       0x44 load address 0x00001a22
+.rodata         0x00005a4e       0x44 load address 0x00001a4e
  *(.rodata)
- .rodata        0x00005a22       0x3a at_lcd.o
+ .rodata        0x00005a4e       0x3a at_lcd.o
  *(.rodata*)
  .rodata.str1.1
-                0x00005a5c        0xa main.o
+                0x00005a88        0xa main.o
  *(.gnu.linkonce.r*)
 
-.data           0x00802800        0x4 load address 0x00001a66
+.data           0x00802800        0x4 load address 0x00001a92
                 0x00802800                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00802800        0x4 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega3\libc.a(rand.o)
@@ -902,8 +905,8 @@ END GROUP
                 0x008028de                g_isr_flags
  *(COMMON)
                 0x008028df                PROVIDE (__bss_end, .)
-                0x00001a66                __data_load_start = LOADADDR (.data)
-                0x00001a6a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00001a92                __data_load_start = LOADADDR (.data)
+                0x00001a96                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008028df        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -980,7 +983,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x2e8
+.debug_aranges  0x00000000      0x2f0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0xd0 at_lcd.o
@@ -993,74 +996,74 @@ END GROUP
  .debug_aranges
                 0x00000198       0xe8 servo.o
  .debug_aranges
-                0x00000280       0x68 uart.o
+                0x00000280       0x70 uart.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x9a04
+.debug_info     0x00000000     0x9b9a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000     0x248a D:/Programs/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega4809/avrxmega3/crtatmega4809.o
  .debug_info    0x0000248a     0x1ded at_lcd.o
  .debug_info    0x00004277      0x7f2 init.o
- .debug_info    0x00004a69     0x14b9 int.o
- .debug_info    0x00005f22     0x12f8 main.o
- .debug_info    0x0000721a     0x1e96 servo.o
- .debug_info    0x000090b0      0x954 uart.o
+ .debug_info    0x00004a69     0x1503 int.o
+ .debug_info    0x00005f6c     0x13a2 main.o
+ .debug_info    0x0000730e     0x1e96 servo.o
+ .debug_info    0x000091a4      0x9f6 uart.o
 
-.debug_abbrev   0x00000000     0x3632
+.debug_abbrev   0x00000000     0x363b
  *(.debug_abbrev)
  .debug_abbrev  0x00000000     0x2296 D:/Programs/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega4809/avrxmega3/crtatmega4809.o
  .debug_abbrev  0x00002296      0x436 at_lcd.o
  .debug_abbrev  0x000026cc      0x153 init.o
  .debug_abbrev  0x0000281f      0x2ec int.o
- .debug_abbrev  0x00002b0b      0x400 main.o
- .debug_abbrev  0x00002f0b      0x3f6 servo.o
- .debug_abbrev  0x00003301      0x331 uart.o
+ .debug_abbrev  0x00002b0b      0x409 main.o
+ .debug_abbrev  0x00002f14      0x3f6 servo.o
+ .debug_abbrev  0x0000330a      0x331 uart.o
 
-.debug_line     0x00000000     0x3333
+.debug_line     0x00000000     0x336e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x187 D:/Programs/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega4809/avrxmega3/crtatmega4809.o
  .debug_line    0x00000187     0x1c52 at_lcd.o
  .debug_line    0x00001dd9      0x1de init.o
  .debug_line    0x00001fb7      0x203 int.o
- .debug_line    0x000021ba      0x33e main.o
- .debug_line    0x000024f8      0xaaa servo.o
- .debug_line    0x00002fa2      0x391 uart.o
+ .debug_line    0x000021ba      0x354 main.o
+ .debug_line    0x0000250e      0xaaa servo.o
+ .debug_line    0x00002fb8      0x3b6 uart.o
 
-.debug_frame    0x00000000      0xa70
+.debug_frame    0x00000000      0xa80
  *(.debug_frame)
  .debug_frame   0x00000000      0x49c at_lcd.o
  .debug_frame   0x0000049c       0x54 init.o
  .debug_frame   0x000004f0      0x124 int.o
  .debug_frame   0x00000614       0xbc main.o
  .debug_frame   0x000006d0      0x2d8 servo.o
- .debug_frame   0x000009a8       0xc8 uart.o
+ .debug_frame   0x000009a8       0xd8 uart.o
 
-.debug_str      0x00000000     0x3121
+.debug_str      0x00000000     0x3199
  *(.debug_str)
  .debug_str     0x00000000      0xf85 D:/Programs/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega4809/avrxmega3/crtatmega4809.o
  .debug_str     0x00000f85      0x7cb at_lcd.o
                                 0x85b (size before relaxing)
  .debug_str     0x00001750      0x682 init.o
                                 0x972 (size before relaxing)
- .debug_str     0x00001dd2      0xa4e int.o
-                                0xe0e (size before relaxing)
- .debug_str     0x00002820      0x254 main.o
-                                0xf71 (size before relaxing)
- .debug_str     0x00002a74      0x423 servo.o
+ .debug_str     0x00001dd2      0xaae int.o
+                                0xe6e (size before relaxing)
+ .debug_str     0x00002880      0x262 main.o
+                                0xfe7 (size before relaxing)
+ .debug_str     0x00002ae2      0x423 servo.o
                                0x1100 (size before relaxing)
- .debug_str     0x00002e97      0x28a uart.o
-                                0x801 (size before relaxing)
+ .debug_str     0x00002f05      0x294 uart.o
+                                0x873 (size before relaxing)
 
-.debug_loc      0x00000000     0x6063
+.debug_loc      0x00000000     0x60c4
  *(.debug_loc)
  .debug_loc     0x00000000     0x419e at_lcd.o
  .debug_loc     0x0000419e       0x4c init.o
  .debug_loc     0x000041ea      0x297 int.o
- .debug_loc     0x00004481      0x2ab main.o
- .debug_loc     0x0000472c     0x16cb servo.o
- .debug_loc     0x00005df7      0x26c uart.o
+ .debug_loc     0x00004481      0x2b2 main.o
+ .debug_loc     0x00004733     0x16cb servo.o
+ .debug_loc     0x00005dfe      0x2c6 uart.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1080,14 +1083,14 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x318
+.debug_ranges   0x00000000      0x338
  *(.debug_ranges)
  .debug_ranges  0x00000000      0x120 at_lcd.o
  .debug_ranges  0x00000120       0x28 init.o
  .debug_ranges  0x00000148       0x30 int.o
- .debug_ranges  0x00000178       0x40 main.o
- .debug_ranges  0x000001b8      0x108 servo.o
- .debug_ranges  0x000002c0       0x58 uart.o
+ .debug_ranges  0x00000178       0x58 main.o
+ .debug_ranges  0x000001d0      0x108 servo.o
+ .debug_ranges  0x000002d8       0x60 uart.o
 
 .debug_macro
  *(.debug_macro)
