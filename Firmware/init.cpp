@@ -171,7 +171,7 @@ void init_pin( void )
 	//!	PA7				: LCD PWR#
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_A_CONFIG(	PIN_H,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_R,	PIN_H );
+	PORT_A_CONFIG(	PIN_H,	PIN_R,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_R,	PIN_H );
 
 	//----------------------------------------------------------------
 	//!	PORTB

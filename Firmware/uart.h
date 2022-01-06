@@ -187,11 +187,11 @@ class Uart
         **********************************************************************************************************************************************************
         *********************************************************************************************************************************************************/
 
-		//! @brief get the number of received bytes
-		bool get_counter_rx( uint16_t &oru16_cnt );
 		//! @brief get the number of transmitted bytes
 		bool get_counter_tx( uint16_t &oru16_cnt );
-
+		//! @brief get the number of received bytes
+		bool get_counter_rx( uint16_t &oru16_cnt );
+		
         //Get current error state of the library
         Error_code get_error( void );
 
@@ -300,7 +300,7 @@ class Uart
 			//	Buffers structure and data vectors
 
 		//! @brief Safe circular buffer for uart input data
-		At_buf8_safe rpi_rx_buf;
+		At_buf8 rpi_rx_buf;
 		//! @brief Safe circular buffer for uart tx data
 		At_buf8 rpi_tx_buf;
 		//! @brief allocate the working vector for the buffer

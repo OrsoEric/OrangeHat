@@ -200,7 +200,8 @@ int main(void)
 	lcd_init();
 	
 	//Welcome message
-	lcd_print_str( LCD_POS( 0, 0 ), "OrangeHat" );
+	lcd_print_str( LCD_POS( 0, 0 ), "TX: " );
+	lcd_print_str( LCD_POS( 1, 0 ), "RX: " );
 	
 		///----------------------------------------------------------------------
 		///	UART Driver
@@ -264,35 +265,54 @@ int main(void)
 		{
 			//Reset slow tick
 			g_isr_flags.slow_tick = false;
+			
+			//----------------------------------------------------------------
+			//	LED DEMO
+			//----------------------------------------------------------------
+			
 			//Toggle LED0	
 			LED0_PORT.OUTTGL = MASK(LED0_PIN);
 			
+			//----------------------------------------------------------------
+			//	DISPLAY DEMO
+			//----------------------------------------------------------------
+		
 			//Power the LCD display ON and OFF
 			//LCD_PWR_PORT.OUTTGL = MASK( LCD_PWR_PIN );
 			
 			//Power all SERVOs ON and OFF
 			//SERVO_PWR_PORT.OUTTGL = MASK( SERVO_PWR_PIN );
-			
+		
 			//Counter
-			lcd_print_u16( LCD_POS(1,0), cnt );
+			//lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
 			
 			//----------------------------------------------------------------
-			//	UART TX DEMO
+			//	UART DEMO
 			//----------------------------------------------------------------
 			
 			//Transmit a data through the driver
-			//USART0.TXDATAL = 'Z';
-			gcl_uart0.send( 'Z' );
+			//USART0.TXDATAL = 'Z';	//Bypass driver buffers
+			gcl_uart0.send( '0' +cnt%10 );
 			//Get the transmitted data and print them on screen
 			uint16_t u16_uart0_cnt;
 			bool u1_fail = gcl_uart0.get_counter_tx( u16_uart0_cnt ) ;
 			if (u1_fail == false)
 			{
-				lcd_print_u16( LCD_POS(0,10), u16_uart0_cnt );
+				lcd_print_u16( LCD_POS(0,4), u16_uart0_cnt );
+			}
+			//Get the received data and print them on screen
+			u1_fail = gcl_uart0.get_counter_rx( u16_uart0_cnt ) ;
+			if (u1_fail == false)
+			{
+				lcd_print_u16( LCD_POS(1,4), u16_uart0_cnt );
 			}
 			
-			//SERVO DEMO: feed servo channels with random position and speeds
+			//----------------------------------------------------------------
+			//	SERVO DEMO
+			//----------------------------------------------------------------
+			//	feed servo channels with random position and speeds
+			
 			//CHANNEL0
 			if (cnt % 4 == 0)
 			{
@@ -308,12 +328,7 @@ int main(void)
 				//move to +100us at 400us/s
 				gc_servo.set_servo( 0, 0 );
 			}
-			
-			
-			
-			
-			
-			//SERVO DEMO
+			//CHANNEL 1 to 7
 			for (uint8_t u8_cnt = 1; u8_cnt < OrangeBot::Servo::Config::NUM_SERVOS; u8_cnt++)
 			{
 				//Generate a random position

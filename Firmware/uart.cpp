@@ -186,7 +186,7 @@ bool Uart::send( uint8_t iu8_data )
 	///--------------------------------------------------------------------------
 
 	//UART DEMO
-	AT_BUF_PUSH( this -> rpi_tx_buf, 'Z' );
+	AT_BUF_PUSH( this -> rpi_tx_buf, iu8_data );
 
 	///--------------------------------------------------------------------------
 	///	RETURN
@@ -224,6 +224,29 @@ bool Uart::get_counter_tx( uint16_t &oru16_cnt )
 	return false;	//OK
 }	//end public getter: get_counter_tx | uint16_t & |
 
+/***************************************************************************/
+//!	@brief public getter
+//!	get_counter_rx | uint16_t & |
+/***************************************************************************/
+//! @param oru16_cnt | transmitted bytes
+//! @return bool | false = OK | true = FAIL |
+//!	@details
+//! \n	get the number of transmitted bytes
+/***************************************************************************/
+
+bool Uart::get_counter_rx( uint16_t &oru16_cnt )
+{
+	DENTER();	//Trace Enter
+	///--------------------------------------------------------------------------
+	///	RETURN
+	///--------------------------------------------------------------------------
+	
+	uint16_t u16_cnt = this -> gu16_rx_cnt;
+	oru16_cnt = u16_cnt;
+	DRETURN_ARG("RX: %d\n", u16_cnt );	//Trace return
+	return false;	//OK
+}	//end public getter: get_counter_rx | uint16_t & |
+
 /****************************************************************************
 *****************************************************************************
 **	TESTERS
@@ -259,12 +282,13 @@ bool Uart::isr_rx_exe( void )
 	if (AT_BUF_NUMELEM( this -> rpi_rx_buf )>=(Config::RX_BUFFER_SIZE-1))
 	{
 		//TODO: This is an error
+		AT_BUF_FLUSH( this -> rpi_rx_buf );
 	}
 	//if: there is space in the RX buffer
 	else
 	{
 		//Push byte into RX buffer for processing
-		AT_BUF_PUSH_SAFER( this -> rpi_rx_buf, rx_data_tmp );
+		AT_BUF_PUSH( this -> rpi_rx_buf, rx_data_tmp );
 		//Profile
 		this -> gu16_rx_cnt++;
 	}
@@ -346,8 +370,10 @@ bool Uart::init( void )
 	this -> gu16_tx_cnt = 0;
 	//attach vector to buffer
 	AT_BUF_ATTACH( this -> rpi_rx_buf, this -> v0, Config::RX_BUFFER_SIZE);
+	AT_BUF_FLUSH( this -> rpi_rx_buf );
 	//attach vector to buffer
 	AT_BUF_ATTACH( this -> rpi_tx_buf, this -> v1, Config::TX_BUFFER_SIZE);
+	AT_BUF_FLUSH( this -> rpi_tx_buf );
 	//Activate USART0 @256Kb/s
 	this->init_uart( USART0, 313 );
 
