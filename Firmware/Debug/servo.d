@@ -1,7 +1,7 @@
 servo.d servo.o: .././servo.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- .././global.h .././at_utils.h \
+ .././at_utils.h .././global.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -21,9 +21,9 @@ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdi
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
 
-.././global.h:
-
 .././at_utils.h:
+
+.././global.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 

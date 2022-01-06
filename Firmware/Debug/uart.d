@@ -1,7 +1,6 @@
-servo.d servo.o: .././servo.cpp \
+uart.d uart.o: .././uart.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- .././global.h .././at_utils.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -13,17 +12,15 @@ servo.d servo.o: .././servo.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\xmega.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ .././at_utils.h .././at4809_port.h .././global.h .././debug.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
+ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
+ .././uart.h
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
-
-.././global.h:
-
-.././at_utils.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
@@ -47,8 +44,18 @@ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
+.././at_utils.h:
+
+.././at4809_port.h:
+
+.././global.h:
+
+.././debug.h:
+
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
+
+.././uart.h:

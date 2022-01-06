@@ -60,6 +60,11 @@
 **	BUTTON			|	Microcontroller
 **	uc.btn.no0		|	uc.A6 (push = FALSE)
 **
+**	UART
+**	rpi.rxi			|	uc.a0.txo
+**	rpi.txo			|	uc.a1.rxi
+**	rpi.p4			|	uc.rst#
+**
 **	DISPLAY			|	Microcontroller
 **	uc.lcd.pwr#		|	uc.A7
 **	uc.lcd.D4		|	uc.B0
@@ -122,6 +127,8 @@
 //Driver for 16X2LCD controller KS0066U with CDM1602K display
 #include "at_lcd.h"
 
+#include "uart.h"
+
 #include "servo.cpp"
 
 /****************************************************************
@@ -136,6 +143,16 @@
 volatile Isr_flags g_isr_flags = { 0 };
 //Error code of the application
 volatile Error_code ge_error_code = Error_code::OK;
+
+//Raspberry PI UART RX Parser
+//Orangebot::Uniparser rpi_rx_parser;
+
+	///----------------------------------------------------------------------
+	///	UART DRIVER
+	///----------------------------------------------------------------------
+
+//Class to handle UART0
+User::Uart gcl_uart0;
 
 	///----------------------------------------------------------------------
 	///	SERVO DRIVER
@@ -168,6 +185,10 @@ int main(void)
 	//! Initialize AT4809 internal peripherals
 	init();
 	
+		///----------------------------------------------------------------------
+		///	Display Driver
+		///----------------------------------------------------------------------
+	
 	//Power the LCD display
 	SET_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
 	_delay_ms( 500.0 );
@@ -180,6 +201,17 @@ int main(void)
 	
 	//Welcome message
 	lcd_print_str( LCD_POS( 0, 0 ), "OrangeHat" );
+	
+		///----------------------------------------------------------------------
+		///	UART Driver
+		///----------------------------------------------------------------------
+	
+	//Construct and initialize UART class
+	gcl_uart0 = User::Uart();
+	
+		///----------------------------------------------------------------------
+		///	Servo Driver
+		///----------------------------------------------------------------------
 	
 	//Construct and initialize the servo class
 	gc_servo = OrangeBot::Servo();
@@ -262,6 +294,12 @@ int main(void)
 				gc_servo.set_servo( 0, 0 );
 			}
 			
+			//USART0.TXDATAL = 'Z';
+			gcl_uart0.send( 'Z' );
+			
+			
+			
+			//SERVO DEMO
 			for (uint8_t u8_cnt = 1; u8_cnt < OrangeBot::Servo::Config::NUM_SERVOS; u8_cnt++)
 			{
 				//Generate a random position
@@ -272,7 +310,13 @@ int main(void)
 				gc_servo.set_servo( u8_cnt, u16_position, u16_speed );
 			}
 			
-		}
+		}	//end if: Slow Tick
+		
+		//----------------------------------------------------------------
+		//	AT4809 --> RPI USART TX
+		//----------------------------------------------------------------
+				
+		gcl_uart0.update();
 		
 	}	//End: Main loop
 

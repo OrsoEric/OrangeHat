@@ -43,13 +43,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 //Bit Sign Types
 #include <stdint.h>
-//Program wide definitions and macros
-#ifndef GLOBAL_H_
-	#include "global.h"
-#endif
 //Useful macros
 #ifndef AT_UTILS_H_
 	#include "at_utils.h"
+#endif
+//Program wide definitions and macros
+#ifndef GLOBAL_H_
+	#include "global.h"
 #endif
 //define the ISR routune, ISR vector, and the sei() cli() function
 #include <avr/interrupt.h>
