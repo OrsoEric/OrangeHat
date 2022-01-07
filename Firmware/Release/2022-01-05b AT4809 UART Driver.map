@@ -155,27 +155,12 @@ Discarded input sections
  .text          0x00000000        0x0 parser_handlers.o
  .data          0x00000000        0x0 parser_handlers.o
  .bss           0x00000000        0x0 parser_handlers.o
- .text._Z12ping_handlerv
-                0x00000000        0xc parser_handlers.o
- .text._Z22send_signature_handlerv
-                0x00000000       0xbe parser_handlers.o
  .text.isfinite
                 0x00000000       0x16 parser_handlers.o
  .text.copysign
                 0x00000000        0x6 parser_handlers.o
- .rodata.str1.1
-                0x00000000       0x22 parser_handlers.o
- .text._Z20init_parser_commandsRN9Orangebot9UniparserE
-                0x00000000       0x3e parser_handlers.o
- .text._Z13set_servo_ppmhii
-                0x00000000       0x1e parser_handlers.o
  .bss.g_f_timeout_detected
                 0x00000000        0x1 parser_handlers.o
- .bss.g_uart_timeout_cnt
-                0x00000000        0x1 parser_handlers.o
- .data.g_board_sign
-                0x00000000        0x2 parser_handlers.o
- .comment       0x00000000       0x31 parser_handlers.o
  .group         0x00000000        0x8 servo.o
  .text          0x00000000        0x0 servo.o
  .data          0x00000000        0x0 servo.o
@@ -188,8 +173,6 @@ Discarded input sections
                 0x00000000        0xa servo.o
  .text._ZN9OrangeBot5Servo9set_servoEhi
                 0x00000000       0x6a servo.o
- .text._ZN9OrangeBot5Servo9set_servoEhij
-                0x00000000       0x8e servo.o
  .text._ZN9OrangeBot5Servo12hal_delay_usEv
                 0x00000000        0xc servo.o
  .text._ZN9OrangeBot5Servo9hal_powerEb
@@ -207,11 +190,6 @@ Discarded input sections
                 0x00000000        0x2 string_uc.o
  .text._ZN4User9String_ucD2Ev
                 0x00000000        0x2 string_uc.o
- .text._ZN4User9String_uc10str_lengthEPhh
-                0x00000000       0x1a string_uc.o
- .rodata        0x00000000       0x35 string_uc.o
- .text._ZN4User9String_uc9to_stringIhEEhT_Ph
-                0x00000000       0x98 string_uc.o
  .text._ZN4User9String_uc9to_stringIaEEhT_Ph
                 0x00000000       0x20 string_uc.o
  .text._ZN4User9String_uc9to_stringIjEEhT_Ph
@@ -224,7 +202,6 @@ Discarded input sections
                 0x00000000       0x2c string_uc.o
  .text._ZN4User9String_uc5dummyEv
                 0x00000000        0x4 string_uc.o
- .comment       0x00000000       0x31 string_uc.o
  .text          0x00000000        0x0 uart.o
  .data          0x00000000        0x0 uart.o
  .bss           0x00000000        0x0 uart.o
@@ -251,18 +228,10 @@ Discarded input sections
  .text          0x00000000        0x0 uniparser.o
  .data          0x00000000        0x0 uniparser.o
  .bss           0x00000000        0x0 uniparser.o
- .text._ZN9Orangebot9UniparserD2Ev
-                0x00000000        0x2 uniparser.o
  .text._ZN9Orangebot9Uniparser9get_errorEv
                 0x00000000        0xa uniparser.o
- .text._ZN9Orangebot9Uniparser4initEv
-                0x00000000       0x2a uniparser.o
  .text._ZN9Orangebot9Uniparser16init_arg_decoderEv
                 0x00000000        0xa uniparser.o
- .text._ZN9Orangebot9Uniparser7chk_cmdEPKh
-                0x00000000       0xd0 uniparser.o
- .text._ZN9Orangebot9Uniparser7add_cmdEPKcPv
-                0x00000000       0x70 uniparser.o
  .text._ZN9Orangebot9Uniparser7set_argIhEEbhT_
                 0x00000000       0x10 uniparser.o
  .text._ZN9Orangebot9Uniparser7set_argIaEEbhT_
@@ -287,21 +256,8 @@ Discarded input sections
                 0x00000000       0x16 uniparser.o
  .text._ZN9Orangebot9Uniparser7get_argIlEET_h
                 0x00000000       0x16 uniparser.o
- .text._ZN9Orangebot9Uniparser7add_argEh
-                0x00000000       0xba uniparser.o
- .text._ZN9Orangebot9Uniparser14accumulate_argEh
-                0x00000000      0x20c uniparser.o
- .text._ZN9Orangebot9Uniparser9close_argEv
-                0x00000000       0x72 uniparser.o
- .text._ZN9Orangebot9Uniparser16execute_callbackEPv
-                0x00000000      0xd26 uniparser.o
- .text._ZN9Orangebot9Uniparser5parseEh
-                0x00000000      0x3aa uniparser.o
- .text._ZN9Orangebot9UniparserC2Ev
-                0x00000000       0x16 uniparser.o
  .text._ZN9Orangebot9Uniparser13error_handlerENS_10_Err_codesE
                 0x00000000        0xa uniparser.o
- .comment       0x00000000       0x31 uniparser.o
  .text          0x00000000        0x0 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodqi4.o)
  .data          0x00000000        0x0 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodqi4.o)
  .bss           0x00000000        0x0 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodqi4.o)
@@ -684,7 +640,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x16de
+.text           0x00000000     0x2f4a
  *(.vectors)
  .vectors       0x00000000       0xa0 D:/Programs/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega4809/avrxmega3/crtatmega4809.o
                 0x00000000                __vector_default
@@ -835,140 +791,196 @@ END GROUP
  .text.__vector_7
                 0x00000976       0x52 int.o
                 0x00000976                __vector_7
- .text.startup.main
-                0x000009c8      0x176 main.o
-                0x000009c8                main
  .text._Z12report_error11_Error_code
-                0x00000b3e        0xe main.o
-                0x00000b3e                _Z12report_error11_Error_code
+                0x000009c8        0xe main.o
+                0x000009c8                _Z12report_error11_Error_code
+ .text.startup.main
+                0x000009d6      0x1a4 main.o
+                0x000009d6                main
  .text.startup._GLOBAL__sub_I_g_isr_flags
-                0x00000b4c       0x10 main.o
+                0x00000b7a       0x18 main.o
  .text.exit._GLOBAL__sub_D_g_isr_flags
-                0x00000b5c       0x10 main.o
+                0x00000b92       0x18 main.o
+ .text._Z12ping_handlerv
+                0x00000baa        0xc parser_handlers.o
+                0x00000baa                _Z12ping_handlerv
+ .text._Z13set_servo_ppmhii
+                0x00000bb6       0x1e parser_handlers.o
+                0x00000bb6                _Z13set_servo_ppmhii
+ .text._Z22send_signature_handlerv
+                0x00000bd4       0xbe parser_handlers.o
+                0x00000bd4                _Z22send_signature_handlerv
+ .text._Z20init_parser_commandsRN9Orangebot9UniparserE
+                0x00000c92       0x3e parser_handlers.o
+                0x00000c92                _Z20init_parser_commandsRN9Orangebot9UniparserE
  .text._ZN9OrangeBot5ServoD2Ev
-                0x00000b6c        0x2 servo.o
-                0x00000b6c                _ZN9OrangeBot5ServoD2Ev
-                0x00000b6c                _ZN9OrangeBot5ServoD1Ev
+                0x00000cd0        0x2 servo.o
+                0x00000cd0                _ZN9OrangeBot5ServoD2Ev
+                0x00000cd0                _ZN9OrangeBot5ServoD1Ev
+ .text._ZN9OrangeBot5Servo9set_servoEhij
+                0x00000cd2       0x8e servo.o
+                0x00000cd2                _ZN9OrangeBot5Servo9set_servoEhij
  .text._ZN9OrangeBot5Servo12hal_servo_ioEhb
-                0x00000b6e       0xb2 servo.o
-                0x00000b6e                _ZN9OrangeBot5Servo12hal_servo_ioEhb
+                0x00000d60       0xb2 servo.o
+                0x00000d60                _ZN9OrangeBot5Servo12hal_servo_ioEhb
  .text._ZN9OrangeBot5Servo11hal_init_ioEv
-                0x00000c20       0x46 servo.o
-                0x00000c20                _ZN9OrangeBot5Servo11hal_init_ioEv
+                0x00000e12       0x46 servo.o
+                0x00000e12                _ZN9OrangeBot5Servo11hal_init_ioEv
  .text._ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj
-                0x00000c66       0x5c servo.o
-                0x00000c66                _ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj
+                0x00000e58       0x5c servo.o
+                0x00000e58                _ZN9OrangeBot5Servo25hal_init_ta0_timeout_modeEj
  .text._ZN9OrangeBot5Servo26hal_microseconds_to_countsEj
-                0x00000cc2       0x54 servo.o
-                0x00000cc2                _ZN9OrangeBot5Servo26hal_microseconds_to_countsEj
+                0x00000eb4       0x54 servo.o
+                0x00000eb4                _ZN9OrangeBot5Servo26hal_microseconds_to_countsEj
  .text._ZN9OrangeBot5Servo19hal_timer_set_delayEj
-                0x00000d16       0xb6 servo.o
-                0x00000d16                _ZN9OrangeBot5Servo19hal_timer_set_delayEj
+                0x00000f08       0xb6 servo.o
+                0x00000f08                _ZN9OrangeBot5Servo19hal_timer_set_delayEj
  .text._ZN9OrangeBot5Servo11hal_run_isrEb
-                0x00000dcc       0x26 servo.o
-                0x00000dcc                _ZN9OrangeBot5Servo11hal_run_isrEb
+                0x00000fbe       0x26 servo.o
+                0x00000fbe                _ZN9OrangeBot5Servo11hal_run_isrEb
  .text._ZN9OrangeBot5Servo15init_class_varsEv
-                0x00000df2       0x50 servo.o
-                0x00000df2                _ZN9OrangeBot5Servo15init_class_varsEv
+                0x00000fe4       0x50 servo.o
+                0x00000fe4                _ZN9OrangeBot5Servo15init_class_varsEv
  .text._ZN9OrangeBot5Servo4initEv
-                0x00000e42       0x82 servo.o
-                0x00000e42                _ZN9OrangeBot5Servo4initEv
+                0x00001034       0x82 servo.o
+                0x00001034                _ZN9OrangeBot5Servo4initEv
  .text._ZN9OrangeBot5ServoC2Ev
-                0x00000ec4        0x4 servo.o
-                0x00000ec4                _ZN9OrangeBot5ServoC2Ev
-                0x00000ec4                _ZN9OrangeBot5ServoC1Ev
+                0x000010b6        0x4 servo.o
+                0x000010b6                _ZN9OrangeBot5ServoC2Ev
+                0x000010b6                _ZN9OrangeBot5ServoC1Ev
  .text._ZN9OrangeBot5Servo10soft_startEhhhh
-                0x00000ec8       0x5e servo.o
-                0x00000ec8                _ZN9OrangeBot5Servo10soft_startEhhhh
+                0x000010ba       0x5e servo.o
+                0x000010ba                _ZN9OrangeBot5Servo10soft_startEhhhh
  .text._ZN9OrangeBot5Servo5powerEb
-                0x00000f26       0x48 servo.o
-                0x00000f26                _ZN9OrangeBot5Servo5powerEb
+                0x00001118       0x48 servo.o
+                0x00001118                _ZN9OrangeBot5Servo5powerEb
  .text._ZN9OrangeBot5Servo14clear_servo_ioEv
-                0x00000f6e       0x2c servo.o
-                0x00000f6e                _ZN9OrangeBot5Servo14clear_servo_ioEv
+                0x00001160       0x2c servo.o
+                0x00001160                _ZN9OrangeBot5Servo14clear_servo_ioEv
  .text._ZN9OrangeBot5Servo14emergency_stopEv
-                0x00000f9a       0x2a servo.o
-                0x00000f9a                _ZN9OrangeBot5Servo14emergency_stopEv
+                0x0000118c       0x2a servo.o
+                0x0000118c                _ZN9OrangeBot5Servo14emergency_stopEv
  .text._ZN9OrangeBot5Servo19compute_servo_delayEhRj
-                0x00000fc4      0x28c servo.o
-                0x00000fc4                _ZN9OrangeBot5Servo19compute_servo_delayEhRj
+                0x000011b6      0x28c servo.o
+                0x000011b6                _ZN9OrangeBot5Servo19compute_servo_delayEhRj
  .text._ZN9OrangeBot5Servo13hal_timer_isrEv
-                0x00001250      0x130 servo.o
-                0x00001250                _ZN9OrangeBot5Servo13hal_timer_isrEv
+                0x00001442      0x130 servo.o
+                0x00001442                _ZN9OrangeBot5Servo13hal_timer_isrEv
+ .text._ZN4User9String_uc10str_lengthEPhh
+                0x00001572       0x1a string_uc.o
+                0x00001572                _ZN4User9String_uc10str_lengthEPhh
+ .text._ZN4User9String_uc9to_stringIhEEhT_Ph
+                0x0000158c       0x98 string_uc.o
+                0x0000158c                _ZN4User9String_uc9to_stringIhEEhT_Ph
  .text._ZN4User4UartD2Ev
-                0x00001380        0x2 uart.o
-                0x00001380                _ZN4User4UartD1Ev
-                0x00001380                _ZN4User4UartD2Ev
+                0x00001624        0x2 uart.o
+                0x00001624                _ZN4User4UartD1Ev
+                0x00001624                _ZN4User4UartD2Ev
  .text._ZN4User4Uart4sendEh
-                0x00001382       0x2c uart.o
-                0x00001382                _ZN4User4Uart4sendEh
+                0x00001626       0x2c uart.o
+                0x00001626                _ZN4User4Uart4sendEh
  .text._ZN4User4Uart14get_counter_txERj
-                0x000013ae       0x10 uart.o
-                0x000013ae                _ZN4User4Uart14get_counter_txERj
+                0x00001652       0x10 uart.o
+                0x00001652                _ZN4User4Uart14get_counter_txERj
  .text._ZN4User4Uart14get_counter_rxERj
-                0x000013be       0x10 uart.o
-                0x000013be                _ZN4User4Uart14get_counter_rxERj
+                0x00001662       0x10 uart.o
+                0x00001662                _ZN4User4Uart14get_counter_rxERj
+ .text._ZN4User4Uart7receiveERh
+                0x00001672       0x48 uart.o
+                0x00001672                _ZN4User4Uart7receiveERh
  .text._ZN4User4Uart10isr_rx_exeEv
-                0x000013ce       0x68 uart.o
-                0x000013ce                _ZN4User4Uart10isr_rx_exeEv
+                0x000016ba       0x5e uart.o
+                0x000016ba                _ZN4User4Uart10isr_rx_exeEv
  .text._ZN4User4Uart6updateEv
-                0x00001436       0x5a uart.o
-                0x00001436                _ZN4User4Uart6updateEv
+                0x00001718       0x5a uart.o
+                0x00001718                _ZN4User4Uart6updateEv
  .text._ZN4User4Uart9init_uartER12USART_structj
-                0x00001490       0x2c uart.o
-                0x00001490                _ZN4User4Uart9init_uartER12USART_structj
+                0x00001772       0x2c uart.o
+                0x00001772                _ZN4User4Uart9init_uartER12USART_structj
  .text._ZN4User4Uart4initEv
-                0x000014bc       0x3a uart.o
-                0x000014bc                _ZN4User4Uart4initEv
+                0x0000179e       0x3a uart.o
+                0x0000179e                _ZN4User4Uart4initEv
  .text._ZN4User4UartC2Ev
-                0x000014f6        0x4 uart.o
-                0x000014f6                _ZN4User4UartC2Ev
-                0x000014f6                _ZN4User4UartC1Ev
+                0x000017d8        0x4 uart.o
+                0x000017d8                _ZN4User4UartC2Ev
+                0x000017d8                _ZN4User4UartC1Ev
+ .text._ZN9Orangebot9UniparserD2Ev
+                0x000017dc        0x2 uniparser.o
+                0x000017dc                _ZN9Orangebot9UniparserD1Ev
+                0x000017dc                _ZN9Orangebot9UniparserD2Ev
+ .text._ZN9Orangebot9Uniparser4initEv
+                0x000017de       0x2a uniparser.o
+                0x000017de                _ZN9Orangebot9Uniparser4initEv
+ .text._ZN9Orangebot9Uniparser7chk_cmdEPKh
+                0x00001808       0xd0 uniparser.o
+                0x00001808                _ZN9Orangebot9Uniparser7chk_cmdEPKh
+ .text._ZN9Orangebot9Uniparser7add_cmdEPKcPv
+                0x000018d8       0x70 uniparser.o
+                0x000018d8                _ZN9Orangebot9Uniparser7add_cmdEPKcPv
+ .text._ZN9Orangebot9Uniparser7add_argEh
+                0x00001948       0xba uniparser.o
+                0x00001948                _ZN9Orangebot9Uniparser7add_argEh
+ .text._ZN9Orangebot9Uniparser14accumulate_argEh
+                0x00001a02      0x20c uniparser.o
+                0x00001a02                _ZN9Orangebot9Uniparser14accumulate_argEh
+ .text._ZN9Orangebot9Uniparser9close_argEv
+                0x00001c0e       0x72 uniparser.o
+                0x00001c0e                _ZN9Orangebot9Uniparser9close_argEv
+ .text._ZN9Orangebot9Uniparser16execute_callbackEPv
+                0x00001c80      0xd26 uniparser.o
+                0x00001c80                _ZN9Orangebot9Uniparser16execute_callbackEPv
+ .text._ZN9Orangebot9Uniparser5parseEh
+                0x000029a6      0x3aa uniparser.o
+                0x000029a6                _ZN9Orangebot9Uniparser5parseEh
+ .text._ZN9Orangebot9UniparserC2Ev
+                0x00002d50       0x16 uniparser.o
+                0x00002d50                _ZN9Orangebot9UniparserC2Ev
+                0x00002d50                _ZN9Orangebot9UniparserC1Ev
  .text.libgcc.div
-                0x000014fa       0x18 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodqi4.o)
-                0x000014fa                __udivmodqi4
+                0x00002d66       0x18 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodqi4.o)
+                0x00002d66                __udivmodqi4
  .text.libgcc.div
-                0x00001512       0x28 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodhi4.o)
-                0x00001512                __udivmodhi4
+                0x00002d7e       0x28 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodhi4.o)
+                0x00002d7e                __udivmodhi4
  .text.libgcc.div
-                0x0000153a       0x44 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodsi4.o)
-                0x0000153a                __udivmodsi4
- .text.libgcc   0x0000157e        0xc d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_tablejump2.o)
-                0x0000157e                __tablejump2__
+                0x00002da6       0x44 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_udivmodsi4.o)
+                0x00002da6                __udivmodsi4
+ .text.libgcc   0x00002dea        0xc d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_tablejump2.o)
+                0x00002dea                __tablejump2__
  .text.libgcc.mul
-                0x0000158a       0x1e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_umulhisi3.o)
-                0x0000158a                __umulhisi3
+                0x00002df6       0x1e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_umulhisi3.o)
+                0x00002df6                __umulhisi3
  .text.libgcc.mul
-                0x000015a8       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_muluhisi3.o)
-                0x000015a8                __muluhisi3
+                0x00002e14       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_muluhisi3.o)
+                0x00002e14                __muluhisi3
  .text.avr-libc
-                0x000015be       0xb8 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega3\libc.a(rand.o)
-                0x00001650                rand_r
-                0x00001656                rand
-                0x00001660                srand
+                0x00002e2a       0xb8 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega3\libc.a(rand.o)
+                0x00002ebc                rand_r
+                0x00002ec2                rand
+                0x00002ecc                srand
  .text.libgcc.div
-                0x00001676       0x2e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_divmodsi4.o)
-                0x00001676                __divmodsi4
+                0x00002ee2       0x2e d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_divmodsi4.o)
+                0x00002ee2                __divmodsi4
  .text.libgcc.div
-                0x000016a4       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_negsi2.o)
-                0x000016a4                __negsi2
+                0x00002f10       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_negsi2.o)
+                0x00002f10                __negsi2
  .text.libgcc.mul
-                0x000016b4       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_mulshisi3.o)
-                0x000016b4                __mulshisi3
-                0x000016ba                __mulohisi3
-                0x000016c4                . = ALIGN (0x2)
+                0x00002f20       0x10 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_mulshisi3.o)
+                0x00002f20                __mulshisi3
+                0x00002f26                __mulohisi3
+                0x00002f30                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000016c4        0x0 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
-                0x000016c4                _exit
-                0x000016c4                exit
+ .fini9         0x00002f30        0x0 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
+                0x00002f30                _exit
+                0x00002f30                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
  *(.fini7)
  *(.fini7)
  *(.fini6)
- .fini6         0x000016c4       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_dtors.o)
-                0x000016c4                __do_global_dtors
+ .fini6         0x00002f30       0x16 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_dtors.o)
+                0x00002f30                __do_global_dtors
  *(.fini6)
  *(.fini5)
  *(.fini5)
@@ -981,69 +993,81 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000016da        0x4 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
+ .fini0         0x00002f46        0x4 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avrxmega3\libgcc.a(_exit.o)
  *(.fini0)
-                0x000016de                _etext = .
+                0x00002f4a                _etext = .
 
-.rodata         0x000056de       0x47 load address 0x000016de
+.rodata         0x00006f4a       0x9e load address 0x00002f4a
  *(.rodata)
- .rodata        0x000056de       0x3d at_lcd.o
+ .rodata        0x00006f4a       0x3d at_lcd.o
+ .rodata        0x00006f87       0x35 string_uc.o
  *(.rodata*)
  .rodata.str1.1
-                0x0000571b        0xa main.o
+                0x00006fbc        0xa main.o
+ .rodata.str1.1
+                0x00006fc6       0x22 parser_handlers.o
  *(.gnu.linkonce.r*)
 
-.data           0x00802800        0x4 load address 0x00001725
+.data           0x00802800        0x6 load address 0x00002fe8
                 0x00802800                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00802800        0x4 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega3\libc.a(rand.o)
  *(.data*)
+ .data.g_board_sign
+                0x00802804        0x2 parser_handlers.o
+                0x00802804                g_board_sign
  *(.gnu.linkonce.d*)
-                0x00802804                . = ALIGN (0x2)
-                0x00802804                _edata = .
-                0x00802804                PROVIDE (__data_end, .)
+                0x00802806                . = ALIGN (0x2)
+                0x00802806                _edata = .
+                0x00802806                PROVIDE (__data_end, .)
 
-.bss            0x00802804       0xda
-                0x00802804                PROVIDE (__bss_start, .)
+.bss            0x00802806      0x150
+                0x00802806                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss._ZZ10lcd_updatevE8data_buf
-                0x00802804        0x1 at_lcd.o
+                0x00802806        0x1 at_lcd.o
  .bss._ZZ10lcd_updatevE6status
-                0x00802805        0x2 at_lcd.o
+                0x00802807        0x2 at_lcd.o
  .bss.lcd_error
-                0x00802807        0x1 at_lcd.o
-                0x00802807                lcd_error
+                0x00802809        0x1 at_lcd.o
+                0x00802809                lcd_error
  .bss.lcd_cfg_flags
-                0x00802808        0x1 at_lcd.o
-                0x00802808                lcd_cfg_flags
- .bss.lcd_updt  0x00802809        0x4 at_lcd.o
-                0x00802809                lcd_updt
- .bss.lcd_show  0x0080280d       0x20 at_lcd.o
-                0x0080280d                lcd_show
+                0x0080280a        0x1 at_lcd.o
+                0x0080280a                lcd_cfg_flags
+ .bss.lcd_updt  0x0080280b        0x4 at_lcd.o
+                0x0080280b                lcd_updt
+ .bss.lcd_show  0x0080280f       0x20 at_lcd.o
+                0x0080280f                lcd_show
  .bss._ZZ10__vector_4E8pre_slow
-                0x0080282d        0x2 int.o
- .bss.gc_servo  0x0080282f       0x6e main.o
-                0x0080282f                gc_servo
+                0x0080282f        0x2 int.o
+ .bss.gc_servo  0x00802831       0x6e main.o
+                0x00802831                gc_servo
+ .bss.gcl_rx_parser
+                0x0080289f       0x75 main.o
+                0x0080289f                gcl_rx_parser
  .bss.gcl_uart0
-                0x0080289d       0x3f main.o
-                0x0080289d                gcl_uart0
+                0x00802914       0x3f main.o
+                0x00802914                gcl_uart0
  .bss.ge_error_code
-                0x008028dc        0x1 main.o
-                0x008028dc                ge_error_code
+                0x00802953        0x1 main.o
+                0x00802953                ge_error_code
  .bss.g_isr_flags
-                0x008028dd        0x1 main.o
-                0x008028dd                g_isr_flags
+                0x00802954        0x1 main.o
+                0x00802954                g_isr_flags
+ .bss.g_uart_timeout_cnt
+                0x00802955        0x1 parser_handlers.o
+                0x00802955                g_uart_timeout_cnt
  *(COMMON)
-                0x008028de                PROVIDE (__bss_end, .)
-                0x00001725                __data_load_start = LOADADDR (.data)
-                0x00001729                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00802956                PROVIDE (__bss_end, .)
+                0x00002fe8                __data_load_start = LOADADDR (.data)
+                0x00002fee                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008028de        0x0
+.noinit         0x00802956        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008028de                _end = .
+                0x00802956                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1090,8 +1114,11 @@ END GROUP
  .comment       0x00000030       0x31 init.o
  .comment       0x00000030       0x31 int.o
  .comment       0x00000030       0x31 main.o
+ .comment       0x00000030       0x31 parser_handlers.o
  .comment       0x00000030       0x31 servo.o
+ .comment       0x00000030       0x31 string_uc.o
  .comment       0x00000030       0x31 uart.o
+ .comment       0x00000030       0x31 uniparser.o
  .comment       0x00000030       0x31 d:/programs/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega3\libc.a(rand.o)
 
 .note.gnu.avr.deviceinfo

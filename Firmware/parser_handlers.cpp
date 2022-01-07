@@ -51,7 +51,7 @@ extern void ping_handler( void );
 //Handle Request for signature coming from the RPI 3B+. Answer with board signature.
 extern void send_signature_handler( void );
 //Handle PPM message. Servo command in microseconds.
-extern void set_servo_ppm( uint8_t iu8_index, int16_t is16_us );
+extern void set_servo_ppm( uint8_t iu8_index, int16_t is16_position, int16_t is16_speed );
 
 /****************************************************************
 ** GLOBAL VARS PROTOTYPES

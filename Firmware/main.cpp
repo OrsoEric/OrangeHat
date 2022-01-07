@@ -142,6 +142,8 @@
 
 //Report an error to the application
 extern bool report_error( Error_code ie_error_code );
+//register all commands and associated callback functions
+extern bool init_parser_commands( Orangebot::Uniparser &parser_tmp );
 
 /****************************************************************
 ** GLOBAL VARIABLES
@@ -161,6 +163,8 @@ volatile Error_code ge_error_code = Error_code::OK;
 
 //Class to handle UART0
 User::Uart gcl_uart0;
+//Parse RX data and automatically execute registered callback functions
+Orangebot::Uniparser gcl_rx_parser;
 
 	///----------------------------------------------------------------------
 	///	SERVO DRIVER
@@ -185,6 +189,8 @@ int main(void)
 	//----------------------------------------------------------------
 	
 	uint16_t cnt = 0;
+	
+	bool u1_fail;
 	
 	//----------------------------------------------------------------
 	//	INIT
@@ -217,6 +223,13 @@ int main(void)
 	
 	//Construct and initialize UART class
 	gcl_uart0 = User::Uart();
+	
+	//register all commands and associated callback functions
+	u1_fail = init_parser_commands( gcl_rx_parser );
+	if (u1_fail == true)
+	{
+		report_error(Error_code::ERR_PARSER);
+	}
 	
 		///----------------------------------------------------------------------
 		///	Servo Driver
@@ -354,6 +367,19 @@ int main(void)
 		//	RPI USART RX --> AT4809
 		//----------------------------------------------------------------
 		
+		uint8_t u8_data;
+		//Try to receive a data from the UART
+		bool u1_ret = gcl_uart0.receive( u8_data );
+		//Data has been received
+		if (u1_ret == false)
+		{
+			gcl_rx_parser.parse( u8_data );
+		}
+		//No data waiting to be received
+		else
+		{
+			//do nothing
+		}
 		
 		
 		//----------------------------------------------------------------
