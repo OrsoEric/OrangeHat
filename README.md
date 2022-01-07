@@ -8,6 +8,9 @@ Dual buck from 2S to 4S LIPO to two 3.0A channels.
 **OrangeHat**  
 Assembly
 ![](https://user-images.githubusercontent.com/30684972/147383414-2592cd50-6037-41e5-a472-984f9cc8984d.jpg)  
+  
+Demo OrangeHat installed on Maze Runner (click on image to see video on youtube)    
+[![Maze Runner OrangeHat](https://user-images.githubusercontent.com/30684972/148542123-92dcce3f-4889-4a59-b972-5f960733bc7a.jpg)](https://youtu.be/MLvYplDcF7E)  
 
 **OrangeHat Firmware**  
 LCD Display (click on image to see video on youtube)  
