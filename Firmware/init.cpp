@@ -42,7 +42,7 @@ extern void init_timer_a_pwm16b( void );
 //setup one of four timers type B of the AT4809 as PWM generator
 extern void init_timer_b( TCB_t &timer );
 //Initialize one of four USART transceivers
-extern void init_uart( USART_t &usart );
+extern void init_uart( USART_t &ist_uart, uint16_t iu16_baud );
 //Initialize port multiplexer for alternate functions
 extern void init_mux( void );
 
@@ -161,8 +161,8 @@ void init_pin( void )
 
 	//----------------------------------------------------------------
 	//!	PORTA
-	//!	PA0				:
-	//!	PA1				: 
+	//!	PA0				: UART0 TXO
+	//!	PA1				: UART0 RXI
 	//!	PA2, TCB0		: 
 	//!	PA3, TCB1		: 
 	//!	PA4				: 
@@ -171,7 +171,7 @@ void init_pin( void )
 	//!	PA7				: LCD PWR#
 	//----------------------------------------------------------------
 	//				0		1		2		3		4		5		6		7
-	PORT_A_CONFIG(	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_R,	PIN_H );
+	PORT_A_CONFIG(	PIN_H,	PIN_R,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_Z,	PIN_R,	PIN_H );
 
 	//----------------------------------------------------------------
 	//!	PORTB

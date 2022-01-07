@@ -43,7 +43,8 @@ C_SRCS +=  \
 ../init.cpp \
 ../int.cpp \
 ../main.cpp \
-../servo.cpp
+../servo.cpp \
+../uart.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -59,7 +60,8 @@ embedded_string.o \
 init.o \
 int.o \
 main.o \
-servo.o
+servo.o \
+uart.o
 
 OBJS_AS_ARGS +=  \
 at_lcd.o \
@@ -68,7 +70,8 @@ embedded_string.o \
 init.o \
 int.o \
 main.o \
-servo.o
+servo.o \
+uart.o
 
 C_DEPS +=  \
 at_lcd.d \
@@ -77,7 +80,8 @@ embedded_string.d \
 init.d \
 int.d \
 main.d \
-servo.d
+servo.d \
+uart.d
 
 C_DEPS_AS_ARGS +=  \
 at_lcd.d \
@@ -86,11 +90,12 @@ embedded_string.d \
 init.d \
 int.d \
 main.d \
-servo.d
+servo.d \
+uart.d
 
-OUTPUT_FILE_PATH +=2021-12-18b\ AT4809\ OrangeHat\ Servo.elf
+OUTPUT_FILE_PATH +=2022-01-05b\ AT4809\ UART\ Driver.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +="2021-12-18b AT4809 OrangeHat Servo.elf"
+OUTPUT_FILE_PATH_AS_ARGS +="2022-01-05b AT4809 UART Driver.elf"
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -151,6 +156,13 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
+./uart.o: .././uart.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 
 
 
@@ -177,13 +189,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR8/GNU Linker : 5.4.0
-	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="2021-12-18b AT4809 OrangeHat Servo.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809"  
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="2022-01-05b AT4809 UART Driver.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809"  
 	@echo Finished building target: $@
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.hex"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.eep" || exit 0
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "2021-12-18b AT4809 OrangeHat Servo.elf" > "2021-12-18b AT4809 OrangeHat Servo.lss"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.srec"
-	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "2021-12-18b AT4809 OrangeHat Servo.elf"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "2022-01-05b AT4809 UART Driver.elf" "2022-01-05b AT4809 UART Driver.hex"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "2022-01-05b AT4809 UART Driver.elf" "2022-01-05b AT4809 UART Driver.eep" || exit 0
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "2022-01-05b AT4809 UART Driver.elf" > "2022-01-05b AT4809 UART Driver.lss"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "2022-01-05b AT4809 UART Driver.elf" "2022-01-05b AT4809 UART Driver.srec"
+	"D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "2022-01-05b AT4809 UART Driver.elf"
 	
 	
 
@@ -195,5 +207,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "2021-12-18b AT4809 OrangeHat Servo.elf" "2021-12-18b AT4809 OrangeHat Servo.a" "2021-12-18b AT4809 OrangeHat Servo.hex" "2021-12-18b AT4809 OrangeHat Servo.lss" "2021-12-18b AT4809 OrangeHat Servo.eep" "2021-12-18b AT4809 OrangeHat Servo.map" "2021-12-18b AT4809 OrangeHat Servo.srec" "2021-12-18b AT4809 OrangeHat Servo.usersignatures"
+	rm -rf "2022-01-05b AT4809 UART Driver.elf" "2022-01-05b AT4809 UART Driver.a" "2022-01-05b AT4809 UART Driver.hex" "2022-01-05b AT4809 UART Driver.lss" "2022-01-05b AT4809 UART Driver.eep" "2022-01-05b AT4809 UART Driver.map" "2022-01-05b AT4809 UART Driver.srec" "2022-01-05b AT4809 UART Driver.usersignatures"
 	

@@ -28,8 +28,7 @@
 	#define	LED1_PORT	PORTC
 	#define LED1_PIN	5
 	
-	#define SERVO_PWR_PORT	PORTD
-	#define SERVO_PWR_PIN	7
+	//#define SERVO_PWR_PORT	PORTD
 	
 		///----------------------------------------------------------------------
 		///	TIMINGS

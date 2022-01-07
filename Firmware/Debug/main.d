@@ -1,6 +1,8 @@
 main.d main.o: .././main.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
+ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -16,11 +18,15 @@ main.d main.o: .././main.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././at_lcd.h .././servo.cpp
+ .././at_lcd.h .././uart.h .././servo.h
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
+
+d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
+d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
@@ -58,4 +64,6 @@ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 .././at_lcd.h:
 
-.././servo.cpp:
+.././uart.h:
+
+.././servo.h:
