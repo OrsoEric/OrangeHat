@@ -1,8 +1,7 @@
-main.d main.o: .././main.cpp \
+servo.d servo.o: .././servo.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
+ .././at_utils.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -14,19 +13,16 @@ main.d main.o: .././main.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\xmega.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././at_utils.h .././at4809_port.h .././global.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././at_lcd.h .././uart.h .././uniparser.h .././servo.h
+ .././servo.h
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
 
-d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
-
-d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
+.././at_utils.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
@@ -50,22 +46,10 @@ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-.././at_utils.h:
-
-.././at4809_port.h:
-
-.././global.h:
-
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
-
-.././at_lcd.h:
-
-.././uart.h:
-
-.././uniparser.h:
 
 .././servo.h:

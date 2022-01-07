@@ -1,4 +1,4 @@
-main.d main.o: .././main.cpp \
+parser_handlers.d parser_handlers.o: .././parser_handlers.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
@@ -18,7 +18,7 @@ main.d main.o: .././main.cpp \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././at_lcd.h .././uart.h .././uniparser.h .././servo.h
+ .././uart.h .././string_uc.h .././uniparser.h
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
@@ -62,10 +62,8 @@ d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h
 
 d:\programs\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
-.././at_lcd.h:
-
 .././uart.h:
 
-.././uniparser.h:
+.././string_uc.h:
 
-.././servo.h:
+.././uniparser.h:

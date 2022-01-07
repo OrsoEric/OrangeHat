@@ -76,7 +76,7 @@ ISR( RTC_PIT_vect )
 	{
 		//ERR OVERRUN
 		//The main application could not keep up with the previous slow tick. Raise the alarm
-		ISSUE_ERROR(ge_error_code, Error_code::ERR_OVERRUN_FAST_TICK);
+		report_error( Error_code::ERR_OVERRUN_FAST_TICK );
 	}
 	
 	//----------------------------------------------------------------
@@ -100,7 +100,7 @@ ISR( RTC_PIT_vect )
 		{
 			//ERR OVERRUN
 			//The main application could not keep up with the previous slow tick. Raise the alarm
-			ISSUE_ERROR(ge_error_code, Error_code::ERR_OVERRUN_SLOW_TICK);
+			report_error( Error_code::ERR_OVERRUN_SLOW_TICK );
 		}
 		
 	}

@@ -55,18 +55,13 @@
 		ERR_OVERRUN_FAST_TICK,
 		//The main application could not keep up with the previous slow tick. Raise the alarm
 		ERR_OVERRUN_SLOW_TICK,
+		//An error occurred with the parser
+		ERR_PARSER,
 	} Error_code;
 
 	/****************************************************************************
 	**	MACRO
 	****************************************************************************/
-
-		///----------------------------------------------------------------------
-		///	ERROR
-		///----------------------------------------------------------------------
-
-	#define ISSUE_ERROR( error_var, error_code )	\
-		(error_var != Error_code::OK)?(error_var = error_code):(Error_code::OK)
 
 	/****************************************************************************
 	**	TYPEDEF
@@ -97,6 +92,9 @@
 	/****************************************************************************
 	**	PROTOTYPE: FUNCTION
 	****************************************************************************/
+		
+	//Report an error to the application
+	extern bool report_error( Error_code ie_error_code );	
 		
 	/****************************************************************************
 	**	PROTOTYPE: GLOBAL VARIABILE
