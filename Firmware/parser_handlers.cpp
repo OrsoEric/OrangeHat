@@ -110,7 +110,7 @@ bool init_parser_commands( Orangebot::Uniparser &parser_tmp )
 	//Register the Find command. Board answers with board signature
 	f_ret |= parser_tmp.add_cmd( "F", (void *)&send_signature_handler );
 	//Platform set PPM command
-	f_ret |= parser_tmp.add_cmd( "PPM%u:%S", (void *)&set_servo_ppm );
+	f_ret |= parser_tmp.add_cmd( "PPM%u:%S:%S", (void *)&set_servo_ppm );
 		
 	//If: Uniparser V4 failed to register a command
 	if (f_ret == true)
@@ -147,7 +147,9 @@ void ping_handler( void )
 	//	BODY
 	//----------------------------------------------------------------
 
-	LED1_PORT.OUTTGL = MASK(LED1_PIN);
+	//Send a pong in response
+	gcl_uart0.send('P');
+	gcl_uart0.send('\0');
 
 	//----------------------------------------------------------------
 	//	RETURN
