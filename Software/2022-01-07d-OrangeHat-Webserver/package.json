@@ -1,0 +1,24 @@
+{
+  "name": "2020-01-04-orangebot-cpp",
+  "version": "1.0.0",
+  "main": "orangebot.js",
+  "gypfile": true,
+  "scripts": {
+    "build": "node-gyp rebuild --verbose",
+    "clean": "node-gyp clean",
+    "install": "node-gyp rebuild"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-gyp": "^5.0.7"
+  },
+  "dependencies": {
+    "node-addon-api": "^2.0.0",
+    "serialport": "^8.0.6",
+    "socket.io": "^2.3.0",
+    "ws": "^7.2.1",
+    "stream-split": "^1.1.0"
+  },
+  "description": ""
+}

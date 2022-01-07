@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+	<head>
+		<style>
+			/* @author Orso Eric */
+			*
+			{
+				box-sizing: border-box;
+			}
+
+			body
+			{
+				background-color: #D0D0D0;
+			}
+			h1
+			{
+				color: blue;
+			}
+			p
+			{
+				color: red;
+			}
+			/*Slider*/
+			.slidecontainer
+			{
+				width: 100%;
+			}
+			.number_display
+			{
+				display: inline-block; /* allow the element to have a size*/
+				overflow: hidden; /*clip content outside the box*/
+				color: black;
+				width: 50px;
+			}
+		</style>
+		<title>OrangeBot</title>
+	</head>
+	<body>
+		<h1>OrangeBot FPV Remote Controls</h1>
+		<p>
+			Robot Firmware revision : <input id="lbl_robot_signature" type="text" value="" size="20">
+			 | Firmware Error Code: <span id="lbl_robot_error_code" class="number_display">0</span>
+			 | Firmware Error Counter: <span id="lbl_robot_error_code_counter" class="number_display">0</span>
+		</p>
+		<p>Robot AT4809 Performance<input id="lbl_at4809_cpu_scan_frequency" type="text" value="" size="20"> UART Bandwidth <input id="lbl_at4809_rxi_bandwidth" type="text" value="" size="20"> <input id="lbl_at4809_txo_bandwidth" type="text" value="" size="20"></p>
+
+		<p>Robot PWM
+			| Channel 0: <span id="lbl_pwm0" class="number_display">0</span>
+			| Channel 1: <span id="lbl_pwm1" class="number_display">0</span>
+			| Channel 2: <span id="lbl_pwm2" class="number_display">0</span>
+			| Channel 3: <span id="lbl_pwm3" class="number_display">0</span>
+		</p>
+		<p>Robot Encoder Position
+			| Channel 0: <input id="lbl_enc_pos0" type="text" value="" size="20">
+			| Channel 1: <input id="lbl_enc_pos1" type="text" value="" size="20">
+		</p>
+		<p>Robot Encoder Speed
+			| Channel 0: <input id="lbl_enc_spd0" type="text" value="" size="20">
+			| Channel 1: <input id="lbl_enc_spd1" type="text" value="" size="20">
+		</p>
+		<p>Robot PID Error
+			| Channel 0:<span id="lbl_pid_err0" class="number_display">0</span>
+			| Channel 1: <span id="lbl_pid_err1" class="number_display">0</span>
+		</p>
+		<p>Robot PID Control Slew Rate
+			| Channel 0:<span id="lbl_pid_slew_rate0" class="number_display">0</span>
+			| Channel 1: <span id="lbl_pid_slew_rate1" class="number_display">0</span>
+		</p>
+		
+		<p>Robot Control Mode: </p>
+			<p><input type="radio" id="rad_control_mode_off" name="rad_control_mode" onclick="rad_control_mode_handler(this)" value="off" checked>OFF<br>
+			<input type="radio" id="rad_control_mode_pwm" name="rad_control_mode" onclick="rad_control_mode_handler(this)" value="pwm">PWM<br>
+			<input type="radio" id="rad_control_mode_fast_spd" name="rad_control_mode" onclick="rad_control_mode_handler(this)" value="fast_spd">Fast Speed PID<br>  
+			<input type="radio" id="rad_control_mode_slow_spd" name="rad_control_mode" onclick="rad_control_mode_handler(this)" value="slow_spd">Slow Speed PID<br>
+			<input type="radio" id="rad_control_mode_pos" name="rad_control_mode" onclick="rad_control_mode_handler(this)" value="pos">Position PID<br>
+		</p>
+		<p>
+			<button id="btn_pid_reset" type="button" value="reset" onclick="btn_pid_handler(this.value)"> Reset PID Gains </button>
+			<button id="btn_pid_save" type="button" value="save" onclick="btn_pid_handler(this.value)"> Save PID Gains </button>
+			<button id="btn_pid_load" type="button" value="load" onclick="btn_pid_handler(this.value)">Load PID Gains</button>
+		</p>
+		<div class="slidecontainer">
+			<p>Speed PID:
+				KP: <input type="range" id="sld_spd_kp" min="-30000" max="30000" value="0" step="100" onchange="sld_handler()"><span id="lbl_spd_kp" class="number_display">0</span>
+				KI: <input type="range" id="sld_spd_ki" min="-1000" max="1000" value="0" step="1" onchange="sld_handler()"><span id="lbl_spd_ki" class="number_display">0</span>
+				KD: <input type="range" id="sld_spd_kd" min="-10000" max="10000" value="0" step="10" onchange="sld_handler()"><span id="lbl_spd_kd" class="number_display">0</span>
+			</p>
+		</div>
+		<div class="slidecontainer">
+			<p>Position PID:
+				KP: <input type="range" id="sld_pos_kp" min="-1000" max="1000" value="0" step="1" onchange="sld_handler()"><span id="lbl_pos_kp" class="number_display">0</span>
+				KI: <input type="range" id="sld_pos_ki" min="-100" max="100" value="0" step="1" onchange="sld_handler()"><span id="lbl_pos_ki" class="number_display">0</span>
+				KD: <input type="range" id="sld_pos_kd" min="-1000" max="1000" value="0" step="10" onchange="sld_handler()"><span id="lbl_pos_kd" class="number_display">0</span>
+			</p>
+		</div>
+		<p>
+			<button type="button" id="btn_video_start" value="start_video">Start Video</button>
+			<button type="button" id="btn_video_stop" value="stop_video">Stop Video</button>
+		</p>
+		<p>
+			This canvas is painted by the javascript player and shows the live stream.
+			<canvas id="raspicam-canvas" width=640 height=480></canvas>
+		</p>
+	</body>
+	<script type="text/javascript">
+		//-----------------------------------------
+		//	GLOBAL VARS
+		//-----------------------------------------
+		
+		//Eneable One Time console logs
+		var g_enable_onetime_log = true;
+		//Enable runtime console log
+		var g_enable_log = true;
+		//Count the number of errors of the firmware
+		var g_fw_err_cnt = 0;
+		//Construct global speed pid var
+		var g_pid =
+		{
+			ctrl_mode : "off",
+			spd_change : false,
+			pos_change : false,
+			spd_kp : 0,
+			spd_ki : 0,
+			spd_kd : 0,
+			pos_kp : 0,
+			pos_ki : 0,
+			pos_kd : 0
+		}
+		//Store the robot status
+		var g_robot_status =
+		{
+			signature : "NULL",
+			AT4809ERR : 0,
+			AT4809CPU : 0,
+			AT4809RXI : 0,
+			AT4809TXO : 0,
+			pwm : [0, 0, 0, 0],
+			enc_pos : [0, 0],
+			enc_spd : [0, 0],
+			pid_err : [0, 0],
+			pid_slew_rate : [0, 0]
+		}
+
+		//Initialize global vars
+		function init_vars( pid, status )
+		{
+			pid.ctrl_mode = "off";
+			//Initialize PID gains to zero
+			init_pid_gains( pid );
+			
+			console.log("initialize global vars...");
+			
+			return;
+		}
+		
+		//Initialize PID gains
+		function init_pid_gains( pid )
+		{
+			pid.spd_kp = 0;
+			pid.spd_ki = 0;
+			pid.spd_kd = 0;
+			pid.pos_kp = 0;
+			pid.pos_ki = 0;
+			pid.pos_kd = 0;
+			
+			return;
+		}		
+
+		//-----------------------------------------
+		//	LINK CONTROLS
+		//-----------------------------------------
+		//	Link relevant controls to vars to speed up page
+		
+		//Link Robot Status
+		var g_lbl_robot_error_code = document.getElementById("lbl_robot_error_code");
+		var g_lbl_robot_error_code_counter = document.getElementById("lbl_robot_error_code_counter");
+		//Link Speed PID Sliders
+		var g_sld_spd_kp = document.getElementById("sld_spd_kp");
+		var g_sld_spd_ki = document.getElementById("sld_spd_ki");
+		var g_sld_spd_kd = document.getElementById("sld_spd_kd");
+		if (g_enable_onetime_log == true)
+		{
+			console.log( "LINK: Speed Gain Sliders | ", g_sld_spd_kp, g_sld_spd_ki, g_sld_spd_kd );
+		}
+		//Link Speed Labels
+		var g_lbl_spd_kp = document.getElementById("lbl_spd_kp");
+		var g_lbl_spd_ki = document.getElementById("lbl_spd_ki");
+		var g_lbl_spd_kd = document.getElementById("lbl_spd_kd");
+		
+		//Link Position PID Sliders
+		var g_sld_pos_kp = document.getElementById("sld_pos_kp");
+		var g_sld_pos_ki = document.getElementById("sld_pos_ki");
+		var g_sld_pos_kd = document.getElementById("sld_pos_kd");
+		if (g_enable_onetime_log == true)
+		{
+			console.log( "LINK: Position Gain Sliders | ", g_sld_pos_kp, g_sld_pos_ki, g_sld_pos_kd );
+		}
+		//Link Position labels Sliders
+		var g_lbl_pos_kp = document.getElementById("lbl_pos_kp");
+		var g_lbl_pos_ki = document.getElementById("lbl_pos_ki");
+		var g_lbl_pos_kd = document.getElementById("lbl_pos_kd");
+		if (g_enable_onetime_log == true)
+		{
+			console.log( "LINK: Position Gain Sliders | ", g_lbl_pos_kp, g_lbl_pos_ki, g_lbl_pos_kd );
+		}
+		
+		//Link Robot Status Controls
+		var g_lbl_pwm = [];
+		g_lbl_pwm[0] = document.getElementById("lbl_pwm0");
+		g_lbl_pwm[1] = document.getElementById("lbl_pwm1");
+		g_lbl_pwm[2] = document.getElementById("lbl_pwm2");
+		g_lbl_pwm[3] = document.getElementById("lbl_pwm3");
+		
+		//Link PID Error
+		var g_lbl_pid_err = [];
+		g_lbl_pid_err[0] = document.getElementById("lbl_pid_err0"); 
+		g_lbl_pid_err[1] = document.getElementById("lbl_pid_err1"); 
+		
+		//Link PID Slew rate
+		var g_lbl_pid_slew_rate = [];
+		g_lbl_pid_slew_rate[0] = document.getElementById("lbl_pid_slew_rate0"); 
+		g_lbl_pid_slew_rate[1] = document.getElementById("lbl_pid_slew_rate1"); 
+		
+		
+		//-----------------------------------------
+		//	UTILITY FUNCTIONS
+		//-----------------------------------------
+		
+		//Fill a lablel by searching for the right control name
+		function fill_value_id( target_id, payload )
+		{
+			window.document.getElementById( target_id ).value = payload;
+			return;
+		}
+		
+		//Fill label by using its reference var
+		function fill_value( target, payload )
+		{	
+			//Check if values are different. Need triple equal because <empty string> and 0 compare to true -.-
+			if (target.value === payload)
+			{
+				//Do nothing
+			}
+			else
+			{
+				//Perform the assignment
+				target.value = payload;
+			}
+			return;
+		}
+		
+		//Fill label by using its reference var
+		function fill_inner_html( target, payload )
+		{	
+			//Check if values are different. Need triple equal because <empty string> and 0 compare to true -.-
+			if (target.innerHTML === payload)
+			{
+				//Do nothing
+			}
+			else
+			{
+				//Perform the assignment
+				target.innerHTML = payload;
+			}
+			return;
+		}
+
+		//-----------------------------------------
+		//	CONTROLS RELATED FUNCTIONS
+		//-----------------------------------------
+		
+		//Load the sliders PID gain values and detect change
+		function update_pid_gain( pid )
+		{
+			//Clear change flags
+			pid.spd_change = false;
+			pid.pos_change = false;
+			//Process change and update gains
+			if (pid.spd_kp != g_sld_spd_kp.value)
+			{
+				pid.spd_kp = g_sld_spd_kp.value;
+				pid.spd_change = true;
+			}
+			if (pid.spd_ki != g_sld_spd_ki.value)
+			{
+				pid.spd_ki = g_sld_spd_ki.value;
+				pid.spd_change = true;
+			}
+			if (pid.spd_kd != g_sld_spd_kd.value)
+			{
+				pid.spd_kd = g_sld_spd_kd.value;
+				pid.spd_change = true;
+			}
+			if (pid.pos_kp != g_sld_pos_kp.value)
+			{
+				pid.pos_kp = g_sld_pos_kp.value;
+				pid.pos_change = true;
+			}
+			if (pid.pos_ki != g_sld_pos_ki.value)
+			{
+				pid.pos_ki = g_sld_pos_ki.value;
+				pid.pos_change = true;
+			}
+			if (pid.pos_kd != g_sld_pos_kd.value)
+			{
+				pid.pos_kd = g_sld_pos_kd.value;
+				pid.pos_change = true;
+			}
+		}
+		
+		//Fill the content of the speed PID labels
+		function fill_pid_labels( pid )
+		{
+			fill_inner_html( g_lbl_spd_kp, pid.spd_kp );
+			fill_inner_html( g_lbl_spd_ki, pid.spd_ki );
+			fill_inner_html( g_lbl_spd_kd, pid.spd_kd );
+			fill_inner_html( g_lbl_pos_kp, pid.pos_kp );
+			fill_inner_html( g_lbl_pos_ki, pid.pos_ki );
+			fill_inner_html( g_lbl_pos_kd, pid.pos_kd );
+			
+			return;
+		}
+		
+		//Fill robot status controls
+		function fill_robot_status( robot_status )
+		{	
+			//Show the robot irmware revision
+			fill_value_id("lbl_robot_signature", robot_status.signature );
+			fill_inner_html( g_lbl_robot_error_code, robot_status.AT4809ERR );
+			
+			//AT4809 Performance Counters
+			fill_value_id("lbl_at4809_cpu_scan_frequency", robot_status.AT4809CPU );
+			fill_value_id("lbl_at4809_rxi_bandwidth", robot_status.AT4809RXI );
+			fill_value_id("lbl_at4809_txo_bandwidth", robot_status.AT4809TXO );
+			fill_inner_html( g_lbl_pwm[0], robot_status.pwm[0] );
+			fill_inner_html( g_lbl_pwm[1], robot_status.pwm[1] );
+			fill_inner_html( g_lbl_pwm[2], robot_status.pwm[2] );
+			fill_inner_html( g_lbl_pwm[3], robot_status.pwm[3] );
+			fill_value_id("lbl_enc_pos0", robot_status.enc_pos[0] );
+			fill_value_id("lbl_enc_pos1", robot_status.enc_pos[1] );
+			fill_value_id("lbl_enc_spd0", robot_status.enc_spd[0] );
+			fill_value_id("lbl_enc_spd1", robot_status.enc_spd[1] );
+			
+			//PID Error
+			fill_inner_html( g_lbl_pid_err[0], robot_status.pid_err[0] );
+			fill_inner_html( g_lbl_pid_err[1], robot_status.pid_err[1] );
+			//PID Control Slew Rate
+			fill_inner_html( g_lbl_pid_slew_rate[0], robot_status.pid_slew_rate[0] );
+			fill_inner_html( g_lbl_pid_slew_rate[1], robot_status.pid_slew_rate[1] );
+			
+			return;
+		}
+		
+		//Set slider position
+		function set_all_sliders( pid )
+		{
+			console.log( "initialize sliders...", pid );
+			//Set control system position
+			document.getElementById("rad_control_mode_off").checked = (pid.ctrl_mode == "off");
+			document.getElementById("rad_control_mode_pwm").checked = (pid.ctrl_mode == "pwm");
+			document.getElementById("rad_control_mode_fast_spd").checked = (pid.ctrl_mode == "fast_spd");
+			document.getElementById("rad_control_mode_slow_spd").checked = (pid.ctrl_mode == "slow_spd");
+			document.getElementById("rad_control_mode_pos").checked = (pid.ctrl_mode == "pos");
+			//Set speed gain sliders
+			g_sld_spd_kp.value = pid.spd_kp;
+			g_sld_spd_ki.value = pid.spd_ki;
+			g_sld_spd_kd.value = pid.spd_kd;
+			//Set position gain sliders
+			g_sld_pos_kp.value = pid.pos_kp;
+			g_sld_pos_ki.value = pid.pos_ki;
+			g_sld_pos_kd.value = pid.pos_kd;
+		
+			return;
+		}
+			
+		//-----------------------------------------
+		//	CONTROLS CALLBACK FUNCTIONS
+		//-----------------------------------------
+		
+		//Handle a slider event
+		function sld_handler()
+		{
+			//Detect changes in every slider
+			update_pid_gain( g_pid );
+			//Emit Speed PID Parameter message
+			send_pid_message( g_pid );
+			fill_pid_labels( g_pid );
+			console.log("Slider event...", g_pid);
+			return;
+		}
+		
+		//Handler for the Control Mode Radio Button
+		function rad_control_mode_handler( data )
+		{
+			//Detect changes in every slider
+			update_pid_gain( g_pid );
+			//Update the control mode on the control structure
+			g_pid.ctrl_mode = data.value;
+			//Emit Speed PID Parameter message. It holds the control mode as well
+			send_pid_message( g_pid );
+			
+			return;
+		}
+		
+		//Button to save/restore PID gains
+		function btn_pid_handler( data )
+		{
+			//console.log("HTML: Node PID Button", data );
+			//Inform NODE that a button action has been emitted
+			send_btn_pid_message( data );
+			
+			return;
+		}
+
+		//-----------------------------------------
+		//	INITIALIZE CONTROLS
+		//-----------------------------------------			
+		
+		if (g_enable_onetime_log == true)
+		{
+			console.log( "g_pid | ", g_pid );
+		}
+		//Read current PID gain configuration
+		//update_pid_gain( g_pid );
+		init_vars( g_pid, g_robot_status );
+		//Initialize PID labels
+		fill_pid_labels( g_pid );
+		//Initialize robot status controls
+		fill_robot_status( g_robot_status );
+		//Initialize the slider position
+		set_all_sliders( g_pid );
+		
+		//-----------------------------------------
+		//	REGISTER EVENT LISTENERS
+		//-----------------------------------------		
+	
+		//Listen for key strokes
+		window.document.addEventListener
+		(
+			"keydown",
+			function onEvent(event)
+			{
+				//Process key event and get current direction
+				f_change = process_key( event.key, 1 );
+				//If: direction has changed
+				if (f_change == true)
+				{
+					//Send a direction change message
+					send_direction_message();
+					if (g_enable_log == true)
+					{
+						console.log("keyup: " +event.key, direction);
+					}
+				}			
+			},
+			false
+		);
+
+		//Listen for key releases
+		window.document.addEventListener
+		(
+			"keyup",
+			function onEvent(event)
+			{
+				f_change = process_key( event.key, 0 );
+				//If: direction has changed
+				if (f_change == true)
+				{
+					//Send a direction change message
+					send_direction_message();
+					if (g_enable_log == true)
+					{
+						console.log("keyup: " +event.key, direction);
+					}
+				}	
+			},
+			false
+		);
+				
+	</script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		//-----------------------------------------
+		//	NETWORK 
+		//-----------------------------------------	
+		
+		//IP of the client browser
+		var g_host_ip = document.location.hostname;
+		if (g_enable_onetime_log == true)
+		{
+			console.log("connecting to host: ", g_host_ip);
+		}
+		
+		//-----------------------------------------
+		//	SOCKET.IO 
+		//-----------------------------------------	
+		//	Real time interface between browser (client) and webserver (Raspberry Pi 3B+)
+
+		//If Socket.IO is undefined
+		if (typeof io === "undefined")
+		{
+			//This happens because you are debugging index.html or because SOCKET.IO is broken
+			console.log( "ERR: Unable to load Socket.IO" );
+			
+			//-----------------------------------------
+			//	EMIT WRAPPER
+			//-----------------------------------------
+			//	Construct an anstraction for the direct socket.IO call
+			//	Replace it with an empty wrapper in case Socket.IO was not loaded
+			
+			function socket_emit_wrapper( label, payload )
+			{
+				console.log( "DUMMY EMIT: | ", label, payload );
+			}
+		}
+		//If: Socket.IO has been loaded
+		else
+		{
+			//Connect to the server via websocket
+			var mysocket = io("http://" +g_host_ip +":8080");
+			
+			//-----------------------------------------
+			//	CONNESSION ACKNOWLEDGE
+			//-----------------------------------------
+			//	Link is initiated by the client
+			//	Server sends a welcome message when link is estabilished
+			//	Server could send an auth token to keep track of individual clients and login data
+
+			mysocket.on
+			(
+				"welcome",
+				(message) =>
+				{
+					console.log("INFO: Server websocket connession acknoweldged... " +message.payload);
+				}
+			)
+			
+			//-----------------------------------------
+			//	PING-PONG
+			//-----------------------------------------
+			//	Server sends ping messages with a timestamp
+			//	Client answers with pongs to allow server to profile latency of the channel
+
+			//profile messages means the server wants to compute roundway trip
+			mysocket.on
+			(
+				"profile_ping",
+				(message) =>
+				{
+					//Answer back with the received timestamp so that server can compute roundway trip
+					socket_emit_wrapper("profile_pong", { timestamp: message.timestamp });
+					console.log( "server wants a pong. server absolute timestamp[ms]: " +message.timestamp );
+				}
+			);
+			
+			//-----------------------------------------
+			//	SERVER->CLIENT CONTROLS
+			//-----------------------------------------
+			//	Server can send an async message to dinamically update the page without reloading
+			//	This is an example message with the server local date and time in string form
+
+			mysocket.on
+			(
+				"robot_status",
+				(message) =>
+				{
+					if (g_enable_log == true)
+					{
+						console.log( message );
+					}
+					//Process the robot status message
+					process_robot_status_message( message );
+				}
+			)
+			
+			mysocket.on
+			(
+				"set_pid_gain",
+				(message) =>
+				{
+					if (g_enable_log == true)
+					{
+						console.log( "HTML set_pid_gain | ", message );
+					}
+					
+					//Set the value of the sliders
+					set_all_sliders( message );
+					update_pid_gain( g_pid );
+					fill_pid_labels( g_pid );
+				}
+			)
+			
+			//-----------------------------------------
+			//	EMIT WRAPPER
+			//-----------------------------------------
+			// Construct an anstraction for the direct socket.IO call
+			
+			function socket_emit_wrapper( label, payload )
+			{
+				mysocket.emit( label, payload );
+			}
+
+		} //End if: Socket.IO has been loaded
+	</script>
+	<script type="text/javascript" src="orangebot_key.js"></script>
+	<script type="text/javascript">
+
+		//-----------------------------------------
+		//	CLIENT->SERVER CONTROLS
+		//-----------------------------------------
+		//	Controls inside the webpage can emit async events to the server
+		//	In this example I have a push button and I catch keyboard strokes
+		
+		//Inform NODE that a button action has been emitted
+		function send_btn_pid_message( data )
+		{
+			//Possible actions are:
+			//reset
+			//save
+			//load
+		
+			switch(data)
+			{
+				case "reset":
+				{
+					//Prepare local var. Must not be a reference
+					var pid = Object.create(g_pid)
+					init_pid_gains( pid );
+					//Set the value of the sliders
+					set_all_sliders( pid );
+					//Detect changes in every slider
+					update_pid_gain( g_pid );
+					//Emit Speed PID Parameter message
+					send_pid_message( g_pid );
+					fill_pid_labels( g_pid );
+					
+					break;
+				}
+				case "save":
+				case "load":
+				{
+					socket_emit_wrapper( "pid_btn", data );
+					break;
+				}
+				default:
+				{
+					console.log("HTML: ERR | bad buttonaction | ", data);
+				}
+				
+			}
+
+			return;
+		}
+		
+		//Send message to configure the PID parameters
+		function send_pid_message( pid )
+		{
+			socket_emit_wrapper("pid", pid );
+			if (g_enable_log == true)
+			{
+				console.log(" JS | send_pid_message: ", pid );
+			}
+			return;
+		}
+		
+		//Send a direction message when a direction key is pressed or released
+		function send_direction_message()
+		{
+			//Compute direction
+			direction = get_direction();
+			//Send direction message
+			socket_emit_wrapper( "direction", direction );
+			
+			return;
+		}
+		
+		//-----------------------------------------
+		//	SERVER->CLIENT CONTROLS
+		//-----------------------------------------
+		
+		//Send a message when button is clicked
+		function process_robot_status_message( message )
+		{	
+			//Store the status message
+			g_robot_status = message;
+			//Update controls
+			fill_robot_status( g_robot_status );
+			
+			return;
+		}
+		
+	</script>
+	<script type="text/javascript" src="http-live-player.js">;</script>
+	<script type="text/javascript">
+		console.log("VIDEO STREAM");
+		
+		//-----------------------------------------
+		//	VIDEO STREAMING
+		//-----------------------------------------
+	
+		//Link canvas element
+		var canvas = document.getElementById("raspicam-canvas");
+		//Link websocket channel
+		var streaming_websocket_url = "ws://" + g_host_ip +":8082/";
+		// Create h264 player
+		var wsavc = new WSAvcPlayer(canvas, "webgl", 1, 35);
+		//Estabilish connection with websocket on server side
+		wsavc.connect(streaming_websocket_url);
+
+		var g_btn_video_start = document.getElementById("btn_video_start");
+		var g_btn_video_stop = document.getElementById("btn_video_stop");
+		
+		g_btn_video_start.addEventListener
+		(
+			"click", 
+			function (data)
+			{
+				console.log("HTML: start the video player",data);
+				wsavc.playStream();
+			},
+			false
+		);
+
+		g_btn_video_stop.addEventListener
+		(
+			"click", 
+			function (data)
+			{
+				console.log("HTML: start the video player",data);
+				wsavc.stopStream();
+			},
+			false
+		);
+
+
+	</script>
+	
+</html>
