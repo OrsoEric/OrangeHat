@@ -43,8 +43,11 @@ C_SRCS +=  \
 ../init.cpp \
 ../int.cpp \
 ../main.cpp \
+../parser_handlers.cpp \
 ../servo.cpp \
-../uart.cpp
+../string_uc.cpp \
+../uart.cpp \
+../uniparser.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -60,8 +63,11 @@ embedded_string.o \
 init.o \
 int.o \
 main.o \
+parser_handlers.o \
 servo.o \
-uart.o
+string_uc.o \
+uart.o \
+uniparser.o
 
 OBJS_AS_ARGS +=  \
 at_lcd.o \
@@ -70,8 +76,11 @@ embedded_string.o \
 init.o \
 int.o \
 main.o \
+parser_handlers.o \
 servo.o \
-uart.o
+string_uc.o \
+uart.o \
+uniparser.o
 
 C_DEPS +=  \
 at_lcd.d \
@@ -80,8 +89,11 @@ embedded_string.d \
 init.d \
 int.d \
 main.d \
+parser_handlers.d \
 servo.d \
-uart.d
+string_uc.d \
+uart.d \
+uniparser.d
 
 C_DEPS_AS_ARGS +=  \
 at_lcd.d \
@@ -90,8 +102,11 @@ embedded_string.d \
 init.d \
 int.d \
 main.d \
+parser_handlers.d \
 servo.d \
-uart.d
+string_uc.d \
+uart.d \
+uniparser.d
 
 OUTPUT_FILE_PATH +=2022-01-05b\ AT4809\ UART\ Driver.elf
 
@@ -149,6 +164,13 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
+./parser_handlers.o: .././parser_handlers.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./servo.o: .././servo.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
@@ -156,7 +178,21 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
+./string_uc.o: .././string_uc.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./uart.o: .././uart.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./uniparser.o: .././uniparser.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Programs\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=20000000  -I"D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -pedantic -mmcu=atmega4809 -B "D:\Programs\7.0\Packs\Atmel\ATmega_DFP\1.7.374\gcc\dev\atmega4809" -c -std=c++11 -fno-threadsafe-statics -fkeep-inline-functions -v -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

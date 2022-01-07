@@ -247,6 +247,53 @@ bool Uart::get_counter_rx( uint16_t &oru16_cnt )
 	return false;	//OK
 }	//end public getter: get_counter_rx | uint16_t & |
 
+/***************************************************************************/
+//!	@brief public getter
+//!	receive | uint8_t & |
+/***************************************************************************/
+//! @param oru16_cnt | transmitted bytes
+//! @return bool | false = OK | true = FAIL |
+//!	@details
+//! \n	try to receive a data. if no data has been received, fails
+/***************************************************************************/
+
+bool Uart::receive( uint8_t &oru8_data )
+{
+	DENTER();	//Trace Enter
+	///--------------------------------------------------------------------------
+	///	VARS
+	///--------------------------------------------------------------------------
+	
+	//Temp 
+	bool u1_ret;
+	uint8_t u8_data;
+	
+	///--------------------------------------------------------------------------
+	///	RETURN
+	///--------------------------------------------------------------------------
+	
+	//If no rx data
+	if (AT_BUF_EMPTY( this -> rpi_rx_buf ) == true)
+	{
+		//No data
+		u8_data = 0x00;
+		u1_ret = true;
+	}
+	else
+	{
+		//Profile
+		this -> gu16_rx_cnt++;
+		//Fetch data
+		u8_data = AT_BUF_PEEK( this -> rpi_rx_buf );
+		AT_BUF_KICK( this -> rpi_rx_buf );
+		u1_ret = false;
+	}
+	//Propagate
+	oru8_data = u8_data;
+	DRETURN_ARG("RX: %d %c\n", u1_ret, u8_data );	//Trace return
+	return u1_ret;	//OK
+}	//end public getter: receive | uint8_t & |
+
 /****************************************************************************
 *****************************************************************************
 **	TESTERS
@@ -289,8 +336,6 @@ bool Uart::isr_rx_exe( void )
 	{
 		//Push byte into RX buffer for processing
 		AT_BUF_PUSH( this -> rpi_rx_buf, rx_data_tmp );
-		//Profile
-		this -> gu16_rx_cnt++;
 	}
 
 	///--------------------------------------------------------------------------

@@ -209,16 +209,31 @@
     <Compile Include="main.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="parser_handlers.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="servo.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="servo.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="string_uc.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="string_uc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="uart.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="uniparser.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="uniparser.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

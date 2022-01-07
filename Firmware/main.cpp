@@ -99,6 +99,8 @@
 
 #define EVER (;;)
 
+//#define DEMO_SERVO
+
 /****************************************************************
 **	INCLUDES
 ****************************************************************/
@@ -126,14 +128,22 @@
 
 //Driver for 16X2LCD controller KS0066U with CDM1602K display
 #include "at_lcd.h"
-
+//Driver for the UART communication. Provides init, ISR and buffers
 #include "uart.h"
+//Parser for UART commands
+#include "uniparser.h"
 
+//Driver for the 16b multi channel timeout ISR servo driver
 #include "servo.h"
 
 /****************************************************************
 ** FUNCTION PROTOTYPES
 ****************************************************************/
+
+//Report an error to the application
+extern bool report_error( Error_code ie_error_code );
+//register all commands and associated callback functions
+extern bool init_parser_commands( Orangebot::Uniparser &parser_tmp );
 
 /****************************************************************
 ** GLOBAL VARIABLES
@@ -153,6 +163,10 @@ volatile Error_code ge_error_code = Error_code::OK;
 
 //Class to handle UART0
 User::Uart gcl_uart0;
+//Parse RX data and automatically execute registered callback functions
+Orangebot::Uniparser gcl_rx_parser;
+
+extern uint8_t g_uart_timeout_cnt;
 
 	///----------------------------------------------------------------------
 	///	SERVO DRIVER
@@ -177,6 +191,8 @@ int main(void)
 	//----------------------------------------------------------------
 	
 	uint16_t cnt = 0;
+	
+	bool u1_fail;
 	
 	//----------------------------------------------------------------
 	//	INIT
@@ -209,6 +225,13 @@ int main(void)
 	
 	//Construct and initialize UART class
 	gcl_uart0 = User::Uart();
+	
+	//register all commands and associated callback functions
+	u1_fail = init_parser_commands( gcl_rx_parser );
+	if (u1_fail == true)
+	{
+		report_error(Error_code::ERR_PARSER);
+	}
 	
 		///----------------------------------------------------------------------
 		///	Servo Driver
@@ -266,12 +289,21 @@ int main(void)
 			//Reset slow tick
 			g_isr_flags.slow_tick = false;
 			
+			g_uart_timeout_cnt++;
+			if (g_uart_timeout_cnt > 3)
+			{
+				gc_servo.set_servo(0,0,0);
+				gc_servo.set_servo(1,0,0);
+				
+			}
+			
 			//----------------------------------------------------------------
 			//	LED DEMO
 			//----------------------------------------------------------------
 			
 			//Toggle LED0	
 			LED0_PORT.OUTTGL = MASK(LED0_PIN);
+			
 			
 			//----------------------------------------------------------------
 			//	DISPLAY DEMO
@@ -312,34 +344,54 @@ int main(void)
 			//	SERVO DEMO
 			//----------------------------------------------------------------
 			//	feed servo channels with random position and speeds
-			
-			//CHANNEL0
-			if (cnt % 4 == 0)
-			{
-				//Move to -100us at 200us/s
-				gc_servo.set_servo( 0, -200, 1000 );
-			}
-			else if (cnt % 4 == 2)
-			{
-				gc_servo.set_servo( 0, +200 );
-			}
-			else
-			{
-				//move to +100us at 400us/s
-				gc_servo.set_servo( 0, 0 );
-			}
-			//CHANNEL 1 to 7
-			for (uint8_t u8_cnt = 1; u8_cnt < OrangeBot::Servo::Config::NUM_SERVOS; u8_cnt++)
-			{
-				//Generate a random position
-				uint16_t u16_position = (rand() %(OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND *2)) -OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND;
-				//Generate a random speed in increments of 50
-				uint16_t u16_speed = (((rand() %8)+1) *50 );
-				//Ask the driver to execute the command
-				gc_servo.set_servo( u8_cnt, u16_position, u16_speed );
-			}
+			#ifdef DEMO_SERVO
+				//CHANNEL0
+				if (cnt % 4 == 0)
+				{
+					//Move to -100us at 200us/s
+					gc_servo.set_servo( 0, -200, 1000 );
+				}
+				else if (cnt % 4 == 2)
+				{
+					gc_servo.set_servo( 0, +200 );
+				}
+				else
+				{
+					//move to +100us at 400us/s
+					gc_servo.set_servo( 0, 0 );
+				}
+				//CHANNEL 1 to 7
+				for (uint8_t u8_cnt = 1; u8_cnt < OrangeBot::Servo::Config::NUM_SERVOS; u8_cnt++)
+				{
+					//Generate a random position
+					uint16_t u16_position = (rand() %(OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND *2)) -OrangeBot::Servo::Config::SERVO_PPM_MAX_COMMAND;
+					//Generate a random speed in increments of 50
+					uint16_t u16_speed = (((rand() %8)+1) *50 );
+					//Ask the driver to execute the command
+					gc_servo.set_servo( u8_cnt, u16_position, u16_speed );
+				}
+			#endif
 			
 		}	//end if: Slow Tick
+		
+		//----------------------------------------------------------------
+		//	RPI USART RX --> AT4809
+		//----------------------------------------------------------------
+		
+		uint8_t u8_data;
+		//Try to receive a data from the UART
+		bool u1_ret = gcl_uart0.receive( u8_data );
+		//Data has been received
+		if (u1_ret == false)
+		{
+			gcl_rx_parser.parse( u8_data );
+		}
+		//No data waiting to be received
+		else
+		{
+			//do nothing
+		}
+		
 		
 		//----------------------------------------------------------------
 		//	AT4809 --> RPI USART TX
@@ -356,12 +408,41 @@ int main(void)
 	return 0;
 }	//end: main
 
+
+/***************************************************************************/
+//!	@brief function
+//!	report_error | Error_code |
+/***************************************************************************/
+//! @param ie_error_code | 
+//! @return bool | false = OK | true = FAIL
+//! @details
+//!	report error code for the application
+/***************************************************************************/
+
+bool report_error( Error_code ie_error_code )
+{
+	//----------------------------------------------------------------
+	//	BODY
+	//----------------------------------------------------------------
+
+	if (ge_error_code != Error_code::OK)
+	{
+		ge_error_code = ie_error_code;
+	}
+
+	//----------------------------------------------------------------
+	//	RETURN
+	//----------------------------------------------------------------
+	
+	return false;
+}	//End function: report_error | Error_code |
+
 /***************************************************************************/
 //!	@brief function
 //!	function_template
 /***************************************************************************/
 //! @param x |
-//! @return void |
+//! @return bool | false = OK | true = FAIL
 //! @details
 /***************************************************************************/
 
