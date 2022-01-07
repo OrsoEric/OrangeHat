@@ -166,6 +166,8 @@ User::Uart gcl_uart0;
 //Parse RX data and automatically execute registered callback functions
 Orangebot::Uniparser gcl_rx_parser;
 
+extern uint8_t g_uart_timeout_cnt;
+
 	///----------------------------------------------------------------------
 	///	SERVO DRIVER
 	///----------------------------------------------------------------------
@@ -287,12 +289,21 @@ int main(void)
 			//Reset slow tick
 			g_isr_flags.slow_tick = false;
 			
+			g_uart_timeout_cnt++;
+			if (g_uart_timeout_cnt > 3)
+			{
+				gc_servo.set_servo(0,0,0);
+				gc_servo.set_servo(1,0,0);
+				
+			}
+			
 			//----------------------------------------------------------------
 			//	LED DEMO
 			//----------------------------------------------------------------
 			
 			//Toggle LED0	
 			LED0_PORT.OUTTGL = MASK(LED0_PIN);
+			
 			
 			//----------------------------------------------------------------
 			//	DISPLAY DEMO
