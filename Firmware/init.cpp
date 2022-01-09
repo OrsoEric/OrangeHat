@@ -45,6 +45,8 @@ extern void init_timer_b( TCB_t &timer );
 extern void init_uart( USART_t &ist_uart, uint16_t iu16_baud );
 //Initialize port multiplexer for alternate functions
 extern void init_mux( void );
+//Initialize ADC
+extern bool init_adc( void );
 
 /****************************************************************************
 **	FUNCTIONS DECLARATIONS
@@ -385,3 +387,4 @@ void init_rtc( void )
 
 	return;
 }	//End: init_rtc
+

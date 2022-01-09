@@ -25,9 +25,18 @@
 
 #include "servo.h"
 
+#include "adc.h"
+
 /****************************************************************************
 **GLOBAL VARS
 ****************************************************************************/
+
+	///----------------------------------------------------------------------
+	///	ADC DRIVER
+	///----------------------------------------------------------------------
+
+//Instance of ADC class. Acquire analog quantities
+extern User::Adc gcl_adc;
 
 	///----------------------------------------------------------------------
 	///	UART DRIVER
@@ -174,4 +183,33 @@ ISR( TCA0_OVF_vect )
 	
 	//Manually clear the interrupt flag
 	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
+}
+
+/***************************************************************************/
+//! @brief HAL ISR
+//! \n ADC0_RESRDY_vect | void
+/***************************************************************************/
+//! @return void
+//! @details
+//! \n	Result from ADC
+
+/***************************************************************************/
+
+ISR( ADC0_RESRDY_vect )
+{
+	//----------------------------------------------------------------
+	//	VARS
+	//----------------------------------------------------------------
+	
+	//Fetch conversion result
+	uint16_t u16_res = ADC0.RES;
+	//Ask the driver to handle the result and set up ADC for next conversion if needed
+	gcl_adc.isr_call( u16_res );
+	
+	//----------------------------------------------------------------
+	//	RETURN
+	//----------------------------------------------------------------
+	
+	//Manually clear the interrupt flag. writing one clears the flag, writing zero has no effect.
+	ADC0.INTFLAGS = ADC_RESRDY_bm;
 }

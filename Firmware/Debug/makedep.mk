@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+adc.cpp
+
 at_lcd.cpp
 
 debug.cpp

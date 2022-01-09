@@ -60,6 +60,14 @@
 **	BUTTON			|	Microcontroller
 **	uc.btn.no0		|	uc.A6 (push = FALSE)
 **
+**	ADC
+**	pwr.vin			|	uc.d0.adc0
+**	pwr.iin			|	uc.d1.adc1
+**	servo.vin		|	uc.d2.adc2
+**	servo.iin		|	uc.d3.adc3
+**	rpi.vin			|	uc.d4.adc4
+**	rpi.iin			|	uc.d5.adc5
+**
 **	UART
 **	rpi.rxi			|	uc.a0.txo
 **	rpi.txo			|	uc.a1.rxi
@@ -135,6 +143,8 @@
 
 //Driver for the 16b multi channel timeout ISR servo driver
 #include "servo.h"
+//Driver for the ADC
+#include "adc.h"
 
 /****************************************************************
 ** FUNCTION PROTOTYPES
@@ -156,6 +166,13 @@ volatile Error_code ge_error_code = Error_code::OK;
 
 //Raspberry PI UART RX Parser
 //Orangebot::Uniparser rpi_rx_parser;
+
+	///----------------------------------------------------------------------
+	///	ADC DRIVER
+	///----------------------------------------------------------------------
+
+//Instance of ADC class. Acquire analog quantities
+User::Adc gcl_adc;
 
 	///----------------------------------------------------------------------
 	///	UART DRIVER
@@ -202,22 +219,12 @@ int main(void)
 	init();
 	
 		///----------------------------------------------------------------------
-		///	Display Driver
+		///	ADC Driver
 		///----------------------------------------------------------------------
 	
-	//Power the LCD display
-	SET_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
-	_delay_ms( 500.0 );
-	//Power the LCD display
-	CLEAR_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
-	_delay_ms( 500.0 );
 	
-	//Initialize
-	lcd_init();
-	
-	//Welcome message
-	lcd_print_str( LCD_POS( 0, 0 ), "TX: " );
-	lcd_print_str( LCD_POS( 1, 0 ), "RX: " );
+	//Construct and initialize ADC class
+	gcl_adc = User::Adc();
 	
 		///----------------------------------------------------------------------
 		///	UART Driver
@@ -247,6 +254,24 @@ int main(void)
 	
 	//Initialize random number generator
 	srand( 0 );
+	
+		///----------------------------------------------------------------------
+		///	Display Driver
+		///----------------------------------------------------------------------
+			
+	//Power the LCD display
+	SET_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
+	_delay_ms( 500.0 );
+	//Power the LCD display
+	CLEAR_BIT( LCD_PWR_PORT.OUT, LCD_PWR_PIN );
+	_delay_ms( 500.0 );
+			
+	//Initialize
+	lcd_init();
+			
+	//Welcome message
+	lcd_print_str( LCD_POS( 0, 0 ), "TX: " );
+	lcd_print_str( LCD_POS( 1, 0 ), "RX: " );
 	
 	//----------------------------------------------------------------
 	//	BODY
@@ -318,6 +343,19 @@ int main(void)
 			//Counter
 			//lcd_print_u16( LCD_POS(1,0), cnt );
 			cnt++;
+
+			//----------------------------------------------------------------
+			//	ADC DEMO
+			//----------------------------------------------------------------
+			
+			SET_BIT( ADC0.COMMAND, ADC_STCONV_bp );
+			
+			uint16_t u16_adc_res;
+			bool u1_fail = gcl_adc.get_result( u16_adc_res );
+			if (u1_fail == false)
+			{
+				lcd_print_u16( LCD_POS(0,8), u16_adc_res );
+			}
 			
 			//----------------------------------------------------------------
 			//	UART DEMO
@@ -328,16 +366,16 @@ int main(void)
 			gcl_uart0.send( '0' +cnt%10 );
 			//Get the transmitted data and print them on screen
 			uint16_t u16_uart0_cnt;
-			bool u1_fail = gcl_uart0.get_counter_tx( u16_uart0_cnt ) ;
+			u1_fail = gcl_uart0.get_counter_tx( u16_uart0_cnt ) ;
 			if (u1_fail == false)
 			{
-				lcd_print_u16( LCD_POS(0,4), u16_uart0_cnt );
+				lcd_print_u16( LCD_POS(0,3), u16_uart0_cnt );
 			}
 			//Get the received data and print them on screen
 			u1_fail = gcl_uart0.get_counter_rx( u16_uart0_cnt ) ;
 			if (u1_fail == false)
 			{
-				lcd_print_u16( LCD_POS(1,4), u16_uart0_cnt );
+				lcd_print_u16( LCD_POS(1,3), u16_uart0_cnt );
 			}
 			
 			//----------------------------------------------------------------

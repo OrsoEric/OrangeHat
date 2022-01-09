@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>2022-01-05b AT4809 UART Driver</AssemblyName>
-    <Name>2022-01-05b AT4809 UART Driver</Name>
-    <RootNamespace>2022-01-05b AT4809 UART Driver</RootNamespace>
+    <AssemblyName>2022-01-08a AT4809 ADC Driver</AssemblyName>
+    <Name>2022-01-08a AT4809 ADC Driver</Name>
+    <RootNamespace>2022-01-08a AT4809 ADC Driver</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -99,6 +99,7 @@
         <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
         <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
         <avrgcccpp.compiler.warnings.AllWarnings>True</avrgcccpp.compiler.warnings.AllWarnings>
+        <avrgcccpp.compiler.warnings.Pedantic>True</avrgcccpp.compiler.warnings.Pedantic>
         <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=c++11 -fno-threadsafe-statics -fkeep-inline-functions</avrgcccpp.compiler.miscellaneous.OtherFlags>
         <avrgcccpp.compiler.miscellaneous.Verbose>True</avrgcccpp.compiler.miscellaneous.Verbose>
         <avrgcccpp.linker.libraries.Libraries>
@@ -176,6 +177,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="adc.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="adc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="at4809_port.h">
       <SubType>compile</SubType>
     </Compile>
