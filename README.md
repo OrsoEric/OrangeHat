@@ -1,3 +1,9 @@
+[![Watch the video](https://img.youtube.com/vi/_5tFXJQIzi4/0.jpg)](https://www.youtube.com/watch?v=_5tFXJQIzi4)
+
+
+https://github.com/user-attachments/assets/1deae73a-e860-4f6f-9027-6b8c417ade36
+
+
 # OrangeHat
 Raspberry Pi Hat
 
