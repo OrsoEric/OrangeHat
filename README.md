@@ -19,6 +19,11 @@ LCD Display (click on image to see video on youtube)
 Eight Servomotors Demo (click on image to see video on youtube)  
 [![Eight Servomotor Demo](https://user-images.githubusercontent.com/30684972/148192421-6b130518-2c06-4834-8d54-1e0173dce9de.jpg)](https://youtu.be/TLqbNKa-QK0)  
 
+[![Eight Servomotor Demo](https://user-images.githubusercontent.com/30684972/148192421-6b130518-2c06-4834-8d54-1e0173dce9de.jpg)]([https://youtu.be/TLqbNKa-QK0](https://github.com/user-attachments/assets/2681257b-f2a1-4da3-b12a-5dc89bd77792))  
+
+
+
+
 [![Watch the video](https://user-images.githubusercontent.com/30684972/148192421-6b130518-2c06-4834-8d54-1e0173dce9de.jpg)](/Media/2022-01-05a%20DEMO%20seven%20servos.mp4)
 
 **OrangeHat Software**  
